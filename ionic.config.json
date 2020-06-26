@@ -1,0 +1,7 @@
+{
+  "name": "bumpit_mobile",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
