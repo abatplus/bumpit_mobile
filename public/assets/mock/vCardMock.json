@@ -1,0 +1,16 @@
+{
+    "vcard": {
+        "name": {"value":"Max", "share":true},
+        "surname": {"value":"Musterman", "share":true},
+        "nickname": {"value":"maxi", "share":true},
+        "street": {"value":"Maxstrasse", "share":true},
+        "location": {"value":"Maxstadt", "share":true},
+        "country": {"value":"Maxland", "share":true},
+        "postalcode": {"value":"888181", "share":true},
+        "tel": {"value":"00220202020", "share":true},
+        "companyTel": {"value":"4545215415", "share":true},
+        "email": {"value":"maxMus@maximus.de", "share":true},
+        "company": {"value":"abat", "share":true}
+        
+    }
+}
