@@ -1,9 +1,12 @@
-import React, { useEffect } from 'react';
-import { IonHeader, IonToolbar, IonContent, IonPage, IonButtons, IonList, IonMenuButton, IonTitle } from '@ionic/react';
-import { QRScanner } from '@ionic-native/qr-scanner';
+import React, { useEffect, useState } from 'react';
+import { IonHeader, IonToolbar, IonContent, IonPage, IonButtons, IonList, IonMenuButton, IonTitle, IonButton } from '@ionic/react';
 import { connect } from '../data/connect';
+import './ScanView.css';
 
 import VcardField from '../components/VcardField';
+
+// import { BarcodeScanner } from '@ionic-native/barcode-scanner';
+import QrReader from 'react-qr-reader';
 
 interface OwnProps { }
 
@@ -17,14 +20,49 @@ type VcardProps = OwnProps & StateProps & DispatchProps;
 
 const ScanView: React.FC<VcardProps> = ({ }) => {
 
-  useEffect(() => {
-    
+  const [encodedText, setEncodedText] = useState<string>();
+  const [qrWidth, setQrWidth] = useState<number>();
+  const [windowSize, setWindowSize] = useState([window.innerWidth, window.innerHeight]);
+
+  useEffect( () => {
+    // calculate size depending on screen orientation
+    let size = windowSize[1] > windowSize[0] ? windowSize[0] - 100 : windowSize[1] - 100
+    // limit max size
+    size = size > 400 ? 400 : size;
+    setQrWidth(size);
+  }, [windowSize])
+
+  function updateWindowSize() {
+    setWindowSize([window.innerWidth, window.innerHeight]);
+  }
+
+  // only fire resize event after 500ms due performance reasond
+  let resizeId: NodeJS.Timeout;
+  window.addEventListener('resize', function() {
+      clearTimeout(resizeId);
+      resizeId = setTimeout(updateWindowSize, 500);
   });
 
+  const renderScanner = () => {
+      return (
+        <div className="qrReaderContainer">
+          <QrReader className="qrReader"
+            delay={300}
+            onError={ (err) => {
+              // alert(err);
+            }}
 
-  function scan() {
-      //TODO
-      QRScanner.scan();
+            onScan={ (data) => {
+              if (data !== null) {
+                alert(data);
+                setEncodedText(data as string)
+              }
+            }}
+            style={{ width: qrWidth }}
+          />
+        </div>
+      );
+    // }
   }
 
   return (
@@ -46,7 +84,7 @@ const ScanView: React.FC<VcardProps> = ({ }) => {
           </IonToolbar>
         </IonHeader>
        
-      
+        {renderScanner()}
 
       </IonContent>
     </IonPage>

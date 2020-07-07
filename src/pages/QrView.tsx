@@ -24,7 +24,7 @@ const QrView: React.FC<VcardProps> = ({ cardData }) => {
 
   useEffect( () => {
     // calculate size depending on screen orientation
-    let size = windowSize[1] > windowSize[0] ? windowSize[0] - 100 : windowSize[1] - 100
+    let size = windowSize[1] > windowSize[0] ? windowSize[0] - 100 : windowSize[1] - 200;
     // limit max size
     size = size > 400 ? 400 : size;
     setQrWidth(size);
