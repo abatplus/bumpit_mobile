@@ -5,11 +5,30 @@ import { people, qrCode, scan, share } from 'ionicons/icons';
 import VcardView from './VcardView';
 import QrView from './QrView';
 import ScanView from './ScanView';
+import SwapView from './SwapView';
+import { swapCardData } from '../data/card/card_actions';
+import { connect } from '../data/connect';
 
 
-interface MainTabsProps { }
+interface OwnProps {}
 
-const MainTabs: React.FC<MainTabsProps> = () => {
+interface StateProps {
+  
+  };
+  
+  interface DispatchProps {
+    swapCardData: typeof swapCardData;
+  }
+
+  type MainTabsProps = OwnProps & StateProps & DispatchProps;
+//interface MainTabsProps { }
+
+const MainTabs: React.FC<MainTabsProps> = ({ swapCardData}) => {
+
+
+  function swapData(){
+    swapCardData();
+  }
 
   return (
     <IonTabs>
@@ -22,9 +41,10 @@ const MainTabs: React.FC<MainTabsProps> = () => {
         <Route path="/tabs/vcard" render={() => <VcardView />} exact={true} />
         <Route path="/tabs/qrcode" render={() => <QrView />} exact={true} />
         <Route path="/tabs/scan" render={() => <ScanView />} exact={true} />
+        <Route path="/tabs/swap" render={() => <SwapView />} exact={true} />
       </IonRouterOutlet>
       <IonTabBar slot="bottom">
-        <IonTabButton tab="schedule" href="/tabs/vcard">
+        <IonTabButton tab="vcard" href="/tabs/vcard">
           <IonIcon icon={people} />
           <IonLabel>Card</IonLabel>
         </IonTabButton>
@@ -36,7 +56,7 @@ const MainTabs: React.FC<MainTabsProps> = () => {
           <IonIcon icon={scan} />
           <IonLabel>Scan</IonLabel>
         </IonTabButton>
-        { <IonTabButton tab="about" href="/tabs/swap">
+        { <IonTabButton tab="swap" href="/tabs/swap" onClick = {() => {swapData()}}>
           <IonIcon icon={share} />
           <IonLabel>Swap</IonLabel>
         </IonTabButton> }
@@ -45,4 +65,13 @@ const MainTabs: React.FC<MainTabsProps> = () => {
   );
 };
 
-export default MainTabs;
+export default connect<OwnProps, StateProps, DispatchProps>({
+  mapStateToProps: (state) => ({
+   
+  }),
+  mapDispatchToProps: {
+      swapCardData
+  },
+  component: MainTabs
+});
+//export default MainTabs;

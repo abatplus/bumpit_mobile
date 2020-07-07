@@ -1,10 +1,9 @@
 import React, { useEffect } from 'react';
 import { IonHeader, IonToolbar, IonContent, IonPage, IonButtons, IonList, IonMenuButton, IonTitle } from '@ionic/react';
-import { QRScanner } from '@ionic-native/qr-scanner';
 import './QrView.css';
 import { connect } from '../data/connect';
-
 import VcardField from '../components/VcardField';
+
 
 interface OwnProps { }
 
@@ -19,14 +18,25 @@ type VcardProps = OwnProps & StateProps & DispatchProps;
 
 const QrView: React.FC<VcardProps> = ({ cardData }) => {
 
-  const createQrCode = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-  };
-
   useEffect(() => {
-    
+
   });
+
+
+  //card data as String
+  function buildQrData(): string {
+
+    // TODO filter field acording share flag
+    return JSON.stringify(cardData);
+
+  }
+
+  //generate qr 
+  const generateCode = () => {
+
+    //TODO 
+    
+  };
 
   return (
 
@@ -46,15 +56,18 @@ const QrView: React.FC<VcardProps> = ({ cardData }) => {
             <IonTitle size="large">qr</IonTitle>
           </IonToolbar>
         </IonHeader>
-        <form noValidate onSubmit={createQrCode}>
-          <IonList>
-            <VcardField name="name" label="Name" />
-            <VcardField name="nickname" label="Nickname" />
-          </IonList>
+
+        {
+        //TODO
+        }
+        <VcardField name="name" label="Name"/>
+        <VcardField name="nickname" label="Nickname"/>
+
+        {generateCode()}
 
 
 
-        </form>
+
 
       </IonContent>
     </IonPage>
@@ -71,5 +84,5 @@ export default connect<OwnProps, StateProps, DispatchProps>({
   mapDispatchToProps: {
 
   },
-  component: QrView
+  component: React.memo(QrView)
 });

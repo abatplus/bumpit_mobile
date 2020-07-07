@@ -3,6 +3,14 @@ import { ActionType } from '../types';
 import { CardDataState } from '../state';
 import { Vcard } from '../../models/Vcard';
 
+
+export const swapCardData = () => async (dispatch: React.Dispatch<any>) => {
+  dispatch(setLoading(true));
+ //TODO 
+  setTimeout(() => {dispatch(setLoading(false));}, 10000);
+  
+}
+
 export const loadCardData = () => async (dispatch: React.Dispatch<any>) => {
   dispatch(setLoading(true));
   const data = await getAppData();
@@ -27,7 +35,7 @@ export const setMenuEnabled = (menuEnabled: boolean) => ({
 
 export const setCardDataField = (fieldName: keyof Vcard, fieldValue: any, vcard: Vcard) => async (dispatch: React.Dispatch<any>) => {
 
-  if (vcard[fieldName].value != fieldValue) {
+  if (vcard[fieldName].value !== fieldValue) {
     vcard[fieldName].value = fieldValue;
     // TODO handle error
     await setVcardData(vcard);
