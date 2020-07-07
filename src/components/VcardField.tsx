@@ -1,6 +1,6 @@
 import React, { } from 'react';
 import {  IonItem, IonLabel,  IonInput,  IonCheckbox } from '@ionic/react';
-
+import './VcardField.css';
 import { connect } from '../data/connect';
 import { setCardDataField, setCardDataFieldShare } from '../data/card/card_actions';
 import { Vcard } from '../models/Vcard';
@@ -43,9 +43,9 @@ const VcardField: React.FC<VcardProps> = ({ name, label, cardData, setCardDataFi
 
 
         <IonItem>
-            <IonLabel position="stacked" color="primary" >{label}</IonLabel>
+            <IonLabel  position="stacked" color="primary" >{label}</IonLabel>
             <IonCheckbox slot="start" checked={getShared()} onIonChange={e => { setCardDataFieldShare(name, e.detail.checked, cardData); }}/>
-            <IonInput name={name} type="text" value={getValue()} spellCheck={false} autocapitalize="off" onIonChange={e => { setCardDataField(name, e.detail.value!, cardData); }}>
+            <IonInput className = {getShared()?'shared':'not-shared'} name={name} type="text" value={getValue()} spellCheck={false} autocapitalize="off" onIonChange={e => { setCardDataField(name, e.detail.value!, cardData); }}>
             </IonInput>
         </IonItem>
 
