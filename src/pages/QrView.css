@@ -1,0 +1,7 @@
+.qrcontainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  padding: 24px;
+}

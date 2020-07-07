@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react';
-import { IonHeader, IonToolbar, IonContent, IonPage, IonButtons, IonList, IonMenuButton, IonTitle } from '@ionic/react';
+import React, { useEffect, useState } from 'react';
+import { IonHeader, IonToolbar, IonContent, IonPage, IonButtons, IonList, IonMenuButton, IonTitle, useIonViewDidEnter } from '@ionic/react';
 import './QrView.css';
 import { connect } from '../data/connect';
 import VcardField from '../components/VcardField';
-
+import { analytics } from 'ionicons/icons';
+import QRCode from 'qrcode.react';
 
 interface OwnProps { }
 
@@ -18,25 +19,33 @@ type VcardProps = OwnProps & StateProps & DispatchProps;
 
 const QrView: React.FC<VcardProps> = ({ cardData }) => {
 
-  useEffect(() => {
+  const [qrWidth, setQrWidth] = useState<number>();
+  const [windowSize, setWindowSize] = useState([window.innerWidth, window.innerHeight]);
 
+  useEffect( () => {
+    // calculate size depending on screen orientation
+    let size = windowSize[1] > windowSize[0] ? windowSize[0] - 100 : windowSize[1] - 100
+    // limit max size
+    size = size > 400 ? 400 : size;
+    setQrWidth(size);
+  }, [windowSize])
+
+  function updateWindowSize() {
+    setWindowSize([window.innerWidth, window.innerHeight]);
+  }
+
+  // only fire resize event after 500ms due performance reasond
+  let resizeId: NodeJS.Timeout;
+  window.addEventListener('resize', function() {
+      clearTimeout(resizeId);
+      resizeId = setTimeout(updateWindowSize, 500);
   });
-
 
   //card data as String
   function buildQrData(): string {
-
     // TODO filter field acording share flag
     return JSON.stringify(cardData);
-
   }
-
-  //generate qr 
-  const generateCode = () => {
-
-    //TODO 
-    
-  };
 
   return (
 
@@ -57,21 +66,12 @@ const QrView: React.FC<VcardProps> = ({ cardData }) => {
           </IonToolbar>
         </IonHeader>
 
-        {
-        //TODO
-        }
-        <VcardField name="name" label="Name"/>
-        <VcardField name="nickname" label="Nickname"/>
-
-        {generateCode()}
-
-
-
-
+        <div className="qrcontainer">
+          <QRCode value={buildQrData()} size={qrWidth} />
+        </div>
 
       </IonContent>
     </IonPage>
-
   );
 };
 
