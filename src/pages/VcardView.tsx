@@ -1,26 +1,14 @@
 import React, {   } from 'react';
 import { IonHeader, IonToolbar, IonContent, IonPage, IonButtons,IonList,IonMenuButton,IonTitle,} from '@ionic/react';
 
-import './VcardView.css';
-import { connect } from '../data/connect';
-import VcardField from '../components/VcardField';
+import './VCardView.css';
+import VCardField from '../components/VCardField';
 
-interface OwnProps {}
-
-interface StateProps {
-    cardData?: any;
-  };
+const VCardView: React.FC = () => {
   
-  interface DispatchProps {
-  }
+  return (
 
-  type VcardProps = OwnProps & StateProps & DispatchProps;
-
-  const VcardView: React.FC<VcardProps> = ({cardData}) => {
-  
-    return (
-
-      <IonPage id="vcard">
+    <IonPage id="vcard">
       <IonHeader translucent={true}>
         <IonToolbar>
           <IonButtons slot="start">
@@ -37,26 +25,15 @@ interface StateProps {
           </IonToolbar>
         </IonHeader>
         <IonList>
-          <VcardField name="name" label="Name"/>
-          <VcardField name="nickname" label="Nickname"/>
-          <VcardField name="tel" label="Handy"/>
-          <VcardField name="companyTel" label="Firmenhandy"/>
-          <VcardField name="email" label="eMail"/>       
+          <VCardField name="name" label="Name"/>
+          <VCardField name="nickname" label="Nickname"/>
+          <VCardField name="tel" label="Handy"/>
+          <VCardField name="companyTel" label="Firmenhandy"/>
+          <VCardField name="email" label="eMail"/>       
         </IonList>
       </IonContent>
     </IonPage>   
-    );
-  };
-  
-
-  export default connect<OwnProps, StateProps, DispatchProps>({
-    mapStateToProps: (state) => ({
-      cardData: state.vcard,
-      
-    }),
-    mapDispatchToProps: {
-      
-    },
-    component: VcardView
-  });
+  );
+};
  
+export default VCardView;

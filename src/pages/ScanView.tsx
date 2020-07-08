@@ -1,24 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { IonHeader, IonToolbar, IonContent, IonPage, IonButtons, IonList, IonMenuButton, IonTitle, IonButton } from '@ionic/react';
-import { connect } from '../data/connect';
+import { IonHeader, IonToolbar, IonContent, IonPage, IonButtons, IonMenuButton, IonTitle } from '@ionic/react';
 import './ScanView.css';
-
-import VcardField from '../components/VcardField';
 
 // import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import QrReader from 'react-qr-reader';
 
-interface OwnProps { }
-
-interface StateProps {
-};
-
-interface DispatchProps {
-}
-
-type VcardProps = OwnProps & StateProps & DispatchProps;
-
-const ScanView: React.FC<VcardProps> = ({ }) => {
+const ScanView: React.FC = () => {
 
   const [encodedText, setEncodedText] = useState<string>();
   const [qrWidth, setQrWidth] = useState<number>();
@@ -93,12 +80,4 @@ const ScanView: React.FC<VcardProps> = ({ }) => {
 };
 
 
-export default connect<OwnProps, StateProps, DispatchProps>({
-  mapStateToProps: (state) => ({
-
-  }),
-  mapDispatchToProps: {
-
-  },
-  component: ScanView
-});
+export default ScanView;

@@ -1,11 +1,11 @@
-import { Vcard } from '../models/Vcard';
 import { Plugins } from '@capacitor/core';
+import { IVCard } from './reducers/VCardReducer';
 
 const { Storage } = Plugins;
 const cardDataUrl = '/assets/mock/vCardMock.json';
 const VCARD_DATA = 'vcard_data';
 
-const emptyVcard : Vcard = {
+const emptyVCard : IVCard = {
     name: { value: '', share: true},
     surname:  { value: '', share: true},
     nickname:  { value: '', share: true},
@@ -22,32 +22,27 @@ const emptyVcard : Vcard = {
 export const getAppData = async () => {
 
     //await Storage.remove({ key: VCARD_DATA});
-    let vcard = emptyVcard;
+    let vCard = emptyVCard;
     //get from storage
     const responseStorage = await Promise.all([
         Storage.get({ key: VCARD_DATA })]);
 
     let cardDataStorage = await responseStorage[0].value || undefined;
     if (cardDataStorage) {
-        vcard = {...vcard, ...JSON.parse(cardDataStorage)};
+        vCard = {...vCard, ...JSON.parse(cardDataStorage)};
     }
     //read data from url
     else {
         const response = await Promise.all([
             fetch(cardDataUrl)]);
         const responseData = await response[0].json();
-        vcard = {...vcard, ...responseData.vcard};
+        vCard = {...vCard, ...responseData.vcard};
     }
 
-    const data = {
-        vcard,
-    }
-
-    return data;
+    return vCard;
 }
 
 //save in Storage
-export const setVcardData = async (data: Vcard) => {
-    
+export const setVCardData = async (data: IVCard) => {
     await Storage.set({ key: VCARD_DATA, value: JSON.stringify(data) });
 }

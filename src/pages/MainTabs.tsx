@@ -2,32 +2,16 @@ import React  from 'react';
 import { IonTabs, IonRouterOutlet, IonTabBar, IonTabButton, IonIcon, IonLabel } from '@ionic/react';
 import { Route, Redirect } from 'react-router';
 import { people, qrCode, scan, share } from 'ionicons/icons';
-import VcardView from './VcardView';
+import VcardView from './VCardView';
 import QrView from './QrView';
 import ScanView from './ScanView';
 import SwapView from './SwapView';
-import { swapCardData } from '../data/card/card_actions';
-import { connect } from '../data/connect';
 
+const MainTabs: React.FC = () => {
 
-interface OwnProps {}
-
-interface StateProps {
-  
-  };
-  
-  interface DispatchProps {
-    swapCardData: typeof swapCardData;
-  }
-
-  type MainTabsProps = OwnProps & StateProps & DispatchProps;
-//interface MainTabsProps { }
-
-const MainTabs: React.FC<MainTabsProps> = ({ swapCardData}) => {
-
-
-  function swapData(){
-    swapCardData();
+  const swapData = () => {
+    //swapCardData();
+    alert("swapCardData");
   }
 
   return (
@@ -65,13 +49,4 @@ const MainTabs: React.FC<MainTabsProps> = ({ swapCardData}) => {
   );
 };
 
-export default connect<OwnProps, StateProps, DispatchProps>({
-  mapStateToProps: (state) => ({
-   
-  }),
-  mapDispatchToProps: {
-      swapCardData
-  },
-  component: MainTabs
-});
-//export default MainTabs;
+export default MainTabs;

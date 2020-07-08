@@ -1,67 +1,44 @@
-import React, { } from 'react';
+import React, { useEffect } from 'react';
 import {  IonItem, IonLabel,  IonInput,  IonCheckbox } from '@ionic/react';
-import './VcardField.css';
-import { connect } from '../data/connect';
-import { setCardDataField, setCardDataFieldShare } from '../data/card/card_actions';
-import { Vcard } from '../models/Vcard';
+import './VCardField.css';
+import { useVCard } from '../store/contexts/VCardContext';
+import * as Actions from '../store/actions/actions';
+import { IVCard } from '../store/reducers/VCardReducer';
+import { useState } from 'react';
 
 interface OwnProps {
-    name: keyof Vcard; label: string
+    name: keyof IVCard; label: string
 }
 
-interface StateProps {
-    cardData?: any;
-};
+type VCardProps = OwnProps;
 
-interface DispatchProps {
-    setCardDataField: typeof setCardDataField;
-    setCardDataFieldShare: typeof setCardDataFieldShare;
-}
+const VCardField: React.FC<VCardProps> = ({ name, label }) => {
+    const { vCard, dispatchVCard } = useVCard();
 
-type VcardProps = OwnProps & StateProps & DispatchProps;
-
-const VcardField: React.FC<VcardProps> = ({ name, label, cardData, setCardDataField, setCardDataFieldShare }) => {
-
-  
-    function getValue() {
-
-        if (cardData && cardData[name]) {
-            return cardData[name].value;
-        }
-        return "";
+    const onValueFieldChange = (e: any) => {
+        dispatchVCard(Actions.VCard.setVCardDataField(name, e.detail.value));
     }
 
-    function getShared() {
-
-        if (cardData && cardData[name]) {
-            return cardData[name].share;
-        }
-        return true
+    const onShareFieldChange = (e: any) => {
+        const shared = e.detail.checked ? true : false;
+        dispatchVCard(Actions.VCard.setVCardDataFieldShare(name, shared));
     }
 
     return (
-
-
         <IonItem>
-            <IonLabel  position="stacked" color="primary" >{label}</IonLabel>
-            <IonCheckbox slot="start" checked={getShared()} onIonChange={e => { setCardDataFieldShare(name, e.detail.checked, cardData); }}/>
-            <IonInput className = {getShared()?'shared':'not-shared'} name={name} type="text" value={getValue()} spellCheck={false} autocapitalize="off" onIonChange={e => { setCardDataField(name, e.detail.value!, cardData); }}>
+            <IonLabel position="stacked" color="primary" >{label}</IonLabel>
+            <IonCheckbox slot="start" checked={vCard[name]?.share} onIonChange={onShareFieldChange}/>
+            <IonInput 
+                className={vCard[name]?.share == true ? 'shared' : 'not-shared'} 
+                name={name} 
+                type="text" 
+                value={vCard[name]?.value} 
+                spellCheck={false} 
+                autocapitalize="off" 
+                onIonChange={onValueFieldChange}>
             </IonInput>
         </IonItem>
-
-
     );
 };
 
-
-export default connect<OwnProps, StateProps, DispatchProps>({
-    mapStateToProps: (state) => ({
-        cardData: state.vcard,
-
-    }),
-    mapDispatchToProps: {
-        setCardDataField,
-        setCardDataFieldShare
-    },
-    component: VcardField
-});
+export default VCardField;

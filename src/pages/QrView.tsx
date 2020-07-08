@@ -1,26 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { IonHeader, IonToolbar, IonContent, IonPage, IonButtons, IonList, IonMenuButton, IonTitle, useIonViewDidEnter } from '@ionic/react';
+import { IonHeader, IonToolbar, IonContent, IonPage, IonButtons, IonMenuButton, IonTitle } from '@ionic/react';
 import './QrView.css';
-import { connect } from '../data/connect';
-import VcardField from '../components/VcardField';
-import { analytics } from 'ionicons/icons';
 import QRCode from 'qrcode.react';
+import { useVCard } from '../store/contexts/VCardContext';
+import { setVCardData } from '../store/actions/vCardActions';
 
-interface OwnProps { }
-
-interface StateProps {
-  cardData?: any;
-};
-
-interface DispatchProps {
-}
-
-type VcardProps = OwnProps & StateProps & DispatchProps;
-
-const QrView: React.FC<VcardProps> = ({ cardData }) => {
+const QrView: React.FC = () => {
 
   const [qrWidth, setQrWidth] = useState<number>();
   const [windowSize, setWindowSize] = useState([window.innerWidth, window.innerHeight]);
+  const { vCard } = useVCard();
 
   useEffect( () => {
     // calculate size depending on screen orientation
@@ -28,24 +17,18 @@ const QrView: React.FC<VcardProps> = ({ cardData }) => {
     // limit max size
     size = size > 400 ? 400 : size;
     setQrWidth(size);
-  }, [windowSize])
+  }, [windowSize, vCard]);
 
-  function updateWindowSize() {
+  const updateWindowSize = () => {
     setWindowSize([window.innerWidth, window.innerHeight]);
   }
 
-  // only fire resize event after 500ms due performance reasond
+  // only fire resize event after 500ms due performance reasons
   let resizeId: NodeJS.Timeout;
   window.addEventListener('resize', function() {
       clearTimeout(resizeId);
       resizeId = setTimeout(updateWindowSize, 500);
   });
-
-  //card data as String
-  function buildQrData(): string {
-    // TODO filter field acording share flag
-    return JSON.stringify(cardData);
-  }
 
   return (
 
@@ -67,7 +50,7 @@ const QrView: React.FC<VcardProps> = ({ cardData }) => {
         </IonHeader>
 
         <div className="qrcontainer">
-          <QRCode value={buildQrData()} size={qrWidth} />
+          <QRCode value={JSON.stringify(vCard)} size={qrWidth} />
         </div>
 
       </IonContent>
@@ -76,13 +59,4 @@ const QrView: React.FC<VcardProps> = ({ cardData }) => {
 };
 
 
-export default connect<OwnProps, StateProps, DispatchProps>({
-  mapStateToProps: (state) => ({
-    cardData: state.vcard,
-
-  }),
-  mapDispatchToProps: {
-
-  },
-  component: React.memo(QrView)
-});
+export default QrView;
