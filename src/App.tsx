@@ -1,11 +1,8 @@
 import React from 'react';
 import { IonApp } from '@ionic/react';
 
-//import Menu from './components/Menu';
-
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
-
 /* Basic CSS for apps built with Ionic */
 import '@ionic/react/css/normalize.css';
 import '@ionic/react/css/structure.css';
@@ -24,16 +21,19 @@ import './theme/variables.css';
 import { VCardProvider } from './store/contexts/VCardContext';
 import { AppContextProvider } from './store/contexts/AppContext';
 import AppRouter from './components/AppRouter';
+import TranslationProvider from './i18n/TranslationProvider';
 
 const App: React.FC = () => {
   return (
-    <IonApp>
-      <AppContextProvider>
-        <VCardProvider>
-          <AppRouter></AppRouter>
-        </VCardProvider>
-      </AppContextProvider>
-    </IonApp>
+    <TranslationProvider>
+      <IonApp>
+        <AppContextProvider>
+          <VCardProvider>
+            <AppRouter />
+          </VCardProvider>
+        </AppContextProvider>
+      </IonApp>
+    </TranslationProvider>
   );
 };
 

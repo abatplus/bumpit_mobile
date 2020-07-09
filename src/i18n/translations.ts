@@ -1,11 +1,9 @@
 import * as DE from './de/vcard.json';
 import * as EN from './de/vcard.json';
 
-export const translations = () => {
-  return {
-    de: { ...convertPontoonFormatToI18n(DE) },
-    en: { ...convertPontoonFormatToI18n(EN) },
-  };
+export const translations = {
+  de: { ...convertPontoonFormatToI18n(DE) },
+  en: { ...convertPontoonFormatToI18n(EN) },
 };
 
 type ObjStringProps = { [key: string]: string };

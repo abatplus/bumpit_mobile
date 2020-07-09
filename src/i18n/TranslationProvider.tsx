@@ -1,11 +1,43 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { IntlProvider } from 'react-intl';
 import { translations } from './translations';
+import { isPlatform } from '@ionic/react';
+import { Globalization } from '@ionic-native/globalization';
 
-const getLocale: () => {};
+const getLocale = async () => {
+  if (isPlatform('cordova') || isPlatform('capacitor')) {
+    await Globalization.getPreferredLanguage()
+      .then((res) => res.value.split('-')[0])
+      .catch(() => 'en');
+  }
+  return navigator.language.split('-')[0];
+};
 
-const TranslationProvider: React.FC = () => {
-  return <IntlProvider locale={getLocale()} messages={translations}></IntlProvider>;
+const messages = (locale: string) => {
+  switch (locale.toLocaleLowerCase()) {
+    case 'de':
+      return translations.de;
+    case 'en':
+    default:
+      return translations.en;
+  }
+};
+
+const TranslationProvider: React.FC<any> = (props) => {
+  const [locale, setLocale] = React.useState('en');
+
+  useEffect(() => {
+    (async function settingLocale() {
+      setLocale(await getLocale());
+      console.log(locale);
+    })();
+  }, [locale]);
+
+  return (
+    <IntlProvider locale={locale} messages={messages(locale)}>
+      {props.children}
+    </IntlProvider>
+  );
 };
 
 export default TranslationProvider;

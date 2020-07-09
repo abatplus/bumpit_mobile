@@ -6,8 +6,13 @@ import VCardView from './VCardView';
 import QrView from './QrView';
 import ScanView from './ScanView';
 import SwapView from './SwapView';
+import { useIntl } from 'react-intl';
+import IMessageI18nConstants from '../i18n/IMessageI18nConstants';
+import { nameof } from '../utils';
 
 const MainTabs: React.FC = () => {
+  const i18n = useIntl();
+
   return (
     <IonTabs>
       <IonRouterOutlet>
@@ -24,19 +29,19 @@ const MainTabs: React.FC = () => {
       <IonTabBar slot="bottom">
         <IonTabButton tab="vcard" href="/">
           <IonIcon icon={people} />
-          <IonLabel>Card</IonLabel>
+          <IonLabel>{i18n.formatMessage({ id: nameof<IMessageI18nConstants>('Card') })}</IonLabel>
         </IonTabButton>
         <IonTabButton tab="qrcode" href="/qrcode">
           <IonIcon icon={qrCode} />
-          <IonLabel>QR</IonLabel>
+          <IonLabel>{i18n.formatMessage({ id: nameof<IMessageI18nConstants>('QR_code') })}</IonLabel>
         </IonTabButton>
         <IonTabButton tab="scan" href="/scan">
           <IonIcon icon={scan} />
-          <IonLabel>Scan</IonLabel>
+          <IonLabel>{i18n.formatMessage({ id: nameof<IMessageI18nConstants>('Scan') })}</IonLabel>
         </IonTabButton>
         <IonTabButton tab="swap" href="/swap">
           <IonIcon icon={share} />
-          <IonLabel>Swap</IonLabel>
+          <IonLabel>{i18n.formatMessage({ id: nameof<IMessageI18nConstants>('Swap') })}</IonLabel>
         </IonTabButton>
       </IonTabBar>
     </IonTabs>

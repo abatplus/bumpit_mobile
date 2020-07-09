@@ -6,5 +6,21 @@
   "appName": {
     "message": "abat+ BumpIt!",
     "description": ""
+  },
+  "Card": {
+    "message": "Visitenkarte",
+    "description": "business card"
+  },
+  "QR_code": {
+    "message": "QR-code"
+  },
+  "Scan": {
+    "message": "Lesen"
+  },
+  "Swap": {
+    "message": "Swap"
+  },
+  "Exchange": {
+    "message": "Austauschen"
   }
 }
