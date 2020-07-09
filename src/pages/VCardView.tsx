@@ -29,7 +29,7 @@ const VCardView: React.FC = () => {
         </IonToolbar>
       </IonHeader>
 
-      <IonContent fullscreen={true}>
+      <IonContent >
         <IonHeader collapse="condense">
           <IonToolbar>
             <IonTitle size="large">Business Card</IonTitle>
