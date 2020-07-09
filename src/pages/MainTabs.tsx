@@ -27,17 +27,9 @@ const MainTabs: React.FC = () => {
           <IonIcon icon={people} />
           <IonLabel>Card</IonLabel>
         </IonTabButton>
-        <IonTabButton tab="qrcode" href="/tabs/qrcode">
-          <IonIcon icon={qrCode} />
-          <IonLabel>QR</IonLabel>
-        </IonTabButton>
         <IonTabButton tab="scan" href="/tabs/scan">
           <IonIcon icon={scan} />
           <IonLabel>Scan</IonLabel>
-        </IonTabButton>
-          <IonTabButton tab="swap" href="/tabs/swap">
-          <IonIcon icon={share} />
-          <IonLabel>Swap</IonLabel>
         </IonTabButton>
       </IonTabBar>
     </IonTabs>

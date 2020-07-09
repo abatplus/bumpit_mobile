@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { IonHeader, IonToolbar, IonContent, IonPage, IonButtons, IonMenuButton, IonTitle } from '@ionic/react';
+import { IonHeader, IonToolbar, IonContent, IonPage, IonButtons, IonMenuButton, IonTitle, IonBackButton } from '@ionic/react';
 import './QrView.css';
 import QRCode from 'qrcode.react';
 import { useVCard } from '../store/contexts/VCardContext';
@@ -34,7 +34,7 @@ const QrView: React.FC = () => {
       <IonHeader translucent={true}>
         <IonToolbar>
           <IonButtons slot="start">
-            <IonMenuButton />
+            <IonBackButton />
           </IonButtons>
           <IonTitle>QR</IonTitle>
         </IonToolbar>
