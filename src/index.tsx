@@ -2,11 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import IntlProvider from 'react-intl';
+import TranslationProvider from './i18n/TranslationProvider';
 ReactDOM.render(
-  <IntlProvider>
+  <TranslationProvider>
     <App />
-  </IntlProvider>,
+  </TranslationProvider>,
   document.getElementById('root')
 );
 
