@@ -1,6 +1,9 @@
-import React from 'react';
-import { IonApp } from '@ionic/react';
-import Router from './components/Router';
+import React, { useEffect } from 'react';
+import { Redirect, Route } from 'react-router-dom';
+import { IonApp, IonRouterOutlet, IonSplitPane } from '@ionic/react';
+import { IonReactRouter } from '@ionic/react-router';
+
+//import Menu from './components/Menu';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -20,11 +23,22 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
+import { VCardProvider } from './store/contexts/VCardContext';
+import { AppContextProvider } from './store/contexts/AppContext';
+import AppRouter from './components/AppRouter';
 
-const App: React.FC = () => (
-  <IonApp>
-    <Router />
-  </IonApp>
-);
+const App: React.FC = () => {
+
+  return ( 
+    <IonApp>
+      <AppContextProvider>
+        <VCardProvider>
+          <AppRouter></AppRouter>
+        </VCardProvider>
+      </AppContextProvider>
+    </IonApp>
+  )
+}
 
 export default App;
+
