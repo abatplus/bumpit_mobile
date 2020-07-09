@@ -2,7 +2,7 @@ import React, {   } from 'react';
 import { IonHeader, IonToolbar, IonContent, IonPage, IonButtons,IonList,IonMenuButton,IonTitle,} from '@ionic/react';
 
 import './VCardView.css';
-import VCardField from '../components/VCardField2';
+import VCardField from '../components/VCardField';
 
 const VCardView: React.FC = () => {
   

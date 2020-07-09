@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { IonHeader, IonToolbar, IonContent, IonPage, IonButtons,IonList,IonMenuButton,IonTitle, IonLoading } from '@ionic/react';
 import './SwapView.css';
-import VCardField from '../components/VCardField2';
+import VCardField from '../components/VCardField';
 import { useAppContext } from '../store/contexts/AppContext';
 import * as Actions from '../store/actions/actions';
 
