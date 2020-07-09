@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { IonReactRouter } from '@ionic/react-router';
 import { IonSplitPane, IonRouterOutlet } from '@ionic/react';
 import { Route, Redirect } from 'react-router';

@@ -43,6 +43,6 @@ export const getAppData = async () => {
 }
 
 //save in Storage
-export const setVCardData = async (data: IVCard) => {
+export const storeVCardData = async (data: IVCard) => {
     await Storage.set({ key: VCARD_DATA, value: JSON.stringify(data) });
 }

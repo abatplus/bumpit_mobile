@@ -26,7 +26,7 @@ const VCardField: React.FC<VCardProps> = ({ name, label }) => {
             <IonLabel position="stacked" color="primary" >{label}</IonLabel>
             <IonCheckbox slot="start" checked={vCard[name]?.share} onIonChange={onShareFieldChange}/>
             <IonInput 
-                className={vCard[name]?.share !== true ? 'not-shared' : ''} 
+                className={vCard[name]?.share === false ? 'not-shared' : ''} 
                 name={name} 
                 type="text" 
                 value={vCard[name]?.value} 
