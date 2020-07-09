@@ -1,12 +1,20 @@
-import React, {  } from 'react';
-import { IonHeader, IonToolbar, IonContent, IonPage, IonButtons,IonList,IonMenuButton,IonTitle, IonSpinner,} from '@ionic/react';
+import React, { useEffect } from 'react';
+import { IonHeader, IonToolbar, IonContent, IonPage, IonButtons,IonList,IonMenuButton,IonTitle, IonLoading } from '@ionic/react';
 import './SwapView.css';
 import VCardField from '../components/VCardField';
 import { useAppContext } from '../store/contexts/AppContext';
+import * as Actions from '../store/actions/actions';
 
 const SwapView: React.FC = () => {
 
-  const { appContext } = useAppContext();
+  const { appContext, dispatchAppContext } = useAppContext();
+
+  useEffect( () => {
+    dispatchAppContext(Actions.App.setLoading(true));
+    setTimeout( () => {
+      dispatchAppContext(Actions.App.setLoading(false));
+    }, 2000);
+  }, []);
 
   return (
     <IonPage id="vcard">
@@ -25,7 +33,11 @@ const SwapView: React.FC = () => {
           <IonTitle size="large">Exchange card</IonTitle>
         </IonToolbar>
       </IonHeader>
-      {appContext.isLoading && <IonSpinner className = "spinner" name = "lines"/>}
+      {appContext.isLoading ? <IonLoading
+          spinner='lines'
+          isOpen={true}
+        /> : ''
+      }
 
       {!appContext.isLoading &&<IonList>
         <VCardField name="name" label="Name"/>

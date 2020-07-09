@@ -40,10 +40,10 @@ const MainTabs: React.FC = () => {
           <IonIcon icon={scan} />
           <IonLabel>Scan</IonLabel>
         </IonTabButton>
-        { <IonTabButton tab="swap" href="/tabs/swap" onClick = {() => {swapData()}}>
+          <IonTabButton tab="swap" href="/tabs/swap">
           <IonIcon icon={share} />
           <IonLabel>Swap</IonLabel>
-        </IonTabButton> }
+        </IonTabButton>
       </IonTabBar>
     </IonTabs>
   );

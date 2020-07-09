@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { IonReactRouter } from '@ionic/react-router';
 import { IonSplitPane, IonRouterOutlet } from '@ionic/react';
 import { Route, Redirect } from 'react-router';
@@ -11,6 +11,7 @@ const AppRouter: React.FC = () => {
 
     const { dispatchVCard } = useVCard();
 
+    // initialize vcard data at first
     useEffect(() => {
       getAppData().then( vCard => {
         dispatchVCard(Actions.VCard.setVCardData(vCard));
@@ -21,8 +22,8 @@ const AppRouter: React.FC = () => {
         <IonReactRouter>
             <IonSplitPane contentId="main">
                 <IonRouterOutlet id="main">
-                <Route path="/tabs" component={MainTabs} />
-                <Route path="/" render={() => <Redirect to="/tabs/vcard" />} exact />
+                  <Route path="/tabs" component={MainTabs} />
+                  <Route path="/" render={() => <Redirect to="/tabs/vcard" />} exact />
                 </IonRouterOutlet>
             </IonSplitPane>
         </IonReactRouter>
