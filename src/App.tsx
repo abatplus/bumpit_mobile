@@ -1,7 +1,5 @@
-import React, { useEffect } from 'react';
-import { Redirect, Route } from 'react-router-dom';
-import { IonApp, IonRouterOutlet, IonSplitPane } from '@ionic/react';
-import { IonReactRouter } from '@ionic/react-router';
+import React from 'react';
+import { IonApp } from '@ionic/react';
 
 //import Menu from './components/Menu';
 
@@ -28,8 +26,7 @@ import { AppContextProvider } from './store/contexts/AppContext';
 import AppRouter from './components/AppRouter';
 
 const App: React.FC = () => {
-
-  return ( 
+  return (
     <IonApp>
       <AppContextProvider>
         <VCardProvider>
@@ -37,8 +34,7 @@ const App: React.FC = () => {
         </VCardProvider>
       </AppContextProvider>
     </IonApp>
-  )
-}
+  );
+};
 
 export default App;
-
