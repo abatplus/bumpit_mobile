@@ -9,11 +9,6 @@ import SwapView from './SwapView';
 
 const MainTabs: React.FC = () => {
 
-  const swapData = () => {
-    //swapCardData();
-    alert("swapCardData");
-  }
-
   return (
     <IonTabs>
       <IonRouterOutlet>
