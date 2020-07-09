@@ -16,8 +16,7 @@ const ScanView: React.FC = () => {
     let size = windowSize[1] > windowSize[0] ? windowSize[0] - 100 : windowSize[1] - 100
     // limit max size
     size = size > 400 ? 400 : size;
-    setQrWidth(size);
-  }, [windowSize])
+    setQrWidth(size); }, [windowSize])
 
   function updateWindowSize() {
     setWindowSize([window.innerWidth, window.innerHeight]);
