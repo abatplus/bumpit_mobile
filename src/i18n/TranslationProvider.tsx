@@ -23,13 +23,17 @@ const messages = (locale: string) => {
   }
 };
 
-const TranslationProvider: React.FC<any> = (props) => {
+interface ITranslationProviderProps {
+  children?: any;
+}
+
+const TranslationProvider: React.FC<ITranslationProviderProps> = (props) => {
   const [locale, setLocale] = React.useState('en');
 
   useEffect(() => {
     (async function settingLocale() {
       setLocale(await getLocale());
-      console.log(locale);
+      console.log('USE EFFECT USING LOCALE: ' + locale);
     })();
   }, [locale]);
 
