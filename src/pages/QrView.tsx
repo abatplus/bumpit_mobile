@@ -3,7 +3,6 @@ import { IonHeader, IonToolbar, IonContent, IonPage, IonButtons, IonMenuButton, 
 import './QrView.css';
 import QRCode from 'qrcode.react';
 import { useVCard } from '../store/contexts/VCardContext';
-import { setVCardData } from '../store/actions/vCardActions';
 
 const QrView: React.FC = () => {
 
@@ -31,7 +30,6 @@ const QrView: React.FC = () => {
   });
 
   return (
-
     <IonPage id="qr">
       <IonHeader translucent={true}>
         <IonToolbar>
@@ -57,6 +55,5 @@ const QrView: React.FC = () => {
     </IonPage>
   );
 };
-
 
 export default QrView;
