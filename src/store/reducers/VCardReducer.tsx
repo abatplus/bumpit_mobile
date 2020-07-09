@@ -53,7 +53,7 @@ export const VCardReducer = (state = initialState, action: IAction) => {
                     value: kvPairField.value
                 }
             };
-        
+
         case Actions.VCard.ActionTypes.SET_VCARD_DATA_FIELD_SHARE:
             const kvPairShare = action.payload as IVCardFieldKeyValuePair;
             return {
