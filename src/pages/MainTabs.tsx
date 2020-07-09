@@ -25,7 +25,7 @@ const MainTabs: React.FC = () => {
       <IonTabBar slot="bottom">
         <IonTabButton tab="vcard" href="/tabs/vcard">
           <IonIcon icon={people} />
-          <IonLabel>tete</IonLabel>
+          <IonLabel>Card</IonLabel>
         </IonTabButton>
         <IonTabButton tab="qrcode" href="/tabs/qrcode">
           <IonIcon icon={qrCode} />
