@@ -13,18 +13,6 @@ export const getLocale = async () => {
   return navigator.language.split(/[-_]/)[0];
 };
 
-const messages = {
-  de: { ...translations.de },
-  en: { ...translations.en },
-};
-
-interface IIntelContext {
-  locale: string;
-  messages: any;
-}
-
-const Context = React.createContext<IIntelContext>({ locale: '', messages: {} });
-
 interface ITranslationProviderProps {
   locale: string;
   children?: React.ReactNode;
@@ -32,11 +20,9 @@ interface ITranslationProviderProps {
 
 const TranslationProvider: React.FC<ITranslationProviderProps> = (props) => {
   return (
-    <Context.Provider value={{ locale: props.locale, messages }}>
-      <IntlProvider locale={props.locale} messages={props.locale === 'de' ? messages.de : messages.en}>
-        {props.children}
-      </IntlProvider>
-    </Context.Provider>
+    <IntlProvider locale={props.locale} messages={props.locale === 'de' ? translations.vcardTranslationsEN : translations.vcardTranslationsEN}>
+      {props.children}
+    </IntlProvider>
   );
 };
 

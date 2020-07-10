@@ -7,8 +7,6 @@ import QrView from './QrView';
 import ScanView from './ScanView';
 import SwapView from './SwapView';
 import { useIntl } from 'react-intl';
-import IMessageI18nConstants from '../i18n/IMessageI18nConstants';
-import { nameof } from '../utils';
 
 const MainTabs: React.FC = () => {
   const i18n = useIntl();
@@ -29,11 +27,11 @@ const MainTabs: React.FC = () => {
       <IonTabBar slot="bottom">
         <IonTabButton tab="vcard" href="/">
           <IonIcon icon={people} />
-          <IonLabel>{i18n.formatMessage({ id: nameof<IMessageI18nConstants>('Card') })}</IonLabel>
+          <IonLabel>{i18n.formatMessage({ id: 'Card' })}</IonLabel>
         </IonTabButton>
         <IonTabButton tab="scan" href="/tabs/scan">
           <IonIcon icon={scan} />
-          <IonLabel>{i18n.formatMessage({ id: nameof<IMessageI18nConstants>('Scan') })}</IonLabel>
+          <IonLabel>{i18n.formatMessage({ id: 'Scan' })}</IonLabel>
         </IonTabButton>
       </IonTabBar>
     </IonTabs>
