@@ -1,6 +1,6 @@
 import React from 'react';
 import { IonTabs, IonRouterOutlet, IonTabBar, IonTabButton, IonIcon, IonLabel } from '@ionic/react';
-import { Route, Redirect } from 'react-router';
+import { Route } from 'react-router';
 import { people, scan } from 'ionicons/icons';
 import VCardView from './VCardView';
 import QrView from './QrView';
@@ -9,6 +9,9 @@ import SwapView from './SwapView';
 import { useIntl } from 'react-intl';
 import { nameof } from '../utils';
 import IvCardTranslations from '../i18n/IvCardTranslations';
+import About from './About';
+import LegalInfo from './LegalInfo';
+import Privacy from './Privacy';
 
 const MainTabs: React.FC = () => {
   const i18n = useIntl();
@@ -24,6 +27,9 @@ const MainTabs: React.FC = () => {
         <Route path="/qrcode" render={() => <QrView />} exact={true} />
         <Route path="/scan" render={() => <ScanView />} exact={true} />
         <Route path="/swap" render={() => <SwapView />} exact={true} />
+        <Route path="/privacy" render={() => <Privacy />} exact={true} />
+        <Route path="/legal" render={() => <LegalInfo />} exact={true} />
+        <Route path="/about" render={() => <About />} exact={true} />
       </IonRouterOutlet>
       <IonTabBar slot="bottom">
         <IonTabButton tab="vcard" href="/vcard">

@@ -27,27 +27,6 @@ const ScanView: React.FC = () => {
     resizeId = setTimeout(updateWindowSize, 500);
   });
 
-  const renderScanner = () => {
-    return (
-      <div className="qrReaderContainer">
-        <QrReader
-          className="qrReader"
-          delay={300}
-          onError={(err) => {
-            // alert(err);
-          }}
-          onScan={(data) => {
-            if (data !== null) {
-              alert(data);
-              setEncodedText(data as string);
-            }
-          }}
-          style={{ width: qrWidth }}
-        />
-      </div>
-    );
-  };
-
   return (
     <IonPage id="scan">
       <IonHeader translucent={true}>
@@ -66,7 +45,22 @@ const ScanView: React.FC = () => {
           </IonToolbar>
         </IonHeader>
 
-        {renderScanner()}
+        <div className="qrReaderContainer">
+          <QrReader
+            className="qrReader"
+            delay={300}
+            onError={(err) => {
+              // alert(err);
+            }}
+            onScan={(data) => {
+              if (data !== null) {
+                alert(data);
+                setEncodedText(data as string);
+              }
+            }}
+            style={{ width: qrWidth }}
+          />
+        </div>
       </IonContent>
     </IonPage>
   );

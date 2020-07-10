@@ -1,5 +1,5 @@
 import React from 'react';
-import { RouteComponentProps, withRouter, useLocation } from 'react-router';
+import { withRouter, useLocation } from 'react-router';
 import { IonContent, IonIcon, IonItem, IonLabel, IonList, IonListHeader, IonMenu, IonMenuToggle } from '@ionic/react';
 import { peopleCircleOutline } from 'ionicons/icons';
 import { useAppContext } from '../store/contexts/AppContext';
