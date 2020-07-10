@@ -11,8 +11,6 @@ export function convertPontoonFormatToI18n(jsonObj: any): ObjStringProps {
     result[prop] = jsonObj.default[prop].message as string;
   }
   delete result.default;
-
-  console.log(result);
   return result;
 }
 

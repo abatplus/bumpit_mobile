@@ -8,4 +8,8 @@ export default interface IvCardTranslations {
   Scan: PontoonMessage;
   Swap: PontoonMessage;
   Exchange: PontoonMessage;
+  Legal_Information: PontoonMessage;
+  Privacy_Protection: PontoonMessage;
+  Help: PontoonMessage;
+  About: PontoonMessage;
 }

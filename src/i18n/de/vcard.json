@@ -19,5 +19,17 @@
   },
   "Exchange": {
     "message": "Austausch"
+  },
+  "Legal_Information": {
+    "message": "Impressum"
+  },
+  "Privacy_Protection": {
+    "message": "Datenschutz"
+  },
+  "Help": {
+    "message": "Hilfe"
+  },
+  "About": {
+    "message": "Über"
   }
 }

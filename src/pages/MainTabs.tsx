@@ -16,18 +16,17 @@ const MainTabs: React.FC = () => {
   return (
     <IonTabs>
       <IonRouterOutlet>
-        <Redirect exact path="/" to="/vcard" />
         {/*
           Using the render method prop cuts down the number of renders your components will have due to route changes.
           Use the component prop when your component depends on the RouterComponentProps passed in automatically.
         */}
-        <Route path="/" render={() => <VCardView />} exact={true} />
+        <Route path="/vcard" render={() => <VCardView />} exact={true} />
         <Route path="/qrcode" render={() => <QrView />} exact={true} />
         <Route path="/scan" render={() => <ScanView />} exact={true} />
         <Route path="/swap" render={() => <SwapView />} exact={true} />
       </IonRouterOutlet>
       <IonTabBar slot="bottom">
-        <IonTabButton tab="vcard" href="/">
+        <IonTabButton tab="vcard" href="/vcard">
           <IonIcon icon={people} />
           <IonLabel>{i18n.formatMessage({ id: nameof<IvCardTranslations>('Card') })}</IonLabel>
         </IonTabButton>
