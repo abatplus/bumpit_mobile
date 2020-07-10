@@ -1,6 +1,6 @@
 import React from 'react';
 import { IntlProvider } from 'react-intl';
-import { translations } from './translations';
+import { Translations } from './translations';
 import { isPlatform } from '@ionic/react';
 import { Globalization } from '@ionic-native/globalization';
 
@@ -20,7 +20,7 @@ interface ITranslationProviderProps {
 
 const TranslationProvider: React.FC<ITranslationProviderProps> = (props) => {
   return (
-    <IntlProvider locale={props.locale} messages={props.locale === 'de' ? translations.vcardTranslationsEN : translations.vcardTranslationsEN}>
+    <IntlProvider locale={props.locale} messages={props.locale === 'de' ? Translations.de : Translations.en}>
       {props.children}
     </IntlProvider>
   );

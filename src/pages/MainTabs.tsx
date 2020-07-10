@@ -7,6 +7,8 @@ import QrView from './QrView';
 import ScanView from './ScanView';
 import SwapView from './SwapView';
 import { useIntl } from 'react-intl';
+import { nameof } from '../utils';
+import IvCardTranslations from '../i18n/IvCardTranslations';
 
 const MainTabs: React.FC = () => {
   const i18n = useIntl();
@@ -14,7 +16,7 @@ const MainTabs: React.FC = () => {
   return (
     <IonTabs>
       <IonRouterOutlet>
-        <Redirect exact path="/tabs" to="/tabs/vcard" />
+        <Redirect exact path="/" to="/vcard" />
         {/*
           Using the render method prop cuts down the number of renders your components will have due to route changes.
           Use the component prop when your component depends on the RouterComponentProps passed in automatically.
@@ -27,11 +29,11 @@ const MainTabs: React.FC = () => {
       <IonTabBar slot="bottom">
         <IonTabButton tab="vcard" href="/">
           <IonIcon icon={people} />
-          <IonLabel>{i18n.formatMessage({ id: 'Card' })}</IonLabel>
+          <IonLabel>{i18n.formatMessage({ id: nameof<IvCardTranslations>('Card') })}</IonLabel>
         </IonTabButton>
-        <IonTabButton tab="scan" href="/tabs/scan">
+        <IonTabButton tab="scan" href="/scan">
           <IonIcon icon={scan} />
-          <IonLabel>{i18n.formatMessage({ id: 'Scan' })}</IonLabel>
+          <IonLabel>{i18n.formatMessage({ id: nameof<IvCardTranslations>('Scan') })}</IonLabel>
         </IonTabButton>
       </IonTabBar>
     </IonTabs>

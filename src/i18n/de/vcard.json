@@ -1,0 +1,23 @@
+{
+  "appTitle": {
+    "message": "vCard-Exchange"
+  },
+  "appName": {
+    "message": "abat+ Exchange"
+  },
+  "Card": {
+    "message": "Visitenkarte"
+  },
+  "QR_code": {
+    "message": "QR-Code"
+  },
+  "Scan": {
+    "message": "Scannen"
+  },
+  "Swap": {
+    "message": "Swap"
+  },
+  "Exchange": {
+    "message": "Austausch"
+  }
+}
