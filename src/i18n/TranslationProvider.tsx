@@ -18,18 +18,25 @@ const messages = {
   en: { ...translations.en },
 };
 
+interface IIntelContext {
+  locale: string;
+  messages: any;
+}
+
+const Context = React.createContext<IIntelContext>({ locale: '', messages: {} });
+
 interface ITranslationProviderProps {
   locale: string;
   children?: React.ReactNode;
 }
 
 const TranslationProvider: React.FC<ITranslationProviderProps> = (props) => {
-  const message = messages.de;
-
   return (
-    <IntlProvider locale={props.locale} messages={message}>
-      {props.children}
-    </IntlProvider>
+    <Context.Provider value={{ locale: props.locale, messages }}>
+      <IntlProvider locale={props.locale} messages={props.locale === 'de' ? messages.de : messages.en}>
+        {props.children}
+      </IntlProvider>
+    </Context.Provider>
   );
 };
 
