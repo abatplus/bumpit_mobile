@@ -20,7 +20,7 @@ const messages = {
 
 interface ITranslationProviderProps {
   locale: string;
-  children?: any;
+  children?: React.ReactNode;
 }
 
 const TranslationProvider: React.FC<ITranslationProviderProps> = (props) => {
