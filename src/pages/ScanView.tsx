@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { IonHeader, IonToolbar, IonContent, IonPage, IonButtons, IonMenuButton, IonTitle } from '@ionic/react';
 import './ScanView.css';
-
-// import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import QrReader from 'react-qr-reader';
 
 const ScanView: React.FC = () => {
@@ -48,7 +46,6 @@ const ScanView: React.FC = () => {
         />
       </div>
     );
-    // }
   };
 
   return (

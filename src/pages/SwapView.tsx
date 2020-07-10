@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { IonHeader, IonToolbar, IonContent, IonPage, IonButtons, IonList, IonMenuButton, IonTitle, IonLoading } from '@ionic/react';
+import { IonHeader, IonToolbar, IonContent, IonPage, IonButtons, IonList, IonTitle, IonLoading, IonBackButton, IonMenuButton } from '@ionic/react';
 import './SwapView.css';
 import VCardField from '../components/VCardField';
 import { useAppContext } from '../store/contexts/AppContext';
@@ -20,7 +20,7 @@ const SwapView: React.FC = () => {
       <IonHeader translucent={true}>
         <IonToolbar>
           <IonButtons slot="start">
-            <IonMenuButton />
+            <IonBackButton />
           </IonButtons>
           <IonTitle>Exchange card</IonTitle>
         </IonToolbar>
@@ -29,6 +29,9 @@ const SwapView: React.FC = () => {
       <IonContent fullscreen={true}>
         <IonHeader collapse="condense">
           <IonToolbar>
+            <IonButtons slot="start">
+              <IonMenuButton />
+            </IonButtons>
             <IonTitle size="large">Exchange card</IonTitle>
           </IonToolbar>
         </IonHeader>
