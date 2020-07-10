@@ -1,15 +1,12 @@
 {
   "appTitle": {
-    "message": "vCard-Tausch",
-    "description": ""
+    "message": "vCard-Tausch"
   },
   "appName": {
-    "message": "abat+ BumpIt!",
-    "description": ""
+    "message": "abat+ BumpIt!"
   },
   "Card": {
-    "message": "Visitenkarte",
-    "description": "business card"
+    "message": "Visitenkarte"
   },
   "QR_code": {
     "message": "QR-code"

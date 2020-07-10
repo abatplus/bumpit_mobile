@@ -22,10 +22,19 @@ import { VCardProvider } from './store/contexts/VCardContext';
 import { AppContextProvider } from './store/contexts/AppContext';
 import AppRouter from './components/AppRouter';
 import TranslationProvider from './i18n/TranslationProvider';
+import { getLocale } from './i18n/TranslationProvider';
 
 const App: React.FC = () => {
+  const [locale, setLocale] = React.useState('en');
+
+  React.useEffect(() => {
+    (async function settingLocale() {
+      setLocale(await getLocale());
+    })();
+  }, [locale]);
+
   return (
-    <TranslationProvider>
+    <TranslationProvider locale={locale}>
       <IonApp>
         <AppContextProvider>
           <VCardProvider>

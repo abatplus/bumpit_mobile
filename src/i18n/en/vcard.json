@@ -1,15 +1,12 @@
 {
   "appTitle": {
-    "message": "vCard-Exchange",
-    "description": ""
+    "message": "vCard-Exchange"
   },
   "appName": {
-    "message": "abat+ BumpIt!",
-    "description": ""
+    "message": "abat+ BumpIt!"
   },
   "Card": {
-    "message": "Card",
-    "description": "business card"
+    "message": "Card"
   },
   "QR_code": {
     "message": "QR-code"
