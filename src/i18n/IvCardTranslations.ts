@@ -12,4 +12,5 @@ export default interface IvCardTranslations {
   Privacy_Protection: PontoonMessage;
   Help: PontoonMessage;
   About: PontoonMessage;
+  Terms_and_conditions: PontoonMessage;
 }

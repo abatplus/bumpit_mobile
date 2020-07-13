@@ -23,8 +23,9 @@ const Menu: React.FC = () => {
 
   const routes = {
     appPages: [
-      { title: i18n.formatMessage({ id: nameof<IvCardTranslations>('Legal_Information') }), path: '/legal' },
+      { title: i18n.formatMessage({ id: nameof<IvCardTranslations>('Terms_and_conditions') }), path: 'termsAndConditions' },
       { title: i18n.formatMessage({ id: nameof<IvCardTranslations>('Privacy_Protection') }), path: '/privacy' },
+      { title: i18n.formatMessage({ id: nameof<IvCardTranslations>('Legal_Information') }), path: '/legal' },
       { title: i18n.formatMessage({ id: nameof<IvCardTranslations>('About') }), path: '/about' },
     ],
   };

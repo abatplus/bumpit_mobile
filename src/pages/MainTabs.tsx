@@ -12,6 +12,7 @@ import IvCardTranslations from '../i18n/IvCardTranslations';
 import About from './About';
 import LegalInfo from './LegalInfo';
 import Privacy from './Privacy';
+import TermsAndConditions from './TermsAndConditions';
 
 const MainTabs: React.FC = () => {
   const i18n = useIntl();
@@ -30,6 +31,7 @@ const MainTabs: React.FC = () => {
         <Route path="/privacy" render={() => <Privacy />} exact={true} />
         <Route path="/legal" render={() => <LegalInfo />} exact={true} />
         <Route path="/about" render={() => <About />} exact={true} />
+        <Route path="/termsAndConditions" render={() => <TermsAndConditions />} exact={true} />
       </IonRouterOutlet>
       <IonTabBar slot="bottom">
         <IonTabButton tab="vcard" href="/vcard">
