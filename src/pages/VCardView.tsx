@@ -59,7 +59,7 @@ const VCardView: React.FC = () => {
         </IonList>
       </IonContent>
 
-      <IonFooter>
+      {/* <IonFooter>
         <IonButtons className="footer-buttons">
           <IonButton color="primary" fill="outline" className="footer-button" onClick={onClickShowQr}>
             <IonIcon icon={qrCode} />
@@ -70,7 +70,7 @@ const VCardView: React.FC = () => {
             <IonLabel className="footer-button-text">{i18n.formatMessage({ id: nameof<IvCardTranslations>('Swap') })}</IonLabel>
           </IonButton>
         </IonButtons>
-      </IonFooter>
+      </IonFooter> */}
     </IonPage>
   );
 };

@@ -11,6 +11,9 @@ import { getAppData } from '../store/dataApi';
 import * as Actions from '../store/actions/actions';
 import Menu from './Menu';
 import VCardView from '../pages/VCardView';
+import VCardProfiles from '../pages/VCardProfiles';
+import ProfileChange from '../pages/ProfileChange';
+import NewProfile from '../pages/NewProfile';
 
 const AppRouter: React.FC = () => {
   const { dispatchVCard } = useVCard();
@@ -32,6 +35,9 @@ const AppRouter: React.FC = () => {
           <Route path="/about" component={About} />
           <Route path="/privacy" component={Privacy} />
           <Route path="/legal" component={LegalInfo} />
+          <Route path="/profile" component={VCardProfiles} />
+          <Route path="/profile/edit/:id" component={ProfileChange} />
+          <Route path="/profile/create" component={NewProfile} />
         </IonRouterOutlet>
       </IonSplitPane>
     </IonReactRouter>

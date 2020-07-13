@@ -23,6 +23,7 @@ import { AppContextProvider } from './store/contexts/AppContext';
 import AppRouter from './components/AppRouter';
 import TranslationProvider from './i18n/TranslationProvider';
 import { getLocale } from './i18n/TranslationProvider';
+import { ProfileContextProvider } from './store/contexts/ProfileContext';
 
 const App: React.FC = () => {
   const [locale, setLocale] = React.useState('en');
@@ -37,9 +38,11 @@ const App: React.FC = () => {
     <TranslationProvider locale={locale}>
       <IonApp>
         <AppContextProvider>
-          <VCardProvider>
-            <AppRouter />
-          </VCardProvider>
+          <ProfileContextProvider>
+            <VCardProvider>
+              <AppRouter />
+            </VCardProvider>
+          </ProfileContextProvider>
         </AppContextProvider>
       </IonApp>
     </TranslationProvider>

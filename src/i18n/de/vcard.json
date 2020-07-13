@@ -31,5 +31,17 @@
   },
   "About": {
     "message": "Über"
+  },
+  "Profiles": {
+    "message": "Meine Profile"
+  },
+  "Edit": {
+    "message": "bearbeiten"
+  },
+  "ShowQRCode": {
+    "message": "zeige QR-Code"
+  },
+  "Profile_Edit": {
+    "message": "Profil bearbeiten: "
   }
 }
