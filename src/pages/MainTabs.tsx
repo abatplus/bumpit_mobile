@@ -1,35 +1,44 @@
-import React  from 'react';
+import React from 'react';
 import { IonTabs, IonRouterOutlet, IonTabBar, IonTabButton, IonIcon, IonLabel } from '@ionic/react';
-import { Route, Redirect } from 'react-router';
-import { people, qrCode, scan, share } from 'ionicons/icons';
-import VcardView from './VCardView';
+import { Route } from 'react-router';
+import { people, scan } from 'ionicons/icons';
+import VCardView from './VCardView';
 import QrView from './QrView';
 import ScanView from './ScanView';
 import SwapView from './SwapView';
+import { useIntl } from 'react-intl';
+import { nameof } from '../utils';
+import IvCardTranslations from '../i18n/IvCardTranslations';
+import About from './About';
+import LegalInfo from './LegalInfo';
+import Privacy from './Privacy';
 
 const MainTabs: React.FC = () => {
+  const i18n = useIntl();
 
   return (
     <IonTabs>
       <IonRouterOutlet>
-        <Redirect exact path="/tabs" to="/tabs/vcard" />
         {/*
           Using the render method prop cuts down the number of renders your components will have due to route changes.
           Use the component prop when your component depends on the RouterComponentProps passed in automatically.
         */}
-        <Route path="/tabs/vcard" render={() => <VcardView />} exact={true} />
-        <Route path="/tabs/qrcode" render={() => <QrView />} exact={true} />
-        <Route path="/tabs/scan" render={() => <ScanView />} exact={true} />
-        <Route path="/tabs/swap" render={() => <SwapView />} exact={true} />
+        <Route path="/vcard" render={() => <VCardView />} exact={true} />
+        <Route path="/qrcode" render={() => <QrView />} exact={true} />
+        <Route path="/scan" render={() => <ScanView />} exact={true} />
+        <Route path="/swap" render={() => <SwapView />} exact={true} />
+        <Route path="/privacy" render={() => <Privacy />} exact={true} />
+        <Route path="/legal" render={() => <LegalInfo />} exact={true} />
+        <Route path="/about" render={() => <About />} exact={true} />
       </IonRouterOutlet>
       <IonTabBar slot="bottom">
-        <IonTabButton tab="vcard" href="/tabs/vcard">
+        <IonTabButton tab="vcard" href="/vcard">
           <IonIcon icon={people} />
-          <IonLabel>Card</IonLabel>
+          <IonLabel>{i18n.formatMessage({ id: nameof<IvCardTranslations>('Card') })}</IonLabel>
         </IonTabButton>
-        <IonTabButton tab="scan" href="/tabs/scan">
+        <IonTabButton tab="scan" href="/scan">
           <IonIcon icon={scan} />
-          <IonLabel>Scan</IonLabel>
+          <IonLabel>{i18n.formatMessage({ id: nameof<IvCardTranslations>('Scan') })}</IonLabel>
         </IonTabButton>
       </IonTabBar>
     </IonTabs>

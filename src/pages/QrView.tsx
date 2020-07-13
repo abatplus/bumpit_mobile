@@ -1,16 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import { IonHeader, IonToolbar, IonContent, IonPage, IonButtons, IonMenuButton, IonTitle, IonBackButton } from '@ionic/react';
+import { IonHeader, IonToolbar, IonContent, IonPage, IonButtons, IonTitle, IonBackButton } from '@ionic/react';
 import './QrView.css';
 import QRCode from 'qrcode.react';
 import { useVCard } from '../store/contexts/VCardContext';
+import { nameof } from '../utils';
+import IvCardTranslations from '../i18n/IvCardTranslations';
+import { useIntl } from 'react-intl';
 
 const QrView: React.FC = () => {
-
   const [qrWidth, setQrWidth] = useState<number>();
   const [windowSize, setWindowSize] = useState([window.innerWidth, window.innerHeight]);
   const { vCard } = useVCard();
 
-  useEffect( () => {
+  const i18n = useIntl();
+
+  useEffect(() => {
     // calculate size depending on screen orientation
     let size = windowSize[1] > windowSize[0] ? windowSize[0] - 100 : windowSize[1] - 200;
     // limit max size
@@ -20,13 +24,13 @@ const QrView: React.FC = () => {
 
   const updateWindowSize = () => {
     setWindowSize([window.innerWidth, window.innerHeight]);
-  }
+  };
 
   // only fire resize event after 500ms due performance reasons
   let resizeId: NodeJS.Timeout;
-  window.addEventListener('resize', function() {
-      clearTimeout(resizeId);
-      resizeId = setTimeout(updateWindowSize, 500);
+  window.addEventListener('resize', function () {
+    clearTimeout(resizeId);
+    resizeId = setTimeout(updateWindowSize, 500);
   });
 
   return (
@@ -36,21 +40,20 @@ const QrView: React.FC = () => {
           <IonButtons slot="start">
             <IonBackButton />
           </IonButtons>
-          <IonTitle>QR</IonTitle>
+          <IonTitle>{i18n.formatMessage({ id: nameof<IvCardTranslations>('QR_code') })}</IonTitle>
         </IonToolbar>
       </IonHeader>
 
       <IonContent fullscreen={true}>
         <IonHeader collapse="condense">
           <IonToolbar>
-            <IonTitle size="large">qr</IonTitle>
+            <IonTitle size="large">{i18n.formatMessage({ id: nameof<IvCardTranslations>('QR_code') })}</IonTitle>
           </IonToolbar>
         </IonHeader>
 
         <div className="qrcontainer">
           <QRCode value={JSON.stringify(vCard)} size={qrWidth} />
         </div>
-
       </IonContent>
     </IonPage>
   );
