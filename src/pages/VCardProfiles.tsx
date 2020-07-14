@@ -1,5 +1,5 @@
 import React from 'react';
-import { IonPage, IonHeader, IonToolbar, IonButtons, IonBackButton, IonTitle, IonContent, IonFab, IonFabButton, IonIcon } from '@ionic/react';
+import { IonPage, IonHeader, IonToolbar, IonButtons, IonBackButton, IonTitle, IonContent, IonFab, IonFabButton, IonIcon, IonMenuButton } from '@ionic/react';
 import { useIntl } from 'react-intl';
 import { nameof } from '../utils';
 import IvCardTranslations from '../i18n/IvCardTranslations';
@@ -8,7 +8,7 @@ import IProfile from '../interfaces/IProfile';
 import { useProfileContext } from '../store/contexts/ProfileContext';
 import { addCircle } from 'ionicons/icons';
 
-const renderProfile = (profiles: IProfile[]) =>
+const renderProfiles = (profiles: IProfile[]) =>
   profiles.map((profile: IProfile) => {
     return <ProfileCard name={profile.name} id={profile.id} key={profile.id} />;
   });
@@ -23,13 +23,14 @@ const VCardProfiles: React.FC = () => {
       <IonHeader translucent={true}>
         <IonToolbar>
           <IonButtons slot="start">
+            <IonMenuButton />
             <IonBackButton />
           </IonButtons>
           <IonTitle>{i18n.formatMessage({ id: nameof<IvCardTranslations>('Profiles') })}</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent slot={'fixed'}>
-        {renderProfile(profiles.profileContext.profiles)}
+        {renderProfiles(profiles.profileContext.profiles)}
 
         <IonFab vertical={'bottom'} horizontal={'end'} slot={'fixed'}>
           <IonFabButton
