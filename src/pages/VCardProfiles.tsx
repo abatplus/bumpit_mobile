@@ -3,10 +3,10 @@ import { IonPage, IonHeader, IonToolbar, IonButtons, IonBackButton, IonTitle, Io
 import { useIntl } from 'react-intl';
 import { nameof } from '../utils';
 import IvCardTranslations from '../i18n/IvCardTranslations';
-import ProfileCard from './ProfileCard';
 import IProfile from '../interfaces/IProfile';
 import { useProfileContext } from '../store/contexts/ProfileContext';
 import { addCircle } from 'ionicons/icons';
+import ProfileCard from '../components/ProfileCard';
 
 const renderProfiles = (profiles: IProfile[]) =>
   profiles.map((profile: IProfile) => {
