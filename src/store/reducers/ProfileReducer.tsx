@@ -2,6 +2,7 @@ import * as Actions from '../actions/actions';
 import { ActionTypes } from '../actions/profileActions';
 import IProfile from '../../interfaces/IProfile';
 import { storeProfileData } from '../dataApi';
+import { IVCard } from '../../interfaces/IVCard';
 
 export interface IProfileState {
   isLoading: boolean;
@@ -35,8 +36,15 @@ export const ProfileReducer = (state = initialState, action: IAction) => {
         profiles: afterAdd,
       };
     case Actions.Profile.ActionTypes.UPDATE_PROFILE:
-      const indexToUpdate = state.profiles.findIndex((x) => x.id === action.payload);
-      const profiles = [...state.profiles.splice(indexToUpdate, 1), action.payload];
+      const payload = action.payload as { id: string; profileName: string; fieldName: keyof IVCard; fieldValue: string };
+
+      const updateProfileIndex: number = state.profiles.findIndex((x) => x.id === payload.id);
+      const updateProfile: IProfile = state.profiles[updateProfileIndex];
+
+      updateProfile.vCard[payload.fieldName] = payload.fieldValue;
+      state.profiles[updateProfileIndex] = updateProfile;
+
+      const profiles = [...state.profiles];
       (async () => await storeProfileData(profiles))();
 
       return {

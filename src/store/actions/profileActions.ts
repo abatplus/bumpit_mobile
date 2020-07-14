@@ -16,13 +16,14 @@ export const setProfiles = (profiles: IProfile[]) => {
   };
 };
 
-export const setProfileVCardDataField = (profileId: string, name: keyof IVCard, value: string) => {
+export const setProfileVCardDataField = (profileId: string, profileName: string, fieldName: keyof IVCard, fieldValue: string) => {
   return {
     type: ActionTypes.UPDATE_PROFILE,
     payload: {
       id: profileId,
-      fieldName: name,
-      fieldValue: value,
+      profileName,
+      fieldName,
+      fieldValue,
     },
   };
 };

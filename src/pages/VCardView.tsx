@@ -45,7 +45,7 @@ const VCardView: React.FC = () => {
 
   const updateProfile = (inputFieldName: keyof IVCard) => (event: CustomEvent) => {
     if (currentProfile && currentProfile.id) {
-      dispatchProfileContext(Actions.Profile.setProfileVCardDataField(currentProfileId, inputFieldName, event.detail.value));
+      dispatchProfileContext(Actions.Profile.setProfileVCardDataField(currentProfileId, currentProfile.name, inputFieldName, event.detail.value));
     }
   };
 
