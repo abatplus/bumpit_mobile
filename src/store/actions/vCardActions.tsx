@@ -1,4 +1,4 @@
-import { IVCard } from '../reducers/VCardReducer';
+import { IVCard } from '../../interfaces/IVCard';
 
 export enum ActionTypes {
   SET_VCARD_DATA = 'SET_VCARD_DATA',

@@ -1,9 +1,12 @@
 import { Plugins } from '@capacitor/core';
-import { IVCard } from './reducers/VCardReducer';
+import { IVCard } from '../interfaces/IVCard';
+import IProfile from '../interfaces/IProfile';
 
 const { Storage } = Plugins;
 const cardDataUrl = '/assets/mock/vCardMock.json';
 const VCARD_DATA = 'vcard_data';
+
+const PROFILE_DATA = 'profile_data';
 
 const emptyVCard: IVCard = {
   company: '',
@@ -19,24 +22,29 @@ const emptyVCard: IVCard = {
   email: '',
 };
 
+const emptyProfile: IProfile = {
+  id: 'default',
+  name: 'default',
+  vcard: emptyVCard,
+};
+
 export const getAppData = async () => {
-  //await Storage.remove({ key: VCARD_DATA});
-  let vCard = emptyVCard;
+  let profiles = [emptyProfile];
   //get from storage
-  const responseStorage = await Promise.all([Storage.get({ key: VCARD_DATA })]);
+  const responseStorage = await Promise.all([Storage.get({ key: PROFILE_DATA })]);
 
   let cardDataStorage = (await responseStorage[0].value) || undefined;
   if (cardDataStorage) {
-    vCard = { ...vCard, ...JSON.parse(cardDataStorage) };
+    profiles = { ...profiles, ...JSON.parse(cardDataStorage) };
   }
   //read data from url
   else {
     const response = await Promise.all([fetch(cardDataUrl)]);
     const responseData = await response[0].json();
-    vCard = { ...vCard, ...responseData.vcard };
+    profiles = { ...profiles, ...responseData.vcard };
   }
 
-  return vCard;
+  return profiles;
 };
 
 //save in Storage

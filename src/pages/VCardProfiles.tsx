@@ -8,15 +8,18 @@ import IProfile from '../interfaces/IProfile';
 import { useProfileContext } from '../store/contexts/ProfileContext';
 import { addCircle } from 'ionicons/icons';
 
-const renderProfiles = (profiles: IProfile[]) =>
-  profiles.map((profile: IProfile) => {
-    return <ProfileCard name={profile.name} id={profile.id} key={profile.id} />;
-  });
+const renderProfiles = (profiles: IProfile[]) => {
+  console.log(profiles);
+  if (profiles) {
+    profiles.map((profile: IProfile) => {
+      return <ProfileCard name={profile.name} id={profile.id} key={profile.id} />;
+    });
+  }
+};
 
 const VCardProfiles: React.FC = () => {
   const i18n = useIntl();
-
-  const profiles = useProfileContext();
+  const { profileContext } = useProfileContext();
 
   return (
     <IonPage id="vcard">
@@ -30,7 +33,7 @@ const VCardProfiles: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent slot={'fixed'}>
-        {renderProfiles(profiles.profileContext.profiles)}
+        {renderProfiles(profileContext.profiles)}
 
         <IonFab vertical={'bottom'} horizontal={'end'} slot={'fixed'}>
           <IonFabButton
@@ -38,12 +41,7 @@ const VCardProfiles: React.FC = () => {
               console.log('Add a new profile');
             }}
           >
-            <IonIcon
-              icon={addCircle}
-              onClick={() => {
-                console.log('Add a new Profile icon click');
-              }}
-            />
+            <IonIcon icon={addCircle} />
           </IonFabButton>
         </IonFab>
       </IonContent>

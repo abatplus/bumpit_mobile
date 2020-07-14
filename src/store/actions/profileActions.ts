@@ -3,10 +3,18 @@ import IProfile from '../../interfaces/IProfile';
 export enum ActionTypes {
   SET_LOADING = 'SET_LOADING',
   GET_PROFILES = 'GET_PROFILES',
+  SET_PROFILES = 'SET_PROFILES',
   ADD_PROFILE = 'ADD_PROFILE',
   REMOVE_PROFILE = 'REMOVE_PROFILE',
   CHANGE_PROFILE = 'CHANGE_PROFILE',
 }
+
+export const setProfiles = (profiles: IProfile[]) => {
+  return {
+    type: ActionTypes.SET_PROFILES,
+    payload: profiles,
+  };
+};
 
 export const setProfileLoading = (isLoading: boolean) => {
   return {

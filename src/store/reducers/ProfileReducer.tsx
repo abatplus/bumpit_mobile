@@ -35,6 +35,12 @@ export const initialState: IProfileState = {
 
 export const ProfileReducer = (state = initialState, action: IAction) => {
   switch (action.type) {
+    case Actions.Profile.ActionTypes.SET_PROFILES: {
+      return {
+        ...state,
+        profiles: action.payload,
+      };
+    }
     case Actions.Profile.ActionTypes.ADD_PROFILE:
       return {
         ...state,

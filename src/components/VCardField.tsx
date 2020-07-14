@@ -2,7 +2,7 @@ import React from 'react';
 import { IonItem, IonLabel, IonInput } from '@ionic/react';
 import { useVCard } from '../store/contexts/VCardContext';
 import * as Actions from '../store/actions/actions';
-import { IVCard } from '../store/reducers/VCardReducer';
+import { IVCard } from '../interfaces/IVCard';
 
 interface VCardProps {
   name: keyof IVCard;

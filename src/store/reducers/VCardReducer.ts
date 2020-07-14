@@ -1,20 +1,7 @@
 import * as Actions from '../actions/actions';
 import { ActionTypes } from '../actions/vCardActions';
 import { storeVCardData } from '../dataApi';
-
-export interface IVCard {
-  company?: string;
-  website?: string;
-  street?: string;
-  zipCode?: string;
-  location?: string;
-  country?: string;
-  name?: string;
-  position?: string;
-  phone?: string;
-  fax?: string;
-  email?: string;
-}
+import { IVCard } from '../../interfaces/IVCard';
 
 export interface IVCardFieldKeyValuePair {
   key: keyof IVCard;
