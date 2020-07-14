@@ -33,7 +33,7 @@ const VCardProfiles: React.FC = () => {
   }, [dispatchAppContext, dispatchProfileContext]);
 
   return (
-    <IonPage id="vcard">
+    <IonPage id="vcardprofiles">
       <IonHeader translucent={true}>
         <IonToolbar>
           <IonButtons slot="start">

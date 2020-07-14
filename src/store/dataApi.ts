@@ -33,7 +33,7 @@ export const getProfileData = async () => {
   const responseStorage = await Promise.all([Storage.get({ key: PROFILE_DATA })]);
   let cardDataStorage = responseStorage[0].value || undefined;
   if (cardDataStorage) {
-    profiles = { ...profiles, ...JSON.parse(cardDataStorage) };
+    profiles = JSON.parse(cardDataStorage);
   }
   //read data from url
   else {
