@@ -9,11 +9,10 @@ import { addCircle } from 'ionicons/icons';
 import ProfileCard from '../components/ProfileCard';
 import * as Actions from '../store/actions/actions';
 import { useAppContext } from '../store/contexts/AppContext';
+import { getProfileData } from '../store/dataApi';
 
 const renderProfiles = (profiles: IProfile[]) => {
-  console.log('rendering profiles');
-
-  profiles.map((profile: IProfile) => {
+  return profiles.map((profile: IProfile) => {
     return <ProfileCard name={profile.name} id={profile.id} key={profile.id} />;
   });
 };
@@ -25,15 +24,13 @@ const VCardProfiles: React.FC = () => {
 
   useEffect(() => {
     dispatchAppContext(Actions.App.setLoading(true));
-    dispatchProfileContext(Actions.Profile.setProfileLoading(true));
-    dispatchProfileContext(Actions.Profile.getProfiles());
+
+    const getProfiles = (async () => await getProfileData())();
+    getProfiles.then((res) => dispatchProfileContext(Actions.Profile.setProfiles(res)));
     setTimeout(() => {
       dispatchAppContext(Actions.App.setLoading(false));
-      dispatchProfileContext(Actions.Profile.setProfileLoading(false));
     }, 2000);
   }, [dispatchAppContext, dispatchProfileContext]);
-
-  console.log(profileContext);
 
   return (
     <IonPage id="vcard">
@@ -47,8 +44,7 @@ const VCardProfiles: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent slot={'fixed'}>
-        {renderProfiles(profileContext.profiles)}
-
+        {profileContext.profiles && profileContext.profiles.length > 0 ? renderProfiles(profileContext.profiles) : <React.Fragment />}
         <IonFab vertical={'bottom'} horizontal={'end'} slot={'fixed'}>
           <IonFabButton
             onClick={() => {

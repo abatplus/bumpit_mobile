@@ -3,7 +3,6 @@ import { IVCard } from '../../interfaces/IVCard';
 
 export enum ActionTypes {
   SET_LOADING = 'SET_LOADING',
-  GET_PROFILES = 'GET_PROFILES',
   SET_PROFILES = 'SET_PROFILES',
   ADD_PROFILE = 'ADD_PROFILE',
   REMOVE_PROFILE = 'REMOVE_PROFILE',
@@ -32,13 +31,6 @@ export const setProfileLoading = (isLoading: boolean) => {
   return {
     type: ActionTypes.SET_LOADING,
     payload: isLoading,
-  };
-};
-
-export const getProfiles = () => {
-  return {
-    type: ActionTypes.GET_PROFILES,
-    payload: {},
   };
 };
 
