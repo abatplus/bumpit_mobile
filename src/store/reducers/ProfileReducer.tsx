@@ -45,10 +45,6 @@ export const ProfileReducer = (state = initialState, action: IAction) => {
         ...state,
         profiles: [...state.profiles, action.payload],
       };
-    case Actions.Profile.ActionTypes.GET_PROFILE:
-      return {
-        ...state,
-      };
     case Actions.Profile.ActionTypes.GET_PROFILES:
       return {
         ...state,
@@ -57,7 +53,6 @@ export const ProfileReducer = (state = initialState, action: IAction) => {
       const currentProfiles = state.profiles;
       const indexOfProfileToRemove = state.profiles.findIndex((x) => x.id === action.payload);
       currentProfiles.splice(indexOfProfileToRemove, 1);
-
       return {
         ...state,
         profiles: currentProfiles,

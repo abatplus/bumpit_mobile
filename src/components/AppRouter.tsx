@@ -3,17 +3,10 @@ import { IonReactRouter } from '@ionic/react-router';
 import { IonSplitPane, IonRouterOutlet } from '@ionic/react';
 import { Route } from 'react-router';
 import MainTabs from '../pages/MainTabs';
-import About from '../pages/About';
-import Privacy from '../pages/Privacy';
-import LegalInfo from '../pages/LegalInfo';
 import { useVCard } from '../store/contexts/VCardContext';
 import { getAppData } from '../store/dataApi';
 import * as Actions from '../store/actions/actions';
 import Menu from './Menu';
-import VCardView from '../pages/VCardView';
-import VCardProfiles from '../pages/VCardProfiles';
-import ProfileChange from '../pages/ProfileChange';
-import NewProfile from '../pages/NewProfile';
 
 const AppRouter: React.FC = () => {
   const { dispatchVCard } = useVCard();
@@ -31,13 +24,12 @@ const AppRouter: React.FC = () => {
         <Menu />
         <IonRouterOutlet id="main">
           <Route path="/" component={MainTabs} />
-          <Route path="/vcard" component={VCardView} />
+          {/* <Route path="/vcard" component={VCardView} />
           <Route path="/about" component={About} />
           <Route path="/privacy" component={Privacy} />
           <Route path="/legal" component={LegalInfo} />
-          <Route path="/profile" component={VCardProfiles} />
-          <Route path="/profile/edit/:id" component={ProfileChange} />
-          <Route path="/profile/create" component={NewProfile} />
+          <Route path="/profile/edit/:id" component={VCardProfiles} />
+          <Route path="/profile/create" component={NewProfile} /> */}
         </IonRouterOutlet>
       </IonSplitPane>
     </IonReactRouter>

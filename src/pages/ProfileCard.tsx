@@ -17,7 +17,7 @@ const ProfileCard: React.FC<IProfileCard> = (props) => {
   return (
     <IonCard style={{ margin: '2em' }}>
       <IonHeader onClick={() => history.push('/profile/' + props.id)}>
-        <IonTitle>{props.name}</IonTitle>
+        <IonTitle className="ion-text-center">{props.name}</IonTitle>
       </IonHeader>
       <hr />
       <IonCardContent>
@@ -48,7 +48,7 @@ const ProfileCard: React.FC<IProfileCard> = (props) => {
               <IonButton
                 onClick={() => {
                   console.log('Profile EDIT');
-                  history.push('/profileChange/' + props.id);
+                  history.push('/profile/edit/' + props.id);
                 }}
                 title={i18n.formatMessage({ id: nameof<IvCardTranslations>('Edit') })}
               >

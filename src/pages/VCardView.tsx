@@ -12,6 +12,7 @@ import {
   IonButton,
   IonIcon,
   IonLabel,
+  IonBackButton,
 } from '@ionic/react';
 import './VCardView.css';
 import VCardField from '../components/VCardField';
@@ -39,6 +40,7 @@ const VCardView: React.FC = () => {
         <IonToolbar>
           <IonButtons slot="start">
             <IonMenuButton />
+            <IonBackButton />
           </IonButtons>
           <IonTitle>{i18n.formatMessage({ id: nameof<IvCardTranslations>('Card') })}</IonTitle>
         </IonToolbar>
@@ -59,7 +61,7 @@ const VCardView: React.FC = () => {
         </IonList>
       </IonContent>
 
-      {/* <IonFooter>
+      <IonFooter>
         <IonButtons className="footer-buttons">
           <IonButton color="primary" fill="outline" className="footer-button" onClick={onClickShowQr}>
             <IonIcon icon={qrCode} />
@@ -70,7 +72,7 @@ const VCardView: React.FC = () => {
             <IonLabel className="footer-button-text">{i18n.formatMessage({ id: nameof<IvCardTranslations>('Swap') })}</IonLabel>
           </IonButton>
         </IonButtons>
-      </IonFooter> */}
+      </IonFooter>
     </IonPage>
   );
 };

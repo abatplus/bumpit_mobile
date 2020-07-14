@@ -13,7 +13,6 @@ import About from './About';
 import LegalInfo from './LegalInfo';
 import Privacy from './Privacy';
 import VCardProfiles from './VCardProfiles';
-import ProfileChange from './ProfileChange';
 import NewProfile from './NewProfile';
 
 const MainTabs: React.FC = () => {
@@ -32,11 +31,9 @@ const MainTabs: React.FC = () => {
         <Route path="/privacy" render={() => <Privacy />} exact={true} />
         <Route path="/legal" render={() => <LegalInfo />} exact={true} />
         <Route path="/about" render={() => <About />} exact={true} />
+        <Route path="/profile/edit/:id" component={VCardView} exact={true} />
+        <Route path="/profile/create" component={NewProfile} />
         <Route path="/profile" component={VCardProfiles} />
-        <Route path="/profile/:id" component={VCardView} exact={true} />
-        <Route path="/profile/add" component={NewProfile} exact={true} />
-        <Route path="/profile/edit/:id" component={ProfileChange} exact={true} />
-        {/*<Route path="profile/remove/:id" component={RemoveProfile} exact={true} />*/}
         <Route path="/" render={() => <VCardProfiles />} exact={true} />
       </IonRouterOutlet>
       <IonTabBar slot="bottom">

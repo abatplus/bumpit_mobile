@@ -2,7 +2,6 @@ import IProfile from '../../interfaces/IProfile';
 
 export enum ActionTypes {
   SET_LOADING = 'SET_LOADING',
-  GET_PROFILE = 'GET_PROFILE',
   GET_PROFILES = 'GET_PROFILES',
   ADD_PROFILE = 'ADD_PROFILE',
   REMOVE_PROFILE = 'REMOVE_PROFILE',
@@ -20,13 +19,6 @@ export const getProfiles = () => {
   return {
     type: ActionTypes.GET_PROFILES,
     payload: {},
-  };
-};
-
-export const getProfile = (id: string) => {
-  return {
-    type: ActionTypes.GET_PROFILE,
-    payload: id,
   };
 };
 
