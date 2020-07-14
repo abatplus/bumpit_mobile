@@ -2,15 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { IonHeader, IonToolbar, IonContent, IonPage, IonButtons, IonTitle, IonBackButton } from '@ionic/react';
 import './QrView.css';
 import QRCode from 'qrcode.react';
-import { useVCard } from '../store/contexts/VCardContext';
-import { nameof } from '../utils';
+import { nameof, getProfileId } from '../utils';
 import IvCardTranslations from '../i18n/IvCardTranslations';
 import { useIntl } from 'react-intl';
+import { useProfileContext } from '../store/contexts/ProfileContext';
+import { useLocation } from 'react-router';
 
 const QrView: React.FC = () => {
   const [qrWidth, setQrWidth] = useState<number>();
   const [windowSize, setWindowSize] = useState([window.innerWidth, window.innerHeight]);
-  const { vCard } = useVCard();
+  const { profileContext } = useProfileContext();
 
   const i18n = useIntl();
 
@@ -20,7 +21,9 @@ const QrView: React.FC = () => {
     // limit max size
     size = size > 400 ? 400 : size;
     setQrWidth(size);
-  }, [windowSize, vCard]);
+  }, [windowSize, profileContext]);
+
+  const location = useLocation();
 
   const updateWindowSize = () => {
     setWindowSize([window.innerWidth, window.innerHeight]);
@@ -32,6 +35,8 @@ const QrView: React.FC = () => {
     clearTimeout(resizeId);
     resizeId = setTimeout(updateWindowSize, 500);
   });
+
+  const currentProfile = profileContext.profiles.find((profile) => profile.id === getProfileId(location.pathname));
 
   return (
     <IonPage id="qr">
@@ -52,7 +57,7 @@ const QrView: React.FC = () => {
         </IonHeader>
 
         <div className="qrcontainer">
-          <QRCode value={JSON.stringify(vCard)} size={qrWidth} />
+          <QRCode value={JSON.stringify(currentProfile?.vcard)} size={qrWidth} />
         </div>
       </IonContent>
     </IonPage>

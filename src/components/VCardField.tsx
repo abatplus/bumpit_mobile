@@ -1,27 +1,37 @@
 import React from 'react';
 import { IonItem, IonLabel, IonInput } from '@ionic/react';
-import { useVCard } from '../store/contexts/VCardContext';
 import * as Actions from '../store/actions/actions';
 import { IVCard } from '../interfaces/IVCard';
+import { useProfileContext } from '../store/contexts/ProfileContext';
 
 interface VCardProps {
+  profileId: string;
   name: keyof IVCard;
   label: string;
 }
 
-const VCardField: React.FC<VCardProps> = ({ name, label }) => {
-  const { vCard, dispatchVCard } = useVCard();
+const VCardField: React.FC<VCardProps> = (props) => {
+  const { profileContext, dispatchProfileContext } = useProfileContext();
 
   const onValueFieldChange = (e: any) => {
-    dispatchVCard(Actions.VCard.setVCardDataField(name, e.detail.value));
+    dispatchProfileContext(Actions.Profile.setProfileVCardDataField(props.profileId, props.name, e.detail.value));
   };
+
+  const currentProfile = profileContext.profiles.find((profile) => profile.id === props.profileId);
 
   return (
     <IonItem>
       <IonLabel position="stacked" color="primary">
-        {label}
+        {props.label}
       </IonLabel>
-      <IonInput name={name} type="text" value={vCard[name]} spellCheck={false} autocapitalize="off" onIonChange={onValueFieldChange} />
+      <IonInput
+        name={props.name}
+        type="text"
+        value={currentProfile?.vcard[props.name]}
+        spellCheck={false}
+        autocapitalize="off"
+        onIonChange={onValueFieldChange}
+      />
     </IonItem>
   );
 };

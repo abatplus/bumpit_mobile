@@ -14,23 +14,7 @@ export interface IAction {
 
 export const initialState: IProfileState = {
   isLoading: false,
-  profiles: [
-    {
-      id: 'pers',
-      name: 'Persönlich',
-      vcard: {},
-    },
-    {
-      id: 'work',
-      name: 'Arbeit',
-      vcard: {},
-    },
-    {
-      id: 'sport',
-      name: 'Sportverein',
-      vcard: {},
-    },
-  ],
+  profiles: [],
 };
 
 export const ProfileReducer = (state = initialState, action: IAction) => {
@@ -46,7 +30,7 @@ export const ProfileReducer = (state = initialState, action: IAction) => {
         ...state,
         profiles: [...state.profiles, action.payload],
       };
-    case Actions.Profile.ActionTypes.CHANGE_PROFILE:
+    case Actions.Profile.ActionTypes.UPDATE_PROFILE:
       return {
         ...state,
         profiles: [...state.profiles, action.payload],
@@ -72,3 +56,5 @@ export const ProfileReducer = (state = initialState, action: IAction) => {
       return state;
   }
 };
+
+// (async () => await storeProfileData(vCardWithNewFieldValue))();

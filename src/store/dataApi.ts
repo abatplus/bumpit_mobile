@@ -3,8 +3,7 @@ import { IVCard } from '../interfaces/IVCard';
 import IProfile from '../interfaces/IProfile';
 
 const { Storage } = Plugins;
-const cardDataUrl = '/assets/mock/vCardMock.json';
-const VCARD_DATA = 'vcard_data';
+const profileDataUrl = '/assets/mock/profilesMock.json';
 
 const PROFILE_DATA = 'profile_data';
 
@@ -28,7 +27,7 @@ const emptyProfile: IProfile = {
   vcard: emptyVCard,
 };
 
-export const getAppData = async () => {
+export const getProfileData = async () => {
   let profiles = [emptyProfile];
   //get from storage
   const responseStorage = await Promise.all([Storage.get({ key: PROFILE_DATA })]);
@@ -39,7 +38,7 @@ export const getAppData = async () => {
   }
   //read data from url
   else {
-    const response = await Promise.all([fetch(cardDataUrl)]);
+    const response = await Promise.all([fetch(profileDataUrl)]);
     const responseData = await response[0].json();
     profiles = { ...profiles, ...responseData.vcard };
   }
@@ -48,6 +47,6 @@ export const getAppData = async () => {
 };
 
 //save in Storage
-export const storeVCardData = async (data: IVCard) => {
-  await Storage.set({ key: VCARD_DATA, value: JSON.stringify(data) });
+export const storeProfileData = async (data: IVCard) => {
+  await Storage.set({ key: PROFILE_DATA, value: JSON.stringify(data) });
 };

@@ -9,12 +9,9 @@ import { addCircle } from 'ionicons/icons';
 import ProfileCard from '../components/ProfileCard';
 
 const renderProfiles = (profiles: IProfile[]) => {
-  console.log(profiles);
-  if (profiles) {
-    profiles.map((profile: IProfile) => {
-      return <ProfileCard name={profile.name} id={profile.id} key={profile.id} />;
-    });
-  }
+  profiles.map((profile: IProfile) => {
+    return <ProfileCard name={profile.name} id={profile.id} key={profile.id} />;
+  });
 };
 
 const VCardProfiles: React.FC = () => {
