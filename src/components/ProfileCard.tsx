@@ -16,7 +16,7 @@ const ProfileCard: React.FC<IProfileCard> = (props) => {
   const history = useHistory();
   return (
     <IonCard style={{ margin: '2em' }}>
-      <IonHeader onClick={() => history.push('/profile/' + props.id)}>
+      <IonHeader onClick={() => history.push('/profile/edit/' + props.id)}>
         <IonTitle className="ion-text-center">{props.name}</IonTitle>
       </IonHeader>
       <hr />
@@ -26,7 +26,7 @@ const ProfileCard: React.FC<IProfileCard> = (props) => {
             <IonCol className="ion-text-center">
               <IonButton
                 onClick={() => {
-                  console.log('QR pressed for ' + props.id);
+                  history.push('/qrcode/' + props.id);
                 }}
                 title={i18n.formatMessage({ id: nameof<IvCardTranslations>('ShowQRCode') })}
               >
@@ -36,7 +36,6 @@ const ProfileCard: React.FC<IProfileCard> = (props) => {
             <IonCol className="ion-text-center">
               <IonButton
                 onClick={() => {
-                  console.log('SWAPPEN');
                   history.push('/swap/' + props.id);
                 }}
                 title={i18n.formatMessage({ id: nameof<IvCardTranslations>('Exchange') })}
@@ -47,7 +46,6 @@ const ProfileCard: React.FC<IProfileCard> = (props) => {
             <IonCol className="ion-text-center">
               <IonButton
                 onClick={() => {
-                  console.log('Profile EDIT');
                   history.push('/profile/edit/' + props.id);
                 }}
                 title={i18n.formatMessage({ id: nameof<IvCardTranslations>('Edit') })}
