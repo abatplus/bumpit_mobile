@@ -3,10 +3,12 @@ import { IonHeader, IonToolbar, IonContent, IonPage, IonButtons, IonList, IonTit
 import VCardField from '../components/VCardField';
 import { useAppContext } from '../store/contexts/AppContext';
 import * as Actions from '../store/actions/actions';
-import { RouteComponentProps } from 'react-router';
+import { useLocation } from 'react-router';
+import { getProfileId } from '../utils';
 
-const SwapView: React.FC<RouteComponentProps> = (props) => {
+const SwapView: React.FC = () => {
   const { appContext, dispatchAppContext } = useAppContext();
+  const location = useLocation();
 
   useEffect(() => {
     dispatchAppContext(Actions.App.setLoading(true));
@@ -15,7 +17,7 @@ const SwapView: React.FC<RouteComponentProps> = (props) => {
     }, 2000);
   }, [dispatchAppContext]);
 
-  const currentProfileId = props.location.pathname.split('/').reverse()[0];
+  const currentProfileId = getProfileId(location.pathname);
 
   return (
     <IonPage id="vcard">

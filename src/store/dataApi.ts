@@ -31,22 +31,20 @@ export const getProfileData = async () => {
   let profiles = [emptyProfile];
   //get from storage
   const responseStorage = await Promise.all([Storage.get({ key: PROFILE_DATA })]);
-
-  let cardDataStorage = (await responseStorage[0].value) || undefined;
+  let cardDataStorage = responseStorage[0].value || undefined;
   if (cardDataStorage) {
     profiles = { ...profiles, ...JSON.parse(cardDataStorage) };
   }
   //read data from url
   else {
     const response = await Promise.all([fetch(profileDataUrl)]);
-    const responseData = await response[0].json();
-    profiles = { ...profiles, ...responseData.vcard };
+    const responseData: { profiles: [{ id: string; name: string; vcard: IVCard }] } = await response[0].json();
+    profiles = responseData.profiles;
   }
-
   return profiles;
 };
 
 //save in Storage
-export const storeProfileData = async (data: IVCard) => {
+export const storeProfileData = async (data: IProfile[]) => {
   await Storage.set({ key: PROFILE_DATA, value: JSON.stringify(data) });
 };

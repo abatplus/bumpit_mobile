@@ -1,6 +1,7 @@
 import * as Actions from '../actions/actions';
-import { ActionTypes } from '../actions/profileActions';
+import { ActionTypes, getProfiles } from '../actions/profileActions';
 import IProfile from '../../interfaces/IProfile';
+import { getProfileData } from '../dataApi';
 
 export interface IProfileState {
   isLoading: boolean;
@@ -36,9 +37,16 @@ export const ProfileReducer = (state = initialState, action: IAction) => {
         profiles: [...state.profiles, action.payload],
       };
     case Actions.Profile.ActionTypes.GET_PROFILES:
-      return {
-        ...state,
-      };
+      (async () => await getProfileData())().then((res) => {
+        console.log('Action');
+        console.log(res);
+
+        return {
+          ...state,
+          isLoading: false,
+          profiles: res,
+        };
+      });
     case Actions.Profile.ActionTypes.REMOVE_PROFILE:
       const currentProfiles = state.profiles;
       const indexOfProfileToRemove = state.profiles.findIndex((x) => x.id === action.payload);
