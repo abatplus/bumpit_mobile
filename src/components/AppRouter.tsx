@@ -24,12 +24,6 @@ const AppRouter: React.FC = () => {
         <Menu />
         <IonRouterOutlet id="main">
           <Route path="/" component={MainTabs} />
-          {/* <Route path="/vcard" component={VCardView} />
-          <Route path="/about" component={About} />
-          <Route path="/privacy" component={Privacy} />
-          <Route path="/legal" component={LegalInfo} />
-          <Route path="/profile/edit/:id" component={VCardProfiles} />
-          <Route path="/profile/create" component={NewProfile} /> */}
         </IonRouterOutlet>
       </IonSplitPane>
     </IonReactRouter>
