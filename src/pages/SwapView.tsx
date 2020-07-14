@@ -14,7 +14,7 @@ const SwapView: React.FC = () => {
   }, [dispatchAppContext]);
 
   return (
-    <IonPage id="vcard">
+    <IonPage id="swapView">
       <IonHeader translucent={true}>
         <IonToolbar>
           <IonButtons slot="start">

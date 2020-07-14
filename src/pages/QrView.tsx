@@ -57,7 +57,7 @@ const QrView: React.FC = () => {
         </IonHeader>
 
         <div className="qrcontainer">
-          <QRCode value={JSON.stringify(currentProfile?.vcard)} size={qrWidth} />
+          <QRCode value={JSON.stringify(currentProfile?.vCard)} size={qrWidth} />
         </div>
       </IonContent>
     </IonPage>
