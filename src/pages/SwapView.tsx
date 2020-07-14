@@ -1,14 +1,10 @@
 import React, { useEffect } from 'react';
-import { IonHeader, IonToolbar, IonContent, IonPage, IonButtons, IonList, IonTitle, IonLoading, IonBackButton, IonMenuButton } from '@ionic/react';
-import VCardField from '../components/VCardField';
+import { IonHeader, IonToolbar, IonContent, IonPage, IonButtons, IonList, IonTitle, IonLoading, IonBackButton, IonMenuButton, IonMenu } from '@ionic/react';
 import { useAppContext } from '../store/contexts/AppContext';
 import * as Actions from '../store/actions/actions';
-import { useLocation } from 'react-router';
-import { getProfileId } from '../utils';
 
 const SwapView: React.FC = () => {
   const { appContext, dispatchAppContext } = useAppContext();
-  const location = useLocation();
 
   useEffect(() => {
     dispatchAppContext(Actions.App.setLoading(true));
@@ -17,13 +13,12 @@ const SwapView: React.FC = () => {
     }, 2000);
   }, [dispatchAppContext]);
 
-  const currentProfileId = getProfileId(location.pathname);
-
   return (
     <IonPage id="vcard">
       <IonHeader translucent={true}>
         <IonToolbar>
           <IonButtons slot="start">
+            <IonMenuButton />
             <IonBackButton />
           </IonButtons>
           <IonTitle>Exchange card</IonTitle>
@@ -41,11 +36,7 @@ const SwapView: React.FC = () => {
         </IonHeader>
         {appContext.isLoading ? <IonLoading spinner="lines" isOpen={true} /> : ''}
 
-        {!appContext.isLoading && (
-          <IonList>
-            <VCardField name="name" label="Name" profileId={currentProfileId} />
-          </IonList>
-        )}
+        {!appContext.isLoading && <IonList></IonList>}
       </IonContent>
     </IonPage>
   );

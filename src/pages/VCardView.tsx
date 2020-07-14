@@ -21,12 +21,16 @@ import { useHistory, useLocation } from 'react-router';
 import { useIntl } from 'react-intl';
 import { nameof, getProfileId } from '../utils';
 import IvCardTranslations from '../i18n/IvCardTranslations';
+import { useProfileContext } from '../store/contexts/ProfileContext';
+import * as Actions from '../store/actions/actions';
+import { IVCard } from '../interfaces/IVCard';
 
 const VCardView: React.FC = () => {
   const history = useHistory();
   const i18n = useIntl();
 
   const location = useLocation();
+  const { profileContext, dispatchProfileContext } = useProfileContext();
 
   const onClickShowQr = () => {
     history.push('/qrcode');
@@ -36,7 +40,13 @@ const VCardView: React.FC = () => {
     history.push('/swap');
   };
 
-  const currentProfile = getProfileId(location.pathname);
+  const currentProfile = profileContext.profiles.find((itm) => itm.id === getProfileId(location.pathname));
+
+  const updateProfile = (inputFieldName: keyof IVCard) => (event: CustomEvent) => {
+    if (currentProfile && currentProfile.id) {
+      dispatchProfileContext(Actions.Profile.setProfileVCardDataField(currentProfile?.id, inputFieldName, event.detail.value));
+    }
+  };
 
   return (
     <IonPage id="vcard">
@@ -57,17 +67,83 @@ const VCardView: React.FC = () => {
           </IonToolbar>
         </IonHeader>
         <IonList>
-          <VCardField profileId={currentProfile} name="company" label={i18n.formatMessage({ id: nameof<IvCardTranslations>('Company') })} />
-          <VCardField profileId={currentProfile} name="website" label={i18n.formatMessage({ id: nameof<IvCardTranslations>('Website') })} />
-          <VCardField profileId={currentProfile} name="street" label={i18n.formatMessage({ id: nameof<IvCardTranslations>('Street') })} />
-          <VCardField profileId={currentProfile} name="zipCode" label={i18n.formatMessage({ id: nameof<IvCardTranslations>('ZipCode') })} />
-          <VCardField profileId={currentProfile} name="location" label={i18n.formatMessage({ id: nameof<IvCardTranslations>('Location') })} />
-          <VCardField profileId={currentProfile} name="country" label={i18n.formatMessage({ id: nameof<IvCardTranslations>('Country') })} />
-          <VCardField profileId={currentProfile} name="name" label={i18n.formatMessage({ id: nameof<IvCardTranslations>('Name') })} />
-          <VCardField profileId={currentProfile} name="position" label={i18n.formatMessage({ id: nameof<IvCardTranslations>('Position') })} />
-          <VCardField profileId={currentProfile} name="phone" label={i18n.formatMessage({ id: nameof<IvCardTranslations>('Phone') })} />
-          <VCardField profileId={currentProfile} name="fax" label={i18n.formatMessage({ id: nameof<IvCardTranslations>('Fax') })} />
-          <VCardField profileId={currentProfile} name="email" label={i18n.formatMessage({ id: nameof<IvCardTranslations>('Email') })} />
+          <VCardField
+            key={'company'}
+            name={'company'}
+            label={i18n.formatMessage({ id: nameof<IvCardTranslations>('Company') })}
+            value={currentProfile?.vcard?.company}
+            onChange={updateProfile('company')}
+          />
+          <VCardField
+            key={'website'}
+            name={'website'}
+            label={i18n.formatMessage({ id: nameof<IvCardTranslations>('Website') })}
+            value={currentProfile?.vcard?.website}
+            onChange={updateProfile('website')}
+          />
+          <VCardField
+            key={'street'}
+            name={'street'}
+            label={i18n.formatMessage({ id: nameof<IvCardTranslations>('Street') })}
+            value={currentProfile?.vcard?.street}
+            onChange={updateProfile('street')}
+          />
+          <VCardField
+            key={'zipCode'}
+            name={'zipCode'}
+            label={i18n.formatMessage({ id: nameof<IvCardTranslations>('ZipCode') })}
+            value={currentProfile?.vcard?.zipCode}
+            onChange={updateProfile('zipCode')}
+          />
+          <VCardField
+            key={'location'}
+            name={'location'}
+            label={i18n.formatMessage({ id: nameof<IvCardTranslations>('Location') })}
+            value={currentProfile?.vcard?.location}
+            onChange={updateProfile('location')}
+          />
+          <VCardField
+            key={'country'}
+            name={'country'}
+            label={i18n.formatMessage({ id: nameof<IvCardTranslations>('Country') })}
+            value={currentProfile?.vcard?.country}
+            onChange={updateProfile('country')}
+          />
+          <VCardField
+            key={'name'}
+            name={'name'}
+            label={i18n.formatMessage({ id: nameof<IvCardTranslations>('Name') })}
+            value={currentProfile?.vcard?.name}
+            onChange={updateProfile('name')}
+          />
+          <VCardField
+            key={'position'}
+            name={'position'}
+            label={i18n.formatMessage({ id: nameof<IvCardTranslations>('Position') })}
+            value={currentProfile?.vcard?.position}
+            onChange={updateProfile('position')}
+          />
+          <VCardField
+            key={'phone'}
+            name={'phone'}
+            label={i18n.formatMessage({ id: nameof<IvCardTranslations>('Phone') })}
+            value={currentProfile?.vcard?.phone}
+            onChange={updateProfile('phone')}
+          />
+          <VCardField
+            key={'fax'}
+            name={'fax'}
+            label={i18n.formatMessage({ id: nameof<IvCardTranslations>('Fax') })}
+            value={currentProfile?.vcard?.fax}
+            onChange={updateProfile('fax')}
+          />
+          <VCardField
+            key={'email'}
+            name={'email'}
+            label={i18n.formatMessage({ id: nameof<IvCardTranslations>('Email') })}
+            value={currentProfile?.vcard?.email}
+            onChange={updateProfile('email')}
+          />
         </IonList>
       </IonContent>
 
