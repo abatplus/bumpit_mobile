@@ -3,13 +3,9 @@ import { IonHeader, IonToolbar, IonContent, IonPage, IonButtons, IonTitle, IonTe
 import { useIntl } from 'react-intl';
 import { nameof } from '../utils';
 import IvCardTranslations from '../i18n/IvCardTranslations';
-import { RouteProps } from 'react-router';
-import { useProfileContext } from '../store/contexts/ProfileContext';
 
 const NewProfile: React.FC = () => {
   const i18n = useIntl();
-  const profileContext = useProfileContext();
-  const [currentProfile, setCurrentProfile] = React.useState();
 
   return (
     <IonPage id="privacy">

@@ -1,5 +1,5 @@
 import React from 'react';
-import { IonHeader, IonTitle, IonCard, IonCardContent, IonButton, IonIcon, IonGrid, IonRow, IonCol, IonButtons } from '@ionic/react';
+import { IonHeader, IonTitle, IonCard, IonCardContent, IonButton, IonIcon, IonGrid, IonRow, IonCol } from '@ionic/react';
 import { useIntl } from 'react-intl';
 import { nameof } from '../utils';
 import IvCardTranslations from '../i18n/IvCardTranslations';
