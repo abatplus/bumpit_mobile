@@ -1,6 +1,7 @@
 import * as Actions from '../actions/actions';
 import { ActionTypes } from '../actions/profileActions';
 import IProfile from '../../interfaces/IProfile';
+import { storeProfileData } from '../dataApi';
 
 export interface IProfileState {
   isLoading: boolean;
@@ -20,34 +21,41 @@ export const initialState: IProfileState = {
 export const ProfileReducer = (state = initialState, action: IAction) => {
   switch (action.type) {
     case Actions.Profile.ActionTypes.SET_PROFILES: {
+      (async () => await storeProfileData(action.payload))();
       return {
         ...state,
         profiles: action.payload,
       };
     }
     case Actions.Profile.ActionTypes.ADD_PROFILE:
+      const afterAdd = [...state.profiles, action.payload];
+      (async () => await storeProfileData(afterAdd))();
       return {
         ...state,
-        profiles: [...state.profiles, action.payload],
+        profiles: afterAdd,
       };
     case Actions.Profile.ActionTypes.UPDATE_PROFILE:
-      // TODO: find updateable profile and update the profile
+      const indexToUpdate = state.profiles.findIndex((x) => x.id === action.payload);
+      const profiles = [...state.profiles.splice(indexToUpdate, 1), action.payload];
+      (async () => await storeProfileData(profiles))();
+
       return {
         ...state,
-        profiles: [...state.profiles, action.payload],
+        profiles: [profiles],
       };
     case Actions.Profile.ActionTypes.REMOVE_PROFILE:
       const currentProfiles = state.profiles;
       const indexOfProfileToRemove = state.profiles.findIndex((x) => x.id === action.payload);
-      currentProfiles.splice(indexOfProfileToRemove, 1);
+      const afterRemove = currentProfiles.splice(indexOfProfileToRemove, 1);
+      (async () => await storeProfileData(afterRemove))();
       return {
         ...state,
-        profiles: currentProfiles,
+        profiles: afterRemove,
       };
     case Actions.Profile.ActionTypes.SET_LOADING:
       return {
         ...state,
-        isLoading: true,
+        isLoading: action.payload,
       };
     default:
       return state;
