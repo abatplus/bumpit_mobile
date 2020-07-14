@@ -1,5 +1,5 @@
 import React from 'react';
-import { IonApp, IonSplitPane, IonTabs } from '@ionic/react';
+import { IonApp, IonSplitPane } from '@ionic/react';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
