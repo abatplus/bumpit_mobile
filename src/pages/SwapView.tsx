@@ -40,10 +40,6 @@ const SwapView: React.FC = () => {
         {!appContext.isLoading && (
           <IonList>
             <VCardField name="name" label="Name" />
-            <VCardField name="nickname" label="Nickname" />
-            <VCardField name="tel" label="Handy" />
-            <VCardField name="companyTel" label="Firmenhandy" />
-            <VCardField name="email" label="eMail" />
           </IonList>
         )}
       </IonContent>

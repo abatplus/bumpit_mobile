@@ -53,11 +53,17 @@ const VCardView: React.FC = () => {
           </IonToolbar>
         </IonHeader>
         <IonList>
-          <VCardField name="name" label="Name" />
-          <VCardField name="nickname" label="Nickname" />
-          <VCardField name="tel" label="Handy" />
-          <VCardField name="companyTel" label="Firmenhandy" />
-          <VCardField name="email" label="eMail" />
+          <VCardField name="company" label={i18n.formatMessage({ id: nameof<IvCardTranslations>('Company') })} />
+          <VCardField name="website" label={i18n.formatMessage({ id: nameof<IvCardTranslations>('Website') })} />
+          <VCardField name="street" label={i18n.formatMessage({ id: nameof<IvCardTranslations>('Street') })} />
+          <VCardField name="zipCode" label={i18n.formatMessage({ id: nameof<IvCardTranslations>('ZipCode') })} />
+          <VCardField name="location" label={i18n.formatMessage({ id: nameof<IvCardTranslations>('Location') })} />
+          <VCardField name="country" label={i18n.formatMessage({ id: nameof<IvCardTranslations>('Country') })} />
+          <VCardField name="name" label={i18n.formatMessage({ id: nameof<IvCardTranslations>('Name') })} />
+          <VCardField name="position" label={i18n.formatMessage({ id: nameof<IvCardTranslations>('Position') })} />
+          <VCardField name="phone" label={i18n.formatMessage({ id: nameof<IvCardTranslations>('Phone') })} />
+          <VCardField name="fax" label={i18n.formatMessage({ id: nameof<IvCardTranslations>('Fax') })} />
+          <VCardField name="email" label={i18n.formatMessage({ id: nameof<IvCardTranslations>('Email') })} />
         </IonList>
       </IonContent>
 
@@ -65,7 +71,7 @@ const VCardView: React.FC = () => {
         <IonButtons className="footer-buttons">
           <IonButton color="primary" fill="outline" className="footer-button" onClick={onClickShowQr}>
             <IonIcon icon={qrCode} />
-            <IonLabel className="footer-button-text">QR anzeigen</IonLabel>
+            <IonLabel className="footer-button-text">{i18n.formatMessage({ id: nameof<IvCardTranslations>('QR_code') })}</IonLabel>
           </IonButton>
           <IonButton color="primary" fill="outline" className="footer-button" onClick={onClickSwap}>
             <IonIcon icon={share} />
