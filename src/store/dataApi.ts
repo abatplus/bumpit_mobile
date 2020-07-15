@@ -30,15 +30,15 @@ const emptyProfile: IProfile = {
 export const getProfileData = async () => {
   let profiles = [emptyProfile];
   //get from storage
-  const responseStorage = await Promise.all([Storage.get({ key: PROFILE_DATA })]);
-  let cardDataStorage = responseStorage[0].value || undefined;
+  const responseStorage = await Storage.get({ key: PROFILE_DATA });
+  let cardDataStorage = responseStorage.value || undefined;
   if (cardDataStorage) {
     profiles = JSON.parse(cardDataStorage);
   }
   //read data from url
   else {
-    const response = await Promise.all([fetch(profileDataUrl)]);
-    const responseData: { profiles: [{ id: string; name: string; vCard: IVCard }] } = await response[0].json();
+    const response = await fetch(profileDataUrl);
+    const responseData: { profiles: [{ id: string; name: string; vCard: IVCard }] } = await response.json();
     profiles = responseData.profiles;
   }
   return profiles;

@@ -2,9 +2,9 @@ import React from 'react';
 import { IonHeader, IonToolbar, IonContent, IonPage, IonButtons, IonTitle, IonFooter, IonButton, IonIcon, IonLabel, IonBackButton } from '@ionic/react';
 import './VCardView.css';
 import { qrCode, share } from 'ionicons/icons';
-import { useHistory, useLocation } from 'react-router';
+import { useHistory, useParams } from 'react-router';
 import { useIntl } from 'react-intl';
-import { nameof, getProfileId } from '../utils';
+import { nameof } from '../utils';
 import IvCardTranslations from '../i18n/IvCardTranslations';
 import { useProfileContext } from '../store/contexts/ProfileContext';
 import IProfile from '../interfaces/IProfile';
@@ -14,8 +14,10 @@ const VCardView: React.FC = () => {
   const history = useHistory();
   const i18n = useIntl();
 
-  const location = useLocation();
+  const { id } = useParams();
   const { profileContext } = useProfileContext();
+
+  console.log(id);
 
   const onClickShowQr = () => {
     history.push('/qrcode');
@@ -27,7 +29,7 @@ const VCardView: React.FC = () => {
 
   const getCurrentProfile = () => {
     if (profileContext.profiles) {
-      return profileContext.profiles.find((itm) => itm.id === getProfileId(location.pathname));
+      return profileContext.profiles.find((itm) => itm.id === id);
     } else {
       return undefined;
     }

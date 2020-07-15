@@ -11,7 +11,7 @@ interface VCardProps {
 
 const VCardField: React.FC<VCardProps> = (props) => {
   return (
-    <IonItem key={'item_' + props.name}>
+    <IonItem>
       <IonLabel position="stacked" color="primary">
         {props.label}
       </IonLabel>

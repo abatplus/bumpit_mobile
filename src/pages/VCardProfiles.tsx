@@ -12,7 +12,7 @@ import { useAppContext } from '../store/contexts/AppContext';
 import { getProfileData } from '../store/dataApi';
 
 const renderProfiles = (profiles: IProfile[]) => {
-  return profiles.map((profile: IProfile) => <ProfileCard name={profile.name} id={profile.id} key={profile.id} />);
+  return profiles.map((profile: IProfile) => <ProfileCard profile={profile} key={profile.id} />);
 };
 
 const VCardProfiles: React.FC = () => {

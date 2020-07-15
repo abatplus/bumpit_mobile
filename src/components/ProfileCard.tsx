@@ -5,20 +5,20 @@ import { nameof } from '../utils';
 import IvCardTranslations from '../i18n/IvCardTranslations';
 import { qrCode, swapVertical, pencil } from 'ionicons/icons';
 import { useHistory } from 'react-router';
+import IProfile from '../interfaces/IProfile';
 
-export interface IProfileCard {
-  id: string;
-  name: string;
+interface IProfileCardProps {
+  profile: IProfile;
 }
 
-const ProfileCard: React.FC<IProfileCard> = (props) => {
+const ProfileCard: React.FC<IProfileCardProps> = (props) => {
   const i18n = useIntl();
   const history = useHistory();
 
   return (
     <IonCard style={{ margin: '2em' }}>
-      <IonHeader onClick={() => history.push('/profile/edit/' + props.id)}>
-        <IonTitle className="ion-text-center">{props.name}</IonTitle>
+      <IonHeader onClick={() => history.push('/profile/edit/' + props.profile.id)}>
+        <IonTitle className="ion-text-center">{props.profile.name}</IonTitle>
       </IonHeader>
       <hr />
       <IonCardContent>
@@ -27,7 +27,7 @@ const ProfileCard: React.FC<IProfileCard> = (props) => {
             <IonCol className="ion-text-center">
               <IonButton
                 onClick={() => {
-                  history.push('/qrcode/' + props.id);
+                  history.push('/qrcode/' + props.profile.id);
                 }}
                 title={i18n.formatMessage({ id: nameof<IvCardTranslations>('ShowQRCode') })}
               >
@@ -37,7 +37,7 @@ const ProfileCard: React.FC<IProfileCard> = (props) => {
             <IonCol className="ion-text-center">
               <IonButton
                 onClick={() => {
-                  history.push('/swap/' + props.id);
+                  history.push('/swap/' + props.profile.id);
                 }}
                 title={i18n.formatMessage({ id: nameof<IvCardTranslations>('Exchange') })}
               >
@@ -47,7 +47,7 @@ const ProfileCard: React.FC<IProfileCard> = (props) => {
             <IonCol className="ion-text-center">
               <IonButton
                 onClick={() => {
-                  history.push('/profile/edit/' + props.id);
+                  history.push('/profile/edit/' + props.profile.id);
                 }}
                 title={i18n.formatMessage({ id: nameof<IvCardTranslations>('Edit') })}
               >
