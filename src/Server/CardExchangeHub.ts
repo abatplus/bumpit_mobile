@@ -1,6 +1,6 @@
 import * as signalR from "@microsoft/signalr";
 
-enum CardExchangeHubMethod {
+export enum CardExchangeHubMethod {
   Subscribe = 'subscribe',
   Unsubcribe = 'unsubcribe',
   Update = 'update',
