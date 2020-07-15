@@ -21,7 +21,7 @@ const emptyVCard: IVCard = {
   email: '',
 };
 
-const emptyProfile: IProfile = {
+export const emptyProfile: IProfile = {
   id: 'default',
   name: 'default',
   vCard: emptyVCard,

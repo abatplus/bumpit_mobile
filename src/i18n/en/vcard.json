@@ -44,6 +44,9 @@
   "Profile_Description": {
     "message": "Profildescription"
   },
+  "Profile_Edit": {
+    "message": "New profile"
+  },
   "Name": {
     "message": "Name"
   },
