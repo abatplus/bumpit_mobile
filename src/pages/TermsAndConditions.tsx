@@ -19,12 +19,6 @@ const TermsAndConditions: React.FC = () => {
       </IonHeader>
 
       <IonContent fullscreen={false}>
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">{i18n.formatMessage({ id: nameof<IvCardTranslations>('Terms_and_conditions') })}</IonTitle>
-          </IonToolbar>
-        </IonHeader>
-
         <div>
           <IonTextarea>AGB</IonTextarea>
         </div>

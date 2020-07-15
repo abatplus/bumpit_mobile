@@ -18,11 +18,11 @@
    transform: translate(-50%, -50%);
    
   }
-  .ion-no-border{
+  
+  .footer{
     height: auto;
     position: inherit;
     text-align: center;
     font-style: italic;
    
   }
-
