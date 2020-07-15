@@ -41,7 +41,7 @@ const App: React.FC = () => {
         <AppContextProvider>
           <ProfileContextProvider>
             <IonReactRouter>
-              <IonSplitPane contentId="main">
+              <IonSplitPane>
                 <Menu />
                 <MainContent />
               </IonSplitPane>

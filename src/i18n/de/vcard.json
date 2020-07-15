@@ -77,4 +77,8 @@
   "Website": {
     "message": "Homepage"
   }
+  ,
+  "Terms_and_conditions": {
+    "message": "AGB"
+  }
 }
