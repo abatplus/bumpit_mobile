@@ -16,22 +16,22 @@ export class CardExchangeHub {
     this.connection = connection;
   }
 
-  public Subscribe = (deviceId: string, longitude: number, latitude: number, displayName: string) => {
-    this.connection.send(CardExchangeHubMethod.Subscribe, deviceId, longitude, latitude, displayName)
+  public Subscribe = async (deviceId: string, longitude: number, latitude: number, displayName: string) => {
+    return await this.connection.send(CardExchangeHubMethod.Subscribe, deviceId, longitude, latitude, displayName)
   };
-  public Unsubcribe = (deviceId: string) => {
-    this.connection.send(CardExchangeHubMethod.Unsubcribe, deviceId)
+  public Unsubcribe = async (deviceId: string) => {
+    return await this.connection.send(CardExchangeHubMethod.Unsubcribe, deviceId)
   };
-  public Update = (deviceId: string, longitude: number, latitude: number, displayName: string) => {
-    this.connection.send(CardExchangeHubMethod.Update, deviceId, longitude, latitude, displayName)
+  public Update = async (deviceId: string, longitude: number, latitude: number, displayName: string) => {
+    return await this.connection.send(CardExchangeHubMethod.Update, deviceId, longitude, latitude, displayName)
   };
-  public RequestCardExchange = (deviceId: string, peerDeviceId: string, displayName: string) => {
-    this.connection.send(CardExchangeHubMethod.RequestCardExchange, deviceId, peerDeviceId, displayName)
+  public RequestCardExchange = async (deviceId: string, peerDeviceId: string, displayName: string) => {
+    return await this.connection.send(CardExchangeHubMethod.RequestCardExchange, deviceId, peerDeviceId, displayName)
   };
-  public AcceptCardExchange = (deviceId: string, peerDeviceId: string, displayName: string, cardData: string) => {
-    this.connection.send(CardExchangeHubMethod.AcceptCardExchange, deviceId, peerDeviceId, displayName, cardData)
+  public AcceptCardExchange = async (deviceId: string, peerDeviceId: string, displayName: string, cardData: string) => {
+    return await this.connection.send(CardExchangeHubMethod.AcceptCardExchange, deviceId, peerDeviceId, displayName, cardData)
   };
-  public SendCardData = (deviceId: string, peerDeviceId: string, displayName: string, cardData: string) => {
-    this.connection.send(CardExchangeHubMethod.SendCardData, deviceId, peerDeviceId, displayName, cardData)
+  public SendCardData = async (deviceId: string, peerDeviceId: string, displayName: string, cardData: string) => {
+    return await this.connection.send(CardExchangeHubMethod.SendCardData, deviceId, peerDeviceId, displayName, cardData)
   };
 }

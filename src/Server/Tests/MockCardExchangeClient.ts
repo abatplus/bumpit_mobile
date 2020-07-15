@@ -8,6 +8,6 @@ export class MockCardExchangeClient implements ICardExchangeClient {
   waitingForAcceptance = (peerDeviceId: string) => { console.log('waitingForAcceptance', peerDeviceId); };
   cardExchangeAccepted = (peerDeviceId: string, displayName: string, cardData: string) => { console.log('cardExchangeAccepted', peerDeviceId, displayName, cardData); };
   acceptanceSent = (deviceId: string) => { console.log('acceptanceSent', deviceId); };
-  cardDataReceived = (deviceId: string, displayName: string, cardData: string) => { console.log('cardDataReceived', deviceId); };
+  cardDataReceived = (deviceId: string, displayName: string, cardData: string) => { console.log('cardDataReceived', deviceId, displayName, cardData); };
   cardDataSent = (peerDeviceId: string) => { console.log('cardDataSent', peerDeviceId); };
 }
