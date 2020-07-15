@@ -36,7 +36,7 @@ const VCardView: React.FC = () => {
   const currentProfile: IProfile | undefined = getCurrentProfile();
 
   return (
-    <IonPage id="vcard">
+    <IonPage>
       <IonHeader translucent={true}>
         <IonToolbar>
           <IonButtons slot="start">

@@ -40,7 +40,7 @@ const QrView: React.FC = () => {
 
   if (currentProfile) {
     return (
-      <IonPage id="qr">
+      <IonPage>
         <IonHeader translucent={true}>
           <IonToolbar>
             <IonButtons slot="start">
