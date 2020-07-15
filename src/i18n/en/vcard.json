@@ -42,7 +42,10 @@
     "message": "show QR-Code"
   },
   "Profile_Description": {
-    "message": "Profildescription"
+    "message": "Profile name"
+  },
+  "My_Data": {
+    "message": "My Data"
   },
   "Profile_Edit": {
     "message": "New profile"

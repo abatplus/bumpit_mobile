@@ -7,6 +7,7 @@ import VCardField from './VCardField';
 import { nameof } from '../utils';
 import IvCardTranslations from '../i18n/IvCardTranslations';
 import * as Actions from '../store/actions/actions';
+import { IonItem, IonLabel, IonInput } from '@ionic/react';
 
 interface IProfileProps {
   profile?: IProfile;
@@ -22,8 +23,20 @@ const Profile: React.FC<IProfileProps> = (props) => {
     }
   };
 
+  const updateProfileName = (event: CustomEvent) => {
+    if (props.profile && props.profile.id) {
+      dispatchProfileContext(Actions.Profile.setProfileName(props.profile.id, event.detail.value));
+    }
+  };
+
   return (
     <div>
+      <IonItem>
+        <IonLabel position="stacked" color="primary">
+          {i18n.formatMessage({ id: nameof<IvCardTranslations>('Profile_Description') })}
+        </IonLabel>
+        <IonInput name={'profileName'} type="text" value={props.profile?.name} spellCheck={false} autocapitalize="off" onIonChange={updateProfileName} />
+      </IonItem>
       <VCardField
         key={'company'}
         name={'company'}
