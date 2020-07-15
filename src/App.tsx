@@ -42,7 +42,7 @@ const App: React.FC = () => {
         <ProfileContextProvider>
           <VCardProvider>
             <IonReactRouter>
-              <IonSplitPane contentId="main">
+              <IonSplitPane id="main">
                 <Menu />
                 <MainContent />
               </IonSplitPane>

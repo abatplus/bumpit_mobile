@@ -44,4 +44,8 @@
   "Profile_Edit": {
     "message": "Edit profile: "
   }
+  ,
+  "Terms_and_conditions": {
+    "message": "Terms and conditions"
+  }
 }

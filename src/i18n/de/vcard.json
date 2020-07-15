@@ -44,4 +44,8 @@
   "Profile_Edit": {
     "message": "Profil bearbeiten: "
   }
+  ,
+  "Terms_and_conditions": {
+    "message": "AGB"
+  }
 }
