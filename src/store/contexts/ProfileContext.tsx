@@ -8,7 +8,7 @@ interface IProps {
   children: React.ReactNode;
 }
 
-export const ProfileContextProvider = (props: IProps) => {
+export const ProfileContextProvider: React.FC<IProps> = (props: IProps) => {
   const [stateProfiles, dispatchProfile] = useReducer(ProfileReducer.ProfileReducer, ProfileReducer.initialState);
 
   return (

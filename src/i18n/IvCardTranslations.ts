@@ -16,4 +16,18 @@ export default interface IvCardTranslations {
   Edit: PontoonMessage;
   ShowQRCode: PontoonMessage;
   Profile_Edit: PontoonMessage;
+  Profile_Description: PontoonMessage;
+  My_Data: PontoonMessage;
+  Name: PontoonMessage;
+  Company: PontoonMessage;
+  Position: PontoonMessage;
+  Street: PontoonMessage;
+  ZipCode: PontoonMessage;
+  Phone: PontoonMessage;
+  Location: PontoonMessage;
+  Country: PontoonMessage;
+  Fax: PontoonMessage;
+  Email: PontoonMessage;
+  Website: PontoonMessage;
+  Terms_and_conditions: PontoonMessage;
 }

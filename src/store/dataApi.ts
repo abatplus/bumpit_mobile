@@ -1,48 +1,50 @@
 import { Plugins } from '@capacitor/core';
-import { IVCard } from './reducers/VCardReducer';
+import { IVCard } from '../interfaces/IVCard';
+import IProfile from '../interfaces/IProfile';
 
 const { Storage } = Plugins;
-const cardDataUrl = '/assets/mock/vCardMock.json';
-const VCARD_DATA = 'vcard_data';
+const profileDataUrl = '/assets/mock/profilesMock.json';
 
-const emptyVCard : IVCard = {
-    name: { value: '', share: true},
-    surname:  { value: '', share: true},
-    nickname:  { value: '', share: true},
-    street:  { value: '', share: true},
-    location: { value: '', share: true},
-    country: { value: '', share: true},
-    postalcode:  { value: '', share: true},
-    tel:  { value: '', share: true},
-    companyTel:  { value: '', share: true},
-    email: { value: '', share: true},
-    company: { value: '', share: true}
-}
+const PROFILE_DATA = 'profile_data';
 
-export const getAppData = async () => {
+const emptyVCard: IVCard = {
+  company: '',
+  website: '',
+  street: '',
+  zipCode: '',
+  location: '',
+  country: '',
+  name: '',
+  position: '',
+  phone: '',
+  fax: '',
+  email: '',
+};
 
-    //await Storage.remove({ key: VCARD_DATA});
-    let vCard = emptyVCard;
-    //get from storage
-    const responseStorage = await Promise.all([
-        Storage.get({ key: VCARD_DATA })]);
+const emptyProfile: IProfile = {
+  id: 'default',
+  name: 'default',
+  vCard: emptyVCard,
+};
 
-    let cardDataStorage = await responseStorage[0].value || undefined;
-    if (cardDataStorage) {
-        vCard = {...vCard, ...JSON.parse(cardDataStorage)};
-    }
-    //read data from url
-    else {
-        const response = await Promise.all([
-            fetch(cardDataUrl)]);
-        const responseData = await response[0].json();
-        vCard = {...vCard, ...responseData.vcard};
-    }
-
-    return vCard;
-}
+export const getProfileData = async () => {
+  let profiles = [emptyProfile];
+  //get from storage
+  const responseStorage = await Storage.get({ key: PROFILE_DATA });
+  let cardDataStorage = responseStorage.value || undefined;
+  if (cardDataStorage) {
+    profiles = JSON.parse(cardDataStorage);
+  }
+  //read data from url
+  else {
+    const response = await fetch(profileDataUrl);
+    const responseData: { profiles: [{ id: string; name: string; vCard: IVCard }] } = await response.json();
+    profiles = responseData.profiles;
+  }
+  return profiles;
+};
 
 //save in Storage
-export const storeVCardData = async (data: IVCard) => {
-    await Storage.set({ key: VCARD_DATA, value: JSON.stringify(data) });
-}
+export const storeProfileData = async (data: IProfile[]) => {
+  await Storage.set({ key: PROFILE_DATA, value: JSON.stringify(data) });
+};
