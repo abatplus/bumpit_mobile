@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { IonHeader, IonToolbar, IonContent, IonPage, IonButtons, IonTitle, IonBackButton } from '@ionic/react';
 import './QrView.css';
 import QRCode from 'qrcode.react';
-import { nameof, getProfileId } from '../utils';
+import { nameof } from '../utils';
 import IvCardTranslations from '../i18n/IvCardTranslations';
 import { useIntl } from 'react-intl';
 import { useProfileContext } from '../store/contexts/ProfileContext';
-import { useLocation } from 'react-router';
+import { useParams } from 'react-router';
 
 const QrView: React.FC = () => {
   const [qrWidth, setQrWidth] = useState<number>();
@@ -23,7 +23,7 @@ const QrView: React.FC = () => {
     setQrWidth(size);
   }, [windowSize, profileContext]);
 
-  const location = useLocation();
+  const { id } = useParams();
 
   const updateWindowSize = () => {
     setWindowSize([window.innerWidth, window.innerHeight]);
@@ -36,7 +36,7 @@ const QrView: React.FC = () => {
     resizeId = setTimeout(updateWindowSize, 500);
   });
 
-  const currentProfile = profileContext.profiles.find((profile) => profile.id === getProfileId(location.pathname));
+  const currentProfile = profileContext.profiles.find((profile) => profile.id === id);
 
   if (currentProfile) {
     return (

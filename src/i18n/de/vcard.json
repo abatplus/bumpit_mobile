@@ -42,28 +42,28 @@
     "message": "zeige QR-Code"
   },
   "Profile_Description": {
-    "message": "Profildescription"
+    "message": "Profilbeschreibung"
   },
   "Name": {
     "message": "Name"
   },
   "Company": {
-    "message": "Company"
+    "message": "Firma"
   },
   "Position": {
     "message": "Position"
   },
   "Street": {
-    "message": "Street"
+    "message": "Straße"
   },
   "ZipCode": {
-    "message": "Zip Code"
+    "message": "Postleitzahl"
   },
   "Phone": {
-    "message": "Phone number"
+    "message": "Telefonnummer"
   },
   "Location": {
-    "message": "Location"
+    "message": "Stadt"
   },
   "Country": {
     "message": "Land"

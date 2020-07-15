@@ -8,7 +8,3 @@
 export const nameof = <T>(name: keyof T): string => {
   return name as string;
 };
-
-export const getProfileId = (location: string): string => {
-  return location.split('/').reverse()[0];
-};

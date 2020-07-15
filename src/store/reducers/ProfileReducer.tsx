@@ -25,11 +25,11 @@ export const ProfileReducer = (state = initialState, action: IAction) => {
       (async () => await storeProfileData(action.payload))();
       return {
         ...state,
-        profiles: action.payload,
+        profiles: action.payload as IProfile[],
       };
     }
     case Actions.Profile.ActionTypes.ADD_PROFILE:
-      const afterAdd = [...state.profiles, action.payload];
+      const afterAdd = [...state.profiles, action.payload] as IProfile[];
       (async () => await storeProfileData(afterAdd))();
       return {
         ...state,
@@ -39,6 +39,9 @@ export const ProfileReducer = (state = initialState, action: IAction) => {
       const payload = action.payload as { id: string; profileName: string; fieldName: keyof IVCard; fieldValue: string };
 
       const updateProfileIndex: number = state.profiles.findIndex((x) => x.id === payload.id);
+      if (updateProfileIndex < 0) {
+        return { ...state };
+      }
       const updateProfile: IProfile = state.profiles[updateProfileIndex];
 
       updateProfile.vCard[payload.fieldName] = payload.fieldValue;
