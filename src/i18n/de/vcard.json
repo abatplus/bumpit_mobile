@@ -44,6 +44,9 @@
   "Profile_Description": {
     "message": "Profilbezeichnung"
   },
+  "My_Data": {
+    "message": "Meine Daten"
+  },
   "Name": {
     "message": "Name"
   },

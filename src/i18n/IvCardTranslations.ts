@@ -17,6 +17,7 @@ export default interface IvCardTranslations {
   ShowQRCode: PontoonMessage;
   Profile_Edit: PontoonMessage;
   Profile_Description: PontoonMessage;
+  My_Data: PontoonMessage;
   Name: PontoonMessage;
   Company: PontoonMessage;
   Position: PontoonMessage;

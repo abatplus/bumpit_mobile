@@ -57,11 +57,11 @@ export const ProfileReducer = (state = initialState, action: IAction) => {
     case Actions.Profile.ActionTypes.REMOVE_PROFILE:
       const currentProfiles = state.profiles;
       const indexOfProfileToRemove = state.profiles.findIndex((x) => x.id === action.payload);
-      const afterRemove = currentProfiles.splice(indexOfProfileToRemove, 1);
-      (async () => await storeProfileData(afterRemove))();
+      currentProfiles.splice(indexOfProfileToRemove, 1);
+      (async () => await storeProfileData(currentProfiles))();
       return {
         ...state,
-        profiles: afterRemove,
+        profiles: currentProfiles,
       };
     case Actions.Profile.ActionTypes.SET_LOADING:
       return {
