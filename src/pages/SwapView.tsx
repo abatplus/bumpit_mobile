@@ -1,7 +1,5 @@
 import React, { useEffect } from 'react';
 import { IonHeader, IonToolbar, IonContent, IonPage, IonButtons, IonList, IonTitle, IonLoading, IonBackButton, IonMenuButton } from '@ionic/react';
-import './SwapView.css';
-import VCardField from '../components/VCardField';
 import { useAppContext } from '../store/contexts/AppContext';
 import * as Actions from '../store/actions/actions';
 
@@ -16,10 +14,11 @@ const SwapView: React.FC = () => {
   }, [dispatchAppContext]);
 
   return (
-    <IonPage id="vcard">
+    <IonPage>
       <IonHeader translucent={true}>
         <IonToolbar>
           <IonButtons slot="start">
+            <IonMenuButton />
             <IonBackButton />
           </IonButtons>
           <IonTitle>Exchange card</IonTitle>
@@ -27,25 +26,8 @@ const SwapView: React.FC = () => {
       </IonHeader>
 
       <IonContent fullscreen={true}>
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonButtons slot="start">
-              <IonMenuButton />
-            </IonButtons>
-            <IonTitle size="large">Exchange card</IonTitle>
-          </IonToolbar>
-        </IonHeader>
         {appContext.isLoading ? <IonLoading spinner="lines" isOpen={true} /> : ''}
-
-        {!appContext.isLoading && (
-          <IonList>
-            <VCardField name="name" label="Name" />
-            <VCardField name="nickname" label="Nickname" />
-            <VCardField name="tel" label="Handy" />
-            <VCardField name="companyTel" label="Firmenhandy" />
-            <VCardField name="email" label="eMail" />
-          </IonList>
-        )}
+        {!appContext.isLoading && <IonList></IonList>}
       </IonContent>
     </IonPage>
   );

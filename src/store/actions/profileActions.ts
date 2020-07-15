@@ -1,12 +1,32 @@
 import IProfile from '../../interfaces/IProfile';
+import { IVCard } from '../../interfaces/IVCard';
 
 export enum ActionTypes {
   SET_LOADING = 'SET_LOADING',
-  GET_PROFILES = 'GET_PROFILES',
+  SET_PROFILES = 'SET_PROFILES',
   ADD_PROFILE = 'ADD_PROFILE',
   REMOVE_PROFILE = 'REMOVE_PROFILE',
-  CHANGE_PROFILE = 'CHANGE_PROFILE',
+  UPDATE_PROFILE = 'UPDATE_PROFILE',
 }
+
+export const setProfiles = (profiles: IProfile[]) => {
+  return {
+    type: ActionTypes.SET_PROFILES,
+    payload: profiles,
+  };
+};
+
+export const setProfileVCardDataField = (profileId: string, profileName: string, fieldName: keyof IVCard, fieldValue: string) => {
+  return {
+    type: ActionTypes.UPDATE_PROFILE,
+    payload: {
+      id: profileId,
+      profileName,
+      fieldName,
+      fieldValue,
+    },
+  };
+};
 
 export const setProfileLoading = (isLoading: boolean) => {
   return {
@@ -15,24 +35,10 @@ export const setProfileLoading = (isLoading: boolean) => {
   };
 };
 
-export const getProfiles = () => {
-  return {
-    type: ActionTypes.GET_PROFILES,
-    payload: {},
-  };
-};
-
 export const addNewProfile = (newProfile: IProfile) => {
   return {
     type: ActionTypes.ADD_PROFILE,
     payload: newProfile,
-  };
-};
-
-export const changeProfile = (profile: IProfile) => {
-  return {
-    type: ActionTypes.CHANGE_PROFILE,
-    payload: profile,
   };
 };
 

@@ -14,6 +14,7 @@ export interface IProfileCard {
 const ProfileCard: React.FC<IProfileCard> = (props) => {
   const i18n = useIntl();
   const history = useHistory();
+
   return (
     <IonCard style={{ margin: '2em' }}>
       <IonHeader onClick={() => history.push('/profile/edit/' + props.id)}>

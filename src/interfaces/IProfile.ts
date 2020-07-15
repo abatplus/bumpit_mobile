@@ -1,7 +1,7 @@
-import { IVCard } from '../store/reducers/VCardReducer';
+import { IVCard } from './IVCard';
 
 export default interface IProfile {
   id: string;
   name: string;
-  vcard: IVCard;
+  vCard: IVCard;
 }
