@@ -27,7 +27,7 @@ const SwapView: React.FC = () => {
   }
 
   return (
-    <IonPage id="vcard">
+    <IonPage>
       <IonHeader translucent={true}>
         <IonToolbar>
           <IonButtons slot="start">

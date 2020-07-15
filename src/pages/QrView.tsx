@@ -2,15 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { IonHeader, IonToolbar, IonContent, IonPage, IonButtons, IonTitle, IonBackButton } from '@ionic/react';
 import './QrView.css';
 import QRCode from 'qrcode.react';
-import { useVCard } from '../store/contexts/VCardContext';
 import { nameof } from '../utils';
 import IvCardTranslations from '../i18n/IvCardTranslations';
 import { useIntl } from 'react-intl';
+import { useProfileContext } from '../store/contexts/ProfileContext';
+import { useParams } from 'react-router';
 
 const QrView: React.FC = () => {
   const [qrWidth, setQrWidth] = useState<number>();
   const [windowSize, setWindowSize] = useState([window.innerWidth, window.innerHeight]);
-  const { vCard } = useVCard();
+  const { profileContext } = useProfileContext();
 
   const i18n = useIntl();
 
@@ -20,7 +21,9 @@ const QrView: React.FC = () => {
     // limit max size
     size = size > 400 ? 400 : size;
     setQrWidth(size);
-  }, [windowSize, vCard]);
+  }, [windowSize, profileContext]);
+
+  const { id } = useParams();
 
   const updateWindowSize = () => {
     setWindowSize([window.innerWidth, window.innerHeight]);
@@ -33,30 +36,29 @@ const QrView: React.FC = () => {
     resizeId = setTimeout(updateWindowSize, 500);
   });
 
-  return (
-    <IonPage id="qr">
-      <IonHeader translucent={true}>
-        <IonToolbar>
-          <IonButtons slot="start">
-            <IonBackButton />
-          </IonButtons>
-          <IonTitle>{i18n.formatMessage({ id: nameof<IvCardTranslations>('QR_code') })}</IonTitle>
-        </IonToolbar>
-      </IonHeader>
+  const currentProfile = profileContext.profiles.find((profile) => profile.id === id);
 
-      <IonContent fullscreen={true}>
-        <IonHeader collapse="condense">
+  if (currentProfile) {
+    return (
+      <IonPage>
+        <IonHeader translucent={true}>
           <IonToolbar>
-            <IonTitle size="large">{i18n.formatMessage({ id: nameof<IvCardTranslations>('QR_code') })}</IonTitle>
+            <IonButtons slot="start">
+              <IonBackButton />
+            </IonButtons>
+            <IonTitle>{i18n.formatMessage({ id: nameof<IvCardTranslations>('QR_code') })}</IonTitle>
           </IonToolbar>
         </IonHeader>
-
-        <div className="qrcontainer">
-          <QRCode value={JSON.stringify(vCard)} size={qrWidth} />
-        </div>
-      </IonContent>
-    </IonPage>
-  );
+        <IonContent fullscreen={true}>
+          <div className="qrcontainer">
+            <QRCode value={JSON.stringify(currentProfile?.vCard)} size={qrWidth} />
+          </div>
+        </IonContent>
+      </IonPage>
+    );
+  } else {
+    return <React.Fragment />;
+  }
 };
 
 export default QrView;

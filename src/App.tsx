@@ -18,7 +18,6 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
-import { VCardProvider } from './store/contexts/VCardContext';
 import { AppContextProvider } from './store/contexts/AppContext';
 import TranslationProvider from './i18n/TranslationProvider';
 import { getLocale } from './i18n/TranslationProvider';
@@ -36,22 +35,22 @@ const App: React.FC = () => {
     })();
   }, [locale]);
 
-  return <TranslationProvider locale={locale}>
-    <IonApp>
-      <AppContextProvider>
-        <ProfileContextProvider>
-          <VCardProvider>
+  return (
+    <TranslationProvider locale={locale}>
+      <IonApp>
+        <AppContextProvider>
+          <ProfileContextProvider>
             <IonReactRouter>
-              <IonSplitPane contentId="main">
+              <IonSplitPane>
                 <Menu />
                 <MainContent />
               </IonSplitPane>
             </IonReactRouter>
-          </VCardProvider>
-        </ProfileContextProvider>
-      </AppContextProvider>
-    </IonApp>
-  </TranslationProvider>
+          </ProfileContextProvider>
+        </AppContextProvider>
+      </IonApp>
+    </TranslationProvider>
+  );
 };
 
 export default App;
