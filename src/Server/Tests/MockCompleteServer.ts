@@ -5,7 +5,7 @@ import { MockCardExchangeEvents } from "./MockCardExchangeEvents";
 import { CardExchangeEvent } from "../CardExchangeEvents";
 import { MockEventAggregator } from "./MockEventAggregator";
 
-export default class MockCardExchangeServer {
+export class MockCompleteServer {
   public Events: MockCardExchangeEvents;
   public Hub: ICardExchangeHub;
 
@@ -18,5 +18,5 @@ export default class MockCardExchangeServer {
     this.Hub = new MockCardExchangeHub();
   }
 
-  fire = (event: CardExchangeEvent) => this.aggregator.fire(event);
+  fire = (event: CardExchangeEvent, ...args: any[]) => this.aggregator.fire(event, ...args);
 }

@@ -4,7 +4,7 @@ import { ICardExchangeClient } from "./ICardExchangeClient";
 import { CardExchangeEvents } from "./CardExchangeEvents";
 import { CardExchangeHub } from "./CardExchangeHub";
 
-export default class CardExchangeServer {
+export class CardExchangeServer {
   connection: signalR.HubConnection;
 
   public Events: CardExchangeEvents;
