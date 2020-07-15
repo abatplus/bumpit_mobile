@@ -8,8 +8,7 @@ import { useIntl } from 'react-intl';
 import IvCardTranslations from '../i18n/IvCardTranslations';
 import { nameof } from '../utils';
 
-
-interface Pages {
+interface IPages {
   title: string;
   path: string;
   icon?: string;
@@ -36,7 +35,7 @@ const Menu: React.FC = () => {
     ],
   };
 
-  function renderlistItems(list: Pages[]) {
+  const renderListItems = (list: IPages[]) => {
     return list
       .filter((route) => !!route.path)
       .map((p) => (
@@ -53,7 +52,7 @@ const Menu: React.FC = () => {
           </IonItem>
         </IonMenuToggle>
       ));
-  }
+  };
 
   return (
     <IonMenu type="overlay" disabled={!appContext.menuEnabled} contentId="main">

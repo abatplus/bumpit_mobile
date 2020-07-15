@@ -1,42 +1,21 @@
 import React from 'react';
-import { IonItem, IonLabel, IonInput, IonCheckbox } from '@ionic/react';
-import './VCardField.css';
-import { useVCard } from '../store/contexts/VCardContext';
-import * as Actions from '../store/actions/actions';
-import { IVCard } from '../store/reducers/VCardReducer';
+import { IonItem, IonLabel, IonInput } from '@ionic/react';
+import { IVCard } from '../interfaces/IVCard';
 
 interface VCardProps {
   name: keyof IVCard;
+  value?: string;
   label: string;
+  onChange: (event: CustomEvent) => void;
 }
 
-const VCardField: React.FC<VCardProps> = ({ name, label }) => {
-  const { vCard, dispatchVCard } = useVCard();
-
-  const onValueFieldChange = (e: any) => {
-    dispatchVCard(Actions.VCard.setVCardDataField(name, e.detail.value));
-  };
-
-  const onShareFieldChange = (e: any) => {
-    const shared = e.detail.checked ? true : false;
-    dispatchVCard(Actions.VCard.setVCardDataFieldShare(name, shared));
-  };
-
+const VCardField: React.FC<VCardProps> = (props) => {
   return (
-    <IonItem>
+    <IonItem key={'item_' + props.name}>
       <IonLabel position="stacked" color="primary">
-        {label}
+        {props.label}
       </IonLabel>
-      <IonCheckbox slot="start" checked={vCard[name]?.share} onIonChange={onShareFieldChange} />
-      <IonInput
-        className={vCard[name]?.share === false ? 'not-shared' : ''}
-        name={name}
-        type="text"
-        value={vCard[name]?.value}
-        spellCheck={false}
-        autocapitalize="off"
-        onIonChange={onValueFieldChange}
-      ></IonInput>
+      <IonInput name={props.name} type="text" value={props.value} spellCheck={false} autocapitalize="off" onIonChange={props.onChange} />
     </IonItem>
   );
 };

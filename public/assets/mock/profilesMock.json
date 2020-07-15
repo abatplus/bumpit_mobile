@@ -3,17 +3,53 @@
     {
       "id": "pers",
       "name": "Persönlich",
-      "vCard": {}
+      "vCard": {
+        "company": "abat",
+        "website": "www.abatplus.de",
+        "street": "Kaiserstraße 170-174",
+        "zipCode": "66809",
+        "location": "St. Ingbert",
+        "country": "Deutschland",
+        "name": "Max Mustermann",
+        "position": "Software-Developer",
+        "phone": "",
+        "fax": "",
+        "email": "max.mustermann@abatplus.de"
+      }
     },
     {
       "id": "work",
       "name": "Arbeit",
-      "vCard": {}
+      "vCard": {
+        "company": "abat",
+        "website": "www.abatplus.de",
+        "street": "Kaiserstraße 170-174",
+        "zipCode": "66809",
+        "location": "St. Ingbert",
+        "country": "Deutschland",
+        "name": "Max Mustermann",
+        "position": "Software-Developer",
+        "phone": "",
+        "fax": "",
+        "email": "max.mustermann@abatplus.de"
+      }
     },
     {
       "id": "sport",
       "name": "Sportverein",
-      "vCard": {}
+      "vCard": {
+        "company": "abat",
+        "website": "www.abatplus.de",
+        "street": "Kaiserstraße 170-174",
+        "zipCode": "66809",
+        "location": "St. Ingbert",
+        "country": "Deutschland",
+        "name": "Max Mustermann",
+        "position": "Software-Developer",
+        "phone": "",
+        "fax": "",
+        "email": "max.mustermann@abatplus.de"
+      }
     }
   ]
 }

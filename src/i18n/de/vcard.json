@@ -41,8 +41,41 @@
   "ShowQRCode": {
     "message": "zeige QR-Code"
   },
-  "Profile_Edit": {
-    "message": "Profil bearbeiten: "
+  "Profile_Description": {
+    "message": "Profildescription"
+  },
+  "Name": {
+    "message": "Name"
+  },
+  "Company": {
+    "message": "Company"
+  },
+  "Position": {
+    "message": "Position"
+  },
+  "Street": {
+    "message": "Street"
+  },
+  "ZipCode": {
+    "message": "Zip Code"
+  },
+  "Phone": {
+    "message": "Phone number"
+  },
+  "Location": {
+    "message": "Location"
+  },
+  "Country": {
+    "message": "Land"
+  },
+  "Fax": {
+    "message": "Fax"
+  },
+  "Email": {
+    "message": "E-Mail"
+  },
+  "Website": {
+    "message": "Homepage"
   }
   ,
   "Terms_and_conditions": {
