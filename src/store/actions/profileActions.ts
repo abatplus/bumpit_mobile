@@ -7,7 +7,18 @@ export enum ActionTypes {
   ADD_PROFILE = 'ADD_PROFILE',
   REMOVE_PROFILE = 'REMOVE_PROFILE',
   UPDATE_PROFILE = 'UPDATE_PROFILE',
+  SET_PROFILE_NAME = 'SET_PROFILE_NAME',
 }
+
+export const setProfileName = (profileId: string, profileName: string) => {
+  return {
+    type: ActionTypes.SET_PROFILE_NAME,
+    payload: {
+      id: profileId,
+      profileName,
+    },
+  };
+};
 
 export const setProfiles = (profiles: IProfile[]) => {
   return {

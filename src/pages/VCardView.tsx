@@ -17,8 +17,6 @@ const VCardView: React.FC = () => {
   const { id } = useParams();
   const { profileContext } = useProfileContext();
 
-  console.log(id);
-
   const onClickShowQr = () => {
     history.push('/qrcode');
   };

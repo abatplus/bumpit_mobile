@@ -68,6 +68,26 @@ export const ProfileReducer = (state = initialState, action: IAction) => {
         ...state,
         isLoading: action.payload,
       };
+    case Actions.Profile.ActionTypes.SET_PROFILE_NAME: {
+      const data = action.payload as { id: string; profileName: string };
+
+      const updateProfileIndex: number = state.profiles.findIndex((x) => x.id === data.id);
+      if (updateProfileIndex < 0) {
+        return { ...state };
+      }
+      const updateProfile: IProfile = state.profiles[updateProfileIndex];
+
+      updateProfile.name = data.profileName;
+      state.profiles[updateProfileIndex] = updateProfile;
+
+      const profiles = [...state.profiles];
+      (async () => await storeProfileData(profiles))();
+
+      return {
+        ...state,
+        profiles: profiles,
+      };
+    }
     default:
       return state;
   }
