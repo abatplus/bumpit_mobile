@@ -1,0 +1,47 @@
+{
+  "appTitle": {
+    "message": "vCard-Exchange"
+  },
+  "appName": {
+    "message": "abat+ Exchange"
+  },
+  "Card": {
+    "message": "Visitenkarte"
+  },
+  "QR_code": {
+    "message": "QR-Code"
+  },
+  "Scan": {
+    "message": "Scannen"
+  },
+  "Swap": {
+    "message": "Swap"
+  },
+  "Exchange": {
+    "message": "Austausch"
+  },
+  "Legal_Information": {
+    "message": "Impressum"
+  },
+  "Privacy_Protection": {
+    "message": "Datenschutz"
+  },
+  "Help": {
+    "message": "Hilfe"
+  },
+  "About": {
+    "message": "Über"
+  },
+  "Profiles": {
+    "message": "Meine Profile"
+  },
+  "Edit": {
+    "message": "bearbeiten"
+  },
+  "ShowQRCode": {
+    "message": "zeige QR-Code"
+  },
+  "Profile_Edit": {
+    "message": "Profil bearbeiten: "
+  }
+}

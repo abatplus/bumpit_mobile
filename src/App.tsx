@@ -1,11 +1,8 @@
 import React from 'react';
-import { IonApp } from '@ionic/react';
-
-//import Menu from './components/Menu';
+import { IonApp, IonSplitPane } from '@ionic/react';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
-
 /* Basic CSS for apps built with Ionic */
 import '@ionic/react/css/normalize.css';
 import '@ionic/react/css/structure.css';
@@ -23,20 +20,38 @@ import '@ionic/react/css/display.css';
 import './theme/variables.css';
 import { VCardProvider } from './store/contexts/VCardContext';
 import { AppContextProvider } from './store/contexts/AppContext';
-import AppRouter from './components/AppRouter';
+import TranslationProvider from './i18n/TranslationProvider';
+import { getLocale } from './i18n/TranslationProvider';
+import { ProfileContextProvider } from './store/contexts/ProfileContext';
+import { IonReactRouter } from '@ionic/react-router';
+import Menu from './components/Menu';
+import { MainContent } from './components/MainContent';
 
 const App: React.FC = () => {
+  const [locale, setLocale] = React.useState('en');
 
-  return ( 
+  React.useEffect(() => {
+    (async function settingLocale() {
+      setLocale(await getLocale());
+    })();
+  }, [locale]);
+
+  return <TranslationProvider locale={locale}>
     <IonApp>
       <AppContextProvider>
-        <VCardProvider>
-          <AppRouter></AppRouter>
-        </VCardProvider>
+        <ProfileContextProvider>
+          <VCardProvider>
+            <IonReactRouter>
+              <IonSplitPane contentId="main">
+                <Menu />
+                <MainContent />
+              </IonSplitPane>
+            </IonReactRouter>
+          </VCardProvider>
+        </ProfileContextProvider>
       </AppContextProvider>
     </IonApp>
-  )
-}
+  </TranslationProvider>
+};
 
 export default App;
-

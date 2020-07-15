@@ -11,10 +11,6 @@
     "@ionic-native/qr-scanner": "^5.27.0",
     "@ionic/react": "^5.2.2",
     "@ionic/react-router": "^5.2.2",
-    "@testing-library/jest-dom": "^5.11.0",
-    "@testing-library/react": "^10.4.3",
-    "@testing-library/user-event": "^12.0.11",
-    "@types/jest": "^26.0.3",
     "@types/node": "^14.0.14",
     "@types/qrcode.react": "^1.0.1",
     "@types/react": "^16.9.41",
@@ -29,6 +25,7 @@
     "qrcode.react": "^1.0.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-intl": "^5.0.2",
     "react-qr-reader": "^2.2.1",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
@@ -37,9 +34,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "build": "react-scripts build"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -59,5 +54,5 @@
   "devDependencies": {
     "@capacitor/cli": "2.2.0"
   },
-  "description": "An Ionic project"
+  "description": "The ExchangeIT App to exchange business cards."
 }
