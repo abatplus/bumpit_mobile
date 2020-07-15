@@ -12,6 +12,7 @@ import {
   IonButton,
   IonIcon,
   IonLabel,
+  IonBackButton,
 } from '@ionic/react';
 import './VCardView.css';
 import VCardField from '../components/VCardField';
@@ -39,6 +40,7 @@ const VCardView: React.FC = () => {
         <IonToolbar>
           <IonButtons slot="start">
             <IonMenuButton />
+            <IonBackButton />
           </IonButtons>
           <IonTitle>{i18n.formatMessage({ id: nameof<IvCardTranslations>('Card') })}</IonTitle>
         </IonToolbar>

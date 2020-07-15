@@ -32,7 +32,16 @@
   "About": {
     "message": "About"
   },
-  "Terms_and_conditions": {
-    "message": "General terms & conditions"
+  "Profiles": {
+    "message": "My profiles"
+  },
+  "Edit": {
+    "message": "edit"
+  },
+  "ShowQRCode": {
+    "message": "show QR-Code"
+  },
+  "Profile_Edit": {
+    "message": "Edit profile: "
   }
 }

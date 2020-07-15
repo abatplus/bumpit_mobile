@@ -1,0 +1,19 @@
+{
+  "profiles": [
+    {
+      "id": "pers",
+      "name": "Persönlich",
+      "vCard": {}
+    },
+    {
+      "id": "work",
+      "name": "Arbeit",
+      "vCard": {}
+    },
+    {
+      "id": "sport",
+      "name": "Sportverein",
+      "vCard": {}
+    }
+  ]
+}
