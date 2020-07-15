@@ -49,7 +49,7 @@ export const ProfileReducer = (state = initialState, action: IAction) => {
 
       return {
         ...state,
-        profiles: [profiles],
+        profiles: profiles,
       };
     case Actions.Profile.ActionTypes.REMOVE_PROFILE:
       const currentProfiles = state.profiles;
@@ -69,5 +69,3 @@ export const ProfileReducer = (state = initialState, action: IAction) => {
       return state;
   }
 };
-
-// (async () => await storeProfileData(vCardWithNewFieldValue))();

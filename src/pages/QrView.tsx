@@ -38,30 +38,27 @@ const QrView: React.FC = () => {
 
   const currentProfile = profileContext.profiles.find((profile) => profile.id === getProfileId(location.pathname));
 
-  return (
-    <IonPage id="qr">
-      <IonHeader translucent={true}>
-        <IonToolbar>
-          <IonButtons slot="start">
-            <IonBackButton />
-          </IonButtons>
-          <IonTitle>{i18n.formatMessage({ id: nameof<IvCardTranslations>('QR_code') })}</IonTitle>
-        </IonToolbar>
-      </IonHeader>
-
-      <IonContent fullscreen={true}>
-        <IonHeader collapse="condense">
+  if (currentProfile) {
+    return (
+      <IonPage id="qr">
+        <IonHeader translucent={true}>
           <IonToolbar>
-            <IonTitle size="large">{i18n.formatMessage({ id: nameof<IvCardTranslations>('QR_code') })}</IonTitle>
+            <IonButtons slot="start">
+              <IonBackButton />
+            </IonButtons>
+            <IonTitle>{i18n.formatMessage({ id: nameof<IvCardTranslations>('QR_code') })}</IonTitle>
           </IonToolbar>
         </IonHeader>
-
-        <div className="qrcontainer">
-          <QRCode value={JSON.stringify(currentProfile?.vCard)} size={qrWidth} />
-        </div>
-      </IonContent>
-    </IonPage>
-  );
+        <IonContent fullscreen={true}>
+          <div className="qrcontainer">
+            <QRCode value={JSON.stringify(currentProfile?.vCard)} size={qrWidth} />
+          </div>
+        </IonContent>
+      </IonPage>
+    );
+  } else {
+    return <React.Fragment />;
+  }
 };
 
 export default QrView;

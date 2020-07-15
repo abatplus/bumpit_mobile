@@ -12,9 +12,7 @@ import { useAppContext } from '../store/contexts/AppContext';
 import { getProfileData } from '../store/dataApi';
 
 const renderProfiles = (profiles: IProfile[]) => {
-  return profiles.map((profile: IProfile) => {
-    return <ProfileCard name={profile.name} id={profile.id} key={profile.id} />;
-  });
+  return profiles.map((profile: IProfile) => <ProfileCard name={profile.name} id={profile.id} key={profile.id} />);
 };
 
 const VCardProfiles: React.FC = () => {
@@ -44,7 +42,7 @@ const VCardProfiles: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent slot={'fixed'}>
-        {profileContext.profiles && profileContext.profiles.length > 0 ? renderProfiles(profileContext.profiles) : <React.Fragment />}
+        {profileContext.profiles && profileContext.profiles.length > 0 ? <div>{renderProfiles(profileContext.profiles)}</div> : <React.Fragment />}
         <IonFab vertical={'bottom'} horizontal={'end'} slot={'fixed'}>
           <IonFabButton
             onClick={() => {

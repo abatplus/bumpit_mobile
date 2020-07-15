@@ -1,37 +1,21 @@
 import React from 'react';
-import {
-  IonHeader,
-  IonToolbar,
-  IonContent,
-  IonPage,
-  IonButtons,
-  IonList,
-  IonMenuButton,
-  IonTitle,
-  IonFooter,
-  IonButton,
-  IonIcon,
-  IonLabel,
-  IonBackButton,
-} from '@ionic/react';
+import { IonHeader, IonToolbar, IonContent, IonPage, IonButtons, IonTitle, IonFooter, IonButton, IonIcon, IonLabel, IonBackButton } from '@ionic/react';
 import './VCardView.css';
-import VCardField from '../components/VCardField';
 import { qrCode, share } from 'ionicons/icons';
 import { useHistory, useLocation } from 'react-router';
 import { useIntl } from 'react-intl';
 import { nameof, getProfileId } from '../utils';
 import IvCardTranslations from '../i18n/IvCardTranslations';
 import { useProfileContext } from '../store/contexts/ProfileContext';
-import { IVCard } from '../interfaces/IVCard';
 import IProfile from '../interfaces/IProfile';
-import * as Actions from '../store/actions/actions';
+import Profile from '../components/Profile';
 
 const VCardView: React.FC = () => {
   const history = useHistory();
   const i18n = useIntl();
 
   const location = useLocation();
-  const { profileContext, dispatchProfileContext } = useProfileContext();
+  const { profileContext } = useProfileContext();
 
   const onClickShowQr = () => {
     history.push('/qrcode');
@@ -39,14 +23,6 @@ const VCardView: React.FC = () => {
 
   const onClickSwap = () => {
     history.push('/swap');
-  };
-
-  const currentProfileId = getProfileId(location.pathname);
-
-  const updateProfile = (inputFieldName: keyof IVCard) => (event: CustomEvent) => {
-    if (currentProfile && currentProfile.id) {
-      dispatchProfileContext(Actions.Profile.setProfileVCardDataField(currentProfileId, currentProfile.name, inputFieldName, event.detail.value));
-    }
   };
 
   const getCurrentProfile = () => {
@@ -64,7 +40,6 @@ const VCardView: React.FC = () => {
       <IonHeader translucent={true}>
         <IonToolbar>
           <IonButtons slot="start">
-            <IonMenuButton />
             <IonBackButton />
           </IonButtons>
           <IonTitle>{i18n.formatMessage({ id: nameof<IvCardTranslations>('Card') })}</IonTitle>
@@ -72,90 +47,7 @@ const VCardView: React.FC = () => {
       </IonHeader>
 
       <IonContent>
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">{i18n.formatMessage({ id: nameof<IvCardTranslations>('Card') })}</IonTitle>
-          </IonToolbar>
-        </IonHeader>
-        <IonList>
-          <VCardField
-            key={'company'}
-            name={'company'}
-            label={i18n.formatMessage({ id: nameof<IvCardTranslations>('Company') })}
-            value={currentProfile?.vCard?.company}
-            onChange={updateProfile('company')}
-          />
-          <VCardField
-            key={'website'}
-            name={'website'}
-            label={i18n.formatMessage({ id: nameof<IvCardTranslations>('Website') })}
-            value={currentProfile?.vCard?.website}
-            onChange={updateProfile('website')}
-          />
-          <VCardField
-            key={'street'}
-            name={'street'}
-            label={i18n.formatMessage({ id: nameof<IvCardTranslations>('Street') })}
-            value={currentProfile?.vCard?.street}
-            onChange={updateProfile('street')}
-          />
-          <VCardField
-            key={'zipCode'}
-            name={'zipCode'}
-            label={i18n.formatMessage({ id: nameof<IvCardTranslations>('ZipCode') })}
-            value={currentProfile?.vCard?.zipCode}
-            onChange={updateProfile('zipCode')}
-          />
-          <VCardField
-            key={'location'}
-            name={'location'}
-            label={i18n.formatMessage({ id: nameof<IvCardTranslations>('Location') })}
-            value={currentProfile?.vCard?.location}
-            onChange={updateProfile('location')}
-          />
-          <VCardField
-            key={'country'}
-            name={'country'}
-            label={i18n.formatMessage({ id: nameof<IvCardTranslations>('Country') })}
-            value={currentProfile?.vCard?.country}
-            onChange={updateProfile('country')}
-          />
-          <VCardField
-            key={'name'}
-            name={'name'}
-            label={i18n.formatMessage({ id: nameof<IvCardTranslations>('Name') })}
-            value={currentProfile?.vCard?.name}
-            onChange={updateProfile('name')}
-          />
-          <VCardField
-            key={'position'}
-            name={'position'}
-            label={i18n.formatMessage({ id: nameof<IvCardTranslations>('Position') })}
-            value={currentProfile?.vCard?.position}
-            onChange={updateProfile('position')}
-          />
-          <VCardField
-            key={'phone'}
-            name={'phone'}
-            label={i18n.formatMessage({ id: nameof<IvCardTranslations>('Phone') })}
-            value={currentProfile?.vCard?.phone}
-            onChange={updateProfile('phone')}
-          />
-          <VCardField
-            key={'fax'}
-            name={'fax'}
-            label={i18n.formatMessage({ id: nameof<IvCardTranslations>('Fax') })}
-            value={currentProfile?.vCard?.fax}
-            onChange={updateProfile('fax')}
-          />
-          <VCardField
-            key={'email'}
-            name={'email'}
-            label={i18n.formatMessage({ id: nameof<IvCardTranslations>('Email') })}
-            value={currentProfile?.vCard?.email}
-            onChange={updateProfile('email')}
-          />
-        </IonList>
+        <Profile profile={currentProfile} />
       </IonContent>
 
       <IonFooter>
