@@ -46,7 +46,7 @@ const QrView: React.FC = () => {
             <IonButtons slot="start">
               <IonBackButton />
             </IonButtons>
-            <IonTitle>{i18n.formatMessage({ id: nameof<IvCardTranslations>('QR_code') })}</IonTitle>
+            <IonTitle>{i18n.formatMessage({ id: nameof<IvCardTranslations>('QR_code') })+" - "+currentProfile.name}</IonTitle>
           </IonToolbar>
         </IonHeader>
         <IonContent fullscreen={true}>

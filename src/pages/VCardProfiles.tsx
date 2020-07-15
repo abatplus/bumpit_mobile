@@ -22,7 +22,8 @@ import { addCircle } from 'ionicons/icons';
 import ProfileCard from '../components/ProfileCard';
 import * as Actions from '../store/actions/actions';
 import { useAppContext } from '../store/contexts/AppContext';
-import { getProfileData, emptyProfile } from '../store/dataApi';
+import { getProfileData, getEmptyProfile } from '../store/dataApi';
+import { v4 as uuidv4 } from 'uuid';
 
 const renderProfiles = (profiles: IProfile[]) => {
     return profiles.map((profile: IProfile) => <ProfileCard profile={profile} key={profile.id} />);
@@ -47,10 +48,11 @@ const VCardProfiles: React.FC = () => {
     function addNewProfile() {
         console.log('Add a new profile');
 
-        let newProfile: IProfile = emptyProfile;
+        let newProfile: IProfile = getEmptyProfile(uuidv4());
+        newProfile.name = "Profilname eingeben";
         dispatchProfileContext(Actions.Profile.addNewProfile(newProfile));
 
-        history.push('/profile/edit/:'+newProfile.id);
+        history.push('/profile/edit/'+newProfile.id);
     }
 
     return (
