@@ -11,6 +11,7 @@ import SwapView from '../pages/SwapView';
 import Privacy from '../pages/Privacy';
 import LegalInfo from '../pages/LegalInfo';
 import About from '../pages/About';
+import TermsAndConditions from '../pages/TermsAndConditions';
 import VCardView from '../pages/VCardView';
 import NewProfile from '../pages/NewProfile';
 import VCardProfiles from '../pages/VCardProfiles';
@@ -28,6 +29,7 @@ export const MainContent: React.FC = () => {
           <Route path="/privacy" component={Privacy} exact={true} />
           <Route path="/legal" component={LegalInfo} exact={true} />
           <Route path="/about" component={About} exact={true} />
+          <Route path="/termsAndConditions" component={TermsAndConditions} exact={true} />
           <Route path="/profile/edit/:id" component={VCardView} exact={true} />
           <Route path="/profile/create" component={NewProfile} exact={true} />
           <Route path="/profile" component={VCardProfiles} exact={true} />

@@ -23,12 +23,12 @@ const Menu: React.FC = () => {
 
   const routes = {
     tabsPages: [
-      { title: i18n.formatMessage({ id: nameof<IvCardTranslations>('Card') }), path: '/vcard', icon: peopleOutline },
+      { title: i18n.formatMessage({ id: nameof<IvCardTranslations>('Profiles') }), path: '/profile', icon: peopleOutline },
       { title: i18n.formatMessage({ id: nameof<IvCardTranslations>('Scan') }), path: '/scan', icon: scan }
 
     ],
     appPages: [
-      { title: i18n.formatMessage({ id: nameof<IvCardTranslations>('Terms_and_conditions') }), path: 'termsAndConditions' },
+      { title: i18n.formatMessage({ id: nameof<IvCardTranslations>('Terms_and_conditions') }), path: '/termsAndConditions' },
       { title: i18n.formatMessage({ id: nameof<IvCardTranslations>('Privacy_Protection') }), path: '/privacy' },
       { title: i18n.formatMessage({ id: nameof<IvCardTranslations>('Legal_Information') }), path: '/legal' },
       { title: i18n.formatMessage({ id: nameof<IvCardTranslations>('About') }), path: '/about' },
@@ -68,11 +68,11 @@ const Menu: React.FC = () => {
               </IonItem>
             </IonToolbar>
           </IonHeader>
-          {renderlistItems(routes.tabsPages)}
+          {renderListItems(routes.tabsPages)}
         </IonList>
         <IonHeader color="primary" />
         <IonList lines="none">
-          {renderlistItems(routes.appPages)}
+          {renderListItems(routes.appPages)}
         </IonList>
       </IonContent>
       <IonFooter className="ion-no-border">
