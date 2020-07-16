@@ -1,13 +1,14 @@
 import { ICardExchangeClient } from "../ICardExchangeClient";
 import { CardExchangeEvent } from "../CardExchangeEvents";
 import { MockEventAggregator } from "./MockEventAggregator";
+import ICardExchangeEvents from '../ICardExchangeEvents';
 
 export interface IRegisteredEventCall {
   event: CardExchangeEvent;
   func: any;
 }
 
-export class MockCardExchangeEvents {
+export class MockCardExchangeEvents implements ICardExchangeEvents {
   connection: MockEventAggregator;
 
   constructor(connection: MockEventAggregator, client: ICardExchangeClient) {

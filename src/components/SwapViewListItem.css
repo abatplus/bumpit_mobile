@@ -1,11 +1,15 @@
 .swap-view-wait {
-    width: 30px;
-    max-width: 30px;
+    width: 32px;
+    max-width: 32px;
     margin: auto;
+    margin-right: 10px;
 }
 
 .swap-view-button {
     width: 50px;
     max-width: 50px;
     margin: auto;
+}
+.swap-view-item-name {
+    text-overflow: ellipsis;
 }

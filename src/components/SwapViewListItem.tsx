@@ -1,15 +1,19 @@
 import React from 'react';
 import './SwapViewListItem.css';
-import { IonItem, IonLabel, IonButton, IonIcon, IonGrid, IonCol, IonRow } from '@ionic/react';
-import { hourglass, checkmark, close, share } from 'ionicons/icons';
+import { IonItem, IonLabel, IonButton, IonIcon, IonGrid, IonCol, IonRow, IonSpinner } from '@ionic/react';
+import { checkmark, close, share } from 'ionicons/icons';
 import SwapState from '../enums/SwapState';
+import ICardExchangeServer from '../Server/ICardExchangeServer';
 
 type OwnProps = {
     name: string;
     state: SwapState;
+    onDoRequest: () => void;
+    onAcceptRequest: () => void;
+    onAbortRequest: () => void;
 }
 
-const SwapViewListItem: React.FC<OwnProps> = ({name, state}) => {
+const SwapViewListItem: React.FC<OwnProps> = ({name, state, onDoRequest, onAbortRequest, onAcceptRequest}) => {
 
   let stateText = ' ';
   switch (state) {
@@ -33,24 +37,12 @@ const SwapViewListItem: React.FC<OwnProps> = ({name, state}) => {
   const onActionButtonClick = () => {
       switch (state) {
         case SwapState.initial:
-            return onRequest;
+            return onDoRequest();
         case SwapState.requested:
             return onAbortRequest();
         case SwapState.received:
-            return onAccept();
+            return onAcceptRequest();
       }
-  }
-
-  const onRequest = () => {
-    console.log(`request to xyz`);
-  }
-
-  const onAbortRequest = () => {
-    console.log(`request to xyz aborted`);
-  }
-
-  const onAccept = () => {
-    console.log(`request from xyz accepted`);
   }
 
   const getActionIcon = () => {
@@ -78,7 +70,7 @@ const SwapViewListItem: React.FC<OwnProps> = ({name, state}) => {
         <IonGrid>
             <IonRow>
                 <IonCol className="swap-view-wait">
-                    { state === SwapState.requested ? <IonIcon icon={hourglass} /> : ""}
+                    { state === SwapState.requested ? <IonSpinner name="dots" /> : ""}
                 </IonCol>
                 <IonCol>
                     <div>

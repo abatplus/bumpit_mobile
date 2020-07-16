@@ -3,10 +3,13 @@ import ISwapListEntry from '../../interfaces/ISwapListEntry';
 export enum ActionTypes {
   UPDATE_LIST = 'UPDATE_LIST',
   SEND_REQUEST = 'SEND_REQUEST',
-  ABORT_REQUEST = 'ABORT_REQUEST',
   RECEIVE_REQUEST = 'RECEIVE_REQUEST',
-  ACCEPT_REQUEST = 'ACCEPT_REQUEST',
-  RECEIVE_ACCEPT = 'RECEIVE_ACCEPT'
+  SEND_ACCEPT_REQUEST = 'SEND_ACCEPT_REQUEST',
+  RECEIVE_ACCEPT_REQUEST = 'RECEIVE_ACCEPT_REQUEST',
+  SEND_ABORT_REQUEST = 'SEND_ABORT_REQUEST',
+  RECEIVE_ABORT_REQUEST = 'RECEIVE_ABORT_REQUEST',
+  SEND_DENY_REQUEST = 'SEND_DENY_REQUEST',
+  RECEIVE_DENY_REQUEST = 'RECEIVE_DENY_REQUEST',
 }
 
 export const updateList = (list: ISwapListEntry[]) => {
@@ -30,23 +33,44 @@ export const receiveRequest = (deviceId: string) => {
   };
 };
 
-export const abortRequest = (deviceId: string) => {
+export const sendAcceptRequest = (deviceId: string) => {
   return {
-    type: ActionTypes.ABORT_REQUEST,
+    type: ActionTypes.SEND_ACCEPT_REQUEST,
     payload: deviceId
   };
 };
 
-export const acceptRequest = (deviceId: string) => {
+export const receiveAcceptRequest = (deviceId: string) => {
   return {
-    type: ActionTypes.ACCEPT_REQUEST,
+    type: ActionTypes.RECEIVE_ACCEPT_REQUEST,
     payload: deviceId
   };
 };
 
-export const receiveAccept = (deviceId: string) => {
+export const sendAbortRequest = (deviceId: string) => {
   return {
-    type: ActionTypes.RECEIVE_ACCEPT,
+    type: ActionTypes.SEND_ABORT_REQUEST,
+    payload: deviceId
+  };
+};
+
+export const receiveAbortRequest = (deviceId: string) => {
+  return {
+    type: ActionTypes.RECEIVE_ABORT_REQUEST,
+    payload: deviceId
+  };
+};
+
+export const sendDenyRequest = (deviceId: string) => {
+  return {
+    type: ActionTypes.SEND_DENY_REQUEST,
+    payload: deviceId
+  };
+};
+
+export const receiveDenyRequest = (deviceId: string) => {
+  return {
+    type: ActionTypes.RECEIVE_DENY_REQUEST,
     payload: deviceId
   };
 };

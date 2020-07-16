@@ -1,4 +1,5 @@
 import * as signalR from "@microsoft/signalr";
+import { ICardExchangeHub } from './ICardExchangeHub';
 
 export enum CardExchangeHubMethod {
   Subscribe = 'subscribe',
@@ -9,7 +10,7 @@ export enum CardExchangeHubMethod {
   SendCardData = 'sendCardData'
 }
 
-export class CardExchangeHub {
+export class CardExchangeHub implements ICardExchangeHub {
   connection: signalR.HubConnection;
 
   constructor(connection: signalR.HubConnection) {
