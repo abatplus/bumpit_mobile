@@ -1,4 +1,6 @@
-export class MockCardExchangeHub {
+import { ICardExchangeHub } from "../ICardExchangeHub";
+
+export class MockCardExchangeHub implements ICardExchangeHub {
 
   constructor() {
   }
@@ -14,6 +16,9 @@ export class MockCardExchangeHub {
   };
   public RequestCardExchange = async (deviceId: string, peerDeviceId: string, displayName: string) => {
     console.log('SERVER | ' + deviceId + ' | RequestCardExchange');
+  };
+  public RevokeCardExchangeRequest = async (deviceId: string, peerDeviceId: string) => {
+    console.log('SERVER | ' + deviceId + ' | RevokeCardExchangeRequest');
   };
   public AcceptCardExchange = async (deviceId: string, peerDeviceId: string, displayName: string, cardData: string) => {
     console.log('SERVER | ' + deviceId + ' | AcceptCardExchange');
