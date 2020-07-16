@@ -1,4 +1,4 @@
-import { ICardExchangeClient } from '../ICardExchangeClient';
+import { ICardExchangeClient } from "../ICardExchangeClient";
 
 export class MockCardExchangeClient implements ICardExchangeClient {
   subscribed = (peers: string[]) => { console.log('subscribed', peers); };
