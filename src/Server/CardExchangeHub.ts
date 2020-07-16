@@ -1,15 +1,18 @@
 import * as signalR from "@microsoft/signalr";
+import { ICardExchangeHub } from "./ICardExchangeHub";
 
 export enum CardExchangeHubMethod {
   Subscribe = 'subscribe',
   Unsubcribe = 'unsubcribe',
   Update = 'update',
+
   RequestCardExchange = 'requestCardExchange',
+  RevokeCardExchangeRequest = 'revokeCardExchangeRequest',
   AcceptCardExchange = 'acceptCardExchange',
   SendCardData = 'sendCardData'
 }
 
-export class CardExchangeHub {
+export class CardExchangeHub implements ICardExchangeHub {
   connection: signalR.HubConnection;
 
   constructor(connection: signalR.HubConnection) {
@@ -25,8 +28,12 @@ export class CardExchangeHub {
   public Update = async (deviceId: string, longitude: number, latitude: number, displayName: string) => {
     return await this.connection.send(CardExchangeHubMethod.Update, deviceId, longitude, latitude, displayName)
   };
+
   public RequestCardExchange = async (deviceId: string, peerDeviceId: string, displayName: string) => {
     return await this.connection.send(CardExchangeHubMethod.RequestCardExchange, deviceId, peerDeviceId, displayName)
+  };
+  public RevokeCardExchangeRequest = async (deviceId: string, peerDeviceId: string) => {
+    return await this.connection.send(CardExchangeHubMethod.RevokeCardExchangeRequest, deviceId, peerDeviceId)
   };
   public AcceptCardExchange = async (deviceId: string, peerDeviceId: string, displayName: string, cardData: string) => {
     return await this.connection.send(CardExchangeHubMethod.AcceptCardExchange, deviceId, peerDeviceId, displayName, cardData)
