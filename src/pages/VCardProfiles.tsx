@@ -46,13 +46,10 @@ const VCardProfiles: React.FC = () => {
     }, [dispatchAppContext, dispatchProfileContext]);
 
     function addNewProfile() {
-        console.log('Add a new profile');
-
         let newProfile: IProfile = getEmptyProfile(uuidv4());
-        newProfile.name = "Profilname eingeben";
+        newProfile.name = i18n.formatMessage({ id: nameof<IvCardTranslations>('Set_Profile_Name') });
         dispatchProfileContext(Actions.Profile.addNewProfile(newProfile));
-
-        history.push('/profile/edit/'+newProfile.id);
+        history.push('/profile/edit/' + newProfile.id);
     }
 
     return (

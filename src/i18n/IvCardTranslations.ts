@@ -29,4 +29,5 @@ export default interface IvCardTranslations {
   Email: PontoonMessage;
   Website: PontoonMessage;
   Terms_and_conditions: PontoonMessage;
+  Set_Profile_Name: PontoonMessage;
 }
