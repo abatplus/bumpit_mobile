@@ -69,29 +69,49 @@ const SwapView: React.FC = () => {
           dispatchSwapContext(
             Actions.Swap.updateList([
               {
-                deviceId: '123',
+                deviceId: uuidv4(),
                 name: 'Arno Nühm',
                 state: SwapState.initial,
               },
               {
-                deviceId: '456',
+                deviceId: uuidv4(),
                 name: 'Bea Trix',
                 state: SwapState.received,
               },
               {
-                deviceId: '789',
+                deviceId: uuidv4(),
                 name: 'Lorette Mahr',
                 state: SwapState.requested,
               },
               {
-                deviceId: 'abc',
+                deviceId: uuidv4(),
                 name: 'Wanda Lismus',
                 state: SwapState.accepted,
               },
               {
-                deviceId: 'def',
+                deviceId: uuidv4(),
                 name: 'Al Coholik',
-                state: SwapState.exchanged,
+                state: SwapState.initial,
+              },
+              {
+                deviceId: uuidv4(),
+                name: 'Wanda Lismus',
+                state: SwapState.requested,
+              },
+              {
+                deviceId: uuidv4(),
+                name: 'Al Coholik',
+                state: SwapState.received,
+              },
+              {
+                deviceId: uuidv4(),
+                name: 'Wanda Lismus',
+                state: SwapState.initial,
+              },
+              {
+                deviceId: uuidv4(),
+                name: 'Al Coholik',
+                state: SwapState.initial,
               },
             ])
           );
@@ -165,7 +185,7 @@ const SwapView: React.FC = () => {
   const renderList = () => {
     // !!!! DON'T REMOVE THE DIV AROUND THE LISTITEM, BECAUSE IT FIXES A SORTING BUG WHEN MORE THAN 2 ELEMENTS WITH THE SAME NAME ARE SHOWN !!!
     return swapList.map((entry) => (
-      <div>
+      <div key={entry.deviceId}>
         <SwapViewListItem
           key={entry.deviceId}
           name={entry.name}
