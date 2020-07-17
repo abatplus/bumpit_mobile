@@ -27,7 +27,7 @@ import SwapState from '../enums/SwapState';
 import * as SwapReducer from '../store/reducers/SwapReducer';
 import { SwapViewCardExchangeClient } from '../Server/SwapViewCardExchangeClient';
 import { MockCompleteServer } from '../Server/Tests/MockCompleteServer';
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuid4 } from 'uuid';
 import { useProfileContext } from '../store/contexts/ProfileContext';
 import { useParams } from 'react-router';
 import { Geolocation } from '@ionic-native/geolocation';
@@ -41,9 +41,9 @@ const SwapView: React.FC = () => {
   const { id } = useParams();
   const i18n = useIntl();
   const [swapContext, dispatchSwapContext] = useReducer(SwapReducer.SwapReducer, []);
-  const [segmentFilter, setSegmmentFilter] = useState<string>('swap-list');
+  const [segmentFilter, setSegmentFilter] = useState<string>('swap-list');
   const [swapList, setSwapList] = useState<ISwapListEntry[]>([]);
-  const deviceId = uuidv4();
+  const deviceId = uuid4();
   let updateHandler = setTimeout(() => {}, 10000000); // dummy
 
   const cardExchangeClient = new SwapViewCardExchangeClient(dispatchSwapContext);
@@ -69,47 +69,47 @@ const SwapView: React.FC = () => {
           dispatchSwapContext(
             Actions.Swap.updateList([
               {
-                deviceId: uuidv4(),
+                deviceId: uuid4(),
                 name: 'Arno Nühm',
                 state: SwapState.initial,
               },
               {
-                deviceId: uuidv4(),
+                deviceId: uuid4(),
                 name: 'Bea Trix',
                 state: SwapState.received,
               },
               {
-                deviceId: uuidv4(),
+                deviceId: uuid4(),
                 name: 'Lorette Mahr',
                 state: SwapState.requested,
               },
               {
-                deviceId: uuidv4(),
+                deviceId: uuid4(),
                 name: 'Wanda Lismus',
                 state: SwapState.accepted,
               },
               {
-                deviceId: uuidv4(),
+                deviceId: uuid4(),
                 name: 'Al Coholik',
                 state: SwapState.initial,
               },
               {
-                deviceId: uuidv4(),
+                deviceId: uuid4(),
                 name: 'Wanda Lismus',
                 state: SwapState.requested,
               },
               {
-                deviceId: uuidv4(),
+                deviceId: uuid4(),
                 name: 'Al Coholik',
                 state: SwapState.received,
               },
               {
-                deviceId: uuidv4(),
+                deviceId: uuid4(),
                 name: 'Wanda Lismus',
                 state: SwapState.initial,
               },
               {
-                deviceId: uuidv4(),
+                deviceId: uuid4(),
                 name: 'Al Coholik',
                 state: SwapState.initial,
               },
@@ -230,7 +230,7 @@ const SwapView: React.FC = () => {
           <IonTitle>{i18n.formatMessage({ id: nameof<IvCardTranslations>('Exchange') })}</IonTitle>
         </IonToolbar>
         <IonToolbar>
-          <IonSegment value={segmentFilter} onIonChange={(e) => setSegmmentFilter(e.detail.value as string)}>
+          <IonSegment value={segmentFilter} onIonChange={(e) => setSegmentFilter(e.detail.value as string)}>
             <IonSegmentButton value="swap-list">
               <IonIcon icon={search} />
               <IonLabel>
