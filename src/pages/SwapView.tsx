@@ -158,10 +158,18 @@ const SwapView: React.FC = () => {
     // onAcceptAll();
   };
 
+  const getNumberOfRequestAll = () => {
+    return swapContext.filter((entry) => entry.state === SwapState.initial).length;
+  };
+
   const onAcceptAll = () => {
     console.log('accept-all');
     swapContext.filter((entry) => entry.state === SwapState.received).forEach((entry) => onAcceptRequest(entry.deviceId));
     clearInterval(updateHandler); // delete
+  };
+
+  const getNumberOfAcceptAll = () => {
+    return swapContext.filter((entry) => entry.state === SwapState.received).length;
   };
 
   const onDoRequest = (peerDeviceId: string) => {
@@ -206,13 +214,17 @@ const SwapView: React.FC = () => {
             <IonItem>
               <IonButton color="primary" fill="outline" className="swap-footer-button" onClick={onDoRequestAll}>
                 <IonIcon icon={share} />
-                <IonLabel className="swap-footer-button-text">{i18n.formatMessage({ id: nameof<IvCardTranslations>('Request_All') })}</IonLabel>
+                <IonLabel className="swap-footer-button-text">
+                  {i18n.formatMessage({ id: nameof<IvCardTranslations>('Request_All') })} {getNumberOfRequestAll()}
+                </IonLabel>
               </IonButton>
             </IonItem>
             <IonItem>
               <IonButton color="primary" fill="outline" className="swap-footer-button" onClick={onAcceptAll}>
                 <IonIcon icon={repeat} />
-                <IonLabel className="swap-footer-button-text">{i18n.formatMessage({ id: nameof<IvCardTranslations>('Accept_All') })}</IonLabel>
+                <IonLabel className="swap-footer-button-text">
+                  {i18n.formatMessage({ id: nameof<IvCardTranslations>('Accept_All') })} {getNumberOfAcceptAll()}
+                </IonLabel>
               </IonButton>
             </IonItem>
           </IonList>
