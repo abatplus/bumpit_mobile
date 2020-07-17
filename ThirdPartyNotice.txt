@@ -1,9 +1,9 @@
-/*!----------------- NAME-App ThirdPartyNotices -------------------------------------------------------
+/*!----------------- vSwap-App ThirdPartyNotices -------------------------------------------------------
 
 Third Party Notices
 
-This App uses third-party software or other resources that may be distributed under licenses different from the NAME-App T&C (Nutzungsbedingungen).
-In the event that we overlooked to list a required notice, please bring this to our attention by contacting us via email: NAME-App@abatplus.de
+This App uses third-party software or other resources that may be distributed under licenses different from the vSwap-App T&C (Nutzungsbedingungen).
+In the event that we overlooked to list a required notice, please bring this to our attention by contacting us via email: vSwap-App@abatplus.de
 
 ---------------------------------------------
 Third Party Code Components
