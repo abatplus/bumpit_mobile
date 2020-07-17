@@ -39,7 +39,7 @@ export class SwapViewCardExchangeClient implements ICardExchangeClient {
     this.dispatch(Actions.Swap.receiveAbortRequest(deviceId));
   };
 
-  // send a revoke request
+  // remove request successfully sent
   revokeSent = (peerDeviceId: string) => {
     console.log('revokeSent', peerDeviceId);
     this.dispatch(Actions.Swap.sendAbortRequest(peerDeviceId));

@@ -15,7 +15,7 @@ type SwapViewListItemType = {
   onAbortRequest: () => void;
 };
 
-const SwapViewListItem: React.FC<SwapViewListItemType> = ({ name, state, onDoRequest, onAbortRequest, onAcceptRequest }) => {
+const SwapViewListItem = ({ name, state, onDoRequest, onAbortRequest, onAcceptRequest }: SwapViewListItemType) => {
   let stateText = ' ';
 
   const i18n = useIntl();
