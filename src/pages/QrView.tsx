@@ -8,7 +8,7 @@ import { useIntl } from 'react-intl';
 import { useProfileContext } from '../store/contexts/ProfileContext';
 import { useParams } from 'react-router';
 import { IVCard } from '../interfaces/IVCard';
-// import * as vCardsJS from 'vcards-js';
+
 
 const QrView: React.FC = () => {
     const [qrWidth, setQrWidth] = useState<number>();
