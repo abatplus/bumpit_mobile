@@ -12,21 +12,14 @@ export class SwapViewCardExchangeClient implements ICardExchangeClient {
   }
 
   subscribed = (peers: string[]) => {
-    // console.log('subscribed', peers);
-    // let list: ISwapListEntry[] = [];
-    // peers.forEach((entry) => list.push(JSON.parse(entry)));
     this.dispatch(Actions.Swap.updateList(peers.map((entry) => JSON.parse(entry))));
   };
 
   unsubscribed = (statusMessage: string) => {
-    // console.log('unsubscribed', statusMessage);
     this.dispatch(Actions.Swap.updateList([] as ISwapListEntry[]));
   };
 
   updated = (peers: string[]) => {
-    // console.log('updated', peers);
-    // let list: ISwapListEntry[] = [];
-    // peers.forEach((entry) => list.push(JSON.parse(entry)));
     this.dispatch(Actions.Swap.updateList(peers.map((entry) => JSON.parse(entry))));
   };
 
