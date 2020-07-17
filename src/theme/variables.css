@@ -240,7 +240,6 @@ http://ionicframework.com/docs/theming/ */
     }
 
     ion-item {
-        --color: #787878;
         --highlight-color-focused: #787878;
     }
 

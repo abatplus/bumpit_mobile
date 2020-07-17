@@ -8,6 +8,7 @@ import { nameof } from '../utils';
 import IvCardTranslations from '../i18n/IvCardTranslations';
 import * as Actions from '../store/actions/actions';
 import { IonItem, IonLabel, IonInput } from '@ionic/react';
+import './VCardField.css';
 
 interface IProfileProps {
     profile?: IProfile;
@@ -38,7 +39,7 @@ const Profile: React.FC<IProfileProps> = (props) => {
 
     return (
         <div>
-            <IonItem>
+            <IonItem className='vcard-field-label'>
                 <IonLabel position='stacked'>
                     {i18n.formatMessage({ id: nameof<IvCardTranslations>('Profile_Description') })}
                 </IonLabel>

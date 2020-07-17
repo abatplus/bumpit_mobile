@@ -1,6 +1,7 @@
 import React from 'react';
 import { IonItem, IonLabel, IonInput } from '@ionic/react';
 import { IVCard } from '../interfaces/IVCard';
+import './VCardField.css';
 
 interface VCardProps {
     name: keyof IVCard;
@@ -11,7 +12,7 @@ interface VCardProps {
 
 const VCardField: React.FC<VCardProps> = (props) => {
     return (
-        <IonItem>
+        <IonItem className='vcard-field-label'>
             <IonLabel position='stacked'>{props.label}</IonLabel>
             <IonInput
                 name={props.name}
