@@ -1,4 +1,4 @@
-# bumpit_mobile &middot; [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/abatplus/bumpit_mobile/blob/master/LICENCE.md)
+# vSwap_mobile &middot; [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/abatplus/vswap_mobile/blob/master/LICENCE.md)
 
 This project was bootstrapped with [Ionic](https://ionicframework.com/docs/developing/starting) with react.
 
@@ -21,4 +21,4 @@ In the project directory, you can run:
 
 ## License
 
-Bumpit_mobile is [MIT licensed](./LICENSE.md).
+vSwap_mobile is [MIT licensed](./LICENSE.md).
