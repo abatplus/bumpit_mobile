@@ -34,7 +34,7 @@
     "react-scripts": "3.4.1",
     "typescript": "3.9.5",
     "uuid": "^8.2.0",
-    "vcards-js": "^2.10.0"
+    "vcf": "^2.0.6"
   },
   "scripts": {
     "start": "react-scripts start",
