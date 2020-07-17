@@ -45,9 +45,9 @@ export class SwapViewCardExchangeClient implements ICardExchangeClient {
     this.dispatch(Actions.Swap.sendAbortRequest(peerDeviceId));
   };
 
-  cardExchangeAccepted = (peerDeviceId: string, displayName: string, cardData: string) => {
+  cardExchangeAccepted = (peerDeviceId: string, peerDisplayName: string, peerCardData: string) => {
     // received
-    console.log('cardExchangeAccepted', peerDeviceId, displayName, cardData);
+    console.log('cardExchangeAccepted', peerDeviceId, peerDisplayName, peerCardData);
     this.dispatch(Actions.Swap.receiveAcceptRequest(peerDeviceId));
     // TODO: Save card data to contacts
   };

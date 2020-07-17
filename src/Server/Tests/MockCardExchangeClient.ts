@@ -11,7 +11,7 @@ export class MockCardExchangeClient implements ICardExchangeClient {
   cardExchangeRequestRevoked = (deviceId: string) => { console.log('cardExchangeRequestRevoked', deviceId); };
   revokeSent = (peerDeviceId: string) => { console.log('revokeSent', peerDeviceId); };
 
-  cardExchangeAccepted = (peerDeviceId: string, displayName: string, cardData: string) => { console.log('cardExchangeAccepted', peerDeviceId, displayName, cardData); };
+  cardExchangeAccepted = (peerDeviceId: string, peerDisplayName: string, peerCardData: string) => { console.log('cardExchangeAccepted', peerDeviceId, peerDisplayName, peerCardData); };
   acceptanceSent = (deviceId: string) => { console.log('acceptanceSent', deviceId); };
 
   cardDataReceived = (deviceId: string, displayName: string, cardData: string) => { console.log('cardDataReceived', deviceId, displayName, cardData); };
