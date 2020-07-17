@@ -1,10 +1,6 @@
-import { ICardExchangeHub } from "../ICardExchangeHub";
+import { ICardExchangeHub } from '../ICardExchangeHub';
 
 export class MockCardExchangeHub implements ICardExchangeHub {
-
-  constructor() {
-  }
-
   public Subscribe = async (deviceId: string, longitude: number, latitude: number, displayName: string) => {
     console.log('SERVER | ' + deviceId + ' | Subscribe');
   };

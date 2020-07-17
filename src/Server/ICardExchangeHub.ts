@@ -1,3 +1,4 @@
+// interface to signalR server. don't change without server changes!
 export interface ICardExchangeHub {
   Subscribe: (deviceId: string, longitude: number, latitude: number, displayName: string) => Promise<void>;
   Unsubcribe: (deviceId: string) => Promise<void>;
