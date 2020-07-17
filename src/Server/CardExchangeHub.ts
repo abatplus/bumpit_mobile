@@ -35,8 +35,8 @@ export class CardExchangeHub implements ICardExchangeHub {
   public RevokeCardExchangeRequest = async (deviceId: string, peerDeviceId: string) => {
     return await this.connection.send(CardExchangeHubMethod.RevokeCardExchangeRequest, deviceId, peerDeviceId);
   };
-  public AcceptCardExchange = async (deviceId: string, peerDeviceId: string, displayName: string, cardData: string) => {
-    return await this.connection.send(CardExchangeHubMethod.AcceptCardExchange, deviceId, peerDeviceId, displayName, cardData);
+  public AcceptCardExchange = async (deviceId: string, peerDeviceId: string, peerDisplayName: string, peerCardData: string) => {
+    return await this.connection.send(CardExchangeHubMethod.AcceptCardExchange, deviceId, peerDeviceId, peerDisplayName, peerCardData);
   };
   public SendCardData = async (deviceId: string, peerDeviceId: string, displayName: string, cardData: string) => {
     return await this.connection.send(CardExchangeHubMethod.SendCardData, deviceId, peerDeviceId, displayName, cardData);
