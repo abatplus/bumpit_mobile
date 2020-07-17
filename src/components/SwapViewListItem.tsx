@@ -3,8 +3,11 @@ import './SwapViewListItem.css';
 import { IonItem, IonLabel, IonButton, IonIcon, IonGrid, IonCol, IonRow, IonSpinner } from '@ionic/react';
 import { checkmark, close, share } from 'ionicons/icons';
 import SwapState from '../enums/SwapState';
+import { useIntl } from 'react-intl';
+import { nameof } from '../utils';
+import IvCardTranslations from '../i18n/IvCardTranslations';
 
-type OwnProps = {
+type SwapViewListItemType = {
   name: string;
   state: SwapState;
   onDoRequest: () => void;
@@ -12,23 +15,25 @@ type OwnProps = {
   onAbortRequest: () => void;
 };
 
-const SwapViewListItem: React.FC<OwnProps> = ({ name, state, onDoRequest, onAbortRequest, onAcceptRequest }) => {
+const SwapViewListItem: React.FC<SwapViewListItemType> = ({ name, state, onDoRequest, onAbortRequest, onAcceptRequest }) => {
   let stateText = ' ';
+
+  const i18n = useIntl();
   switch (state) {
     case SwapState.initial:
       stateText = ' ';
       break;
     case SwapState.requested:
-      stateText = 'Warte auf Bestätigung...';
+      stateText = i18n.formatMessage({ id: nameof<IvCardTranslations>('Wait_for_acceptance') });
       break;
     case SwapState.received:
-      stateText = 'Anfrage erhalten';
+      stateText = i18n.formatMessage({ id: nameof<IvCardTranslations>('Exchange_request_received') });
       break;
     case SwapState.accepted:
-      stateText = 'Anfrage akzeptiert. Sende Daten...';
+      stateText = i18n.formatMessage({ id: nameof<IvCardTranslations>('Accept_request_send_data') });
       break;
     case SwapState.exchanged:
-      stateText = 'Daten erfolgreich ausgetauscht.';
+      stateText = i18n.formatMessage({ id: nameof<IvCardTranslations>('Exchange_successful') });
       break;
   }
 

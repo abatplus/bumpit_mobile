@@ -100,5 +100,17 @@
   },
   "Wait_for_contacts": {
     "message": "Warte auf Kontakte..."
+  },
+  "Wait_for_acceptance": {
+    "message": "Warte auf Bestätigung..."
+  },
+  "Accept_request_send_data": {
+    "message": "Anfrage akzeptiert. Sende Daten..."
+  },
+  "Exchange_request_received": {
+    "message": "Anfrage erhalten"
+  },
+  "Exchange_successful": {
+    "message": "Daten erfolgreich ausgetauscht."
   }
 }

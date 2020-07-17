@@ -100,5 +100,17 @@
   },
   "Wait_for_contacts": {
     "message": "Wait for contacts..."
+  },
+  "Wait_for_acceptance": {
+    "message": "Wait for acceptance..."
+  },
+  "Accept_request_send_data": {
+    "message": "Request accepted. Send data..."
+  },
+  "Exchange_request_received": {
+    "message": "Exchange request received."
+  },
+  "Exchange_successful": {
+    "message": "Exchange successful."
   }
 }
