@@ -1,13 +1,15 @@
-import * as signalR from "@microsoft/signalr";
+import * as signalR from '@microsoft/signalr';
 import { ICardExchangeHub } from './ICardExchangeHub';
 
 export enum CardExchangeHubMethod {
   Subscribe = 'subscribe',
   Unsubcribe = 'unsubcribe',
   Update = 'update',
+
   RequestCardExchange = 'requestCardExchange',
+  RevokeCardExchangeRequest = 'revokeCardExchangeRequest',
   AcceptCardExchange = 'acceptCardExchange',
-  SendCardData = 'sendCardData'
+  SendCardData = 'sendCardData',
 }
 
 export class CardExchangeHub implements ICardExchangeHub {
@@ -18,21 +20,25 @@ export class CardExchangeHub implements ICardExchangeHub {
   }
 
   public Subscribe = async (deviceId: string, longitude: number, latitude: number, displayName: string) => {
-    return await this.connection.send(CardExchangeHubMethod.Subscribe, deviceId, longitude, latitude, displayName)
+    return await this.connection.send(CardExchangeHubMethod.Subscribe, deviceId, longitude, latitude, displayName);
   };
   public Unsubcribe = async (deviceId: string) => {
-    return await this.connection.send(CardExchangeHubMethod.Unsubcribe, deviceId)
+    return await this.connection.send(CardExchangeHubMethod.Unsubcribe, deviceId);
   };
   public Update = async (deviceId: string, longitude: number, latitude: number, displayName: string) => {
-    return await this.connection.send(CardExchangeHubMethod.Update, deviceId, longitude, latitude, displayName)
+    return await this.connection.send(CardExchangeHubMethod.Update, deviceId, longitude, latitude, displayName);
   };
+
   public RequestCardExchange = async (deviceId: string, peerDeviceId: string, displayName: string) => {
-    return await this.connection.send(CardExchangeHubMethod.RequestCardExchange, deviceId, peerDeviceId, displayName)
+    return await this.connection.send(CardExchangeHubMethod.RequestCardExchange, deviceId, peerDeviceId, displayName);
+  };
+  public RevokeCardExchangeRequest = async (deviceId: string, peerDeviceId: string) => {
+    return await this.connection.send(CardExchangeHubMethod.RevokeCardExchangeRequest, deviceId, peerDeviceId);
   };
   public AcceptCardExchange = async (deviceId: string, peerDeviceId: string, displayName: string, cardData: string) => {
-    return await this.connection.send(CardExchangeHubMethod.AcceptCardExchange, deviceId, peerDeviceId, displayName, cardData)
+    return await this.connection.send(CardExchangeHubMethod.AcceptCardExchange, deviceId, peerDeviceId, displayName, cardData);
   };
   public SendCardData = async (deviceId: string, peerDeviceId: string, displayName: string, cardData: string) => {
-    return await this.connection.send(CardExchangeHubMethod.SendCardData, deviceId, peerDeviceId, displayName, cardData)
+    return await this.connection.send(CardExchangeHubMethod.SendCardData, deviceId, peerDeviceId, displayName, cardData);
   };
 }

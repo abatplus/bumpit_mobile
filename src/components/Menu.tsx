@@ -11,10 +11,7 @@ import {
     IonFooter,
     IonToolbar,
     IonTitle,
-    IonHeader,
     IonImg,
-    IonListHeader,
-    IonItemDivider,
 } from '@ionic/react';
 import { peopleOutline, scan } from 'ionicons/icons';
 import { useAppContext } from '../store/contexts/AppContext';

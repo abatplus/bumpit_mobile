@@ -50,7 +50,7 @@ const VCardView: React.FC = () => {
           <IonButtons slot="start">
             <IonBackButton />
           </IonButtons>
-          <IonTitle>{i18n.formatMessage({ id: nameof<IvCardTranslations>('My_Data') })}</IonTitle>
+          <IonTitle>{i18n.formatMessage({ id: nameof<IvCardTranslations>('My_Data') })+" - "+currentProfile?.name}</IonTitle>
           <IonButtons slot="end">
             <IonButton onClick={deleteProfile}>
               <IonIcon icon={trash} />

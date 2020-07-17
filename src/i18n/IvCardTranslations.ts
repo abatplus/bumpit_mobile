@@ -15,7 +15,6 @@ export default interface IvCardTranslations {
   Profiles: PontoonMessage;
   Edit: PontoonMessage;
   ShowQRCode: PontoonMessage;
-  Profile_Edit: PontoonMessage;
   Profile_Description: PontoonMessage;
   My_Data: PontoonMessage;
   Name: PontoonMessage;
@@ -30,4 +29,5 @@ export default interface IvCardTranslations {
   Email: PontoonMessage;
   Website: PontoonMessage;
   Terms_and_conditions: PontoonMessage;
+  Set_Profile_Name: PontoonMessage;
 }
