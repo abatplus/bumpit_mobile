@@ -238,4 +238,17 @@ http://ionicframework.com/docs/theming/ */
     ion-tab-button {
         --color: #ffffff;
     }
+
+    ion-item {
+        --color: #787878;
+        --highlight-color-focused: #787878;
+    }
+
+    .item-has-focus .label-stacked.sc-ion-label-md-h {
+        color: #787878;
+    }
+
+    .item-label-stacked .sc-ion-input-md-h {
+        --color: #ffffff;
+    }
 }

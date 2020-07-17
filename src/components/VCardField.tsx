@@ -3,21 +3,26 @@ import { IonItem, IonLabel, IonInput } from '@ionic/react';
 import { IVCard } from '../interfaces/IVCard';
 
 interface VCardProps {
-  name: keyof IVCard;
-  value?: string;
-  label: string;
-  onChange: (event: CustomEvent) => void;
+    name: keyof IVCard;
+    value?: string;
+    label: string;
+    onChange: (event: CustomEvent) => void;
 }
 
 const VCardField: React.FC<VCardProps> = (props) => {
-  return (
-    <IonItem>
-      <IonLabel position="stacked" color="primary">
-        {props.label}
-      </IonLabel>
-      <IonInput name={props.name} type="text" value={props.value} spellCheck={false} autocapitalize="off" onIonChange={props.onChange} />
-    </IonItem>
-  );
+    return (
+        <IonItem>
+            <IonLabel position='stacked'>{props.label}</IonLabel>
+            <IonInput
+                name={props.name}
+                type='text'
+                value={props.value}
+                spellCheck={false}
+                autocapitalize='off'
+                onIonChange={props.onChange}
+            />
+        </IonItem>
+    );
 };
 
 export default VCardField;
