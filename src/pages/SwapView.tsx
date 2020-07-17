@@ -40,7 +40,7 @@ const SwapView: React.FC = () => {
   const { profileContext } = useProfileContext();
   const { id } = useParams();
   const i18n = useIntl();
-  const [swapContext, dispatchSwapContext] = useReducer(SwapReducer.SwapReducer, SwapReducer.initialState);
+  const [swapContext, dispatchSwapContext] = useReducer(SwapReducer.SwapReducer, []);
   const [segmentFilter, setSegmmentFilter] = useState<string>('swap-list');
   const [swapList, setSwapList] = useState<ISwapListEntry[]>([]);
   const deviceId = uuidv4();

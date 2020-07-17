@@ -8,8 +8,13 @@ export interface IAction {
   payload?: ISwapListEntry[] | string;
 }
 
+/**
+ * Compares two ISwapListEntries and returns a number depending on the compare result to sort a list of ISwapListEntries.
+ * Reorder so that the old element won't be shown on the bottom of the list.
+ * @param a ISwapListEntry to compare
+ * @param b ISwapListEntry to compare
+ */
 const swapListEntrySort = (a: ISwapListEntry, b: ISwapListEntry) => {
-  // reorder so that the old element won't be shown on the bottom of the list now
   if (a.name.toUpperCase() < b.name.toUpperCase()) {
     return -1;
   }
@@ -19,9 +24,7 @@ const swapListEntrySort = (a: ISwapListEntry, b: ISwapListEntry) => {
   return 0;
 };
 
-export const initialState: ISwapListEntry[] = [];
-
-export const SwapReducer = (state = initialState, action: IAction) => {
+export const SwapReducer = (state: ISwapListEntry[] = [], action: IAction) => {
   switch (action.type) {
     case Actions.Swap.ActionTypes.UPDATE_LIST: {
       // copy the old list items SwapState if the entry is still available in the updated list
@@ -54,12 +57,38 @@ export const SwapReducer = (state = initialState, action: IAction) => {
       state[indexOfEntry].state = SwapState.exchanged;
       return [...state];
     }
-
+    case Actions.Swap.ActionTypes.RECEIVE_ABORT_REQUEST:
     case Actions.Swap.ActionTypes.SEND_ABORT_REQUEST: {
       const indexOfEntry = state.findIndex((item) => item.deviceId === action.payload);
       if (indexOfEntry === -1) return state;
 
       state[indexOfEntry].state = SwapState.initial;
+      return [...state];
+    }
+
+    // // TODO: Do we need a deny request ??? we could just avoid accepting it but risky if pressing to fast maybe?
+    // case Actions.Swap.ActionTypes.RECEIVE_DENY_REQUEST: {
+    //   const indexOfEntry = state.findIndex((item) => item.deviceId === action.payload);
+    //   if (indexOfEntry === -1) return state;
+
+    //   state[indexOfEntry].state = SwapState.denied;
+    //   return [...state];
+    // }
+
+    // // TODO: Do we need a deny request ??? we could just avoid accepting it but risky if pressing to fast maybe?
+    // case Actions.Swap.ActionTypes.SEND_DENY_REQUEST: {
+    //   const indexOfEntry = state.findIndex((item) => item.deviceId === action.payload);
+    //   if (indexOfEntry === -1) return state;
+
+    //   state[indexOfEntry].state = SwapState.denied;
+    //   return [...state];
+    // }
+    // TODO: accept request and sending data to the peer device
+    case Actions.Swap.ActionTypes.SEND_ACCEPT_REQUEST: {
+      const indexOfEntry = state.findIndex((item) => item.deviceId === action.payload);
+      if (indexOfEntry === -1) return state;
+
+      state[indexOfEntry].state = SwapState.accepted;
       return [...state];
     }
 

@@ -8,69 +8,70 @@ export enum ActionTypes {
   RECEIVE_ACCEPT_REQUEST = 'RECEIVE_ACCEPT_REQUEST',
   SEND_ABORT_REQUEST = 'SEND_ABORT_REQUEST',
   RECEIVE_ABORT_REQUEST = 'RECEIVE_ABORT_REQUEST',
-  SEND_DENY_REQUEST = 'SEND_DENY_REQUEST',
-  RECEIVE_DENY_REQUEST = 'RECEIVE_DENY_REQUEST',
+  // SEND_DENY_REQUEST = 'SEND_DENY_REQUEST',
+  // RECEIVE_DENY_REQUEST = 'RECEIVE_DENY_REQUEST',
 }
 
 export const updateList = (list: ISwapListEntry[]) => {
   return {
     type: ActionTypes.UPDATE_LIST,
-    payload: list
+    payload: list,
   };
 };
 
 export const sendRequest = (deviceId: string) => {
   return {
     type: ActionTypes.SEND_REQUEST,
-    payload: deviceId
+    payload: deviceId,
   };
 };
 
 export const receiveRequest = (deviceId: string) => {
   return {
     type: ActionTypes.RECEIVE_REQUEST,
-    payload: deviceId
+    payload: deviceId,
   };
 };
 
 export const sendAcceptRequest = (deviceId: string) => {
   return {
     type: ActionTypes.SEND_ACCEPT_REQUEST,
-    payload: deviceId
+    payload: deviceId,
   };
 };
 
 export const receiveAcceptRequest = (deviceId: string) => {
   return {
     type: ActionTypes.RECEIVE_ACCEPT_REQUEST,
-    payload: deviceId
+    payload: deviceId,
   };
 };
 
 export const sendAbortRequest = (deviceId: string) => {
   return {
     type: ActionTypes.SEND_ABORT_REQUEST,
-    payload: deviceId
+    payload: deviceId,
   };
 };
 
 export const receiveAbortRequest = (deviceId: string) => {
   return {
     type: ActionTypes.RECEIVE_ABORT_REQUEST,
-    payload: deviceId
+    payload: deviceId,
   };
 };
 
-export const sendDenyRequest = (deviceId: string) => {
-  return {
-    type: ActionTypes.SEND_DENY_REQUEST,
-    payload: deviceId
-  };
-};
+// TODO: check if needed
+// export const sendDenyRequest = (deviceId: string) => {
+//   return {
+//     type: ActionTypes.SEND_DENY_REQUEST,
+//     payload: deviceId
+//   };
+// };
 
-export const receiveDenyRequest = (deviceId: string) => {
-  return {
-    type: ActionTypes.RECEIVE_DENY_REQUEST,
-    payload: deviceId
-  };
-};
+// export const receiveDenyRequest = (deviceId: string) => {
+//   return {
+//     type: ActionTypes.RECEIVE_DENY_REQUEST,
+//     payload: deviceId
+//   };
+// };
