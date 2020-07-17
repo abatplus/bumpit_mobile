@@ -65,25 +65,6 @@ export const SwapReducer = (state: ISwapListEntry[] = [], action: IAction) => {
       state[indexOfEntry].state = SwapState.initial;
       return [...state];
     }
-
-    // // TODO: Do we need a deny request ??? we could just avoid accepting it but risky if pressing to fast maybe?
-    // case Actions.Swap.ActionTypes.RECEIVE_DENY_REQUEST: {
-    //   const indexOfEntry = state.findIndex((item) => item.deviceId === action.payload);
-    //   if (indexOfEntry === -1) return state;
-
-    //   state[indexOfEntry].state = SwapState.denied;
-    //   return [...state];
-    // }
-
-    // // TODO: Do we need a deny request ??? we could just avoid accepting it but risky if pressing to fast maybe?
-    // case Actions.Swap.ActionTypes.SEND_DENY_REQUEST: {
-    //   const indexOfEntry = state.findIndex((item) => item.deviceId === action.payload);
-    //   if (indexOfEntry === -1) return state;
-
-    //   state[indexOfEntry].state = SwapState.denied;
-    //   return [...state];
-    // }
-    // TODO: accept request and sending data to the peer device
     case Actions.Swap.ActionTypes.SEND_ACCEPT_REQUEST: {
       const indexOfEntry = state.findIndex((item) => item.deviceId === action.payload);
       if (indexOfEntry === -1) return state;
