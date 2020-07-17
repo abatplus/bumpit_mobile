@@ -82,9 +82,14 @@
   },
   "Website": {
     "message": "Homepage"
-  }
-  ,
+  },
   "Terms_and_conditions": {
     "message": "Terms and conditions"
+  },
+  "Request_All": {
+    "message": "Request all"
+  },
+  "Accept_All": {
+    "message": "Accept all"
   }
 }

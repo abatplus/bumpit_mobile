@@ -30,4 +30,6 @@ export default interface IvCardTranslations {
   Website: PontoonMessage;
   Terms_and_conditions: PontoonMessage;
   Set_Profile_Name: PontoonMessage;
+  Request_All: PontoonMessage;
+  Accept_All: PontoonMessage;
 }
