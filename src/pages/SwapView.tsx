@@ -227,24 +227,33 @@ const SwapView: React.FC = () => {
           <IonButtons slot="start">
             <IonBackButton />
           </IonButtons>
-          <IonTitle>Exchange card</IonTitle>
+          <IonTitle>{i18n.formatMessage({ id: nameof<IvCardTranslations>('Exchange') })}</IonTitle>
         </IonToolbar>
         <IonToolbar>
           <IonSegment value={segmentFilter} onIonChange={(e) => setSegmmentFilter(e.detail.value as string)}>
             <IonSegmentButton value="swap-list">
               <IonIcon icon={search} />
-              <IonLabel>Suche ({swapContext.filter((entry) => entry.state !== SwapState.exchanged).length})</IonLabel>
+              <IonLabel>
+                {i18n.formatMessage({ id: nameof<IvCardTranslations>('Search') })} ({swapContext.filter((entry) => entry.state !== SwapState.exchanged).length})
+              </IonLabel>
             </IonSegmentButton>
             <IonSegmentButton value="ready-list">
               <IonIcon icon={people} />
-              <IonLabel>Empfangen ({swapContext.filter((entry) => entry.state === SwapState.exchanged).length})</IonLabel>
+              <IonLabel>
+                {i18n.formatMessage({ id: nameof<IvCardTranslations>('Received') })} (
+                {swapContext.filter((entry) => entry.state === SwapState.exchanged).length})
+              </IonLabel>
             </IonSegmentButton>
           </IonSegment>
         </IonToolbar>
       </IonHeader>
 
       <IonContent>
-        {swapContext.length === 0 ? <IonLoading spinner="lines" isOpen={true} message="Warte auf Kontakte" /> : ''}
+        {swapContext.length === 0 ? (
+          <IonLoading spinner="lines" isOpen={true} message={i18n.formatMessage({ id: nameof<IvCardTranslations>('Wait_for_contacts') })} />
+        ) : (
+          ''
+        )}
         <IonList>{renderList()}</IonList>
       </IonContent>
       {renderFooter()}

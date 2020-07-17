@@ -91,5 +91,14 @@
   },
   "Accept_All": {
     "message": "Accept all"
+  },
+  "Search": {
+    "message": "Search"
+  },
+  "Received": {
+    "message": "Received"
+  },
+  "Wait_for_contacts": {
+    "message": "Wait for contacts..."
   }
 }

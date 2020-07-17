@@ -32,4 +32,7 @@ export default interface IvCardTranslations {
   Set_Profile_Name: PontoonMessage;
   Request_All: PontoonMessage;
   Accept_All: PontoonMessage;
+  Search: PontoonMessage;
+  Received: PontoonMessage;
+  Wait_for_contacts: PontoonMessage;
 }
