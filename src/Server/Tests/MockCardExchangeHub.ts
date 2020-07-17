@@ -14,6 +14,7 @@ export class MockCardExchangeHub implements ICardExchangeHub {
   public Update = async (deviceId: string, longitude: number, latitude: number, displayName: string) => {
     console.log('SERVER | ' + deviceId + ' | Update');
   };
+
   public RequestCardExchange = async (deviceId: string, peerDeviceId: string, displayName: string) => {
     console.log('SERVER | ' + deviceId + ' | RequestCardExchange');
   };

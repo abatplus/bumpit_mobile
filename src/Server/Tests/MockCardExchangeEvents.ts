@@ -20,6 +20,9 @@ export class MockCardExchangeEvents {
     this.connection.on(CardExchangeEvent.CardExchangeRequested, client.cardExchangeRequested);
     this.connection.on(CardExchangeEvent.WaitingForAcceptance, client.waitingForAcceptance);
 
+    this.connection.on(CardExchangeEvent.CardExchangeRequestRevoked, client.cardExchangeRequestRevoked);
+    this.connection.on(CardExchangeEvent.RevokeSent, client.revokeSent);
+
     this.connection.on(CardExchangeEvent.CardExchangeAccepted, client.cardExchangeAccepted);
     this.connection.on(CardExchangeEvent.AcceptanceSent, client.acceptanceSent);
 
