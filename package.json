@@ -61,5 +61,5 @@
     "@capacitor/cli": "2.3.0",
     "@ionic/lab": "3.1.7"
   },
-  "description": "The best app to exchange business cards."
+  "description": "The vSwap-App to exchange business cards with people in range."
 }
