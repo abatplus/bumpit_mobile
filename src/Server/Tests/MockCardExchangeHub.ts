@@ -17,7 +17,7 @@ export class MockCardExchangeHub implements ICardExchangeHub {
   public RevokeCardExchangeRequest = async (deviceId: string, peerDeviceId: string) => {
     console.log('SERVER | ' + deviceId + ' | RevokeCardExchangeRequest');
   };
-  public AcceptCardExchange = async (deviceId: string, peerDeviceId: string, displayName: string, cardData: string) => {
+  public AcceptCardExchange = async (deviceId: string, peerDeviceId: string, peerDisplayName: string, peerCardData: string) => {
     console.log('SERVER | ' + deviceId + ' | AcceptCardExchange');
   };
   public SendCardData = async (deviceId: string, peerDeviceId: string, displayName: string, cardData: string) => {

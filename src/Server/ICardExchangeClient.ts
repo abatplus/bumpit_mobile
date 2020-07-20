@@ -10,7 +10,7 @@ export interface ICardExchangeClient {
   cardExchangeRequestRevoked: (deviceId: string) => void;
   revokeSent: (peerDeviceId: string) => void;
 
-  cardExchangeAccepted: (peerDeviceId: string, displayName: string, cardData: string) => void;
+  cardExchangeAccepted: (peerDeviceId: string, peerDisplayName: string, peerCardData: string) => void;
   acceptanceSent: (deviceId: string) => void;
 
   cardDataReceived: (deviceId: string, displayName: string, cardData: string) => void;

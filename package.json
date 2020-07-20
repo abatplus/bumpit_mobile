@@ -1,5 +1,5 @@
 {
-  "name": "bumpit_mobile",
+  "name": "vswap_mobile",
   "version": "0.0.1",
   "private": true,
   "dependencies": {
@@ -56,9 +56,10 @@
       "last 1 safari version"
     ]
   },
+  "license": "MIT",
   "devDependencies": {
     "@capacitor/cli": "2.3.0",
     "@ionic/lab": "3.1.7"
   },
-  "description": "The ExchangeIT App to exchange business cards."
+  "description": "The vSwap-App to exchange business cards with people in range."
 }
