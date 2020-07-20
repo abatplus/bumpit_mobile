@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { IonHeader, IonToolbar, IonContent, IonPage, IonButtons, IonMenuButton, IonTitle } from '@ionic/react';
+import { IonHeader, IonToolbar, IonContent, IonPage, IonButtons, IonMenuButton, IonTitle, useIonViewDidEnter, isPlatform } from '@ionic/react';
 import './ScanView.css';
 import QrReader from 'react-qr-reader';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 
 const ScanView: React.FC = () => {
   const [encodedText, setEncodedText] = useState<string>();
@@ -27,25 +28,20 @@ const ScanView: React.FC = () => {
     resizeId = setTimeout(updateWindowSize, 500);
   });
 
-  return (
-    <IonPage id="scan">
-      <IonHeader translucent={true}>
-        <IonToolbar>
-          <IonButtons slot="start">
-            <IonMenuButton />
-          </IonButtons>
-          <IonTitle>Scan QR code</IonTitle>
-        </IonToolbar>
-      </IonHeader>
+  const onScanCompleted = (data: string) => {
+    setEncodedText(data as string);
+    alert(data);
+  }
 
-      <IonContent fullscreen={true}>
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">qr</IonTitle>
-          </IonToolbar>
-        </IonHeader>
+  useIonViewDidEnter( () => {
+    if (isPlatform('cordova') || isPlatform('capacitor')) {
+      BarcodeScanner.scan().then ( data => onScanCompleted(data.text) );
+    }
+  });
 
-        <div className="qrReaderContainer">
+  const renderBrowserScanner = () => {
+    return (
+      <div className="qrReaderContainer">
           <QrReader
             className="qrReader"
             delay={300}
@@ -54,13 +50,28 @@ const ScanView: React.FC = () => {
             }}
             onScan={(data) => {
               if (data !== null) {
-                alert(data);
-                setEncodedText(data as string);
+                onScanCompleted(data);
               }
             }}
             style={{ width: qrWidth }}
           />
         </div>
+    );
+  }
+
+  return (
+    <IonPage id="scan">
+      <IonHeader>
+        <IonToolbar>
+          <IonButtons slot="start">
+            <IonMenuButton />
+          </IonButtons>
+          <IonTitle>Scan QR code</IonTitle>
+        </IonToolbar>
+      </IonHeader>
+
+      <IonContent>
+        {!isPlatform('cordova') && !isPlatform('capacitor') && renderBrowserScanner()}
       </IonContent>
     </IonPage>
   );
