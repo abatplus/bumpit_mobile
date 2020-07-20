@@ -20,13 +20,11 @@ import {
   useIonViewDidLeave,
 } from '@ionic/react';
 import './SwapView.css';
-import * as Actions from '../store/actions/actions';
 import SwapViewListItem from '../components/SwapViewListItem';
 import { share, repeat, people, search } from 'ionicons/icons';
 import SwapState from '../enums/SwapState';
 import * as SwapReducer from '../store/reducers/SwapReducer';
 import { SwapViewCardExchangeClient } from '../Server/SwapViewCardExchangeClient';
-import { MockCompleteServer } from '../Server/Tests/MockCompleteServer';
 import { v4 as uuid4 } from 'uuid';
 import { useProfileContext } from '../store/contexts/ProfileContext';
 import { useParams } from 'react-router';
@@ -48,7 +46,6 @@ const SwapView: React.FC = () => {
   let updateHandler = setTimeout(() => {}, 10000000); // dummy
 
   const cardExchangeClient = new SwapViewCardExchangeClient(dispatchSwapContext);
-  // const cardExchangeServer = new CardExchangeServer(cardExchangeClient);
   const cardExchangeServer = new CardExchangeServer(cardExchangeClient);
 
   useEffect(() => {
@@ -64,59 +61,6 @@ const SwapView: React.FC = () => {
     Geolocation.getCurrentPosition()
       .then((resp) => {
         cardExchangeServer.Hub.Subscribe(deviceId, resp.coords.longitude, resp.coords.latitude, name);
-        dispatchSwapContext(Actions.Swap.updateList([]));
-        // setTimeout(() => {
-        //   // TODO remove dummy data
-        //   dispatchSwapContext(
-        //     Actions.Swap.updateList([
-        //       {
-        //         deviceId: uuid4(),
-        //         name: 'Arno Nühm',
-        //         state: SwapState.initial,
-        //       },
-        //       {
-        //         deviceId: uuid4(),
-        //         name: 'Bea Trix',
-        //         state: SwapState.received,
-        //       },
-        //       {
-        //         deviceId: uuid4(),
-        //         name: 'Lorette Mahr',
-        //         state: SwapState.requested,
-        //       },
-        //       {
-        //         deviceId: uuid4(),
-        //         name: 'Wanda Lismus',
-        //         state: SwapState.accepted,
-        //       },
-        //       {
-        //         deviceId: uuid4(),
-        //         name: 'Al Coholik',
-        //         state: SwapState.initial,
-        //       },
-        //       {
-        //         deviceId: uuid4(),
-        //         name: 'Wanda Lismus',
-        //         state: SwapState.requested,
-        //       },
-        //       {
-        //         deviceId: uuid4(),
-        //         name: 'Al Coholik',
-        //         state: SwapState.received,
-        //       },
-        //       {
-        //         deviceId: uuid4(),
-        //         name: 'Wanda Lismus',
-        //         state: SwapState.initial,
-        //       },
-        //       {
-        //         deviceId: uuid4(),
-        //         name: 'Al Coholik',
-        //         state: SwapState.initial,
-        //       },
-        //     ])
-        //   );
-        // }, 2000);
 
         updateHandler = setInterval(() => {
           Geolocation.getCurrentPosition()
@@ -125,7 +69,6 @@ const SwapView: React.FC = () => {
             })
             .catch((error) => {
               console.error('Error updating location', error);
-              // clearInterval(updateHandler);
             });
         }, 2000);
       })
@@ -152,11 +95,8 @@ const SwapView: React.FC = () => {
   };
 
   const onDoRequestAll = () => {
-    console.log('request-all');
     // request all non requested or from whose no request is received
     swapContext.filter((entry) => entry.state === SwapState.initial).forEach((entry) => onDoRequest(entry.deviceId));
-    // additionally approve all yet existing incoming requests
-    // onAcceptAll();
   };
 
   const getNumberOfRequestAll = () => {
@@ -164,7 +104,6 @@ const SwapView: React.FC = () => {
   };
 
   const onAcceptAll = () => {
-    console.log('accept-all');
     swapContext.filter((entry) => entry.state === SwapState.received).forEach((entry) => onAcceptRequest(entry.deviceId));
     clearInterval(updateHandler); // delete
   };
