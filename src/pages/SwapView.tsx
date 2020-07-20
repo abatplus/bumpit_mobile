@@ -209,7 +209,6 @@ const SwapView: React.FC = () => {
             showBackdrop={true}
             backdropDismiss={false}
             duration={10000}
-            onDidDismiss={() => console.log('Loading dismissed')}
           />
         ) : (
           ''
