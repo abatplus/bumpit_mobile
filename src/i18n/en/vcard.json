@@ -82,9 +82,35 @@
   },
   "Website": {
     "message": "Homepage"
-  }
-  ,
+  },
   "Terms_and_conditions": {
     "message": "Terms and conditions"
+  },
+  "Request_All": {
+    "message": "Request all"
+  },
+  "Accept_All": {
+    "message": "Accept all"
+  },
+  "Search": {
+    "message": "Search"
+  },
+  "Received": {
+    "message": "Received"
+  },
+  "Wait_for_contacts": {
+    "message": "Waiting for contacts..."
+  },
+  "Wait_for_acceptance": {
+    "message": "Waiting for acceptance..."
+  },
+  "Accept_request_send_data": {
+    "message": "Request accepted. Sending data..."
+  },
+  "Exchange_request_received": {
+    "message": "Exchange request received."
+  },
+  "Exchange_successful": {
+    "message": "Exchange successful."
   }
 }

@@ -1,6 +1,6 @@
 {
   "appId": "io.ionic.starter",
-  "appName": "bumpit_mobile",
+  "appName": "vswap_mobile",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "build",

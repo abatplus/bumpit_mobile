@@ -3,8 +3,10 @@ import { ICardExchangeHub } from "./ICardExchangeHub";
 import { ICardExchangeClient } from "./ICardExchangeClient";
 import { CardExchangeEvents } from "./CardExchangeEvents";
 import { CardExchangeHub } from "./CardExchangeHub";
+import ICardExchangeServer from './ICardExchangeServer';
 
-export class CardExchangeServer {
+// TODO Use Server URL from config
+export default class CardExchangeServer implements ICardExchangeServer {
   connection: signalR.HubConnection;
 
   public Events: CardExchangeEvents;
@@ -12,7 +14,7 @@ export class CardExchangeServer {
 
   constructor(client: ICardExchangeClient) {
     this.connection = new signalR.HubConnectionBuilder()
-      .withUrl("http://localhost:5000/hub")
+      .withUrl("http://localhost:5000/swaphub")
       .build();
 
     this.Events = new CardExchangeEvents(this.connection, client);

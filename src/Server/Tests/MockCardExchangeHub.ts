@@ -1,10 +1,6 @@
-import { ICardExchangeHub } from "../ICardExchangeHub";
+import { ICardExchangeHub } from '../ICardExchangeHub';
 
 export class MockCardExchangeHub implements ICardExchangeHub {
-
-  constructor() {
-  }
-
   public Subscribe = async (deviceId: string, longitude: number, latitude: number, displayName: string) => {
     console.log('SERVER | ' + deviceId + ' | Subscribe');
   };
@@ -21,7 +17,7 @@ export class MockCardExchangeHub implements ICardExchangeHub {
   public RevokeCardExchangeRequest = async (deviceId: string, peerDeviceId: string) => {
     console.log('SERVER | ' + deviceId + ' | RevokeCardExchangeRequest');
   };
-  public AcceptCardExchange = async (deviceId: string, peerDeviceId: string, displayName: string, cardData: string) => {
+  public AcceptCardExchange = async (deviceId: string, peerDeviceId: string, peerDisplayName: string, peerCardData: string) => {
     console.log('SERVER | ' + deviceId + ' | AcceptCardExchange');
   };
   public SendCardData = async (deviceId: string, peerDeviceId: string, displayName: string, cardData: string) => {

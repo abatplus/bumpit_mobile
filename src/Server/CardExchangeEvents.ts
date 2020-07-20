@@ -1,5 +1,6 @@
 import * as signalR from "@microsoft/signalr";
 import { ICardExchangeClient } from "./ICardExchangeClient";
+import ICardExchangeEvents from './ICardExchangeEvents';
 
 export enum CardExchangeEvent {
   Subscribed = 'Subscribed',
@@ -19,7 +20,7 @@ export enum CardExchangeEvent {
   CardDataSent = 'CardDataSent'
 }
 
-export class CardExchangeEvents {
+export class CardExchangeEvents implements ICardExchangeEvents {
   connection: signalR.HubConnection;
 
   constructor(connection: signalR.HubConnection, client: ICardExchangeClient) {
