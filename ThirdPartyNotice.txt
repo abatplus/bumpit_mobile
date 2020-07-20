@@ -27,7 +27,7 @@ Names:
  - @ionic-native/core
  - @ionic-native/contacts
  - @ionic-native/globalization
- - @ionic-native/qr-scanner
+ - @ionic-native/barcode-scanner
 Version: 5.27.0
 Licensor: Drifty Co (http://drifty.com)
 Website: https://capacitor.ionicframework.com/
@@ -56,12 +56,6 @@ License: Apache-2.0
 
 Name: @types/node
 Version: 14.0.23
-Licensor: DefinitelyTyped (https://github.com/DefinitelyTyped/DefinitelyTyped)
-Copyright Notice: ????
-License: MIT
-
-Name: @types/qrcode.react
-Version: 1.0.1
 Licensor: DefinitelyTyped (https://github.com/DefinitelyTyped/DefinitelyTyped)
 Copyright Notice: ????
 License: MIT
@@ -119,12 +113,6 @@ Version: 5.1.2
 Licensor: Ionic (http://ionicons.com/)
 Copyright Notice: Copyright (c) 2015-present Ionic (http://ionic.io/)
 License: MIT
-
-Name: qrcode.react
-Version: 1.0.0
-Licensor: (http://zpao.github.io/qrcode.react)
-Copyright Notice: Copyright (c) 2015, Paul O’Shannessy
-License: ISC
 
 Name: react
 Version: 16.13.1
