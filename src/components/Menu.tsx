@@ -89,7 +89,7 @@ const Menu: React.FC = () => {
             </IonContent>
             <IonFooter className='footer'>
                 <IonToolbar>
-                    <IonTitle className='powerdBy' size='small'>
+                    <IonTitle className='poweredBy' size='small'>
                         powered by abat+
                     </IonTitle>
                 </IonToolbar>
