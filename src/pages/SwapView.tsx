@@ -35,6 +35,7 @@ import ISwapListEntry from '../interfaces/ISwapListEntry';
 import { useIntl } from 'react-intl';
 import { nameof } from '../utils';
 import IvCardTranslations from '../i18n/IvCardTranslations';
+import CardExchangeServer from '../Server/CardExchangeServer';
 
 const SwapView: React.FC = () => {
   const { profileContext } = useProfileContext();
@@ -48,7 +49,7 @@ const SwapView: React.FC = () => {
 
   const cardExchangeClient = new SwapViewCardExchangeClient(dispatchSwapContext);
   // const cardExchangeServer = new CardExchangeServer(cardExchangeClient);
-  const cardExchangeServer = new MockCompleteServer(cardExchangeClient);
+  const cardExchangeServer = new CardExchangeServer(cardExchangeClient);
 
   useEffect(() => {
     setSwapList(
@@ -63,59 +64,59 @@ const SwapView: React.FC = () => {
     Geolocation.getCurrentPosition()
       .then((resp) => {
         cardExchangeServer.Hub.Subscribe(deviceId, resp.coords.longitude, resp.coords.latitude, name);
-
-        setTimeout(() => {
-          // TODO remove dummy data
-          dispatchSwapContext(
-            Actions.Swap.updateList([
-              {
-                deviceId: uuid4(),
-                name: 'Arno Nühm',
-                state: SwapState.initial,
-              },
-              {
-                deviceId: uuid4(),
-                name: 'Bea Trix',
-                state: SwapState.received,
-              },
-              {
-                deviceId: uuid4(),
-                name: 'Lorette Mahr',
-                state: SwapState.requested,
-              },
-              {
-                deviceId: uuid4(),
-                name: 'Wanda Lismus',
-                state: SwapState.accepted,
-              },
-              {
-                deviceId: uuid4(),
-                name: 'Al Coholik',
-                state: SwapState.initial,
-              },
-              {
-                deviceId: uuid4(),
-                name: 'Wanda Lismus',
-                state: SwapState.requested,
-              },
-              {
-                deviceId: uuid4(),
-                name: 'Al Coholik',
-                state: SwapState.received,
-              },
-              {
-                deviceId: uuid4(),
-                name: 'Wanda Lismus',
-                state: SwapState.initial,
-              },
-              {
-                deviceId: uuid4(),
-                name: 'Al Coholik',
-                state: SwapState.initial,
-              },
-            ])
-          );
-        }, 2000);
+        dispatchSwapContext(Actions.Swap.updateList([]));
+        // setTimeout(() => {
+        //   // TODO remove dummy data
+        //   dispatchSwapContext(
+        //     Actions.Swap.updateList([
+        //       {
+        //         deviceId: uuid4(),
+        //         name: 'Arno Nühm',
+        //         state: SwapState.initial,
+        //       },
+        //       {
+        //         deviceId: uuid4(),
+        //         name: 'Bea Trix',
+        //         state: SwapState.received,
+        //       },
+        //       {
+        //         deviceId: uuid4(),
+        //         name: 'Lorette Mahr',
+        //         state: SwapState.requested,
+        //       },
+        //       {
+        //         deviceId: uuid4(),
+        //         name: 'Wanda Lismus',
+        //         state: SwapState.accepted,
+        //       },
+        //       {
+        //         deviceId: uuid4(),
+        //         name: 'Al Coholik',
+        //         state: SwapState.initial,
+        //       },
+        //       {
+        //         deviceId: uuid4(),
+        //         name: 'Wanda Lismus',
+        //         state: SwapState.requested,
+        //       },
+        //       {
+        //         deviceId: uuid4(),
+        //         name: 'Al Coholik',
+        //         state: SwapState.received,
+        //       },
+        //       {
+        //         deviceId: uuid4(),
+        //         name: 'Wanda Lismus',
+        //         state: SwapState.initial,
+        //       },
+        //       {
+        //         deviceId: uuid4(),
+        //         name: 'Al Coholik',
+        //         state: SwapState.initial,
+        //       },
+        //     ])
+        //   );
+        // }, 2000);
 
         updateHandler = setInterval(() => {
           Geolocation.getCurrentPosition()
@@ -196,7 +197,7 @@ const SwapView: React.FC = () => {
       <div key={entry.deviceId}>
         <SwapViewListItem
           key={entry.deviceId}
-          name={entry.name}
+          name={entry.displayName}
           state={entry.state}
           onDoRequest={() => onDoRequest(entry.deviceId)}
           onAcceptRequest={() => onAcceptRequest(entry.deviceId)}
@@ -262,7 +263,15 @@ const SwapView: React.FC = () => {
 
       <IonContent>
         {swapContext.length === 0 ? (
-          <IonLoading spinner="lines" isOpen={true} message={i18n.formatMessage({ id: nameof<IvCardTranslations>('Wait_for_contacts') })} />
+          <IonLoading
+            spinner={'lines'}
+            isOpen={true}
+            message={i18n.formatMessage({ id: nameof<IvCardTranslations>('Wait_for_contacts') })}
+            showBackdrop={true}
+            backdropDismiss={false}
+            duration={10000}
+            onDidDismiss={() => console.log('Loading dismissed')}
+          />
         ) : (
           ''
         )}
