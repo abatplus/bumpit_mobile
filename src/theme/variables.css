@@ -250,4 +250,8 @@ http://ionicframework.com/docs/theming/ */
     .item-label-stacked .sc-ion-input-md-h {
         --color: #ffffff;
     }
+
+    .native-input.sc-ion-input-ios {
+        color: #ffffff;
+    }
 }
