@@ -33,8 +33,10 @@ License: MIT
 Names: 
  - @ionic-native/core
  - @ionic-native/contacts
+ - @ionic-native/geolocation
  - @ionic-native/globalization
  - @ionic-native/barcode-scanner
+ - @ionic-native/qr-scanner
 Version: 5.27.0
 Licensor: Drifty Co (http://drifty.com)
 Website: https://capacitor.ionicframework.com/
@@ -106,6 +108,12 @@ License: MIT
 Name: cordova-plugin-contacts
 Version: 3.0.1
 Licensor: Apache Cordova (https://github.com/apache/cordova-plugin-contacts#readme)
+Copyright Notice: Copyright 2012 The Apache Software Foundation
+License: Apache License, Version 2.0
+
+Name: cordova-plugin-geolocation
+Version: 1.11.0
+Licensor: Apache Cordova (https://github.com/apache/cordova-plugin-geoloaction#readme)
 Copyright Notice: Copyright 2012 The Apache Software Foundation
 License: Apache License, Version 2.0
 
