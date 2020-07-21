@@ -1,5 +1,5 @@
-import React from 'react';
-import { IonHeader, IonToolbar, IonContent, IonPage, IonButtons, IonTitle, IonFooter, IonButton, IonIcon, IonLabel, IonBackButton, IonMenuButton } from '@ionic/react';
+import React, {  useState } from 'react';
+import { IonHeader, IonToolbar, IonContent, IonPage, IonButtons, IonTitle, IonFooter, IonButton, IonIcon, IonLabel, IonBackButton, IonMenuButton, IonToast } from '@ionic/react';
 import './VCardView.css';
 import {  save } from 'ionicons/icons';
 import { useHistory,  useLocation } from 'react-router';
@@ -16,11 +16,12 @@ import * as Actions from '../store/actions/actions';
 const NewContactView: React.FC = () => {
   const history = useHistory();
   const i18n = useIntl();
-
   const vCard : IVCard =  useLocation().state as IVCard 
+  const [showSavedMessage, setShowSavedMessage] = useState<boolean>(false);
+
   const onSaveContact = () => {
-    //TODO
-   
+    //TODO save vCard to contacts
+    setShowSavedMessage(true);
     history.replace("/profile");
   };
 
@@ -118,6 +119,13 @@ const NewContactView: React.FC = () => {
       </IonContent>
 
       <IonFooter>
+      <IonToast
+        isOpen={showSavedMessage}
+        onDidDismiss={() => setShowSavedMessage(false)}
+        message={i18n.formatMessage({ id: nameof<IvCardTranslations>('Contact_saved') })}
+        duration={1000}
+      />
+
         <IonButtons className="footer-buttons">
           <IonButton color="primary" fill="outline" className="footer-button" onClick={onSaveContact}>
             <IonIcon icon={save} />

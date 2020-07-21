@@ -118,5 +118,8 @@
   },
   "New_contact": {
     "message": "Neues Kontakt"
+  },
+  "Contact_saved": {
+    "message": "Neues Kontakt wurde gespeichert."
   }
 }
