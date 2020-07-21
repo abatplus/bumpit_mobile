@@ -20,6 +20,9 @@ jspm_packages/
 /android
 /ios
 
+# android build files
+/android
+
 # misc
 .DS_Store
 .env.local
