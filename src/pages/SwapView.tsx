@@ -20,13 +20,11 @@ import {
   useIonViewDidLeave,
 } from '@ionic/react';
 import './SwapView.css';
-import * as Actions from '../store/actions/actions';
 import SwapViewListItem from '../components/SwapViewListItem';
 import { share, repeat, people, search } from 'ionicons/icons';
 import SwapState from '../enums/SwapState';
 import * as SwapReducer from '../store/reducers/SwapReducer';
 import { SwapViewCardExchangeClient } from '../Server/SwapViewCardExchangeClient';
-import { MockCompleteServer } from '../Server/Tests/MockCompleteServer';
 import { v4 as uuid4 } from 'uuid';
 import { useProfileContext } from '../store/contexts/ProfileContext';
 import { useParams } from 'react-router';
@@ -35,6 +33,7 @@ import ISwapListEntry from '../interfaces/ISwapListEntry';
 import { useIntl } from 'react-intl';
 import { nameof } from '../utils';
 import IvCardTranslations from '../i18n/IvCardTranslations';
+import CardExchangeServer from '../Server/CardExchangeServer';
 
 const SwapView: React.FC = () => {
   const { profileContext } = useProfileContext();
@@ -47,8 +46,7 @@ const SwapView: React.FC = () => {
   let updateHandler = setTimeout(() => {}, 10000000); // dummy
 
   const cardExchangeClient = new SwapViewCardExchangeClient(dispatchSwapContext);
-  // const cardExchangeServer = new CardExchangeServer(cardExchangeClient);
-  const cardExchangeServer = new MockCompleteServer(cardExchangeClient);
+  const cardExchangeServer = new CardExchangeServer(cardExchangeClient);
 
   useEffect(() => {
     setSwapList(
@@ -64,59 +62,6 @@ const SwapView: React.FC = () => {
       .then((resp) => {
         cardExchangeServer.Hub.Subscribe(deviceId, resp.coords.longitude, resp.coords.latitude, name);
 
-        setTimeout(() => {
-          // TODO remove dummy data
-          dispatchSwapContext(
-            Actions.Swap.updateList([
-              {
-                deviceId: uuid4(),
-                name: 'Arno Nühm',
-                state: SwapState.initial,
-              },
-              {
-                deviceId: uuid4(),
-                name: 'Bea Trix',
-                state: SwapState.received,
-              },
-              {
-                deviceId: uuid4(),
-                name: 'Lorette Mahr',
-                state: SwapState.requested,
-              },
-              {
-                deviceId: uuid4(),
-                name: 'Wanda Lismus',
-                state: SwapState.accepted,
-              },
-              {
-                deviceId: uuid4(),
-                name: 'Al Coholik',
-                state: SwapState.initial,
-              },
-              {
-                deviceId: uuid4(),
-                name: 'Wanda Lismus',
-                state: SwapState.requested,
-              },
-              {
-                deviceId: uuid4(),
-                name: 'Al Coholik',
-                state: SwapState.received,
-              },
-              {
-                deviceId: uuid4(),
-                name: 'Wanda Lismus',
-                state: SwapState.initial,
-              },
-              {
-                deviceId: uuid4(),
-                name: 'Al Coholik',
-                state: SwapState.initial,
-              },
-            ])
-          );
-        }, 2000);
-
         updateHandler = setInterval(() => {
           Geolocation.getCurrentPosition()
             .then((resp) => {
@@ -124,7 +69,6 @@ const SwapView: React.FC = () => {
             })
             .catch((error) => {
               console.error('Error updating location', error);
-              // clearInterval(updateHandler);
             });
         }, 2000);
       })
@@ -151,11 +95,8 @@ const SwapView: React.FC = () => {
   };
 
   const onDoRequestAll = () => {
-    console.log('request-all');
     // request all non requested or from whose no request is received
     swapContext.filter((entry) => entry.state === SwapState.initial).forEach((entry) => onDoRequest(entry.deviceId));
-    // additionally approve all yet existing incoming requests
-    // onAcceptAll();
   };
 
   const getNumberOfRequestAll = () => {
@@ -163,7 +104,6 @@ const SwapView: React.FC = () => {
   };
 
   const onAcceptAll = () => {
-    console.log('accept-all');
     swapContext.filter((entry) => entry.state === SwapState.received).forEach((entry) => onAcceptRequest(entry.deviceId));
     clearInterval(updateHandler); // delete
   };
@@ -196,7 +136,7 @@ const SwapView: React.FC = () => {
       <div key={entry.deviceId}>
         <SwapViewListItem
           key={entry.deviceId}
-          name={entry.name}
+          name={entry.displayName}
           state={entry.state}
           onDoRequest={() => onDoRequest(entry.deviceId)}
           onAcceptRequest={() => onAcceptRequest(entry.deviceId)}
@@ -262,7 +202,14 @@ const SwapView: React.FC = () => {
 
       <IonContent>
         {swapContext.length === 0 ? (
-          <IonLoading spinner="lines" isOpen={true} message={i18n.formatMessage({ id: nameof<IvCardTranslations>('Wait_for_contacts') })} />
+          <IonLoading
+            spinner={'lines'}
+            isOpen={true}
+            message={i18n.formatMessage({ id: nameof<IvCardTranslations>('Wait_for_contacts') })}
+            showBackdrop={true}
+            backdropDismiss={false}
+            duration={10000}
+          />
         ) : (
           ''
         )}
