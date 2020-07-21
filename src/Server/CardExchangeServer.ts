@@ -4,8 +4,8 @@ import { ICardExchangeClient } from "./ICardExchangeClient";
 import { CardExchangeEvents } from "./CardExchangeEvents";
 import { CardExchangeHub } from "./CardExchangeHub";
 import ICardExchangeServer from './ICardExchangeServer';
-import { connect } from "http2";
 
+// TODO Use Server URL from config
 export default class CardExchangeServer implements ICardExchangeServer {
   connection: signalR.HubConnection;
 

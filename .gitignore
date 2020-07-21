@@ -1,5 +1,8 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
+# to ignore temporary docx files from repo commits
+~$*
+
 # Dependency directories
 node_modules/
 jspm_packages/
@@ -14,6 +17,8 @@ jspm_packages/
 
 # production
 /build
+/android
+/ios
 
 # misc
 .DS_Store

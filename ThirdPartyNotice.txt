@@ -23,11 +23,18 @@ Website: https://capacitor.ionicframework.com/
 Copyright Notice: Copyright 2015-present Drifty Co.
 License: MIT
 
+Name: @capacitor/ios
+Version: 2.2.0
+Licensor: Drifty Co (http://drifty.com)
+Website: https://capacitor.ionicframework.com/
+Copyright Notice: Copyright 2015-present Drifty Co.
+License: MIT
+
 Names: 
  - @ionic-native/core
  - @ionic-native/contacts
  - @ionic-native/globalization
- - @ionic-native/qr-scanner
+ - @ionic-native/barcode-scanner
 Version: 5.27.0
 Licensor: Drifty Co (http://drifty.com)
 Website: https://capacitor.ionicframework.com/
@@ -120,9 +127,45 @@ Licensor: Ionic (http://ionicons.com/)
 Copyright Notice: Copyright (c) 2015-present Ionic (http://ionic.io/)
 License: MIT
 
+Name: phonegap-plugin-barcodescanner
+Version: 8.1.0
+Licensor: Ionic (https://github.com/phonegap/phonegap-plugin-barcodescanner)
+Copyright Notice: 
+Copyright 2010 Matt Kane
+Copyright 2011 IBM Corporation
+Copyright 2012-2017 Adobe Systems
+License: MIT
+
+Name: phonegap-plugin-barcodescanner
+Version: 8.1.0
+Licensor: Ionic (https://github.com/phonegap/phonegap-plugin-barcodescanner)
+Copyright Notice: 
+Copyright 2010 Matt Kane
+Copyright 2011 IBM Corporation
+Copyright 2012-2017 Adobe Systems
+License: MIT
+
+Name: phonegap-plugin-barcodescanner
+Version: 8.1.0
+Licensor: Ionic (https://github.com/phonegap/phonegap-plugin-barcodescanner)
+Copyright Notice: 
+Copyright 2010 Matt Kane
+Copyright 2011 IBM Corporation
+Copyright 2012-2017 Adobe Systems
+License: MIT
+
+Name: phonegap-plugin-barcodescanner
+Version: 8.1.0
+Licensor: Ionic (https://github.com/phonegap/phonegap-plugin-barcodescanner)
+Copyright Notice: 
+Copyright 2010 Matt Kane
+Copyright 2011 IBM Corporation
+Copyright 2012-2017 Adobe Systems
+License: MIT
+
 Name: qrcode.react
-Version: 1.0.0
-Licensor: (http://zpao.github.io/qrcode.react)
+Version: 0.9.2
+Licensor: (http://zpao.github.io/qrcode.react/)
 Copyright Notice: Copyright (c) 2015, Paul O’Shannessy
 License: ISC
 
