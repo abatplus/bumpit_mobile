@@ -112,5 +112,11 @@
   },
   "Exchange_successful": {
     "message": "Exchange successful."
+  },
+  "Save_contact": {
+    "message": "Save contact"
+  },
+  "New_contact": {
+    "message": "New contact"
   }
 }

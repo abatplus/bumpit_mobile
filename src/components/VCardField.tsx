@@ -6,7 +6,8 @@ interface VCardProps {
   name: keyof IVCard;
   value?: string;
   label: string;
-  onChange: (event: CustomEvent) => void;
+  onChange?: (event: CustomEvent) => void;
+  isReadonly?: boolean;
 }
 
 const VCardField: React.FC<VCardProps> = (props) => {
@@ -15,7 +16,7 @@ const VCardField: React.FC<VCardProps> = (props) => {
       <IonLabel position="stacked" color="primary">
         {props.label}
       </IonLabel>
-      <IonInput name={props.name} type="text" value={props.value} spellCheck={false} autocapitalize="off" onIonChange={props.onChange} />
+      <IonInput name={props.name} type="text" value={props.value} spellCheck={false} autocapitalize="off" onIonChange={props.onChange} readonly={props.isReadonly}/>
     </IonItem>
   );
 };

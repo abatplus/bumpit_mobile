@@ -39,4 +39,6 @@ export default interface IvCardTranslations {
   Exchange_successful: PontoonMessage;
   Exchange_request_received: PontoonMessage;
   Accept_request_send_data: PontoonMessage;
+  Save_contact: PontoonMessage;
+  New_contact: PontoonMessage;
 }
