@@ -18,14 +18,7 @@ const VCardView: React.FC = () => {
   const { id } = useParams();
   const { profileContext, dispatchProfileContext } = useProfileContext();
 
-  const onClickShowQr = () => {
-    history.push('/qrcode');
-  };
-
-  const onClickSwap = () => {
-    history.push('/swap');
-  };
-
+ 
   const getCurrentProfile = () => {
     if (profileContext.profiles) {
       return profileContext.profiles.find((itm) => itm.id === id);
@@ -42,6 +35,15 @@ const VCardView: React.FC = () => {
   };
 
   const currentProfile: IProfile | undefined = getCurrentProfile();
+
+  const onClickShowQr = () => {
+    history.push('/qrcode/'+currentProfile?.id);
+  };
+
+  const onClickSwap = () => {
+    history.push('/swap/'+currentProfile?.id);
+  };
+
 
   return (
     <IonPage>

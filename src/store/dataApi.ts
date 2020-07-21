@@ -31,8 +31,23 @@ export function getEmptyProfile(id: string): IProfile {
     return {
         id: id,
         name: '',
-        vCard: {},
+        vCard: getEmptyVCard (),
     };
+}
+
+export function getEmptyVCard (): IVCard {
+    return{
+    company: '',
+    website: '',
+    street: '',
+    zipCode: '',
+    location: '',
+    country: '',
+    name: '',
+    position: '',
+    phone: '',
+    fax: '',
+    email: ''};
 }
 
 export const getProfileData = async () => {

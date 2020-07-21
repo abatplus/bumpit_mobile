@@ -112,5 +112,14 @@
   },
   "Exchange_successful": {
     "message": "Daten erfolgreich ausgetauscht."
+  },
+  "Save_contact": {
+    "message": "Kontakt speichern"
+  },
+  "New_contact": {
+    "message": "Neuer Kontakt"
+  },
+  "Contact_saved": {
+    "message": "Neuer Kontakt wurde gespeichert."
   }
 }

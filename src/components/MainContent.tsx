@@ -14,6 +14,7 @@ import About from '../pages/About';
 import TermsAndConditions from '../pages/TermsAndConditions';
 import VCardView from '../pages/VCardView';
 import VCardProfiles from '../pages/VCardProfiles';
+import NewContactView from '../pages/NewContactView';
 
 export const MainContent: React.FC = () => {
   const i18n = useIntl();
@@ -24,6 +25,7 @@ export const MainContent: React.FC = () => {
         <IonRouterOutlet>
           <Route path="/qrcode/:id" component={QrView} exact={true} />
           <Route path="/scan" component={ScanView} exact={true} />
+          <Route path="/newContact" component={NewContactView} exact={true} />
           <Route path="/swap/:id" component={SwapView} exact={true} />
           <Route path="/privacy" component={Privacy} exact={true} />
           <Route path="/legal" component={LegalInfo} exact={true} />
