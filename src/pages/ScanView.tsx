@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
-import { IonHeader, IonToolbar, IonContent, IonPage, IonButtons, IonMenuButton, IonTitle, useIonViewDidEnter, isPlatform } from '@ionic/react';
+import { IonHeader, IonToolbar, IonContent, IonPage, IonButtons, IonMenuButton, IonTitle, useIonViewDidEnter, isPlatform, useIonViewDidLeave } from '@ionic/react';
 import './ScanView.css';
 import QrReader from 'react-qr-reader';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
@@ -11,6 +11,7 @@ const ScanView: React.FC = () => {
   const history = useHistory();
   const [qrWidth, setQrWidth] = useState<number>();
   const [windowSize, setWindowSize] = useState([window.innerWidth, window.innerHeight]);
+  const [isInView, setIsInView] = useState<boolean>(false);
 
   useEffect(() => {
     // calculate size depending on screen orientation
@@ -41,17 +42,21 @@ const ScanView: React.FC = () => {
     } catch (error) {
         window.alert("Invalide QR code.\n"+error);
     } 
-    //replace - otherwise the scanner stays active in background
-    history.replace('/newContact', vCard);
+    
+    history.push('/newContact', vCard);
    
   }
 
   useIonViewDidEnter( () => {
+    setIsInView(true);
     if (isPlatform('cordova') || isPlatform('capacitor')) {
       BarcodeScanner.scan().then ( data => onScanCompleted(data.text) );
     }
   });
 
+  useIonViewDidLeave(() => {
+    setIsInView(false);
+});
 
   function getName(vcfData: any): string {
     let name = '';
@@ -173,6 +178,7 @@ function parseQrDataToVcard(data: string): IVCard {
 }
 
   const renderBrowserScanner = () => {
+    if(isInView)
     return (
       <div className="qrReaderContainer">
           <QrReader
@@ -190,6 +196,8 @@ function parseQrDataToVcard(data: string): IVCard {
           />
         </div>
     );
+    
+    return <div></div>
   }
 
   return (
