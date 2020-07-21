@@ -1,7 +1,7 @@
-import SwapState from "../enums/SwapState";
+import SwapState from '../enums/SwapState';
 
 export default interface ISwapListEntry {
-    deviceId: string;
-    name: string;
-    state: SwapState;
+  deviceId: string;
+  displayName: string;
+  state: SwapState;
 }

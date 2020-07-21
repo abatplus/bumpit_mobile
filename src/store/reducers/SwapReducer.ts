@@ -15,10 +15,10 @@ export interface IAction {
  * @param b ISwapListEntry to compare
  */
 const swapListEntrySort = (a: ISwapListEntry, b: ISwapListEntry) => {
-  if (a.name.toUpperCase() < b.name.toUpperCase()) {
+  if (a.displayName.toUpperCase() < b.displayName.toUpperCase()) {
     return -1;
   }
-  if (a.name.toUpperCase() > b.name.toUpperCase()) {
+  if (a.displayName.toUpperCase() > b.displayName.toUpperCase()) {
     return 1;
   }
   return 0;
@@ -33,6 +33,8 @@ export const SwapReducer = (state: ISwapListEntry[] = [], action: IAction) => {
         const index = state.findIndex((oldItem) => oldItem.deviceId === newItem.deviceId);
         if (index !== -1) {
           newItem.state = state[index].state;
+        } else {
+          newItem.state = SwapState.initial;
         }
       });
       return newList.sort(swapListEntrySort);
