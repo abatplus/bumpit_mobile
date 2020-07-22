@@ -31,8 +31,7 @@ import { useParams } from 'react-router';
 import { Geolocation } from '@ionic-native/geolocation';
 import ISwapListEntry from '../interfaces/ISwapListEntry';
 import { useIntl } from 'react-intl';
-import { nameof } from '../utils';
-import IvCardTranslations from '../i18n/IvCardTranslations';
+import { translate } from '../utils';
 import CardExchangeServer from '../Server/CardExchangeServer';
 
 const SwapView: React.FC = () => {
@@ -43,7 +42,7 @@ const SwapView: React.FC = () => {
   const [segmentFilter, setSegmentFilter] = useState<string>('swap-list');
   const [swapList, setSwapList] = useState<ISwapListEntry[]>([]);
   const deviceId = uuid4();
-  let updateHandler = setTimeout(() => {}, 10000000); // dummy
+  let updateHandler = setTimeout(() => { }, 10000000); // dummy
 
   const cardExchangeClient = new SwapViewCardExchangeClient(dispatchSwapContext);
   const cardExchangeServer = new CardExchangeServer(cardExchangeClient);
@@ -155,7 +154,7 @@ const SwapView: React.FC = () => {
               <IonButton color="primary" fill="outline" className="swap-footer-button" onClick={onDoRequestAll}>
                 <IonIcon icon={share} />
                 <IonLabel className="swap-footer-button-text">
-                  {i18n.formatMessage({ id: nameof<IvCardTranslations>('Request_All') })} {getNumberOfRequestAll()}
+                  {translate(i18n, 'Request_All')} {getNumberOfRequestAll()}
                 </IonLabel>
               </IonButton>
             </IonItem>
@@ -163,7 +162,7 @@ const SwapView: React.FC = () => {
               <IonButton color="primary" fill="outline" className="swap-footer-button" onClick={onAcceptAll}>
                 <IonIcon icon={repeat} />
                 <IonLabel className="swap-footer-button-text">
-                  {i18n.formatMessage({ id: nameof<IvCardTranslations>('Accept_All') })} {getNumberOfAcceptAll()}
+                  {translate(i18n, 'Accept_All')} {getNumberOfAcceptAll()}
                 </IonLabel>
               </IonButton>
             </IonItem>
@@ -179,20 +178,20 @@ const SwapView: React.FC = () => {
           <IonButtons slot="start">
             <IonBackButton />
           </IonButtons>
-          <IonTitle>{i18n.formatMessage({ id: nameof<IvCardTranslations>('Exchange') })}</IonTitle>
+          <IonTitle>{translate(i18n, 'Exchange')}</IonTitle>
         </IonToolbar>
         <IonToolbar>
           <IonSegment value={segmentFilter} onIonChange={(e) => setSegmentFilter(e.detail.value as string)}>
             <IonSegmentButton value="swap-list">
               <IonIcon icon={search} />
               <IonLabel>
-                {i18n.formatMessage({ id: nameof<IvCardTranslations>('Search') })} ({swapContext.filter((entry) => entry.state !== SwapState.exchanged).length})
+                {translate(i18n, 'Search')} ({swapContext.filter((entry) => entry.state !== SwapState.exchanged).length})
               </IonLabel>
             </IonSegmentButton>
             <IonSegmentButton value="ready-list">
               <IonIcon icon={people} />
               <IonLabel>
-                {i18n.formatMessage({ id: nameof<IvCardTranslations>('Received') })} (
+                {translate(i18n, 'Received')} (
                 {swapContext.filter((entry) => entry.state === SwapState.exchanged).length})
               </IonLabel>
             </IonSegmentButton>
@@ -205,14 +204,14 @@ const SwapView: React.FC = () => {
           <IonLoading
             spinner={'lines'}
             isOpen={true}
-            message={i18n.formatMessage({ id: nameof<IvCardTranslations>('Wait_for_contacts') })}
+            message={translate(i18n, 'Wait_for_contacts')}
             showBackdrop={true}
             backdropDismiss={false}
             duration={10000}
           />
         ) : (
-          ''
-        )}
+            ''
+          )}
         <IonList>{renderList()}</IonList>
       </IonContent>
       {renderFooter()}

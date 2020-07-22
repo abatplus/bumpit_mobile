@@ -4,8 +4,7 @@ import './VCardView.css';
 import { qrCode, share, trash } from 'ionicons/icons';
 import { useHistory, useParams } from 'react-router';
 import { useIntl } from 'react-intl';
-import { nameof } from '../utils';
-import IvCardTranslations from '../i18n/IvCardTranslations';
+import { translate } from '../utils';
 import { useProfileContext } from '../store/contexts/ProfileContext';
 import IProfile from '../interfaces/IProfile';
 import Profile from '../components/Profile';
@@ -18,7 +17,7 @@ const VCardView: React.FC = () => {
   const { id } = useParams();
   const { profileContext, dispatchProfileContext } = useProfileContext();
 
- 
+
   const getCurrentProfile = () => {
     if (profileContext.profiles) {
       return profileContext.profiles.find((itm) => itm.id === id);
@@ -37,13 +36,12 @@ const VCardView: React.FC = () => {
   const currentProfile: IProfile | undefined = getCurrentProfile();
 
   const onClickShowQr = () => {
-    history.push('/qrcode/'+currentProfile?.id);
+    history.push('/qrcode/' + currentProfile?.id);
   };
 
   const onClickSwap = () => {
-    history.push('/swap/'+currentProfile?.id);
+    history.push('/swap/' + currentProfile?.id);
   };
-
 
   return (
     <IonPage>
@@ -52,7 +50,7 @@ const VCardView: React.FC = () => {
           <IonButtons slot="start">
             <IonBackButton />
           </IonButtons>
-          <IonTitle>{i18n.formatMessage({ id: nameof<IvCardTranslations>('My_Data') })+" - "+currentProfile?.name}</IonTitle>
+          <IonTitle>{translate(i18n, 'My_Data') + " - " + currentProfile?.name}</IonTitle>
           <IonButtons slot="end">
             <IonButton onClick={deleteProfile}>
               <IonIcon icon={trash} />
@@ -69,11 +67,11 @@ const VCardView: React.FC = () => {
         <IonButtons className="footer-buttons">
           <IonButton color="primary" fill="outline" className="footer-button" onClick={onClickShowQr}>
             <IonIcon icon={qrCode} />
-            <IonLabel className="footer-button-text">{i18n.formatMessage({ id: nameof<IvCardTranslations>('QR_code') })}</IonLabel>
+            <IonLabel className="footer-button-text">{translate(i18n, 'QR_code')}</IonLabel>
           </IonButton>
           <IonButton color="primary" fill="outline" className="footer-button" onClick={onClickSwap}>
             <IonIcon icon={share} />
-            <IonLabel className="footer-button-text">{i18n.formatMessage({ id: nameof<IvCardTranslations>('Swap') })}</IonLabel>
+            <IonLabel className="footer-button-text">{translate(i18n, 'Swap')}</IonLabel>
           </IonButton>
         </IonButtons>
       </IonFooter>

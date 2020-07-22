@@ -2,18 +2,17 @@ import React from 'react';
 import { IonTabBar, IonTabButton, IonIcon, IonLabel, IonTabs, IonRouterOutlet, IonPage } from '@ionic/react';
 import { people, scan } from 'ionicons/icons';
 import { useIntl } from 'react-intl';
-import { nameof } from '../utils';
-import IvCardTranslations from '../i18n/IvCardTranslations';
+import { translate } from '../utils';
 import { Route, Redirect } from 'react-router';
 import ScanView from '../pages/ScanView';
 import QrView from '../pages/QrView';
 import SwapView from '../pages/SwapView';
 import Privacy from '../pages/Privacy';
-import LegalInfo from '../pages/LegalInfo';
+import { LegalInfo } from '../pages/LegalInfo';
 import About from '../pages/About';
 import TermsAndConditions from '../pages/TermsAndConditions';
 import VCardView from '../pages/VCardView';
-import VCardProfiles from '../pages/VCardProfiles';
+import { VCardProfiles } from '../pages/VCardProfiles';
 import NewContactView from '../pages/NewContactView';
 
 export const MainContent: React.FC = () => {
@@ -38,11 +37,11 @@ export const MainContent: React.FC = () => {
         <IonTabBar slot="bottom">
           <IonTabButton tab="profile" href="/profile">
             <IonIcon icon={people} />
-            <IonLabel>{i18n.formatMessage({ id: nameof<IvCardTranslations>('Profiles') })}</IonLabel>
+            <IonLabel>{translate(i18n, 'Profiles')}</IonLabel>
           </IonTabButton>
           <IonTabButton tab="scan" href="/scan">
             <IonIcon icon={scan} />
-            <IonLabel>{i18n.formatMessage({ id: nameof<IvCardTranslations>('Scan') })}</IonLabel>
+            <IonLabel>{translate(i18n, 'Scan')}</IonLabel>
           </IonTabButton>
         </IonTabBar>
       </IonTabs>

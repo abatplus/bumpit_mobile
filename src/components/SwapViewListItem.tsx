@@ -4,8 +4,7 @@ import { IonItem, IonLabel, IonButton, IonIcon, IonGrid, IonCol, IonRow, IonSpin
 import { checkmark, close, share } from 'ionicons/icons';
 import SwapState from '../enums/SwapState';
 import { useIntl } from 'react-intl';
-import { nameof } from '../utils';
-import IvCardTranslations from '../i18n/IvCardTranslations';
+import { translate } from '../utils';
 
 type SwapViewListItemType = {
   name: string;
@@ -24,16 +23,16 @@ const SwapViewListItem = ({ name, state, onDoRequest, onAbortRequest, onAcceptRe
       stateText = ' ';
       break;
     case SwapState.requested:
-      stateText = i18n.formatMessage({ id: nameof<IvCardTranslations>('Wait_for_acceptance') });
+      stateText = translate(i18n, 'Wait_for_acceptance');
       break;
     case SwapState.received:
-      stateText = i18n.formatMessage({ id: nameof<IvCardTranslations>('Exchange_request_received') });
+      stateText = translate(i18n, 'Exchange_request_received');
       break;
     case SwapState.accepted:
-      stateText = i18n.formatMessage({ id: nameof<IvCardTranslations>('Accept_request_send_data') });
+      stateText = translate(i18n, 'Accept_request_send_data');
       break;
     case SwapState.exchanged:
-      stateText = i18n.formatMessage({ id: nameof<IvCardTranslations>('Exchange_successful') });
+      stateText = translate(i18n, 'Exchange_successful');
       break;
   }
 

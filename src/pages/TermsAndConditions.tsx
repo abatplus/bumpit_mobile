@@ -1,8 +1,7 @@
 import React from 'react';
 import { IonHeader, IonToolbar, IonContent, IonPage, IonButtons, IonMenuButton, IonTitle, IonTextarea } from '@ionic/react';
 import { useIntl } from 'react-intl';
-import { nameof } from '../utils';
-import IvCardTranslations from '../i18n/IvCardTranslations';
+import { translate } from '../utils';
 
 const TermsAndConditions: React.FC = () => {
   const i18n = useIntl();
@@ -14,7 +13,7 @@ const TermsAndConditions: React.FC = () => {
           <IonButtons slot="start">
             <IonMenuButton />
           </IonButtons>
-          <IonTitle>{i18n.formatMessage({ id: nameof<IvCardTranslations>('Terms_and_conditions') })}</IonTitle>
+          <IonTitle>{translate(i18n, 'Terms_and_conditions')}</IonTitle>
         </IonToolbar>
       </IonHeader>
 
