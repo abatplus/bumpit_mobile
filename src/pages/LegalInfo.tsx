@@ -1,5 +1,5 @@
 import React from 'react';
-import { IonHeader, IonToolbar, IonContent, IonPage, IonButtons, IonMenuButton, IonTitle } from '@ionic/react';
+import { IonHeader, IonToolbar, IonContent, IonPage, IonButtons, IonMenuButton, IonTitle, IonCard } from '@ionic/react';
 import { useIntl } from 'react-intl';
 import { convertMarkdownFile, translate } from '../utils';
 import ReactMarkdown from 'react-markdown';
@@ -32,12 +32,12 @@ export const LegalInfo: React.FC = () => {
             <IonTitle size="large">{translate(i18n, 'Legal_Information')}</IonTitle>
           </IonToolbar>
         </IonHeader>
-        <div>
+        <IonCard>
           <ReactMarkdown source={licence} />
-        </div>
-        <div>
+        </IonCard>
+        <IonCard>
           <ReactMarkdown source={thirdParty} />
-        </div>
+        </IonCard>
       </IonContent>
     </IonPage >
   );

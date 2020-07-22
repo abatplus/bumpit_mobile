@@ -1,10 +1,15 @@
 import React from 'react';
-import { IonHeader, IonToolbar, IonContent, IonPage, IonButtons, IonMenuButton, IonTitle, IonTextarea } from '@ionic/react';
+import { IonHeader, IonToolbar, IonContent, IonPage, IonButtons, IonMenuButton, IonTitle, IonTextarea, IonCard } from '@ionic/react';
 import { useIntl } from 'react-intl';
-import { translate } from '../utils';
+import { translate, convertMarkdownFile } from '../utils';
+import termsFile from "../docs/Nutzungsbedingungen.md";
+import ReactMarkdown from 'react-markdown';
 
 const TermsAndConditions: React.FC = () => {
   const i18n = useIntl();
+  const [terms, setTerms] = React.useState('');
+
+  convertMarkdownFile(termsFile).then(setTerms);
 
   return (
     <IonPage id="termsAndConditions">
@@ -18,9 +23,10 @@ const TermsAndConditions: React.FC = () => {
       </IonHeader>
 
       <IonContent fullscreen={false}>
-        <div>
-          <IonTextarea>AGB</IonTextarea>
-        </div>
+
+        <IonCard>
+          <ReactMarkdown source={terms} />
+        </IonCard>
       </IonContent>
     </IonPage>
   );

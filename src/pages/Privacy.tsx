@@ -1,10 +1,15 @@
 import React from 'react';
-import { IonHeader, IonToolbar, IonContent, IonPage, IonButtons, IonMenuButton, IonTitle, IonTextarea } from '@ionic/react';
+import { IonHeader, IonToolbar, IonContent, IonPage, IonButtons, IonMenuButton, IonTitle, IonTextarea, IonCard } from '@ionic/react';
 import { useIntl } from 'react-intl';
-import { translate } from '../utils';
+import { translate, convertMarkdownFile } from '../utils';
+import privacyFile from "../docs/Datenschutz.md";
+import ReactMarkdown from 'react-markdown';
 
 const Privacy: React.FC = () => {
   const i18n = useIntl();
+  const [privacy, setPrivacy] = React.useState('');
+
+  convertMarkdownFile(privacyFile).then(setPrivacy);
 
   return (
     <IonPage id="privacy">
@@ -24,9 +29,9 @@ const Privacy: React.FC = () => {
           </IonToolbar>
         </IonHeader>
 
-        <div>
-          <IonTextarea>Datenschutz</IonTextarea>
-        </div>
+        <IonCard>
+          <ReactMarkdown source={privacy} />
+        </IonCard>
       </IonContent>
     </IonPage>
   );
