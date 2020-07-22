@@ -1,6 +1,8 @@
 import React from 'react';
 import { IonTabBar, IonTabButton, IonIcon, IonLabel, IonTabs, IonRouterOutlet, IonPage } from '@ionic/react';
 import { people, scan } from 'ionicons/icons';
+import { faBarcodeRead, faIdCard } from '@fortawesome/pro-duotone-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useIntl } from 'react-intl';
 import { nameof } from '../utils';
 import IvCardTranslations from '../i18n/IvCardTranslations';
@@ -37,11 +39,11 @@ export const MainContent: React.FC = () => {
         </IonRouterOutlet>
         <IonTabBar slot="bottom">
           <IonTabButton tab="profile" href="/profile">
-            <IonIcon icon={people} />
+            <FontAwesomeIcon  className="fa fa-2x" icon={faIdCard} />
             <IonLabel>{i18n.formatMessage({ id: nameof<IvCardTranslations>('Profiles') })}</IonLabel>
           </IonTabButton>
           <IonTabButton tab="scan" href="/scan">
-            <IonIcon icon={scan} />
+            <FontAwesomeIcon className="fa fa-2x" icon={faBarcodeRead} />
             <IonLabel>{i18n.formatMessage({ id: nameof<IvCardTranslations>('Scan') })}</IonLabel>
           </IonTabButton>
         </IonTabBar>

@@ -22,6 +22,8 @@ import {
 import './SwapView.css';
 import SwapViewListItem from '../components/SwapViewListItem';
 import { share, repeat, people, search } from 'ionicons/icons';
+import { faExchange, faPollPeople, faCheckDouble, faCheck, faShareAll } from '@fortawesome/pro-duotone-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import SwapState from '../enums/SwapState';
 import * as SwapReducer from '../store/reducers/SwapReducer';
 import { SwapViewCardExchangeClient } from '../Server/SwapViewCardExchangeClient';
@@ -153,7 +155,8 @@ const SwapView: React.FC = () => {
           <IonList>
             <IonItem>
               <IonButton color="primary" fill="outline" className="swap-footer-button" onClick={onDoRequestAll}>
-                <IonIcon icon={share} />
+                {/* <IonIcon icon={share} /> */}
+                <FontAwesomeIcon  className="fa fa-2x" icon={faShareAll} />
                 <IonLabel className="swap-footer-button-text">
                   {i18n.formatMessage({ id: nameof<IvCardTranslations>('Request_All') })} {getNumberOfRequestAll()}
                 </IonLabel>
@@ -161,7 +164,8 @@ const SwapView: React.FC = () => {
             </IonItem>
             <IonItem>
               <IonButton color="primary" fill="outline" className="swap-footer-button" onClick={onAcceptAll}>
-                <IonIcon icon={repeat} />
+                {/* <IonIcon icon={repeat} /> */}
+                <FontAwesomeIcon  className="fa fa-2x" icon={faCheckDouble} />
                 <IonLabel className="swap-footer-button-text">
                   {i18n.formatMessage({ id: nameof<IvCardTranslations>('Accept_All') })} {getNumberOfAcceptAll()}
                 </IonLabel>
@@ -184,13 +188,15 @@ const SwapView: React.FC = () => {
         <IonToolbar>
           <IonSegment value={segmentFilter} onIonChange={(e) => setSegmentFilter(e.detail.value as string)}>
             <IonSegmentButton value="swap-list">
-              <IonIcon icon={search} />
+              {/* <IonIcon icon={search} /> */}
+              <FontAwesomeIcon  className="fa fa-2x" icon={faPollPeople} />
               <IonLabel>
                 {i18n.formatMessage({ id: nameof<IvCardTranslations>('Search') })} ({swapContext.filter((entry) => entry.state !== SwapState.exchanged).length})
               </IonLabel>
             </IonSegmentButton>
             <IonSegmentButton value="ready-list">
-              <IonIcon icon={people} />
+              {/* <IonIcon icon={people} /> */}
+              <FontAwesomeIcon  className="fa fa-2x" icon={faCheck} />
               <IonLabel>
                 {i18n.formatMessage({ id: nameof<IvCardTranslations>('Received') })} (
                 {swapContext.filter((entry) => entry.state === SwapState.exchanged).length})

@@ -14,6 +14,8 @@ import {
     IonImg,
 } from '@ionic/react';
 import { peopleOutline, scan } from 'ionicons/icons';
+import { faBarcodeRead, faIdCard, IconDefinition } from '@fortawesome/pro-duotone-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useAppContext } from '../store/contexts/AppContext';
 import './Menu.css';
 import { useIntl } from 'react-intl';
@@ -23,7 +25,7 @@ import { nameof } from '../utils';
 interface IPages {
     title: string;
     path: string;
-    icon?: string;
+    icon?: IconDefinition;
     routerDirection?: string;
 }
 
@@ -38,9 +40,9 @@ const Menu: React.FC = () => {
             {
                 title: i18n.formatMessage({ id: nameof<IvCardTranslations>('Profiles') }),
                 path: '/profile',
-                icon: peopleOutline,
+                icon: faIdCard,
             },
-            { title: i18n.formatMessage({ id: nameof<IvCardTranslations>('Scan') }), path: '/scan', icon: scan },
+            { title: i18n.formatMessage({ id: nameof<IvCardTranslations>('Scan') }), path: '/scan', icon: faBarcodeRead },
         ],
         appPages: [
             {
@@ -64,8 +66,9 @@ const Menu: React.FC = () => {
                         routerDirection='none'
                         className={location.pathname.startsWith(p.path) ? 'selected' : undefined}
                         disabled={appContext.isLoading}>
-                        {p.icon && <IonIcon slot='start' icon={p.icon} />}
-                        <IonLabel>{p.title}</IonLabel>
+                       
+                        {p.icon && <FontAwesomeIcon  className="fa fa-2x menuline-icon" icon={p.icon} />}
+                        <IonLabel >{p.title}</IonLabel>
                     </IonItem>
                 </IonMenuToggle>
             ));
