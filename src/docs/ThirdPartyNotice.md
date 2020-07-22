@@ -141,6 +141,12 @@ Licensor: (https://formatjs.io/docs/react-intl/)
 Copyright Notice: Copyright 2019 Oath Inc. All rights reserved.
 License: BSD-3-Clause
 
+Name: react-markdown
+Version: 4.3.1
+Licensor: (https://rexxars.github.io/react-markdown/)
+Copyright Notice: Copyright 2020 Espen Hovlandsdal
+License: MIT
+
 Name: react-qr-reader
 Version: 2.2.1
 Licensor: (https://github.com/JodusNodus/react-qr-reader#readme)
