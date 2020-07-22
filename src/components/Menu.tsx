@@ -2,7 +2,6 @@ import React from 'react';
 import { withRouter, useLocation } from 'react-router';
 import {
     IonContent,
-    IonIcon,
     IonItem,
     IonLabel,
     IonList,
@@ -13,7 +12,6 @@ import {
     IonTitle,
     IonImg,
 } from '@ionic/react';
-import { peopleOutline, scan } from 'ionicons/icons';
 import { faBarcodeRead, faIdCard, IconDefinition } from '@fortawesome/pro-duotone-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useAppContext } from '../store/contexts/AppContext';

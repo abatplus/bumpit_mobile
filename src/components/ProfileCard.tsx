@@ -4,7 +4,6 @@ import {
     IonCard,
     IonCardContent,
     IonButton,
-    IonIcon,
     IonGrid,
     IonRow,
     IonCol,
@@ -13,7 +12,6 @@ import {
 import { useIntl } from 'react-intl';
 import { nameof } from '../utils';
 import IvCardTranslations from '../i18n/IvCardTranslations';
-import { qrCode, swapVertical, pencil } from 'ionicons/icons';
 import { faQrcode, faEdit, faExchange } from '@fortawesome/pro-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useHistory } from 'react-router';
@@ -42,7 +40,6 @@ const ProfileCard: React.FC<IProfileCardProps> = (props) => {
                                     history.push('/qrcode/' + props.profile.id);
                                 }}
                                 title={i18n.formatMessage({ id: nameof<IvCardTranslations>('ShowQRCode') })}>
-                                {/* <IonIcon icon={qrCode} /> */}
                                 <FontAwesomeIcon className="fa fa-lg" icon={faQrcode} />
                             </IonButton>
                         </IonCol>
@@ -52,7 +49,6 @@ const ProfileCard: React.FC<IProfileCardProps> = (props) => {
                                     history.push('/swap/' + props.profile.id);
                                 }}
                                 title={i18n.formatMessage({ id: nameof<IvCardTranslations>('Exchange') })}>
-                                {/* <IonIcon icon={swapVertical} /> */}
                                 <FontAwesomeIcon className="fa fa-lg" icon={faExchange} />
                             </IonButton>
                         </IonCol>
@@ -62,7 +58,6 @@ const ProfileCard: React.FC<IProfileCardProps> = (props) => {
                                     history.push('/profile/edit/' + props.profile.id);
                                 }}
                                 title={i18n.formatMessage({ id: nameof<IvCardTranslations>('Edit') })}>
-                                {/* <IonIcon icon={pencil} /> */}
                                 <FontAwesomeIcon className="fa fa-lg" icon={faEdit} />
                             </IonButton>
                         </IonCol>

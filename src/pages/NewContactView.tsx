@@ -8,13 +8,14 @@ import {
     IonTitle,
     IonFooter,
     IonButton,
-    IonIcon,
     IonLabel,
     IonMenuButton,
     IonToast,
+    IonItem,
 } from '@ionic/react';
 import './VCardView.css';
-import { save } from 'ionicons/icons';
+import { faSave } from '@fortawesome/pro-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useHistory, useLocation } from 'react-router';
 import { useIntl } from 'react-intl';
 import { nameof } from '../utils';
@@ -42,10 +43,8 @@ const NewContactView: React.FC = () => {
                 .catch((error) => {
                     window.alert(error);
                 });
-        }
-        else
-        {
-          window.alert("no contact created");
+        } else {
+            window.alert('no contact created');
         }
         history.replace('/profile');
     };
@@ -149,14 +148,14 @@ const NewContactView: React.FC = () => {
                     duration={1000}
                 />
 
-                <IonButtons className='footer-buttons'>
-                    <IonButton color='primary' fill='outline' className='footer-button' onClick={onSaveContact}>
-                        <IonIcon icon={save} />
+                <IonItem>
+                    <IonButton className='footer-button' onClick={onSaveContact}>
+                        <FontAwesomeIcon className='fa fa-lg' icon={faSave} />
                         <IonLabel className='footer-button-text'>
                             {i18n.formatMessage({ id: nameof<IvCardTranslations>('Save_contact') })}
                         </IonLabel>
                     </IonButton>
-                </IonButtons>
+                </IonItem>
             </IonFooter>
         </IonPage>
     );

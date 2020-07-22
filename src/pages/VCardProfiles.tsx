@@ -10,7 +10,6 @@ import {
     IonContent,
     IonFab,
     IonFabButton,
-    IonIcon,
     IonMenuButton,
 } from '@ionic/react';
 import { useIntl } from 'react-intl';
@@ -18,8 +17,7 @@ import { nameof } from '../utils';
 import IvCardTranslations from '../i18n/IvCardTranslations';
 import IProfile from '../interfaces/IProfile';
 import { useProfileContext } from '../store/contexts/ProfileContext';
-import { addCircle } from 'ionicons/icons';
-import { faPlus } from '@fortawesome/pro-regular-svg-icons';
+import { faPlus } from '@fortawesome/pro-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import ProfileCard from '../components/ProfileCard';
 import * as Actions from '../store/actions/actions';
@@ -76,7 +74,6 @@ const VCardProfiles: React.FC = () => {
                         onClick={() => {
                             addNewProfile();
                         }}>
-                        {/* <IonIcon icon={addCircle} /> */}
                         <FontAwesomeIcon  className="fa fa-2x" icon={faPlus} />
                     </IonFabButton>
                 </IonFab>

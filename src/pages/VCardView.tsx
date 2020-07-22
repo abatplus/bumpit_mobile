@@ -8,13 +8,11 @@ import {
     IonTitle,
     IonFooter,
     IonButton,
-    IonIcon,
     IonLabel,
     IonBackButton,
     IonItem,
 } from '@ionic/react';
 import './VCardView.css';
-import { qrCode, share, trash } from 'ionicons/icons';
 import { faQrcode, faExchange } from '@fortawesome/pro-solid-svg-icons';
 import { faTrash } from '@fortawesome/pro-duotone-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -73,7 +71,6 @@ const VCardView: React.FC = () => {
                     </IonTitle>
                     <IonButtons slot='end'>
                         <IonButton onClick={deleteProfile}>
-                            {/* <IonIcon icon={trash} /> */}
                             <FontAwesomeIcon className='fa fa-lg' icon={faTrash} />
                         </IonButton>
                     </IonButtons>
@@ -86,13 +83,10 @@ const VCardView: React.FC = () => {
 
             <IonFooter>
                 <IonItem>
-                    {/* <IonButtons className="footer-buttons">  */}
-                    {/* <IonButtons> */}
-
                     <IonButton
-                    className='footer-button'
+                        className='footer-button'
                         onClick={onClickShowQr}
-                        title={i18n.formatMessage({ id: nameof<IvCardTranslations>('QR_code') })}>   
+                        title={i18n.formatMessage({ id: nameof<IvCardTranslations>('QR_code') })}>
                         <FontAwesomeIcon className='fa fa-lg' icon={faQrcode} />
                         <IonLabel className='footer-button-text'>
                             {i18n.formatMessage({ id: nameof<IvCardTranslations>('QR_code') })}
@@ -100,8 +94,7 @@ const VCardView: React.FC = () => {
                     </IonButton>
 
                     <IonButton
-                    className='footer-button'
-                        
+                        className='footer-button'
                         onClick={onClickSwap}
                         title={i18n.formatMessage({ id: nameof<IvCardTranslations>('Swap') })}>
                         <FontAwesomeIcon className='fa fa-lg' icon={faExchange} />
@@ -109,21 +102,6 @@ const VCardView: React.FC = () => {
                             {i18n.formatMessage({ id: nameof<IvCardTranslations>('Swap') })}
                         </IonLabel>
                     </IonButton>
-
-                    {/* <IonButton color='primary' fill='outline' className='footer-button' onClick={onClickShowQr}>
-                        <FontAwesomeIcon className='fa fa-lg' icon={faQrcode} />
-                        <IonLabel className='footer-button-text'>
-                            {i18n.formatMessage({ id: nameof<IvCardTranslations>('QR_code') })}
-                        </IonLabel>
-                    </IonButton>
-                    <IonButton color='primary' fill='outline' className='footer-button' onClick={onClickSwap}>
-                        <FontAwesomeIcon className='fa fa-lg' icon={faExchange} />
-                        <IonLabel className='footer-button-text'>
-                            {i18n.formatMessage({ id: nameof<IvCardTranslations>('Swap') })}
-                        </IonLabel>
-                    </IonButton> */}
-
-                    {/* </IonButtons> */}
                 </IonItem>
             </IonFooter>
         </IonPage>
