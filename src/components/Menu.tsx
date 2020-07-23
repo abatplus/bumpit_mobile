@@ -2,7 +2,6 @@ import React from 'react';
 import { withRouter, useLocation } from 'react-router';
 import {
     IonContent,
-    IonIcon,
     IonItem,
     IonLabel,
     IonList,
@@ -13,43 +12,43 @@ import {
     IonTitle,
     IonImg,
 } from '@ionic/react';
-import { peopleOutline, scan } from 'ionicons/icons';
+import { faBarcodeRead, faIdCard, IconDefinition } from '@fortawesome/pro-duotone-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useAppContext } from '../store/contexts/AppContext';
 import './Menu.css';
 import { useIntl } from 'react-intl';
-import IvCardTranslations from '../i18n/IvCardTranslations';
-import { nameof } from '../utils';
+import { translate } from '../utils';
 
 interface IPages {
     title: string;
     path: string;
-    icon?: string;
+    icon?: IconDefinition;
     routerDirection?: string;
 }
 
 const Menu: React.FC = () => {
-    const location = useLocation();
-    const { appContext } = useAppContext();
+  const location = useLocation();
+  const { appContext } = useAppContext();
 
-    const i18n = useIntl();
+  const i18n = useIntl();
 
     const routes = {
         tabsPages: [
             {
-                title: i18n.formatMessage({ id: nameof<IvCardTranslations>('Profiles') }),
+                title: translate(i18n, 'Profiles'),
                 path: '/profile',
-                icon: peopleOutline,
+                icon: faIdCard,
             },
-            { title: i18n.formatMessage({ id: nameof<IvCardTranslations>('Scan') }), path: '/scan', icon: scan },
+            { title: translate(i18n, 'Scan'), path: '/scan', icon: faBarcodeRead },
         ],
         appPages: [
             {
-                title: i18n.formatMessage({ id: nameof<IvCardTranslations>('Terms_and_conditions') }),
+                title: translate(i18n, 'Terms_and_conditions'),
                 path: '/termsAndConditions',
             },
-            { title: i18n.formatMessage({ id: nameof<IvCardTranslations>('Privacy_Protection') }), path: '/privacy' },
-            { title: i18n.formatMessage({ id: nameof<IvCardTranslations>('Legal_Information') }), path: '/legal' },
-            { title: i18n.formatMessage({ id: nameof<IvCardTranslations>('About') }), path: '/about' },
+            { title: translate(i18n, 'Privacy_Protection'), path: '/privacy' },
+            { title: translate(i18n, 'Legal_Information'), path: '/legal' },
+            { title: translate(i18n, 'About'), path: '/about' },
         ],
     };
 
@@ -64,38 +63,39 @@ const Menu: React.FC = () => {
                         routerDirection='none'
                         className={location.pathname.startsWith(p.path) ? 'selected' : undefined}
                         disabled={appContext.isLoading}>
-                        {p.icon && <IonIcon slot='start' icon={p.icon} />}
-                        <IonLabel>{p.title}</IonLabel>
+                       
+                        {p.icon && <FontAwesomeIcon  className="fa fa-2x menuline-icon" icon={p.icon} />}
+                        <IonLabel >{p.title}</IonLabel>
                     </IonItem>
                 </IonMenuToggle>
             ));
     };
 
-    return (
-        <IonMenu type='overlay' disabled={!appContext.menuEnabled} contentId='main'>
-            <IonContent forceOverscroll={false}>
-                <IonItem lines='none'>
-                    <IonImg className='app-icon' src='../../assets/icon/Logo_dummy.png'></IonImg>
-                </IonItem>
-                <IonItem lines='inset'>
-                    <IonLabel className='app-name'>
-                        {i18n.formatMessage({ id: nameof<IvCardTranslations>('appName') })}
-                    </IonLabel>
-                </IonItem>
-                <IonItem lines='inset'>
-                    <IonList lines='none'>{renderListItems(routes.tabsPages)}</IonList>
-                </IonItem>
-                <IonList lines='none'>{renderListItems(routes.appPages)}</IonList>
-            </IonContent>
-            <IonFooter className='footer'>
-                <IonToolbar>
-                    <IonTitle className='poweredBy' size='small'>
-                        powered by abat+
+  return (
+    <IonMenu type='overlay' disabled={!appContext.menuEnabled} contentId='main'>
+      <IonContent forceOverscroll={false}>
+        <IonItem lines='none'>
+          <IonImg className='app-icon' src='../../assets/icon/Logo_dummy.png'></IonImg>
+        </IonItem>
+        <IonItem lines='inset'>
+          <IonLabel className='app-name'>
+            {translate(i18n, 'appName')}
+          </IonLabel>
+        </IonItem>
+        <IonItem lines='inset'>
+          <IonList lines='none'>{renderListItems(routes.tabsPages)}</IonList>
+        </IonItem>
+        <IonList lines='none'>{renderListItems(routes.appPages)}</IonList>
+      </IonContent>
+      <IonFooter className='footer'>
+        <IonToolbar>
+          <IonTitle className='poweredBy' size='small'>
+            powered by abat+
                     </IonTitle>
-                </IonToolbar>
-            </IonFooter>
-        </IonMenu>
-    );
+        </IonToolbar>
+      </IonFooter>
+    </IonMenu>
+  );
 };
 
 export default withRouter(Menu);

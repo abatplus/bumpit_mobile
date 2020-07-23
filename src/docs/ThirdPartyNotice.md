@@ -1,13 +1,10 @@
-/*!----------------- vSwap-App ThirdPartyNotices -------------------------------------------------------
-
-Third Party Notices
+## Third Party Notices
 
 This App uses third-party software or other resources that may be distributed under licenses different from the vSwap-App T&C (Nutzungsbedingungen).
 In the event that we overlooked to list a required notice, please bring this to our attention by contacting us via email: vSwap-App@abatplus.de
 
----------------------------------------------
-Third Party Code Components
---------------------------------------------
+
+## Third Party Code Components
 
 Name: @capacitor/android
 Version: 2.3.0
@@ -144,6 +141,12 @@ Licensor: (https://formatjs.io/docs/react-intl/)
 Copyright Notice: Copyright 2019 Oath Inc. All rights reserved.
 License: BSD-3-Clause
 
+Name: react-markdown
+Version: 4.3.1
+Licensor: (https://rexxars.github.io/react-markdown/)
+Copyright Notice: Copyright 2020 Espen Hovlandsdal
+License: MIT
+
 Name: react-qr-reader
 Version: 2.2.1
 Licensor: (https://github.com/JodusNodus/react-qr-reader#readme)
@@ -186,6 +189,29 @@ Licensor: Jonas Hermsmeier (https://github.com/jhermsmeier/node-vcf)
 Copyright Notice: Copyright (c) 2015 Jonas Hermsmeier
 License: MIT
 
+Name: fortawesome/fontawesome-svg-core
+Version: 1.2.30
+Licensor:  https://fontawesome.com
+Copyright Notice: Copyright (c) Fonticons, Inc.
+License: MIT
+
+Name: fortawesome/react-fontawesome
+Version: 0.1.11
+Licensor:  https://fontawesome.com
+Copyright Notice: Copyright (c) 2018 Fonticons, Inc.
+License: MIT
+
+Name: fortawesome/pro-duotone-svg-icons
+Version: 5.14.0
+Licensor:  https://fontawesome.com
+Copyright Notice: Copyright (c) Fonticons, Inc.
+License: Font Awesome Pro commercial license
+
+Name: fortawesome/pro-solid-svg-icons
+Version: 5.14.0
+Licensor:  https://fontawesome.com
+Copyright Notice: Copyright (c) Fonticons, Inc.
+License: Font Awesome Pro commercial license
 
 Licenses:
 

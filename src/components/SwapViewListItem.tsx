@@ -1,11 +1,11 @@
 import React from 'react';
 import './SwapViewListItem.css';
-import { IonItem, IonLabel, IonButton, IonIcon, IonGrid, IonCol, IonRow, IonSpinner } from '@ionic/react';
-import { checkmark, close, share } from 'ionicons/icons';
+import { IonItem, IonLabel, IonButton, IonGrid, IonCol, IonRow, IonSpinner } from '@ionic/react';
+import { faCheck, faShare, faTimes } from '@fortawesome/pro-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import SwapState from '../enums/SwapState';
 import { useIntl } from 'react-intl';
-import { nameof } from '../utils';
-import IvCardTranslations from '../i18n/IvCardTranslations';
+import { translate } from '../utils';
 
 type SwapViewListItemType = {
   name: string;
@@ -24,16 +24,16 @@ const SwapViewListItem = ({ name, state, onDoRequest, onAbortRequest, onAcceptRe
       stateText = ' ';
       break;
     case SwapState.requested:
-      stateText = i18n.formatMessage({ id: nameof<IvCardTranslations>('Wait_for_acceptance') });
+      stateText = translate(i18n, 'Wait_for_acceptance');
       break;
     case SwapState.received:
-      stateText = i18n.formatMessage({ id: nameof<IvCardTranslations>('Exchange_request_received') });
+      stateText = translate(i18n, 'Exchange_request_received');
       break;
     case SwapState.accepted:
-      stateText = i18n.formatMessage({ id: nameof<IvCardTranslations>('Accept_request_send_data') });
+      stateText = translate(i18n, 'Accept_request_send_data');
       break;
     case SwapState.exchanged:
-      stateText = i18n.formatMessage({ id: nameof<IvCardTranslations>('Exchange_successful') });
+      stateText = translate(i18n, 'Exchange_successful');
       break;
   }
 
@@ -51,19 +51,21 @@ const SwapViewListItem = ({ name, state, onDoRequest, onAbortRequest, onAcceptRe
   const getActionIcon = () => {
     switch (state) {
       case SwapState.initial:
-        return share;
+        return faShare;
       case SwapState.received:
-        return checkmark;
+        return faCheck;
       case SwapState.requested:
-        return close;
+        return faTimes;
     }
+    return faShare;
   };
 
+ 
   const renderActionButton = () => {
     if (state !== SwapState.accepted && state !== SwapState.exchanged)
       return (
         <IonButton float-right color="primary" fill="outline" onClick={onActionButtonClick}>
-          <IonIcon icon={getActionIcon()} />
+          <FontAwesomeIcon  className="fa fa-lg" icon={getActionIcon()} />
         </IonButton>
       );
   };
