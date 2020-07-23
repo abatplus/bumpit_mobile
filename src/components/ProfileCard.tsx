@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
     IonTitle,
     IonCard,
@@ -8,6 +8,7 @@ import {
     IonRow,
     IonCol,
     IonCardHeader,
+    IonToast,
 } from '@ionic/react';
 import { useIntl } from 'react-intl';
 import { translate } from '../utils';
@@ -21,8 +22,17 @@ interface IProfileCardProps {
 }
 
 const ProfileCard: React.FC<IProfileCardProps> = (props) => {
-  const i18n = useIntl();
-  const history = useHistory();
+    const i18n = useIntl();
+    const history = useHistory();
+    const [showToast, setShowToast] = useState(false);
+
+    const onClickSwap = () => {
+        if (!props.profile.vCard.name) {
+            setShowToast(true);
+        } else {
+            history.push('/swap/' + props.profile.id);
+        }
+    };
 
     return (
         <IonCard style={{ margin: '2em' }}>
@@ -43,9 +53,7 @@ const ProfileCard: React.FC<IProfileCardProps> = (props) => {
                         </IonCol>
                         <IonCol className='ion-text-center'>
                             <IonButton
-                                onClick={() => {
-                                    history.push('/swap/' + props.profile.id);
-                                }}
+                                onClick={onClickSwap}
                                 title={translate(i18n, 'Exchange')}>
                                 <FontAwesomeIcon className="fa fa-lg" icon={faExchange} />
                             </IonButton>
@@ -62,6 +70,12 @@ const ProfileCard: React.FC<IProfileCardProps> = (props) => {
                     </IonRow>
                 </IonGrid>
             </IonCardContent>
+            <IonToast
+                isOpen={showToast}
+                onDidDismiss={() => setShowToast(false)}
+                message="Please provide your name in the profile before swapping."
+                duration={2000}
+            />
         </IonCard>
     );
 };

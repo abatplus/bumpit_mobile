@@ -1,17 +1,5 @@
-import React from 'react';
-import {
-    IonHeader,
-    IonToolbar,
-    IonContent,
-    IonPage,
-    IonButtons,
-    IonTitle,
-    IonFooter,
-    IonButton,
-    IonLabel,
-    IonBackButton,
-    IonItem,
-} from '@ionic/react';
+import React, { useState } from 'react';
+import { IonHeader, IonToolbar, IonContent, IonPage, IonButtons, IonTitle, IonFooter, IonButton, IonIcon, IonLabel, IonBackButton, IonToast, IonItem } from '@ionic/react';
 import './VCardView.css';
 import { faQrcode, faExchange } from '@fortawesome/pro-solid-svg-icons';
 import { faTrash } from '@fortawesome/pro-duotone-svg-icons';
@@ -30,6 +18,7 @@ const VCardView: React.FC = () => {
 
     const { id } = useParams();
     const { profileContext, dispatchProfileContext } = useProfileContext();
+    const [showToast, setShowToast] = useState(false);
 
     const getCurrentProfile = () => {
         if (profileContext.profiles) {
@@ -52,9 +41,13 @@ const VCardView: React.FC = () => {
         history.push('/qrcode/' + currentProfile?.id);
     };
 
-    const onClickSwap = () => {
-        history.push('/swap/' + currentProfile?.id);
-    };
+  const onClickSwap = () => {
+    if (!currentProfile?.vCard.name) {
+        setShowToast(true);
+    } else {
+      history.push('/swap/' + currentProfile?.id);
+    }
+};
 
     return (
         <IonPage>
