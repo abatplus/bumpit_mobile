@@ -185,7 +185,7 @@ const SwapView: React.FC = () => {
             <IonSegmentButton value="swap-list">
               <FontAwesomeIcon  className="fa fa-lg" icon={faPollPeople} />
               <IonLabel>
-                {i18n.formatMessage({ id: nameof<IvCardTranslations>('Search') })} ({swapContext.filter((entry) => entry.state !== SwapState.exchanged).length})
+                {i18n.formatMessage({ id: nameof<IvCardTranslations>('Swap_candidates') })} ({swapContext.filter((entry) => entry.state !== SwapState.exchanged).length})
               </IonLabel>
             </IonSegmentButton>
             <IonSegmentButton value="ready-list">

@@ -93,7 +93,7 @@
     "message": "Alle akzeptieren"
   },
   "Search": {
-    "message": "Kandidaten"
+    "message": "Suche"
   },
   "Received": {
     "message": "Empfangen"
@@ -121,5 +121,8 @@
   },
   "Contact_saved": {
     "message": "Neuer Kontakt wurde gespeichert."
+  },
+  "Swap_candidates": {
+    "message": "Kandidaten"
   }
 }
