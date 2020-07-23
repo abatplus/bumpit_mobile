@@ -68,7 +68,7 @@ const SwapView: React.FC = () => {
   };
 
   const connection = new signalR.HubConnectionBuilder()
-  .withUrl("http://192.168.0.5:30256/swaphub")
+  .withUrl("https://vswap-dev.smef.io/swaphub")
   .build();
   
   const hub = new CardExchangeHub(connection);

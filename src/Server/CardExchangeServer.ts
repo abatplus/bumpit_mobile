@@ -14,7 +14,7 @@ export default class CardExchangeServer implements ICardExchangeServer {
 
   constructor(client: ICardExchangeClient) {
     this.connection = new signalR.HubConnectionBuilder()
-      .withUrl("http://192.168.0.5:30256/swaphub")
+      .withUrl("https://vswap-dev.smef.io/swaphub")
       .build();
 
     this.Events = new CardExchangeEvents(this.connection, client);
