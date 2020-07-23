@@ -18,8 +18,7 @@ import { faTrash } from '@fortawesome/pro-duotone-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useHistory, useParams } from 'react-router';
 import { useIntl } from 'react-intl';
-import { nameof } from '../utils';
-import IvCardTranslations from '../i18n/IvCardTranslations';
+import { translate } from '../utils';
 import { useProfileContext } from '../store/contexts/ProfileContext';
 import IProfile from '../interfaces/IProfile';
 import Profile from '../components/Profile';
@@ -65,9 +64,7 @@ const VCardView: React.FC = () => {
                         <IonBackButton />
                     </IonButtons>
                     <IonTitle>
-                        {i18n.formatMessage({ id: nameof<IvCardTranslations>('My_Data') }) +
-                            ' - ' +
-                            currentProfile?.name}
+                        {translate(i18n, 'My_Data') + ' - ' + currentProfile?.name}
                     </IonTitle>
                     <IonButtons slot='end'>
                         <IonButton onClick={deleteProfile}>
@@ -86,20 +83,20 @@ const VCardView: React.FC = () => {
                     <IonButton
                         className='footer-button'
                         onClick={onClickShowQr}
-                        title={i18n.formatMessage({ id: nameof<IvCardTranslations>('QR_code') })}>
+                        title={translate(i18n, 'QR_code')}>
                         <FontAwesomeIcon className='fa fa-lg' icon={faQrcode} />
                         <IonLabel className='footer-button-text'>
-                            {i18n.formatMessage({ id: nameof<IvCardTranslations>('QR_code') })}
+                            {translate(i18n, 'QR_code')}
                         </IonLabel>
                     </IonButton>
 
                     <IonButton
                         className='footer-button'
                         onClick={onClickSwap}
-                        title={i18n.formatMessage({ id: nameof<IvCardTranslations>('Swap') })}>
+                        title={translate(i18n, 'Swap')}>
                         <FontAwesomeIcon className='fa fa-lg' icon={faExchange} />
                         <IonLabel className='footer-button-text'>
-                            {i18n.formatMessage({ id: nameof<IvCardTranslations>('Swap') })}
+                            {translate(i18n, 'Swap')}
                         </IonLabel>
                     </IonButton>
                 </IonItem>

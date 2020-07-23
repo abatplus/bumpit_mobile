@@ -1,11 +1,15 @@
 import React from 'react';
-import { IonHeader, IonToolbar, IonContent, IonPage, IonButtons, IonMenuButton, IonTitle, IonTextarea } from '@ionic/react';
+import { IonHeader, IonToolbar, IonContent, IonPage, IonButtons, IonMenuButton, IonTitle, IonTextarea, IonCard } from '@ionic/react';
 import { useIntl } from 'react-intl';
-import { nameof } from '../utils';
-import IvCardTranslations from '../i18n/IvCardTranslations';
+import { translate, convertMarkdownFile } from '../utils';
+import termsFile from "../docs/Nutzungsbedingungen.md";
+import ReactMarkdown from 'react-markdown';
 
 const TermsAndConditions: React.FC = () => {
   const i18n = useIntl();
+  const [terms, setTerms] = React.useState('');
+
+  convertMarkdownFile(termsFile).then(setTerms);
 
   return (
     <IonPage id="termsAndConditions">
@@ -14,14 +18,15 @@ const TermsAndConditions: React.FC = () => {
           <IonButtons slot="start">
             <IonMenuButton />
           </IonButtons>
-          <IonTitle>{i18n.formatMessage({ id: nameof<IvCardTranslations>('Terms_and_conditions') })}</IonTitle>
+          <IonTitle>{translate(i18n, 'Terms_and_conditions')}</IonTitle>
         </IonToolbar>
       </IonHeader>
 
       <IonContent fullscreen={false}>
-        <div>
-          <IonTextarea>AGB</IonTextarea>
-        </div>
+
+        <IonCard>
+          <ReactMarkdown source={terms} />
+        </IonCard>
       </IonContent>
     </IonPage>
   );

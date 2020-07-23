@@ -1,11 +1,19 @@
 import React from 'react';
-import { IonHeader, IonToolbar, IonContent, IonPage, IonButtons, IonMenuButton, IonTitle, IonTextarea } from '@ionic/react';
+import { IonHeader, IonToolbar, IonContent, IonPage, IonButtons, IonMenuButton, IonTitle, IonCard } from '@ionic/react';
 import { useIntl } from 'react-intl';
-import { nameof } from '../utils';
-import IvCardTranslations from '../i18n/IvCardTranslations';
+import { convertMarkdownFile, translate } from '../utils';
+import ReactMarkdown from 'react-markdown';
+import licenceFile from "../docs/LICENCE.md";
+import thirdPartyFile from "../docs/ThirdPartyNotice.md";
 
-const LegalInfo: React.FC = () => {
+export const LegalInfo: React.FC = () => {
+  const [licence, setLicence] = React.useState('');
+  const [thirdParty, setThirdParty] = React.useState('');
+
   const i18n = useIntl();
+
+  convertMarkdownFile(licenceFile).then(setLicence);
+  convertMarkdownFile(thirdPartyFile).then(setThirdParty);
 
   return (
     <IonPage id="legal">
@@ -14,22 +22,24 @@ const LegalInfo: React.FC = () => {
           <IonButtons slot="start">
             <IonMenuButton />
           </IonButtons>
-          <IonTitle>{i18n.formatMessage({ id: nameof<IvCardTranslations>('Legal_Information') })}</IonTitle>
+          <IonTitle>{translate(i18n, 'Legal_Information')}</IonTitle>
         </IonToolbar>
       </IonHeader>
 
       <IonContent fullscreen={false}>
         <IonHeader collapse="condense">
           <IonToolbar>
-            <IonTitle size="large">{i18n.formatMessage({ id: nameof<IvCardTranslations>('Legal_Information') })}</IonTitle>
+            <IonTitle size="large">{translate(i18n, 'Legal_Information')}</IonTitle>
           </IonToolbar>
         </IonHeader>
-
-        <div>
-          <IonTextarea> Alles hier ist völlig legal.</IonTextarea>
-        </div>
+        <IonCard>
+          <ReactMarkdown source={licence} />
+        </IonCard>
+        <IonCard>
+          <ReactMarkdown source={thirdParty} />
+        </IonCard>
       </IonContent>
-    </IonPage>
+    </IonPage >
   );
 };
 
