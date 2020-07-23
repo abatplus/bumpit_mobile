@@ -186,6 +186,29 @@ Licensor: Jonas Hermsmeier (https://github.com/jhermsmeier/node-vcf)
 Copyright Notice: Copyright (c) 2015 Jonas Hermsmeier
 License: MIT
 
+Name: fortawesome/fontawesome-svg-core
+Version: 1.2.30
+Licensor:  https://fontawesome.com
+Copyright Notice: Copyright (c) Fonticons, Inc.
+License: MIT
+
+Name: fortawesome/react-fontawesome
+Version: 0.1.11
+Licensor:  https://fontawesome.com
+Copyright Notice: Copyright (c) 2018 Fonticons, Inc.
+License: MIT
+
+Name: fortawesome/pro-duotone-svg-icons
+Version: 5.14.0
+Licensor:  https://fontawesome.com
+Copyright Notice: Copyright (c) Fonticons, Inc.
+License: Font Awesome Pro commercial license
+
+Name: fortawesome/pro-solid-svg-icons
+Version: 5.14.0
+Licensor:  https://fontawesome.com
+Copyright Notice: Copyright (c) Fonticons, Inc.
+License: Font Awesome Pro commercial license
 
 Licenses:
 
