@@ -1,16 +1,28 @@
 import React, { useEffect } from 'react';
 import { useHistory } from 'react-router';
+import {
+    IonPage,
+    IonHeader,
+    IonToolbar,
+    IonButtons,
+    IonBackButton,
+    IonTitle,
+    IonContent,
+    IonFab,
+    IonFabButton,
+    IonMenuButton,
+} from '@ionic/react';
 import { useIntl } from 'react-intl';
 import { translate } from '../utils';
 import IProfile from '../interfaces/IProfile';
 import { useProfileContext } from '../store/contexts/ProfileContext';
+import { faPlus } from '@fortawesome/pro-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import ProfileCard from '../components/ProfileCard';
 import * as Actions from '../store/actions/actions';
 import { useAppContext } from '../store/contexts/AppContext';
 import { getProfileData, getEmptyProfile } from '../store/dataApi';
 import { v4 as uuidv4 } from 'uuid';
-import { IonPage, IonHeader, IonToolbar, IonButtons, IonMenuButton, IonBackButton, IonTitle, IonContent, IonFab, IonIcon, IonFabButton } from '@ionic/react';
-import { addCircle } from 'ionicons/icons';
 
 const renderProfiles = (profiles: IProfile[]) => {
   return profiles.map((profile: IProfile) => <ProfileCard profile={profile} key={profile.id} />);
@@ -39,32 +51,34 @@ export const VCardProfiles: React.FC = () => {
     history.push('/profile/edit/' + newProfile.id);
   }
 
-  return (
-    <IonPage>
-      <IonHeader translucent={true}>
-        <IonToolbar>
-          <IonButtons slot='start'>
-            <IonMenuButton />
-            <IonBackButton />
-          </IonButtons>
-          <IonTitle>{translate(i18n, 'Profiles')}</IonTitle>
-        </IonToolbar>
-      </IonHeader>
-      <IonContent slot={'fixed'}>
-        {profileContext.profiles && profileContext.profiles.length > 0 ? (
-          <div>{renderProfiles(profileContext.profiles)}</div>
-        ) : (
-            <React.Fragment />
-          )}
-        <IonFab vertical={'bottom'} horizontal={'end'} slot={'fixed'}>
-          <IonFabButton
-            onClick={() => addNewProfile()}>
-            <IonIcon icon={addCircle} />
-          </IonFabButton>
-        </IonFab>
-      </IonContent>
-    </IonPage>
-  );
+    return (
+        <IonPage>
+            <IonHeader translucent={true}>
+                <IonToolbar>
+                    <IonButtons slot='start'>
+                        <IonMenuButton />
+                        <IonBackButton />
+                    </IonButtons>
+                    <IonTitle>{translate(i18n, 'Profiles')}</IonTitle>
+                </IonToolbar>
+            </IonHeader>
+            <IonContent slot={'fixed'}>
+                {profileContext.profiles && profileContext.profiles.length > 0 ? (
+                    <div>{renderProfiles(profileContext.profiles)}</div>
+                ) : (
+                    <React.Fragment />
+                )}
+                <IonFab vertical={'bottom'} horizontal={'end'} slot={'fixed'}>
+                    <IonFabButton
+                        onClick={() => {
+                            addNewProfile();
+                        }}>
+                        <FontAwesomeIcon  className="fa fa-2x" icon={faPlus} />
+                    </IonFabButton>
+                </IonFab>
+            </IonContent>
+        </IonPage>
+    );
 };
 
 export default VCardProfiles;

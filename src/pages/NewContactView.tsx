@@ -1,20 +1,21 @@
 import React, { useState } from 'react';
 import {
-  IonHeader,
-  IonToolbar,
-  IonContent,
-  IonPage,
-  IonButtons,
-  IonTitle,
-  IonFooter,
-  IonButton,
-  IonIcon,
-  IonLabel,
-  IonMenuButton,
-  IonToast,
+    IonHeader,
+    IonToolbar,
+    IonContent,
+    IonPage,
+    IonButtons,
+    IonTitle,
+    IonFooter,
+    IonButton,
+    IonLabel,
+    IonMenuButton,
+    IonToast,
+    IonItem,
 } from '@ionic/react';
 import './VCardView.css';
-import { save } from 'ionicons/icons';
+import { faSave } from '@fortawesome/pro-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useHistory, useLocation } from 'react-router';
 import { useIntl } from 'react-intl';
 import { translate } from '../utils';
@@ -30,23 +31,22 @@ const NewContactView: React.FC = () => {
   const [showSavedMessage, setShowSavedMessage] = useState<boolean>(false);
   const contactApi: IContactApi = new ContactApi();
 
-  const onSaveContact = () => {
-    //Save contact to contacts
-    let createdContact = contactApi.createContact(vCard);
-    if (createdContact) {
-      createdContact
-        .then(() => {
-          setShowSavedMessage(true);
-        })
-        .catch((error) => {
-          window.alert(error);
-        });
-    }
-    else {
-      window.alert("no contact created");
-    }
-    history.replace('/profile');
-  };
+    const onSaveContact = () => {
+        //Save contact to contacts
+        let createdContact = contactApi.createContact(vCard);
+        if (createdContact) {
+            createdContact
+                .then(() => {
+                    setShowSavedMessage(true);
+                })
+                .catch((error) => {
+                    window.alert(error);
+                });
+        } else {
+            window.alert('no contact created');
+        }
+        history.replace('/profile');
+    };
 
   return (
     <IonPage>
@@ -147,17 +147,17 @@ const NewContactView: React.FC = () => {
           duration={1000}
         />
 
-        <IonButtons className='footer-buttons'>
-          <IonButton color='primary' fill='outline' className='footer-button' onClick={onSaveContact}>
-            <IonIcon icon={save} />
-            <IonLabel className='footer-button-text'>
-              {translate(i18n, 'Save_contact')}
-            </IonLabel>
-          </IonButton>
-        </IonButtons>
-      </IonFooter>
-    </IonPage>
-  );
+                <IonItem>
+                    <IonButton className='footer-button' onClick={onSaveContact}>
+                        <FontAwesomeIcon className='fa fa-lg' icon={faSave} />
+                        <IonLabel className='footer-button-text'>
+                            {translate(i18n, 'Save_contact')}
+                        </IonLabel>
+                    </IonButton>
+                </IonItem>
+            </IonFooter>
+        </IonPage>
+    );
 };
 
 export default NewContactView;

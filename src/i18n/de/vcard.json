@@ -15,7 +15,7 @@
     "message": "Scannen"
   },
   "Swap": {
-    "message": "Swap"
+    "message": "Austauschen"
   },
   "Exchange": {
     "message": "Austausch"
@@ -121,5 +121,8 @@
   },
   "Contact_saved": {
     "message": "Neuer Kontakt wurde gespeichert."
+  },
+  "Swap_candidates": {
+    "message": "Kandidaten"
   }
 }
