@@ -41,13 +41,13 @@ const VCardView: React.FC = () => {
         history.push('/qrcode/' + currentProfile?.id);
     };
 
-  const onClickSwap = () => {
-    if (!currentProfile?.vCard.name) {
-        setShowToast(true);
-    } else {
-      history.push('/swap/' + currentProfile?.id);
-    }
-};
+    const onClickSwap = () => {
+        if (!currentProfile?.vCard.name) {
+            setShowToast(true);
+        } else {
+            history.push('/swap/' + currentProfile?.id);
+        }
+    };
 
     return (
         <IonPage>
@@ -94,6 +94,13 @@ const VCardView: React.FC = () => {
                     </IonButton>
                 </IonItem>
             </IonFooter>
+
+            <IonToast
+                isOpen={showToast}
+                onDidDismiss={() => setShowToast(false)}
+                message={translate(i18n, 'Deny_Swap_Missing_Name_In_Profile')}
+                duration={2000}
+            />
         </IonPage>
     );
 };

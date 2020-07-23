@@ -124,5 +124,8 @@
   },
   "Swap_candidates": {
     "message": "Kandidaten"
+  },
+  "Deny_Swap_Missing_Name_In_Profile": {
+    "message": "Zum Datenaustausch bitte einen Namen im Profil eintragen."
   }
 }
