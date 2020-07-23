@@ -33,7 +33,9 @@ import { Geolocation } from '@ionic-native/geolocation';
 import ISwapListEntry from '../interfaces/ISwapListEntry';
 import { useIntl } from 'react-intl';
 import { translate } from '../utils';
-import CardExchangeServer from '../Server/CardExchangeServer';
+import * as signalR from '@microsoft/signalr';
+import { CardExchangeHub } from '../Server/CardExchangeHub';
+import { CardExchangeEvents } from '../Server/CardExchangeEvents';
 
 const SwapView: React.FC = () => {
   const { profileContext } = useProfileContext();
@@ -42,11 +44,36 @@ const SwapView: React.FC = () => {
   const [swapContext, dispatchSwapContext] = useReducer(SwapReducer.SwapReducer, []);
   const [segmentFilter, setSegmentFilter] = useState<string>('swap-list');
   const [swapList, setSwapList] = useState<ISwapListEntry[]>([]);
-  const deviceId = uuid4();
-  let updateHandler = setTimeout(() => { }, 10000000); // dummy
+  const [deviceId] = useState<string>(uuid4());
+  let updateHandler = setTimeout(() => {}, 10000000); // dummy
 
-  const cardExchangeClient = new SwapViewCardExchangeClient(dispatchSwapContext);
-  const cardExchangeServer = new CardExchangeServer(cardExchangeClient);
+  const getCurrentProfile = () => {
+    return profileContext.profiles.find((entry) => entry.id === id);
+  };
+
+  const getCurrentVCard = () => {
+    const profile = getCurrentProfile();
+    if (!profile?.vCard) {
+      throw new Error("could not get vcard");
+    }
+    return profile.vCard;
+  }
+
+  const getCurrentProfileNameField = () => {
+    const vcard = getCurrentVCard();
+    if (!vcard?.name) {
+      throw new Error("vcard contains no name");
+    }
+    return vcard.name;
+  };
+
+  const connection = new signalR.HubConnectionBuilder()
+  .withUrl("https://vswap-dev.smef.io/swaphub")
+  .build();
+  
+  const hub = new CardExchangeHub(connection);
+  const cardExchangeClient = new SwapViewCardExchangeClient(dispatchSwapContext, deviceId, getCurrentVCard(), hub);
+  const events = new CardExchangeEvents(connection, cardExchangeClient);
 
   useEffect(() => {
     setSwapList(
@@ -60,12 +87,12 @@ const SwapView: React.FC = () => {
     const name: string = getCurrentProfileNameField();
     Geolocation.getCurrentPosition()
       .then((resp) => {
-        cardExchangeServer.Hub.Subscribe(deviceId, resp.coords.longitude, resp.coords.latitude, name);
+        hub.Subscribe(deviceId, resp.coords.longitude, resp.coords.latitude, name);
 
         updateHandler = setInterval(() => {
           Geolocation.getCurrentPosition()
             .then((resp) => {
-              cardExchangeServer.Hub.Update(deviceId, resp.coords.longitude, resp.coords.latitude, name);
+              hub.Update(deviceId, resp.coords.longitude, resp.coords.latitude, name);
             })
             .catch((error) => {
               console.error('Error updating location', error);
@@ -78,21 +105,9 @@ const SwapView: React.FC = () => {
   });
 
   useIonViewDidLeave(() => {
-     clearInterval(updateHandler); // stop updates
-     cardExchangeServer.Hub.Unsubcribe(deviceId);
+    clearInterval(updateHandler); // stop updates
+    hub.Unsubcribe(deviceId);
   });
-
-  const getCurrentProfile = () => {
-    return profileContext.profiles.find((entry) => entry.id === id);
-  };
-
-  const getCurrentProfileNameField = () => {
-    const profile = getCurrentProfile();
-    if (!profile?.vCard?.name) {
-      throw new Error("profile doesn't exist or contains no name");
-    }
-    return profile.vCard.name;
-  };
 
   const onDoRequestAll = () => {
     // request all non requested or from whose no request is received
@@ -114,20 +129,17 @@ const SwapView: React.FC = () => {
 
   const onDoRequest = (peerDeviceId: string) => {
     console.log('request');
-    cardExchangeServer.Hub.RequestCardExchange(deviceId, peerDeviceId, getCurrentProfileNameField());
-    cardExchangeClient.cardExchangeRequested(peerDeviceId, 'xyz'); // TODO: DELETE AGAIN - JUST FOR TESTING NOW
+    hub.RequestCardExchange(deviceId, peerDeviceId, getCurrentProfileNameField());
   };
 
   const onAcceptRequest = (peerDeviceId: string) => {
     console.log('accept-request');
-    cardExchangeServer.Hub.AcceptCardExchange(deviceId, peerDeviceId, getCurrentProfileNameField(), JSON.stringify(getCurrentProfile()?.vCard));
-    cardExchangeClient.cardExchangeAccepted(peerDeviceId, 'xyz', 'XYZ'); // TODO: DELETE AGAIN - JUST FOR TESTING NOW
+    hub.AcceptCardExchange(deviceId, peerDeviceId, getCurrentProfileNameField(), JSON.stringify(getCurrentProfile()?.vCard));
   };
 
   const onAbortRequest = (peerDeviceId: string) => {
     console.log('abort request');
-    cardExchangeServer.Hub.RevokeCardExchangeRequest(deviceId, peerDeviceId);
-    cardExchangeClient.revokeSent(peerDeviceId);
+    hub.RevokeCardExchangeRequest(deviceId, peerDeviceId);
   };
 
   const renderList = () => {
