@@ -163,7 +163,7 @@ const SwapView: React.FC = () => {
       return (
         <IonFooter>
            <IonItem>
-          <IonList>
+          <IonList className="swap-footer-button-list">
               <IonButton className="swap-footer-button" onClick={onDoRequestAll}>
                 <FontAwesomeIcon  className="fa fa-lg" icon={faShareAll} />
                 <IonLabel className="swap-footer-button-text">
