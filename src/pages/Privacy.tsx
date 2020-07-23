@@ -1,5 +1,5 @@
 import React from 'react';
-import { IonHeader, IonToolbar, IonContent, IonPage, IonButtons, IonMenuButton, IonTitle, IonTextarea, IonCard } from '@ionic/react';
+import { IonHeader, IonToolbar, IonContent, IonPage, IonButtons, IonMenuButton, IonTitle, IonCard } from '@ionic/react';
 import { useIntl } from 'react-intl';
 import { translate, convertMarkdownFile } from '../utils';
 import privacyFile from "../docs/Datenschutz.md";

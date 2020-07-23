@@ -20,7 +20,7 @@ import {
 } from '@ionic/react';
 import './SwapView.css';
 import SwapViewListItem from '../components/SwapViewListItem';
-import { faPollPeople, faCheck,  } from '@fortawesome/pro-duotone-svg-icons';
+import { faPollPeople, faCheck, } from '@fortawesome/pro-duotone-svg-icons';
 import { faCheckDouble, faShareAll } from '@fortawesome/pro-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import SwapState from '../enums/SwapState';
@@ -33,9 +33,7 @@ import { Geolocation } from '@ionic-native/geolocation';
 import ISwapListEntry from '../interfaces/ISwapListEntry';
 import { useIntl } from 'react-intl';
 import { translate } from '../utils';
-import * as signalR from '@microsoft/signalr';
-import { CardExchangeHub } from '../Server/CardExchangeHub';
-import { CardExchangeEvents } from '../Server/CardExchangeEvents';
+import CardExchangeServer from '../Server/CardExchangeServer';
 
 const SwapView: React.FC = () => {
   const { profileContext } = useProfileContext();
@@ -45,7 +43,7 @@ const SwapView: React.FC = () => {
   const [segmentFilter, setSegmentFilter] = useState<string>('swap-list');
   const [swapList, setSwapList] = useState<ISwapListEntry[]>([]);
   const [deviceId] = useState<string>(uuid4());
-  let updateHandler = setTimeout(() => {}, 10000000); // dummy
+  let updateHandler = setTimeout(() => { }, 10000000); // dummy
 
   const getCurrentProfile = () => {
     return profileContext.profiles.find((entry) => entry.id === id);
@@ -67,13 +65,12 @@ const SwapView: React.FC = () => {
     return vcard.name;
   };
 
-  const connection = new signalR.HubConnectionBuilder()
-  .withUrl("https://vswap-dev.smef.io/swaphub")
-  .build();
-  
-  const hub = new CardExchangeHub(connection);
-  const cardExchangeClient = new SwapViewCardExchangeClient(dispatchSwapContext, deviceId, getCurrentVCard(), hub);
-  const events = new CardExchangeEvents(connection, cardExchangeClient);
+  const sendCardData = (peerDeviceId: string) => {
+    server.Hub.SendCardData(deviceId, peerDeviceId, getCurrentProfileNameField(), JSON.stringify(getCurrentVCard()));
+  }
+
+  const cardExchangeClient = new SwapViewCardExchangeClient(dispatchSwapContext, sendCardData);
+  const server = new CardExchangeServer(cardExchangeClient);
 
   useEffect(() => {
     setSwapList(
@@ -87,12 +84,12 @@ const SwapView: React.FC = () => {
     const name: string = getCurrentProfileNameField();
     Geolocation.getCurrentPosition()
       .then((resp) => {
-        hub.Subscribe(deviceId, resp.coords.longitude, resp.coords.latitude, name);
+        server.Hub.Subscribe(deviceId, resp.coords.longitude, resp.coords.latitude, name);
 
         updateHandler = setInterval(() => {
           Geolocation.getCurrentPosition()
             .then((resp) => {
-              hub.Update(deviceId, resp.coords.longitude, resp.coords.latitude, name);
+              server.Hub.Update(deviceId, resp.coords.longitude, resp.coords.latitude, name);
             })
             .catch((error) => {
               console.error('Error updating location', error);
@@ -106,7 +103,7 @@ const SwapView: React.FC = () => {
 
   useIonViewDidLeave(() => {
     clearInterval(updateHandler); // stop updates
-    hub.Unsubcribe(deviceId);
+    server.Hub.Unsubcribe(deviceId);
   });
 
   const onDoRequestAll = () => {
@@ -129,17 +126,17 @@ const SwapView: React.FC = () => {
 
   const onDoRequest = (peerDeviceId: string) => {
     console.log('request');
-    hub.RequestCardExchange(deviceId, peerDeviceId, getCurrentProfileNameField());
+    server.Hub.RequestCardExchange(deviceId, peerDeviceId, getCurrentProfileNameField());
   };
 
   const onAcceptRequest = (peerDeviceId: string) => {
     console.log('accept-request');
-    hub.AcceptCardExchange(deviceId, peerDeviceId, getCurrentProfileNameField(), JSON.stringify(getCurrentProfile()?.vCard));
+    server.Hub.AcceptCardExchange(deviceId, peerDeviceId, getCurrentProfileNameField(), JSON.stringify(getCurrentProfile()?.vCard));
   };
 
   const onAbortRequest = (peerDeviceId: string) => {
     console.log('abort request');
-    hub.RevokeCardExchangeRequest(deviceId, peerDeviceId);
+    server.Hub.RevokeCardExchangeRequest(deviceId, peerDeviceId);
   };
 
   const renderList = () => {
@@ -162,21 +159,21 @@ const SwapView: React.FC = () => {
     if (segmentFilter === 'swap-list')
       return (
         <IonFooter>
-           <IonItem>
-          <IonList>
+          <IonItem>
+            <IonList>
               <IonButton className="swap-footer-button" onClick={onDoRequestAll}>
-                <FontAwesomeIcon  className="fa fa-lg" icon={faShareAll} />
+                <FontAwesomeIcon className="fa fa-lg" icon={faShareAll} />
                 <IonLabel className="swap-footer-button-text">
                   {translate(i18n, 'Request_All')} {getNumberOfRequestAll()}
                 </IonLabel>
               </IonButton>
-              <IonButton  className="swap-footer-button" onClick={onAcceptAll}>
-                <FontAwesomeIcon  className="fa fa-lg" icon={faCheckDouble} />
+              <IonButton className="swap-footer-button" onClick={onAcceptAll}>
+                <FontAwesomeIcon className="fa fa-lg" icon={faCheckDouble} />
                 <IonLabel className="swap-footer-button-text">
                   {translate(i18n, 'Accept_All')} {getNumberOfAcceptAll()}
                 </IonLabel>
               </IonButton>
-          </IonList>
+            </IonList>
           </IonItem>
         </IonFooter>
       );
@@ -194,13 +191,13 @@ const SwapView: React.FC = () => {
         <IonToolbar>
           <IonSegment value={segmentFilter} onIonChange={(e) => setSegmentFilter(e.detail.value as string)}>
             <IonSegmentButton value="swap-list">
-              <FontAwesomeIcon  className="fa fa-lg" icon={faPollPeople} />
+              <FontAwesomeIcon className="fa fa-lg" icon={faPollPeople} />
               <IonLabel>
                 {translate(i18n, 'Swap_candidates')} ({swapContext.filter((entry) => entry.state !== SwapState.exchanged).length})
               </IonLabel>
             </IonSegmentButton>
             <IonSegmentButton value="ready-list">
-              <FontAwesomeIcon  className="fa fa-lg" icon={faCheck} />
+              <FontAwesomeIcon className="fa fa-lg" icon={faCheck} />
               <IonLabel>
                 {translate(i18n, 'Received')} (
                 {swapContext.filter((entry) => entry.state === SwapState.exchanged).length})
