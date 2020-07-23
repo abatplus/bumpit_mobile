@@ -73,7 +73,7 @@ const ProfileCard: React.FC<IProfileCardProps> = (props) => {
             <IonToast
                 isOpen={showToast}
                 onDidDismiss={() => setShowToast(false)}
-                message="Please provide your name in the profile before swapping."
+                message={translate(i18n, 'Deny_Swap_Missing_Name_In_Profile')}
                 duration={2000}
             />
         </IonCard>
