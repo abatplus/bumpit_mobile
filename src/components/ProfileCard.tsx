@@ -30,7 +30,6 @@ const ProfileCard: React.FC<IProfileCardProps> = (props) => {
             <IonCardHeader onClick={() => history.push('/profile/edit/' + props.profile.id)}>
                 <IonTitle className='ion-text-center'>{props.profile.name}</IonTitle>
             </IonCardHeader>
-            {/* <hr /> */}
             <IonCardContent>
                 <IonGrid>
                     <IonRow>
