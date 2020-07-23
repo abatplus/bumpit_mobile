@@ -8,11 +8,11 @@ import ScanView from '../pages/ScanView';
 import QrView from '../pages/QrView';
 import SwapView from '../pages/SwapView';
 import Privacy from '../pages/Privacy';
-import { LegalInfo } from '../pages/LegalInfo';
+import LegalInfo from '../pages/LegalInfo';
 import About from '../pages/About';
 import TermsAndConditions from '../pages/TermsAndConditions';
 import VCardView from '../pages/VCardView';
-import { VCardProfiles } from '../pages/VCardProfiles';
+import VCardProfiles from '../pages/VCardProfiles';
 import NewContactView from '../pages/NewContactView';
 
 export const MainContent: React.FC = () => {
