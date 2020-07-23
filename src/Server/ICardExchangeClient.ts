@@ -1,5 +1,6 @@
 // interface to signalR server. don't change without server changes!
 export interface ICardExchangeClient {
+
   subscribed: (peers: string[]) => void;
   unsubscribed: (statusMessage: string) => void;
   updated: (peers: string[]) => void;

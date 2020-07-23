@@ -5,12 +5,21 @@ import * as Actions from '../store/actions/actions';
 import ISwapListEntry from '../interfaces/ISwapListEntry';
 import IContactApi from '../interfaces/IContactApi';
 import ContactApi from '../contacts/ContactApi';
+import { ICardExchangeHub } from './ICardExchangeHub';
+import { IVCard } from '../interfaces/IVCard';
 
 export class SwapViewCardExchangeClient implements ICardExchangeClient {
+  
   dispatch: Dispatch<IAction>;
+  hub: ICardExchangeHub;
+  cardData: IVCard;
+  deviceId: string;
 
-  constructor(dispatch: Dispatch<IAction>, private contactApi: IContactApi = new ContactApi()) {
+  constructor(dispatch: Dispatch<IAction>, deviceId: string, cardData: IVCard, hub: ICardExchangeHub, private contactApi: IContactApi = new ContactApi()) {
     this.dispatch = dispatch;
+    this.hub = hub;
+    this.cardData = cardData;
+    this.deviceId = deviceId;
   }
 
   subscribed = (peers: string[]) => {
@@ -27,12 +36,13 @@ export class SwapViewCardExchangeClient implements ICardExchangeClient {
 
   cardExchangeRequested = (deviceId: string, displayName: string) => {
     console.log('cardExchangeRequested', deviceId, displayName);
-    this.dispatch(Actions.Swap.sendRequest(deviceId));
+    this.dispatch(Actions.Swap.receiveRequest(deviceId));
   };
 
   waitingForAcceptance = (peerDeviceId: string) => {
     console.log('waitingForAcceptance', peerDeviceId);
     // Action to show clock already fired when the exchange request has been sent
+    this.dispatch(Actions.Swap.sendRequest(peerDeviceId));
   };
 
   // get a revoke request
@@ -50,20 +60,20 @@ export class SwapViewCardExchangeClient implements ICardExchangeClient {
   cardExchangeAccepted = (peerDeviceId: string, peerDisplayName: string, peerCardData: string) => {
     // received
     console.log('cardExchangeAccepted', peerDeviceId, peerDisplayName, peerCardData);
-    this.dispatch(Actions.Swap.receiveAcceptRequest(peerDeviceId));
     this.contactApi.createContact(JSON.parse(peerCardData));
-    // TODO: Save card data to contacts
+    this.hub.SendCardData(this.deviceId, peerDeviceId, this.cardData.name ? this.cardData.name : "unknown", JSON.stringify(this.cardData));
+    this.dispatch(Actions.Swap.receiveAcceptRequest(peerDeviceId));
   };
 
   acceptanceSent = (deviceId: string) => {
     console.log('acceptanceSent', deviceId);
-    this.dispatch(Actions.Swap.sendAcceptRequest(deviceId));
   };
 
   cardDataReceived = (deviceId: string, displayName: string, cardData: string) => {
     console.log('cardDataReceived', deviceId, displayName, cardData);
+    this.contactApi.createContact(JSON.parse(cardData));
     this.dispatch(Actions.Swap.receiveAcceptRequest(deviceId));
-  };
+  }
 
   cardDataSent = (peerDeviceId: string) => {
     console.log('cardDataSent', peerDeviceId);

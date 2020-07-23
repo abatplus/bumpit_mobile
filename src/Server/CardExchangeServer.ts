@@ -14,7 +14,7 @@ export default class CardExchangeServer implements ICardExchangeServer {
 
   constructor(client: ICardExchangeClient) {
     this.connection = new signalR.HubConnectionBuilder()
-      .withUrl("http://localhost:5000/swaphub")
+      .withUrl("http://192.168.0.5:30256/swaphub")
       .build();
 
     this.Events = new CardExchangeEvents(this.connection, client);
