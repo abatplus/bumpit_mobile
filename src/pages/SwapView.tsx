@@ -20,12 +20,12 @@ import {
 } from '@ionic/react';
 import './SwapView.css';
 import SwapViewListItem from '../components/SwapViewListItem';
-import { faPollPeople, faCheck,  } from '@fortawesome/pro-duotone-svg-icons';
+import { faPollPeople, faCheck, } from '@fortawesome/pro-duotone-svg-icons';
 import { faCheckDouble, faShareAll } from '@fortawesome/pro-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import SwapState from '../enums/SwapState';
 import * as SwapReducer from '../store/reducers/SwapReducer';
-import { SwapViewCardExchangeClient } from '../Server/SwapViewCardExchangeClient';
+import { SwapViewCardExchangeClient } from '../server/SwapViewCardExchangeClient';
 import { v4 as uuid4 } from 'uuid';
 import { useProfileContext } from '../store/contexts/ProfileContext';
 import { useParams } from 'react-router';
@@ -34,8 +34,8 @@ import ISwapListEntry from '../interfaces/ISwapListEntry';
 import { useIntl } from 'react-intl';
 import { translate } from '../utils';
 import * as signalR from '@microsoft/signalr';
-import { CardExchangeHub } from '../Server/CardExchangeHub';
-import { CardExchangeEvents } from '../Server/CardExchangeEvents';
+import { CardExchangeHub } from '../server/CardExchangeHub';
+import { CardExchangeEvents } from '../server/CardExchangeEvents';
 
 const SwapView: React.FC = () => {
   const { profileContext } = useProfileContext();
@@ -45,7 +45,7 @@ const SwapView: React.FC = () => {
   const [segmentFilter, setSegmentFilter] = useState<string>('swap-list');
   const [swapList, setSwapList] = useState<ISwapListEntry[]>([]);
   const [deviceId] = useState<string>(uuid4());
-  let updateHandler = setTimeout(() => {}, 10000000); // dummy
+  let updateHandler = setTimeout(() => { }, 10000000); // dummy
 
   const getCurrentProfile = () => {
     return profileContext.profiles.find((entry) => entry.id === id);
@@ -68,9 +68,9 @@ const SwapView: React.FC = () => {
   };
 
   const connection = new signalR.HubConnectionBuilder()
-  .withUrl("https://vswap-dev.smef.io/swaphub")
-  .build();
-  
+    .withUrl("https://vswap-dev.smef.io/swaphub")
+    .build();
+
   const hub = new CardExchangeHub(connection);
   const cardExchangeClient = new SwapViewCardExchangeClient(dispatchSwapContext, deviceId, getCurrentVCard(), hub);
   const events = new CardExchangeEvents(connection, cardExchangeClient);
@@ -162,21 +162,21 @@ const SwapView: React.FC = () => {
     if (segmentFilter === 'swap-list')
       return (
         <IonFooter>
-           <IonItem>
-          <IonList className="swap-footer-button-list">
+          <IonItem>
+            <IonList className="swap-footer-button-list">
               <IonButton className="swap-footer-button" onClick={onDoRequestAll}>
-                <FontAwesomeIcon  className="fa fa-lg" icon={faShareAll} />
+                <FontAwesomeIcon className="fa fa-lg" icon={faShareAll} />
                 <IonLabel className="swap-footer-button-text">
                   {translate(i18n, 'Request_All')} {getNumberOfRequestAll()}
                 </IonLabel>
               </IonButton>
-              <IonButton  className="swap-footer-button" onClick={onAcceptAll}>
-                <FontAwesomeIcon  className="fa fa-lg" icon={faCheckDouble} />
+              <IonButton className="swap-footer-button" onClick={onAcceptAll}>
+                <FontAwesomeIcon className="fa fa-lg" icon={faCheckDouble} />
                 <IonLabel className="swap-footer-button-text">
                   {translate(i18n, 'Accept_All')} {getNumberOfAcceptAll()}
                 </IonLabel>
               </IonButton>
-          </IonList>
+            </IonList>
           </IonItem>
         </IonFooter>
       );
@@ -194,13 +194,13 @@ const SwapView: React.FC = () => {
         <IonToolbar>
           <IonSegment value={segmentFilter} onIonChange={(e) => setSegmentFilter(e.detail.value as string)}>
             <IonSegmentButton value="swap-list">
-              <FontAwesomeIcon  className="fa fa-lg" icon={faPollPeople} />
+              <FontAwesomeIcon className="fa fa-lg" icon={faPollPeople} />
               <IonLabel>
                 {translate(i18n, 'Swap_candidates')} ({swapContext.filter((entry) => entry.state !== SwapState.exchanged).length})
               </IonLabel>
             </IonSegmentButton>
             <IonSegmentButton value="ready-list">
-              <FontAwesomeIcon  className="fa fa-lg" icon={faCheck} />
+              <FontAwesomeIcon className="fa fa-lg" icon={faCheck} />
               <IonLabel>
                 {translate(i18n, 'Received')} (
                 {swapContext.filter((entry) => entry.state === SwapState.exchanged).length})
