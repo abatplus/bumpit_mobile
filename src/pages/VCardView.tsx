@@ -1,5 +1,5 @@
-import React from 'react';
-import { IonHeader, IonToolbar, IonContent, IonPage, IonButtons, IonTitle, IonFooter, IonButton, IonIcon, IonLabel, IonBackButton } from '@ionic/react';
+import React, { useState } from 'react';
+import { IonHeader, IonToolbar, IonContent, IonPage, IonButtons, IonTitle, IonFooter, IonButton, IonIcon, IonLabel, IonBackButton, IonToast } from '@ionic/react';
 import './VCardView.css';
 import { qrCode, share, trash } from 'ionicons/icons';
 import { useHistory, useParams } from 'react-router';
@@ -17,6 +17,7 @@ const VCardView: React.FC = () => {
 
   const { id } = useParams();
   const { profileContext, dispatchProfileContext } = useProfileContext();
+  const [showToast, setShowToast] = useState(false);
 
  
   const getCurrentProfile = () => {
@@ -41,8 +42,12 @@ const VCardView: React.FC = () => {
   };
 
   const onClickSwap = () => {
-    history.push('/swap/'+currentProfile?.id);
-  };
+    if (!currentProfile?.vCard.name) {
+        setShowToast(true);
+    } else {
+      history.push('/swap/'+currentProfile?.id);
+    }
+};
 
 
   return (
@@ -77,6 +82,12 @@ const VCardView: React.FC = () => {
           </IonButton>
         </IonButtons>
       </IonFooter>
+      <IonToast
+        isOpen={showToast}
+        onDidDismiss={() => setShowToast(false)}
+        message="Please provide your name in the profile before swapping."
+        duration={2000}
+      />
     </IonPage>
   );
 };
