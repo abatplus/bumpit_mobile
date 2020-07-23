@@ -1,9 +1,9 @@
 import React from 'react';
-import { IonTabBar, IonTabButton, IonIcon, IonLabel, IonTabs, IonRouterOutlet, IonPage } from '@ionic/react';
-import { people, scan } from 'ionicons/icons';
+import { IonTabBar, IonTabButton, IonLabel, IonTabs, IonRouterOutlet, IonPage } from '@ionic/react';
+import { faBarcodeRead, faIdCard } from '@fortawesome/pro-duotone-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useIntl } from 'react-intl';
-import { nameof } from '../utils';
-import IvCardTranslations from '../i18n/IvCardTranslations';
+import { translate } from '../utils';
 import { Route, Redirect } from 'react-router';
 import ScanView from '../pages/ScanView';
 import QrView from '../pages/QrView';
@@ -37,12 +37,12 @@ export const MainContent: React.FC = () => {
         </IonRouterOutlet>
         <IonTabBar slot="bottom">
           <IonTabButton tab="profile" href="/profile">
-            <IonIcon icon={people} />
-            <IonLabel>{i18n.formatMessage({ id: nameof<IvCardTranslations>('Profiles') })}</IonLabel>
+            <FontAwesomeIcon  className="fa fa-lg" icon={faIdCard} />
+            <IonLabel>{translate(i18n, 'Profiles')}</IonLabel>
           </IonTabButton>
           <IonTabButton tab="scan" href="/scan">
-            <IonIcon icon={scan} />
-            <IonLabel>{i18n.formatMessage({ id: nameof<IvCardTranslations>('Scan') })}</IonLabel>
+            <FontAwesomeIcon className="fa fa-lg" icon={faBarcodeRead} />
+            <IonLabel>{translate(i18n, 'Scan')}</IonLabel>
           </IonTabButton>
         </IonTabBar>
       </IonTabs>

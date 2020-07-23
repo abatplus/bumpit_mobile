@@ -1,11 +1,15 @@
 import React from 'react';
-import { IonHeader, IonToolbar, IonContent, IonPage, IonButtons, IonMenuButton, IonTitle, IonTextarea } from '@ionic/react';
+import { IonHeader, IonToolbar, IonContent, IonPage, IonButtons, IonMenuButton, IonTitle, IonTextarea, IonCard } from '@ionic/react';
 import { useIntl } from 'react-intl';
-import { nameof } from '../utils';
-import IvCardTranslations from '../i18n/IvCardTranslations';
+import { translate, convertMarkdownFile } from '../utils';
+import privacyFile from "../docs/Datenschutz.md";
+import ReactMarkdown from 'react-markdown';
 
 const Privacy: React.FC = () => {
   const i18n = useIntl();
+  const [privacy, setPrivacy] = React.useState('');
+
+  convertMarkdownFile(privacyFile).then(setPrivacy);
 
   return (
     <IonPage id="privacy">
@@ -14,20 +18,20 @@ const Privacy: React.FC = () => {
           <IonButtons slot="start">
             <IonMenuButton />
           </IonButtons>
-          <IonTitle>{i18n.formatMessage({ id: nameof<IvCardTranslations>('Privacy_Protection') })}</IonTitle>
+          <IonTitle>{translate(i18n, 'Privacy_Protection')}</IonTitle>
         </IonToolbar>
       </IonHeader>
 
       <IonContent fullscreen={false}>
         <IonHeader collapse="condense">
           <IonToolbar>
-            <IonTitle size="large">{i18n.formatMessage({ id: nameof<IvCardTranslations>('Privacy_Protection') })}</IonTitle>
+            <IonTitle size="large">{translate(i18n, 'Privacy_Protection')}</IonTitle>
           </IonToolbar>
         </IonHeader>
 
-        <div>
-          <IonTextarea> Sie wollen private Daten austauschen, keine "privacy".</IonTextarea>
-        </div>
+        <IonCard>
+          <ReactMarkdown source={privacy} />
+        </IonCard>
       </IonContent>
     </IonPage>
   );

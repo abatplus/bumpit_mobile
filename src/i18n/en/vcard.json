@@ -121,5 +121,8 @@
   },
   "Contact_saved": {
     "message": "New contact was saved."
+  },
+  "Swap_candidates": {
+    "message": "Candidates"
   }
 }
