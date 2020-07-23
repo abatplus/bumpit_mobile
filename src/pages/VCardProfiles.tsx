@@ -66,3 +66,5 @@ export const VCardProfiles: React.FC = () => {
     </IonPage>
   );
 };
+
+export default VCardProfiles;

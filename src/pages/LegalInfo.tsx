@@ -42,3 +42,5 @@ export const LegalInfo: React.FC = () => {
     </IonPage >
   );
 };
+
+export default LegalInfo;
