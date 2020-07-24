@@ -7,7 +7,6 @@ import {
   IonButtons,
   IonList,
   IonTitle,
-  IonLoading,
   IonBackButton,
   IonFooter,
   IonButton,
@@ -34,6 +33,7 @@ import ISwapListEntry from '../interfaces/ISwapListEntry';
 import { useIntl } from 'react-intl';
 import { translate } from '../utils';
 import CardExchangeServer from '../server/CardExchangeServer';
+import LoadingSpinner from '../components/LoadingSpinner';
 
 const SwapView: React.FC = () => {
   const { profileContext } = useProfileContext();
@@ -208,18 +208,7 @@ const SwapView: React.FC = () => {
       </IonHeader>
 
       <IonContent>
-        {swapContext.length === 0 ? (
-          <IonLoading
-            spinner={'lines'}
-            isOpen={true}
-            message={translate(i18n, 'Wait_for_contacts')}
-            showBackdrop={true}
-            backdropDismiss={false}
-            duration={10000}
-          />
-        ) : (
-            ''
-          )}
+        {swapContext.length === 0 && <LoadingSpinner message={translate(i18n, 'Wait_for_contacts')}/> }
         <IonList>{renderList()}</IonList>
       </IonContent>
       {renderFooter()}
