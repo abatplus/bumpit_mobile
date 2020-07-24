@@ -74,10 +74,10 @@ const Menu: React.FC = () => {
   return (
     <IonMenu type='overlay' disabled={!appContext.menuEnabled} contentId='main'>
       <IonContent forceOverscroll={false}>
-        <IonItem lines='none'>
+        <IonItem lines='none' color='secondary'>
           <IonImg className='app-icon' src='../../assets/icon/Logo_dummy.png'></IonImg>
         </IonItem>
-        <IonItem lines='inset'>
+        <IonItem lines='inset'  color='secondary'>
           <IonLabel className='app-name'>
             {translate(i18n, 'appName')}
           </IonLabel>

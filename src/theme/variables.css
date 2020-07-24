@@ -1,6 +1,16 @@
 /* Ionic Variables and Theming. For more info, please see:
 http://ionicframework.com/docs/theming/ */
 
+
+.ion-color-abatgray {
+    --ion-color-base: var(--ion-color-abatgray);
+    --ion-color-base-rgb: var(--ion-color-abatgray-rgb);
+    --ion-color-contrast: var(--ion-color-abatgray-contrast);
+    --ion-color-contrast-rgb: var(--ion-color-abatgray-contrast-rgb);
+    --ion-color-shade: var(--ion-color-abatgray-shade);
+    --ion-color-tint: var(--ion-color-abatgray-tint);
+  }
+
 /** Ionic CSS Variables **/
 :root {
     /** primary **/
@@ -75,8 +85,34 @@ http://ionicframework.com/docs/theming/ */
     --ion-color-light-shade: #d7d8da;
     --ion-color-light-tint: #f5f6f9;
 
+    /** abatgray **/
+    --ion-color-abatgray: #787878;
+    --ion-color-abatgray-rgb: 120,120,120;
+    --ion-color-abatgray-contrast: #ffffff;
+    --ion-color-abatgray-contrast-rgb: 255,255,255;
+    --ion-color-abatgray-shade: #6a6a6a;
+    --ion-color-abatgray-tint: #868686;
+
     --ion-text-color: #000000;
+    --ion-text-color-rgb: 0, 0, 0; 
 }
+
+.ion-title {
+    --color: #000000;
+};
+
+.ion-tab-button {
+    --color: #000000;
+}
+/** change color of label of input fields on focus**/
+/* .item-has-focus .label-stacked.sc-ion-label-md-h {
+    color: #007878;
+} */
+
+.native-input.sc-ion-input-ios {
+    color: #000000;
+}
+
 
 @media (prefers-color-scheme: dark) {
     /*
