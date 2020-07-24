@@ -190,7 +190,7 @@ const SwapView: React.FC = () => {
         </IonToolbar>
         <IonToolbar>
           <IonSegment value={segmentFilter} onIonChange={(e) => setSegmentFilter(e.detail.value as string)}>
-            <IonSegmentButton value="swap-list">
+            <IonSegmentButton value="swap-list" className="swap-segment-button">
               <FontAwesomeIcon className="fa fa-lg" icon={faPollPeople} />
               <IonLabel>
                 {translate(i18n, 'Swap_candidates')} ({swapContext.filter((entry) => entry.state !== SwapState.exchanged).length})
