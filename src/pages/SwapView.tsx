@@ -25,7 +25,7 @@ import { faCheckDouble, faShareAll } from '@fortawesome/pro-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import SwapState from '../enums/SwapState';
 import * as SwapReducer from '../store/reducers/SwapReducer';
-import { SwapViewCardExchangeClient } from '../Server/SwapViewCardExchangeClient';
+import { SwapViewCardExchangeClient } from '../server/SwapViewCardExchangeClient';
 import { v4 as uuid4 } from 'uuid';
 import { useProfileContext } from '../store/contexts/ProfileContext';
 import { useParams } from 'react-router';
@@ -33,7 +33,7 @@ import { Geolocation } from '@ionic-native/geolocation';
 import ISwapListEntry from '../interfaces/ISwapListEntry';
 import { useIntl } from 'react-intl';
 import { translate } from '../utils';
-import CardExchangeServer from '../Server/CardExchangeServer';
+import CardExchangeServer from '../server/CardExchangeServer';
 
 const SwapView: React.FC = () => {
   const { profileContext } = useProfileContext();

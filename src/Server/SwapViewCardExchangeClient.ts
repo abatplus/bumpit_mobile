@@ -1,10 +1,10 @@
-import { ICardExchangeClient } from './ICardExchangeClient';
 import { Dispatch } from 'react';
 import { IAction } from '../store/reducers/SwapReducer';
 import * as Actions from '../store/actions/actions';
 import ISwapListEntry from '../interfaces/ISwapListEntry';
 import IContactApi from '../interfaces/IContactApi';
 import ContactApi from '../contacts/ContactApi';
+import { ICardExchangeClient } from './ICardExchangeClient';
 
 export class SwapViewCardExchangeClient implements ICardExchangeClient {
 

@@ -1,6 +1,6 @@
 import * as signalR from "@microsoft/signalr";
+import ICardExchangeEvents from "./ICardExchangeEvents";
 import { ICardExchangeClient } from "./ICardExchangeClient";
-import ICardExchangeEvents from './ICardExchangeEvents';
 
 export enum CardExchangeEvent {
   Subscribed = 'Subscribed',
