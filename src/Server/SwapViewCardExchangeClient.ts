@@ -1,25 +1,15 @@
-import { ICardExchangeClient } from './ICardExchangeClient';
 import { Dispatch } from 'react';
 import { IAction } from '../store/reducers/SwapReducer';
 import * as Actions from '../store/actions/actions';
 import ISwapListEntry from '../interfaces/ISwapListEntry';
 import IContactApi from '../interfaces/IContactApi';
 import ContactApi from '../contacts/ContactApi';
-import { ICardExchangeHub } from './ICardExchangeHub';
-import { IVCard } from '../interfaces/IVCard';
+import { ICardExchangeClient } from './ICardExchangeClient';
 
 export class SwapViewCardExchangeClient implements ICardExchangeClient {
-  
-  dispatch: Dispatch<IAction>;
-  hub: ICardExchangeHub;
-  cardData: IVCard;
-  deviceId: string;
 
-  constructor(dispatch: Dispatch<IAction>, deviceId: string, cardData: IVCard, hub: ICardExchangeHub, private contactApi: IContactApi = new ContactApi()) {
-    this.dispatch = dispatch;
-    this.hub = hub;
-    this.cardData = cardData;
-    this.deviceId = deviceId;
+  constructor(private dispatch: Dispatch<IAction>, private sendCardData: (peerDeviceId: string) => void, private contactApi: IContactApi = new ContactApi()) {
+
   }
 
   subscribed = (peers: string[]) => {
@@ -61,7 +51,7 @@ export class SwapViewCardExchangeClient implements ICardExchangeClient {
     // received
     console.log('cardExchangeAccepted', peerDeviceId, peerDisplayName, peerCardData);
     this.contactApi.createContact(JSON.parse(peerCardData));
-    this.hub.SendCardData(this.deviceId, peerDeviceId, this.cardData.name ? this.cardData.name : "unknown", JSON.stringify(this.cardData));
+    this.sendCardData(peerDeviceId);
     this.dispatch(Actions.Swap.receiveAcceptRequest(peerDeviceId));
   };
 

@@ -33,9 +33,7 @@ import { Geolocation } from '@ionic-native/geolocation';
 import ISwapListEntry from '../interfaces/ISwapListEntry';
 import { useIntl } from 'react-intl';
 import { translate } from '../utils';
-import * as signalR from '@microsoft/signalr';
-import { CardExchangeHub } from '../server/CardExchangeHub';
-import { CardExchangeEvents } from '../server/CardExchangeEvents';
+import CardExchangeServer from '../server/CardExchangeServer';
 
 const SwapView: React.FC = () => {
   const { profileContext } = useProfileContext();
@@ -67,13 +65,12 @@ const SwapView: React.FC = () => {
     return vcard.name;
   };
 
-  const connection = new signalR.HubConnectionBuilder()
-    .withUrl("https://vswap-dev.smef.io/swaphub")
-    .build();
+  const sendCardData = (peerDeviceId: string) => {
+    server.Hub.SendCardData(deviceId, peerDeviceId, getCurrentProfileNameField(), JSON.stringify(getCurrentVCard()));
+  }
 
-  const hub = new CardExchangeHub(connection);
-  const cardExchangeClient = new SwapViewCardExchangeClient(dispatchSwapContext, deviceId, getCurrentVCard(), hub);
-  const events = new CardExchangeEvents(connection, cardExchangeClient);
+  const cardExchangeClient = new SwapViewCardExchangeClient(dispatchSwapContext, sendCardData);
+  const server = new CardExchangeServer(cardExchangeClient);
 
   useEffect(() => {
     setSwapList(
@@ -87,12 +84,12 @@ const SwapView: React.FC = () => {
     const name: string = getCurrentProfileNameField();
     Geolocation.getCurrentPosition()
       .then((resp) => {
-        hub.Subscribe(deviceId, resp.coords.longitude, resp.coords.latitude, name);
+        server.Hub.Subscribe(deviceId, resp.coords.longitude, resp.coords.latitude, name);
 
         updateHandler = setInterval(() => {
           Geolocation.getCurrentPosition()
             .then((resp) => {
-              hub.Update(deviceId, resp.coords.longitude, resp.coords.latitude, name);
+              server.Hub.Update(deviceId, resp.coords.longitude, resp.coords.latitude, name);
             })
             .catch((error) => {
               console.error('Error updating location', error);
@@ -106,7 +103,7 @@ const SwapView: React.FC = () => {
 
   useIonViewDidLeave(() => {
     clearInterval(updateHandler); // stop updates
-    hub.Unsubcribe(deviceId);
+    server.Hub.Unsubcribe(deviceId);
   });
 
   const onDoRequestAll = () => {
@@ -129,17 +126,17 @@ const SwapView: React.FC = () => {
 
   const onDoRequest = (peerDeviceId: string) => {
     console.log('request');
-    hub.RequestCardExchange(deviceId, peerDeviceId, getCurrentProfileNameField());
+    server.Hub.RequestCardExchange(deviceId, peerDeviceId, getCurrentProfileNameField());
   };
 
   const onAcceptRequest = (peerDeviceId: string) => {
     console.log('accept-request');
-    hub.AcceptCardExchange(deviceId, peerDeviceId, getCurrentProfileNameField(), JSON.stringify(getCurrentProfile()?.vCard));
+    server.Hub.AcceptCardExchange(deviceId, peerDeviceId, getCurrentProfileNameField(), JSON.stringify(getCurrentProfile()?.vCard));
   };
 
   const onAbortRequest = (peerDeviceId: string) => {
     console.log('abort request');
-    hub.RevokeCardExchangeRequest(deviceId, peerDeviceId);
+    server.Hub.RevokeCardExchangeRequest(deviceId, peerDeviceId);
   };
 
   const renderList = () => {

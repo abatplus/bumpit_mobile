@@ -38,8 +38,8 @@ const Profile: React.FC<IProfileProps> = (props) => {
 
   return (
     <div>
-      <IonItem className='vcard-field-label'>
-        <IonLabel position='stacked'>
+      <IonItem >
+        <IonLabel position='stacked' color='abatgray'>
           {translate(i18n, 'Profile_Description')}
         </IonLabel>
         <IonInput
