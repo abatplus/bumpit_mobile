@@ -97,21 +97,21 @@ http://ionicframework.com/docs/theming/ */
     --ion-text-color-rgb: 0, 0, 0; 
 }
 
-.ion-title {
+/* .ion-title {
     --color: #000000;
 };
 
 .ion-tab-button {
     --color: #000000;
-}
+} */
 /** change color of label of input fields on focus**/
 /* .item-has-focus .label-stacked.sc-ion-label-md-h {
     color: #007878;
 } */
 
-.native-input.sc-ion-input-ios {
+/* .native-input.sc-ion-input-ios {
     color: #000000;
-}
+} */
 
 
 @media (prefers-color-scheme: dark) {
