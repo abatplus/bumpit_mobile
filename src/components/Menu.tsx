@@ -78,13 +78,16 @@ const Menu: React.FC = () => {
     : 
     '../../assets/icon/Logo_vSwap_Menue-Drawer.png';
 
+  const menuItemColor = window.matchMedia('(prefers-color-scheme: dark)').matches ? 
+    'secondary' : '';
+
   return (
     <IonMenu type='overlay' disabled={!appContext.menuEnabled} contentId='main'>
-      <IonContent forceOverscroll={false}>
+      <IonContent forceOverscroll={false} className="menu-background">
         <IonItem lines='inset' color='secondary'>
           <IonImg className='app-icon' src={logo}></IonImg>
         </IonItem>
-        <IonItem lines='inset' color='secondary'>
+        <IonItem lines='inset' color={menuItemColor}>
           <IonList lines='none'>{renderListItems(routes.tabsPages)}</IonList>
         </IonItem>
         <IonItem>
