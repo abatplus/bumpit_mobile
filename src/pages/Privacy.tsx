@@ -14,7 +14,7 @@ const Privacy: React.FC = () => {
   return (
     <IonPage id="privacy">
       <IonHeader translucent={true}>
-        <IonToolbar>
+        <IonToolbar color="primary">
           <IonButtons slot="start">
             <IonMenuButton />
           </IonButtons>
@@ -24,7 +24,7 @@ const Privacy: React.FC = () => {
 
       <IonContent fullscreen={false}>
         <IonHeader collapse="condense">
-          <IonToolbar>
+          <IonToolbar color="primary">
             <IonTitle size="large">{translate(i18n, 'Privacy_Protection')}</IonTitle>
           </IonToolbar>
         </IonHeader>

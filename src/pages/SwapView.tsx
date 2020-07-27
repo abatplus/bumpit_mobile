@@ -182,13 +182,13 @@ const SwapView: React.FC = () => {
   return (
     <IonPage>
       <IonHeader translucent={true}>
-        <IonToolbar>
+        <IonToolbar color="primary">
           <IonButtons slot="start">
             <IonBackButton />
           </IonButtons>
           <IonTitle>{translate(i18n, 'Exchange')}</IonTitle>
         </IonToolbar>
-        <IonToolbar>
+        <IonToolbar color="primary">
           <IonSegment value={segmentFilter} onIonChange={(e) => setSegmentFilter(e.detail.value as string)}>
             <IonSegmentButton value="swap-list" className="swap-segment-button">
               <FontAwesomeIcon className="fa fa-lg" icon={faPollPeople} />

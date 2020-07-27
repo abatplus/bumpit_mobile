@@ -14,7 +14,7 @@ const TermsAndConditions: React.FC = () => {
   return (
     <IonPage id="termsAndConditions">
       <IonHeader translucent={true}>
-        <IonToolbar>
+        <IonToolbar color="primary">
           <IonButtons slot="start">
             <IonMenuButton />
           </IonButtons>

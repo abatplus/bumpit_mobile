@@ -18,7 +18,7 @@ export const LegalInfo: React.FC = () => {
   return (
     <IonPage id="legal">
       <IonHeader translucent={true}>
-        <IonToolbar>
+        <IonToolbar color="primary">
           <IonButtons slot="start">
             <IonMenuButton />
           </IonButtons>
@@ -28,7 +28,7 @@ export const LegalInfo: React.FC = () => {
 
       <IonContent fullscreen={false}>
         <IonHeader collapse="condense">
-          <IonToolbar>
+          <IonToolbar color="primary">
             <IonTitle size="large">{translate(i18n, 'Legal_Information')}</IonTitle>
           </IonToolbar>
         </IonHeader>

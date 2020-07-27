@@ -17,11 +17,12 @@ jspm_packages/
 
 # production
 /build
-/android
-/ios
 
 # android build files
 /android
+
+# ios build files
+/ios
 
 # misc
 .DS_Store

@@ -15,10 +15,22 @@ https://ionicframework.com/docs/developing/previewing
 
 In the project directory, you can run:
 
-### `ionic serve`
+### `npm install`
 
 ### `npm start`
 
+To create a platform specific project run either
+
+### `ionic capacitor build android`
+or
+### `ionic capacitor build ios`
+
+After that you have to run the following command to supply app icon ans splash screen to the native projects
+
+### `npm run resources`
+
+Now you can start start your native prject in the corresponding IDE. (iOS needs to add a profisioning profile before running)
+
 ## License
 
-vSwap_mobile is [MIT licensed](./LICENSE.md).
+vSwap is [MIT licensed](./LICENSE.md).

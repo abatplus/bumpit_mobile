@@ -54,7 +54,7 @@ export const VCardProfiles: React.FC = () => {
     return (
         <IonPage>
             <IonHeader translucent={true}>
-                <IonToolbar>
+                <IonToolbar color="primary">
                     <IonButtons slot='start'>
                         <IonMenuButton />
                         <IonBackButton />

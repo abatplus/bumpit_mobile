@@ -44,14 +44,18 @@ const ScanView: React.FC = () => {
     });
 
     function onScanCompleted(data: string) {
-        let vCard = getEmptyVCard();
-        try {
-            vCard = parseQrDataToVcard(data.replace(/\n/g, '\r\n'));
-        } catch (error) {
-            window.alert('Invalide QR code.\n' + error);
+        if (data && data.length > 0 ) {
+            let vCard = getEmptyVCard();
+            try {
+                vCard = parseQrDataToVcard(data.replace(/\n/g, '\r\n'));
+                history.replace('/newContact', vCard);
+            } catch (error) {
+                window.alert('Invalid QR code.\n'); // + error);
+                history.goBack();
+            }   
+        } else {
+            history.goBack();
         }
-
-        history.push('/newContact', vCard);
     }
 
     useIonViewDidEnter(() => {
@@ -193,7 +197,7 @@ const ScanView: React.FC = () => {
     return (
         <IonPage id='scan'>
             <IonHeader>
-                <IonToolbar>
+                <IonToolbar color="primary">
                     <IonButtons slot='start'>
                         <IonMenuButton />
                     </IonButtons>

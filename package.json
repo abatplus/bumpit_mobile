@@ -47,7 +47,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build"
+    "build": "react-scripts build",
+    "resources": "cordova-res ios && cordova-res android && node scripts/resources.js"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -67,7 +68,8 @@
   "license": "MIT",
   "devDependencies": {
     "@capacitor/cli": "2.3.0",
-    "@ionic/lab": "3.1.7"
+    "@ionic/lab": "3.1.7",
+    "cordova-res": "^0.15.1"
   },
   "description": "The vSwap-App to exchange business cards with people in range."
 }
