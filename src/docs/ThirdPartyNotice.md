@@ -6,216 +6,371 @@ In the event that we overlooked to list a required notice, please bring this to 
 
 ## Third Party Code Components
 
-Name: @capacitor/android
+**Name: @capacitor/android**
+
 Version: 2.3.0
+
 Licensor: Drifty Co (http://drifty.com)
+
 Website: https://capacitor.ionicframework.com/
+
 Copyright Notice: Copyright 2015-present Drifty Co.
+
 License: MIT
 
-Name: @capacitor/core
+**Name: @capacitor/core**
+
 Version: 2.3.0
+
 Licensor: Drifty Co (http://drifty.com)
+
 Website: https://capacitor.ionicframework.com/
+
 Copyright Notice: Copyright 2015-present Drifty Co.
+
 License: MIT
 
-Names: 
- - @ionic-native/core
- - @ionic-native/contacts
- - @ionic-native/globalization
- - @ionic-native/qr-scanner
+**Names:**
+ - **@ionic-native/core**
+ - **@ionic-native/contacts**
+ - **@ionic-native/globalization**
+ - **@ionic-native/qr-scanner**
+
 Version: 5.27.0
+
 Licensor: Drifty Co (http://drifty.com)
+
 Website: https://capacitor.ionicframework.com/
+
 Copyright Notice: Copyright 2015-present Drifty Co.
+
 License: MIT
 
-Name: @ionic/react
+**Name: @ionic/react**
+
 Version: 5.2.3
+
 Licensor: Drifty Co (http://drifty.com)
+
 Website: https://capacitor.ionicframework.com/
+
 Copyright Notice: Copyright 2015-present Drifty Co.
+
 License: MIT
 
-Name: @ionic/react-router
+**Name: @ionic/react-router**
+
 Version: 5.2.3
+
 Licensor: Drifty Co (http://drifty.com)
+
 Website: https://capacitor.ionicframework.com/
+
 Copyright Notice: Copyright 2015-present Drifty Co.
+
 License: MIT
 
-Name: @microsoft/signalr
+**Name: @microsoft/signalr**
+
 Version 3.1.6
+
 Licensor: Microsoft (https://github.com/dotnet/aspnetcore/tree/master/src/SignalR#readme)
+
 Copyright Notice: Copyright (c) Microsoft Corporation. All rights reserved.
+
 License: Apache-2.0
 
-Name: @types/node
+**Name: @types/node**
+
 Version: 14.0.23
+
 Licensor: DefinitelyTyped (https://github.com/DefinitelyTyped/DefinitelyTyped)
+
 Copyright Notice: Copyright (c) Microsoft Corporation. All rights reserved.
+
 License: MIT
 
-Name: @types/qrcode.react
+**Name: @types/qrcode.react**
+
 Version: 1.0.1
+
 Licensor: DefinitelyTyped (https://github.com/DefinitelyTyped/DefinitelyTyped)
+
 Copyright Notice: Copyright 2014 - 2016 © taobao.org 
+
 License: MIT
 
-Name: @types/react
+**Name: @types/react**
+
 Version: 16.9.43
+
 Licensor: DefinitelyTyped (https://github.com/DefinitelyTyped/DefinitelyTyped)
+
 Copyright Notice: Copyright 2014 - 2016 © taobao.org
+
 License: MIT
 
-Name: @types/react-dom
+**Name: @types/react-dom**
+
 Version: 16.9.8
+
 Licensor: DefinitelyTyped (https://github.com/DefinitelyTyped/DefinitelyTyped)
+
 Copyright Notice: Copyright 2014 - 2016 © taobao.org
+
 License: MIT
 
-Name: @types/react-qr-reader
+**Name: @types/react-qr-reader**
+
 Version: 2.1.3
+
 Licensor: DefinitelyTyped (https://github.com/DefinitelyTyped/DefinitelyTyped)
+
 Copyright Notice: Copyright 2014 - 2016 © taobao.org
+
 License: MIT
 
-Name: @types/react-router
+**Name: @types/react-router**
+
 Version: 5.1.8
+
 Licensor: DefinitelyTyped (https://github.com/DefinitelyTyped/DefinitelyTyped)
+
 Copyright Notice: Copyright 2014 - 2016 © taobao.org
+
 License: MIT
 
-Name: @types/react-router-dom
+**Name: @types/react-router-dom**
+
 Version: 5.1.5
+
 Licensor: DefinitelyTyped (https://github.com/DefinitelyTyped/DefinitelyTyped)
+
 Copyright Notice: Copyright 2014 - 2016 © taobao.org
+
 License: MIT
 
-Name: @types/uuid
+**Name: @types/uuid**
+
 Version: 8.0.0
+
 Licensor: DefinitelyTyped (https://github.com/DefinitelyTyped/DefinitelyTyped)
+
 Copyright Notice: Copyright 2014 - 2016 © taobao.org
+
 License: MIT
 
-Name: cordova-plugin-contacts
+**Name: cordova-plugin-contacts**
+
 Version: 3.0.1
+
 Licensor: Apache Cordova (https://github.com/apache/cordova-plugin-contacts#readme)
+
 Copyright Notice: Copyright 2012 The Apache Software Foundation
+
 License: Apache License, Version 2.0
 
-Name: cordova-plugin-globalization
+**Name: cordova-plugin-globalization**
+
 Version: 1.11.0
+
 Licensor: Apache Cordova (https://github.com/apache/cordova-plugin-globalization#readme)
+
 Copyright Notice: Copyright 2012 The Apache Software Foundation
+
 License: Apache-2.0
 
-Name: ionicons
+**Name: ionicons**
+
 Version: 5.1.2
+
 Licensor: Ionic (http://ionicons.com/)
+
 Copyright Notice: Copyright (c) 2015-present Ionic (http://ionic.io/)
+
 License: MIT
 
-Name: qrcode.react
+**Name: phonegap-plugin-barcodescanner**
+
+Version: 8.1.0
+
+Licensor: Matt Kane (https://github.com/phonegap/phonegap-plugin-barcodescanner)
+
+Copyright Notice:
+
+  Copyright 2010 Matt Kane
+
+  Copyright 2011 IBM Corporation
+
+  Copyright 2012-2017 Adobe Systems
+
+  (https://github.com/phonegap/phonegap-plugin-barcodescanner)
+
+License: MIT
+
+**Name: qrcode.react**
+
 Version: 1.0.0
+
 Licensor: (http://zpao.github.io/qrcode.react)
+
 Copyright Notice: Copyright (c) 2015, Paul O’Shannessy
+
 License: ISC
 
-Name: react
+**Name: react**
+
 Version: 16.13.1
+
 Licensor: (https://reactjs.org/)
+
 Copyright Notice: Copyright (c) Facebook, Inc. and its affiliates.
+
 License: MIT
 
-Name: react-dom
+**Name: react-dom**
+
 Version: 16.13.1
+
 Licensor: (https://reactjs.org/)
+
 Copyright Notice: Copyright (c) Facebook, Inc. and its affiliates.
+
 License: MIT
 
-Name: react-intl
+**Name: react-intl**
+
 Version: 5.0.2
+
 Licensor: (https://formatjs.io/docs/react-intl/)
+
 Copyright Notice: Copyright 2019 Oath Inc. All rights reserved.
+
 License: BSD-3-Clause
 
-Name: react-markdown
+**Name: react-markdown**
+
 Version: 4.3.1
+
 Licensor: (https://rexxars.github.io/react-markdown/)
+
 Copyright Notice: Copyright 2020 Espen Hovlandsdal
+
 License: MIT
 
-Name: react-qr-reader
+**Name: react-qr-reader**
+
 Version: 2.2.1
+
 Licensor: (https://github.com/JodusNodus/react-qr-reader#readme)
+
 Copyright Notice: Copyright (c) 2017 Thomas Billiet
+
 License: MIT
 
-Name: react-router
+**Name: react-router**
+
 Version: 5.2.0
+
 Licensor: (https://github.com/ReactTraining/react-router#readme)
+
 Copyright Notice: Copyright (c) React Training 2016-2018
+
 License: MIT
 
-Name: react-router-dom
+**Name: react-router-dom**
+
 Version: 5.2.0
+
 Licensor: (https://github.com/ReactTraining/react-router#readme)
+
 Copyright Notice: Copyright (c) React Training 2016-2018
+
 License: MIT
 
-Name: react-scripts
+**Name: react-scripts**
+
 Version: 3.4.1
+
 Licensor: Facebook, Inc. (https://github.com/facebook/create-react-app#readme)
+
 Copyright Notice: Copyright (c) 2013-present, Facebook, Inc.
+
 License: MIT
 
-Name: typescript
+**Name: typescript**
+
 Version: 3.9.7
+
 Licensor: Microsoft (https://www.typescriptlang.org/)
+
 Copyright Notice: Copyright (c) Microsoft Corporation. All rights reserved.
+
 License: Apache License, Version 2.0
 
-Name: uuid
+**Name: uuid**
+
 Version: 8.2.0
+
 Licensor: Robert Kieffer (https://github.com/uuidjs/uuid#readme)
+
 Copyright Notice: Copyright (c) 2010-2020 Robert Kieffer and other contributors
+
 License: MIT
 
-Name: vcf
+**Name: vcf**
+
 Version: 2.0.6
+
 Licensor: Jonas Hermsmeier (https://github.com/jhermsmeier/node-vcf)
+
 Copyright Notice: Copyright (c) 2015 Jonas Hermsmeier
+
 License: MIT
 
-Name: fortawesome/fontawesome-svg-core
+**Name: fortawesome/fontawesome-svg-core**
+
 Version: 1.2.30
+
 Licensor:  https://fontawesome.com
+
 Copyright Notice: Copyright (c) Fonticons, Inc.
+
 License: MIT
 
-Name: fortawesome/react-fontawesome
+**Name: fortawesome/react-fontawesome**
+
 Version: 0.1.11
+
 Licensor:  https://fontawesome.com
+
 Copyright Notice: Copyright (c) 2018 Fonticons, Inc.
+
 License: MIT
 
-Name: fortawesome/pro-duotone-svg-icons
+**Name: fortawesome/pro-duotone-svg-icons**
+
 Version: 5.14.0
+
 Licensor:  https://fontawesome.com
+
 Copyright Notice: Copyright (c) Fonticons, Inc.
+
 License: Font Awesome Pro commercial license
 
-Name: fortawesome/pro-solid-svg-icons
+**Name: fortawesome/pro-solid-svg-icons**
+
 Version: 5.14.0
+
 Licensor:  https://fontawesome.com
+
 Copyright Notice: Copyright (c) Fonticons, Inc.
+
 License: Font Awesome Pro commercial license
 
 Licenses:
 
-Apache 2.0 (@microsoft/signalr, cordova-plugin-contacts, cordova-plugin-globalization, typescript)	
+**Apache 2.0** (@microsoft/signalr, cordova-plugin-contacts, cordova-plugin-globalization, typescript)
 
 TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
 
@@ -266,10 +421,9 @@ TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
 
 END OF TERMS AND CONDITIONS
 
-
-MIT - License 
+**MIT - License**
 (@capacitor/android, @capacitor/core, @ionic-native/core, @ionic-native/contacts, @ionic-native/globalization, @ionic-native/qr-scanner, @ionic/react, @ionic/react-router, @types/node, @types/qrcode.react, @types/react,
- @types/react-dom, @types/react-qr-reader, @types/react-router, @types/react-router-dom, @types/uuid, ionicons, react, react-dom, react-qr-reader, react-router, react-router-dom, react-scripts, uuid, vcf)
+ @types/react-dom, @types/react-qr-reader, @types/react-router, @types/react-router-dom, @types/uuid, ionicons, phonegap-plugin-barcodescanner, react, react-dom, react-qr-reader, react-router, react-router-dom, react-scripts, uuid, vcf)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
@@ -277,8 +431,7 @@ The above copyright notice and this permission notice shall be included in all c
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE
 
-
-BSD-3-Clause (react-intl)
+**BSD-3-Clause** (react-intl)
 Copyright 2019 Oath Inc. All rights reserved.
 
 Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
