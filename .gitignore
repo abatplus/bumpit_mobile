@@ -17,8 +17,6 @@ jspm_packages/
 
 # production
 /build
-/android
-/ios
 
 # android build files
 /android
