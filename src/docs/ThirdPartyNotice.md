@@ -96,7 +96,7 @@ Version: 1.0.1
 
 Licensor: DefinitelyTyped (https://github.com/DefinitelyTyped/DefinitelyTyped)
 
-Copyright Notice: Copyright 2014 - 2016 © taobao.org 
+Copyright Notice: Copyright 2014 - 2016 © Microsoft Corporation 
 
 License: MIT
 
@@ -106,7 +106,7 @@ Version: 16.9.43
 
 Licensor: DefinitelyTyped (https://github.com/DefinitelyTyped/DefinitelyTyped)
 
-Copyright Notice: Copyright 2014 - 2016 © taobao.org
+Copyright Notice: Copyright 2014 - 2016 © Microsoft Corporation
 
 License: MIT
 
@@ -116,7 +116,7 @@ Version: 16.9.8
 
 Licensor: DefinitelyTyped (https://github.com/DefinitelyTyped/DefinitelyTyped)
 
-Copyright Notice: Copyright 2014 - 2016 © taobao.org
+Copyright Notice: Copyright 2014 - 2016 © Microsoft Corporation
 
 License: MIT
 
@@ -126,7 +126,7 @@ Version: 2.1.3
 
 Licensor: DefinitelyTyped (https://github.com/DefinitelyTyped/DefinitelyTyped)
 
-Copyright Notice: Copyright 2014 - 2016 © taobao.org
+Copyright Notice: Copyright 2014 - 2016 © Microsoft Corporation
 
 License: MIT
 
@@ -136,7 +136,7 @@ Version: 5.1.8
 
 Licensor: DefinitelyTyped (https://github.com/DefinitelyTyped/DefinitelyTyped)
 
-Copyright Notice: Copyright 2014 - 2016 © taobao.org
+Copyright Notice: Copyright 2014 - 2016 © Microsoft Corporation
 
 License: MIT
 
@@ -146,7 +146,7 @@ Version: 5.1.5
 
 Licensor: DefinitelyTyped (https://github.com/DefinitelyTyped/DefinitelyTyped)
 
-Copyright Notice: Copyright 2014 - 2016 © taobao.org
+Copyright Notice: Copyright 2014 - 2016 © Microsoft Corporation
 
 License: MIT
 
@@ -156,7 +156,7 @@ Version: 8.0.0
 
 Licensor: DefinitelyTyped (https://github.com/DefinitelyTyped/DefinitelyTyped)
 
-Copyright Notice: Copyright 2014 - 2016 © taobao.org
+Copyright Notice: Copyright 2014 - 2016 © Microsoft Corporation
 
 License: MIT
 
