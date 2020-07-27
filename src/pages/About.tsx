@@ -13,7 +13,7 @@ const About: React.FC = () => {
 
   return <IonPage id="about">
     <IonHeader translucent={true}>
-      <IonToolbar>
+      <IonToolbar color="primary">
         <IonButtons slot="start">
           <IonMenuButton />
         </IonButtons>
@@ -23,7 +23,7 @@ const About: React.FC = () => {
 
     <IonContent fullscreen={false}>
       <IonHeader collapse="condense">
-        <IonToolbar>
+       <IonToolbar color="primary">
           <IonTitle size="large">{translate(i18n, 'About')}</IonTitle>
         </IonToolbar>
       </IonHeader>

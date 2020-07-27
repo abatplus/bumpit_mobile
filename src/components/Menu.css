@@ -1,13 +1,3 @@
-.app-name {
-    padding-left: 18px;
-    padding-right: 18px;
-    padding-bottom: 10px;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    font-weight: 600;
-    text-align: center;
-}
-
 .app-icon {
     padding-top: 10px;
     position: relative;
@@ -16,13 +6,15 @@
     height: 80%;
     display: block;
     transform: translate(-50%, -50%);
+    margin-bottom: 30px;
 }
 
-.footer {
+.menu-footer {
     height: auto;
     position: inherit;
     text-align: center;
-    font-style: italic;
+    font-weight: 800;
+    margin-bottom: 20px;
 }
 
 .poweredBy {

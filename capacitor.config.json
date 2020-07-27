@@ -1,6 +1,6 @@
 {
   "appId": "io.ionic.starter",
-  "appName": "vswap_mobile",
+  "appName": "vSwap",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "build",

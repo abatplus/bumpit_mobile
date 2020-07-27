@@ -52,7 +52,7 @@ const VCardView: React.FC = () => {
   return (
     <IonPage>
       <IonHeader translucent={true}>
-        <IonToolbar>
+        <IonToolbar color="primary">
           <IonButtons slot='start'>
             <IonBackButton />
           </IonButtons>

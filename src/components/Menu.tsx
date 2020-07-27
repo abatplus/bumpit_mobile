@@ -18,6 +18,7 @@ import { useAppContext } from '../store/contexts/AppContext';
 import './Menu.css';
 import { useIntl } from 'react-intl';
 import { translate } from '../utils';
+import { IonText } from '@ionic/react';
 
 interface IPages {
   title: string;
@@ -71,26 +72,27 @@ const Menu: React.FC = () => {
       ));
   };
 
+  // detect darkmode and switch imgsrc
+  const logo = window.matchMedia('(prefers-color-scheme: dark)').matches ? 
+    '../../assets/icon/Logo_vSwap_Menue-Drawer Darkmode.png' 
+    : 
+    '../../assets/icon/Logo_vSwap_Menue-Drawer.png';
+
   return (
     <IonMenu type='overlay' disabled={!appContext.menuEnabled} contentId='main'>
       <IonContent forceOverscroll={false}>
-        <IonItem lines='none' color='primary'>
-          <IonImg className='app-icon' src='../../assets/icon/Logo_vSwap_Menue-Drawer Darkmode.png'></IonImg>
+        <IonItem lines='inset' color='secondary'>
+          <IonImg className='app-icon' src={logo}></IonImg>
         </IonItem>
-        <IonItem lines='inset'  color='primary'>
-          <IonLabel className='app-name'>
-            {translate(i18n, 'appName')}
-          </IonLabel>
-        </IonItem>
-        <IonItem lines='inset'>
+        <IonItem lines='inset' color='secondary'>
           <IonList lines='none'>{renderListItems(routes.tabsPages)}</IonList>
         </IonItem>
-        <IonList lines='none'>{renderListItems(routes.appPages)}</IonList>
+        <IonItem>
+          <IonList lines='none'>{renderListItems(routes.appPages)}</IonList>
+        </IonItem>
       </IonContent>
-      <IonFooter className='footer'>
-        <IonToolbar>
-          <IonTitle className='poweredBy' size='small'>powered by abat+</IonTitle>
-        </IonToolbar>
+      <IonFooter className='menu-footer'>
+          <IonText className='poweredBy'>POWERED BY abat+</IonText>
       </IonFooter>
     </IonMenu>
   );

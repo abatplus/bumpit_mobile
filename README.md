@@ -21,4 +21,4 @@ In the project directory, you can run:
 
 ## License
 
-vSwap_mobile is [MIT licensed](./LICENSE.md).
+vSwap is [MIT licensed](./LICENSE.md).

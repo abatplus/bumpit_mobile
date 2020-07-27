@@ -193,7 +193,7 @@ const ScanView: React.FC = () => {
     return (
         <IonPage id='scan'>
             <IonHeader>
-                <IonToolbar>
+                <IonToolbar color="primary">
                     <IonButtons slot='start'>
                         <IonMenuButton />
                     </IonButtons>

@@ -15,6 +15,7 @@ import TermsAndConditions from '../pages/TermsAndConditions';
 import VCardView from '../pages/VCardView';
 import VCardProfiles from '../pages/VCardProfiles';
 import NewContactView from '../pages/NewContactView';
+import './MainContent.css';
 
 export const MainContent: React.FC = () => {
   const i18n = useIntl();
@@ -35,12 +36,13 @@ export const MainContent: React.FC = () => {
           <Route path="/profile" component={VCardProfiles} exact={true} />
           <Redirect exact path="/" to="/profile" />
         </IonRouterOutlet>
-        <IonTabBar slot="bottom">
-          <IonTabButton tab="profile" href="/profile">
-            <FontAwesomeIcon  className="fa fa-lg" icon={faIdCard} />
+
+        <IonTabBar slot="bottom" color="secondary">
+          <IonTabButton tab="profile" href="/profile" className="footer-button">
+            <FontAwesomeIcon  className="fa fa-lg test2" icon={faIdCard} />
             <IonLabel>{translate(i18n, 'Profiles')}</IonLabel>
           </IonTabButton>
-          <IonTabButton tab="scan" href="/scan">
+          <IonTabButton tab="scan" href="/scan" className="footer-button">
             <FontAwesomeIcon className="fa fa-lg" icon={faBarcodeRead} />
             <IonLabel>{translate(i18n, 'Scan')}</IonLabel>
           </IonTabButton>

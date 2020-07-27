@@ -51,7 +51,7 @@ const NewContactView: React.FC = () => {
   return (
     <IonPage>
       <IonHeader translucent={true}>
-        <IonToolbar>
+        <IonToolbar color="primary">
           <IonButtons slot='start'>
             <IonMenuButton />
           </IonButtons>
