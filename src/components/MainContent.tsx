@@ -38,11 +38,11 @@ export const MainContent: React.FC = () => {
         </IonRouterOutlet>
 
         <IonTabBar slot="bottom" color="secondary">
-          <IonTabButton tab="profile" href="/profile" className="footer-button">
+          <IonTabButton tab="profile" href="/profile" className="main-footer-button">
             <FontAwesomeIcon  className="fa fa-lg test2" icon={faIdCard} />
             <IonLabel>{translate(i18n, 'Profiles')}</IonLabel>
           </IonTabButton>
-          <IonTabButton tab="scan" href="/scan" className="footer-button">
+          <IonTabButton tab="scan" href="/scan" className="main-footer-button">
             <FontAwesomeIcon className="fa fa-lg" icon={faBarcodeRead} />
             <IonLabel>{translate(i18n, 'Scan')}</IonLabel>
           </IonTabButton>

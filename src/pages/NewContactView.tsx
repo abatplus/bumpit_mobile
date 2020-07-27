@@ -23,6 +23,7 @@ import { IVCard } from '../interfaces/IVCard';
 import VCardField from '../components/VCardField';
 import IContactApi from '../interfaces/IContactApi';
 import ContactApi from '../contacts/ContactApi';
+import { IonBackButton } from '@ionic/react';
 
 const NewContactView: React.FC = () => {
   const history = useHistory();
@@ -53,7 +54,7 @@ const NewContactView: React.FC = () => {
       <IonHeader translucent={true}>
         <IonToolbar color="primary">
           <IonButtons slot='start'>
-            <IonMenuButton />
+            <IonBackButton />
           </IonButtons>
           <IonTitle>{translate(i18n, 'New_contact')}</IonTitle>
         </IonToolbar>

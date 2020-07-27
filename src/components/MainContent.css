@@ -1,5 +1,5 @@
 @media (prefers-color-scheme: dark) {
-    .footer-button:not([aria-selected=true]) {
+    .main-footer-button:not([aria-selected=true]) {
         color: #888888;
     }
 }
