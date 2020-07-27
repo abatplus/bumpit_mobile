@@ -17,6 +17,7 @@ import QrReader from 'react-qr-reader';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { IVCard } from '../interfaces/IVCard';
 import { getEmptyVCard } from '../store/dataApi';
+import { IonBackButton } from '@ionic/react';
 
 const ScanView: React.FC = () => {
     const history = useHistory();
@@ -44,14 +45,17 @@ const ScanView: React.FC = () => {
     });
 
     function onScanCompleted(data: string) {
-        let vCard = getEmptyVCard();
-        try {
-            vCard = parseQrDataToVcard(data.replace(/\n/g, '\r\n'));
-        } catch (error) {
-            window.alert('Invalide QR code.\n' + error);
-        }
+        if (data && data.length > 0 ) {
 
-        history.push('/newContact', vCard);
+            let vCard = getEmptyVCard();
+            try {
+                vCard = parseQrDataToVcard(data.replace(/\n/g, '\r\n'));
+                history.push('/newContact', vCard);
+            } catch (error) {
+                window.alert('Invalid QR code.\n'); // + error);
+                history.goBack();
+            }   
+        }
     }
 
     useIonViewDidEnter(() => {
@@ -195,7 +199,7 @@ const ScanView: React.FC = () => {
             <IonHeader>
                 <IonToolbar color="primary">
                     <IonButtons slot='start'>
-                        <IonMenuButton />
+                        <IonBackButton />
                     </IonButtons>
                     <IonTitle>Scan QR code</IonTitle>
                 </IonToolbar>
