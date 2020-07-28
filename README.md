@@ -25,11 +25,11 @@ To create a platform specific project run either
 or
 ### `ionic capacitor build ios`
 
-After that you have to run the following command to supply app icon ans splash screen to the native projects
+After that you have to run the following command to supply the app icon and splash screen to the native projects.
 
 ### `npm run resources`
 
-Now you can start start your native prject in the corresponding IDE. (iOS needs to add a profisioning profile before running)
+Now you can start your native project in the corresponding IDE [Android Studio](https://developer.android.com/studio) or [XCode](https://apps.apple.com/us/app/xcode/id497799835?ls=1&mt=12). (iOS needs to add a provisioning profile before running)
 
 ## License
 
