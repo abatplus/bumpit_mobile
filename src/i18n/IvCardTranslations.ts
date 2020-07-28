@@ -44,4 +44,5 @@ export default interface IvCardTranslations {
   Contact_saved: PontoonMessage;
   Swap_candidates: PontoonMessage;
   Deny_Swap_Missing_Name_In_Profile: PontoonMessage;
+  Connection_Or_Geolocation_Error: PontoonMessage;
 }

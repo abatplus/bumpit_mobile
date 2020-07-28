@@ -127,5 +127,8 @@
   },
   "Deny_Swap_Missing_Name_In_Profile": {
     "message": "Zum Datenaustausch bitte einen Namen im Profil eintragen."
+  },
+  "Connection_Or_Geolocation_Error": {
+    "message": "Fehler bei Verbindung oder Geolocation"
   }
 }

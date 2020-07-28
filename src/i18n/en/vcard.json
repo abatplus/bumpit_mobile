@@ -127,5 +127,8 @@
   },
   "Deny_Swap_Missing_Name_In_Profile": {
     "message": "Please provide your name in the profile before swapping."
+  },
+  "Connection_Or_Geolocation_Error": {
+    "message": "Connection or geolocation error"
   }
 }
