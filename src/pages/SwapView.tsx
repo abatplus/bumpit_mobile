@@ -86,7 +86,7 @@ const SwapView: React.FC = () => {
     try {
       const name: string = getCurrentProfileNameField();
       const geo = await Geolocation.getCurrentPosition();
-      setLonLat((geo.coords.latitude + "").substr(0,9) + " - " + (geo.coords.longitude + "").substr(0,9));
+      // setLonLat((geo.coords.latitude + "").substr(0,9) + " - " + (geo.coords.longitude + "").substr(0,9));
       // Subscribe to the hub
       await server.Hub.Subscribe(deviceId, geo.coords.longitude, geo.coords.latitude, name)
       console.log("connected");
@@ -94,7 +94,7 @@ const SwapView: React.FC = () => {
       updateHandler = setInterval( async () => {
         const geo = await Geolocation.getCurrentPosition();
         console.log("update");
-        setLonLat((geo.coords.latitude + "").substr(0,9) + " - " + (geo.coords.longitude + "").substr(0,9));
+        // setLonLat((geo.coords.latitude + "").substr(0,9) + " - " + (geo.coords.longitude + "").substr(0,9));
         await server.Hub.Update(deviceId, geo.coords.longitude, geo.coords.latitude, name);
       }, 2000);
 
@@ -168,9 +168,9 @@ const SwapView: React.FC = () => {
     if (segmentFilter === 'swap-list')
       return (
         <IonFooter>
-          <IonItem>
+          {/* <IonItem>
             {lonLat}
-          </IonItem>
+          </IonItem> */}
           <IonItem>
             <IonList className="swap-footer-button-list">
               <IonButton className="swap-footer-button" onClick={onDoRequestAll}>
