@@ -47,6 +47,8 @@ const SwapView: React.FC = () => {
   let updateHandler = setTimeout(() => { }, 10000000); // dummy
   const [lonLat, setLonLat] = useState<string>();
 
+  const debug = false;
+
   const getCurrentProfile = () => {
     return profileContext.profiles.find((entry) => entry.id === id);
   };
@@ -86,21 +88,21 @@ const SwapView: React.FC = () => {
     try {
       const name: string = getCurrentProfileNameField();
       const geo = await Geolocation.getCurrentPosition();
-      // setLonLat((geo.coords.latitude + "").substr(0,9) + " - " + (geo.coords.longitude + "").substr(0,9));
+      if (debug) setLonLat((geo.coords.latitude + "").substr(0,9) + " - " + (geo.coords.longitude + "").substr(0,9));
       // Subscribe to the hub
       await server.Hub.Subscribe(deviceId, geo.coords.longitude, geo.coords.latitude, name)
-      console.log("connected");
+      if (debug) console.log("connected");
       // Update the current location everty 2 seconds
       updateHandler = setInterval( async () => {
         const geo = await Geolocation.getCurrentPosition();
-        console.log("update");
-        // setLonLat((geo.coords.latitude + "").substr(0,9) + " - " + (geo.coords.longitude + "").substr(0,9));
+        if (debug) console.log("update");
+        if (debug) setLonLat((geo.coords.latitude + "").substr(0,9) + " - " + (geo.coords.longitude + "").substr(0,9));
         await server.Hub.Update(deviceId, geo.coords.longitude, geo.coords.latitude, name);
       }, 2000);
 
     } catch (error) {
         console.error('Error: ', error);
-        alert("Connection or location error");
+        alert(translate(i18n, 'Connection_Or_Geolocation_Error'));
         if (clearInterval) clearInterval(updateHandler);
         history.goBack();
     }     
@@ -132,17 +134,14 @@ const SwapView: React.FC = () => {
   };
 
   const onDoRequest = (peerDeviceId: string) => {
-    console.log('request');
     server.Hub.RequestCardExchange(deviceId, peerDeviceId, getCurrentProfileNameField());
   };
 
   const onAcceptRequest = (peerDeviceId: string) => {
-    console.log('accept-request');
     server.Hub.AcceptCardExchange(deviceId, peerDeviceId, getCurrentProfileNameField(), JSON.stringify(getCurrentProfile()?.vCard));
   };
 
   const onAbortRequest = (peerDeviceId: string) => {
-    console.log('abort request');
     server.Hub.RevokeCardExchangeRequest(deviceId, peerDeviceId);
   };
 
@@ -168,9 +167,11 @@ const SwapView: React.FC = () => {
     if (segmentFilter === 'swap-list')
       return (
         <IonFooter>
-          {/* <IonItem>
-            {lonLat}
-          </IonItem> */}
+          { debug && (
+            <IonItem>
+              {lonLat}
+            </IonItem> )
+          }
           <IonItem>
             <IonList className="swap-footer-button-list">
               <IonButton className="swap-footer-button" onClick={onDoRequestAll}>
