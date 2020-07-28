@@ -27,7 +27,7 @@ import * as SwapReducer from '../store/reducers/SwapReducer';
 import { SwapViewCardExchangeClient } from '../server/SwapViewCardExchangeClient';
 import { v4 as uuid4 } from 'uuid';
 import { useProfileContext } from '../store/contexts/ProfileContext';
-import { useParams } from 'react-router';
+import { useParams, useHistory } from 'react-router';
 import { Geolocation } from '@ionic-native/geolocation';
 import ISwapListEntry from '../interfaces/ISwapListEntry';
 import { useIntl } from 'react-intl';
@@ -39,11 +39,13 @@ const SwapView: React.FC = () => {
   const { profileContext } = useProfileContext();
   const { id } = useParams();
   const i18n = useIntl();
+  const history = useHistory();
   const [swapContext, dispatchSwapContext] = useReducer(SwapReducer.SwapReducer, []);
   const [segmentFilter, setSegmentFilter] = useState<string>('swap-list');
   const [swapList, setSwapList] = useState<ISwapListEntry[]>([]);
   const [deviceId] = useState<string>(uuid4());
   let updateHandler = setTimeout(() => { }, 10000000); // dummy
+  const [lonLat, setLonLat] = useState<string>();
 
   const getCurrentProfile = () => {
     return profileContext.profiles.find((entry) => entry.id === id);
@@ -76,29 +78,32 @@ const SwapView: React.FC = () => {
     setSwapList(
       segmentFilter === 'ready-list'
         ? swapContext.filter((entry) => entry.state === SwapState.exchanged)
-        : swapContext.filter((entry) => entry.state !== SwapState.exchanged)
+        : swapContext.filter((entry) => entry.state !== SwapState.exchanged && entry.online === true)
     );
   }, [segmentFilter, swapContext]);
 
-  useIonViewDidEnter(() => {
-    const name: string = getCurrentProfileNameField();
-    Geolocation.getCurrentPosition()
-      .then((resp) => {
-        server.Hub.Subscribe(deviceId, resp.coords.longitude, resp.coords.latitude, name);
+  useIonViewDidEnter(async () => {
+    try {
+      const name: string = getCurrentProfileNameField();
+      const geo = await Geolocation.getCurrentPosition();
+      setLonLat((geo.coords.latitude + "").substr(0,9) + " - " + (geo.coords.longitude + "").substr(0,9));
+      // Subscribe to the hub
+      await server.Hub.Subscribe(deviceId, geo.coords.longitude, geo.coords.latitude, name)
+      console.log("connected");
+      // Update the current location everty 2 seconds
+      updateHandler = setInterval( async () => {
+        const geo = await Geolocation.getCurrentPosition();
+        console.log("update");
+        setLonLat((geo.coords.latitude + "").substr(0,9) + " - " + (geo.coords.longitude + "").substr(0,9));
+        await server.Hub.Update(deviceId, geo.coords.longitude, geo.coords.latitude, name);
+      }, 2000);
 
-        updateHandler = setInterval(() => {
-          Geolocation.getCurrentPosition()
-            .then((resp) => {
-              server.Hub.Update(deviceId, resp.coords.longitude, resp.coords.latitude, name);
-            })
-            .catch((error) => {
-              console.error('Error updating location', error);
-            });
-        }, 2000);
-      })
-      .catch((error) => {
-        console.error('Error getting location', error);
-      });
+    } catch (error) {
+        console.error('Error: ', error);
+        alert("Connection or location error");
+        if (clearInterval) clearInterval(updateHandler);
+        history.goBack();
+    }     
   });
 
   useIonViewDidLeave(() => {
@@ -108,7 +113,8 @@ const SwapView: React.FC = () => {
 
   const onDoRequestAll = () => {
     // request all non requested or from whose no request is received
-    swapContext.filter((entry) => entry.state === SwapState.initial).forEach((entry) => onDoRequest(entry.deviceId));
+    const entries = [...swapContext.filter((entry) => entry.state === SwapState.initial)];
+    entries.forEach((entry) => onDoRequest(entry.deviceId));
   };
 
   const getNumberOfRequestAll = () => {
@@ -116,7 +122,8 @@ const SwapView: React.FC = () => {
   };
 
   const onAcceptAll = () => {
-    swapContext.filter((entry) => entry.state === SwapState.received).forEach((entry) => onAcceptRequest(entry.deviceId));
+    const entries = [...swapContext.filter((entry) => entry.state === SwapState.received)]
+    entries.forEach((entry) => onAcceptRequest(entry.deviceId));
     clearInterval(updateHandler); // delete
   };
 
@@ -155,10 +162,15 @@ const SwapView: React.FC = () => {
     ));
   };
 
+  
+
   const renderFooter = () => {
     if (segmentFilter === 'swap-list')
       return (
         <IonFooter>
+          <IonItem>
+            {lonLat}
+          </IonItem>
           <IonItem>
             <IonList className="swap-footer-button-list">
               <IonButton className="swap-footer-button" onClick={onDoRequestAll}>

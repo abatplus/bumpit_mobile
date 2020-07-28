@@ -27,16 +27,31 @@ const swapListEntrySort = (a: ISwapListEntry, b: ISwapListEntry) => {
 export const SwapReducer = (state: ISwapListEntry[] = [], action: IAction) => {
   switch (action.type) {
     case Actions.Swap.ActionTypes.UPDATE_LIST: {
+      // copy old list and set everyone to offline initially to remember him
+      const oldList = [...state];
+      
       // copy the old list items SwapState if the entry is still available in the updated list
       const newList = action.payload as ISwapListEntry[];
       newList.forEach((newItem) => {
-        const index = state.findIndex((oldItem) => oldItem.deviceId === newItem.deviceId);
+        // mark as online
+        newItem.online = true;
+        const index = oldList.findIndex((oldItem) => oldItem.deviceId === newItem.deviceId);
         if (index !== -1) {
-          newItem.state = state[index].state;
+          newItem.state = oldList[index].state;
         } else {
           newItem.state = SwapState.initial;
         }
       });
+      
+      // copy old items which are offline or already exchanged to remember them
+      oldList.forEach((oldItem) => {
+        oldItem.online = false;
+        const index = newList.findIndex((newItem) => oldItem.deviceId === newItem.deviceId);
+        if (index === -1) { // add the old item to the list now
+          newList.push(oldItem);
+        }
+      });
+
       return newList.sort(swapListEntrySort);
     }
     case Actions.Swap.ActionTypes.SEND_REQUEST: {

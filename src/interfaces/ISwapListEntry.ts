@@ -4,4 +4,5 @@ export default interface ISwapListEntry {
   deviceId: string;
   displayName: string;
   state: SwapState;
+  online: boolean;
 }
