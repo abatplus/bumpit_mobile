@@ -14,8 +14,6 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
 import { useState } from 'react';
 import { Crop } from '@ionic-native/crop';
 import { File } from '@ionic-native/file';
-import { useCamera, availableFeatures } from '@capacitor-community/react-hooks/camera';
-import { CameraResultType } from '@capacitor/core';
 
 interface IProfileProps {
   profile?: IProfile;
@@ -24,10 +22,6 @@ interface IProfileProps {
 const Profile: React.FC<IProfileProps> = (props) => {
   const i18n = useIntl();
   const { dispatchProfileContext } = useProfileContext();
-  const { photo, getPhoto } = useCamera();
-  // const [b64img, setB64img] = useState<string>();
-
-  // alert(props.profile?.image?.length);
 
   const updateProfile = (inputFieldName: keyof IVCard) => (event: CustomEvent) => {
     if (props.profile && props.profile.id) {
@@ -48,7 +42,7 @@ const Profile: React.FC<IProfileProps> = (props) => {
     }
   };
 
-  const updateProfileImage = (base64Image: string) => (event: CustomEvent) => {
+  const updateProfileImage = (base64Image: string) => {
     if (props.profile && props.profile.id) {
       dispatchProfileContext(
         Actions.Profile.setProfileImage(
@@ -59,7 +53,7 @@ const Profile: React.FC<IProfileProps> = (props) => {
     }
   };
 
-  const removeProfileImage = () => (event: CustomEvent) => {
+  const removeProfileImage = () => {
     if (props.profile && props.profile.id) {
       dispatchProfileContext(
         Actions.Profile.removeProfileImage(props.profile.id)
@@ -68,27 +62,23 @@ const Profile: React.FC<IProfileProps> = (props) => {
   };
 
   const loadPicture = async (sourceType: number) => {
-    const options = {
+    const options: CameraOptions = {
       quality: 100,
-      // sourceType: sourceType,
-      // destinationType: Camera.DestinationType.FILE_URI,
-      resultType: CameraResultType.Uri,
-      // encodingType: Camera.EncodingType.JPEG,
-      // mediaType: Camera.MediaType.PICTURE
+      sourceType: sourceType,
+      destinationType: Camera.DestinationType.FILE_URI,
+      encodingType: Camera.EncodingType.JPEG,
+      mediaType: Camera.MediaType.PICTURE
     }
 
-    // let fileUri = await Camera.getPicture(options)  
-    const cameraPhoto = await getPhoto(options);
-    const fileUri = isPlatform('android') ? cameraPhoto.path = 'file://' : cameraPhoto.path;
+    let fileUri = await Camera.getPicture(options)  
+    if (isPlatform('android')) fileUri = 'file://' + fileUri;
   
-    // const cropPath = await Crop.crop(fileUri + "", {
-    //   quality: 75,
-    //   targetHeight: 400,
-    //   targetWidth: 400
-    // });
-
-    const newPath = (fileUri + "").split('?')[0];
-    // const newPath = cropPath.split('?')[0];
+    const cropPath = await Crop.crop(fileUri, {
+      quality: 75,
+      targetHeight: 400,
+      targetWidth: 400
+    });
+    const newPath = cropPath.split('?')[0];
     const copyPath = newPath;
     const splitPath = copyPath.split('/');
     const imageName = splitPath[splitPath.length - 1];
