@@ -6,8 +6,16 @@ import { IVCard } from '../interfaces/IVCard';
 import VCardField from './VCardField';
 import { translate } from '../utils';
 import * as Actions from '../store/actions/actions';
-import { IonItem, IonLabel, IonInput } from '@ionic/react';
+import { isPlatform } from '@ionic/react';
+import { IonItem, IonLabel, IonInput, IonButton } from '@ionic/react';
 import './VCardField.css';
+import './Profile.css';
+import { Camera, CameraOptions } from '@ionic-native/camera';
+import { useState } from 'react';
+import { Crop } from '@ionic-native/crop';
+import { File } from '@ionic-native/file';
+import { useCamera, availableFeatures } from '@capacitor-community/react-hooks/camera';
+import { CameraResultType } from '@capacitor/core';
 
 interface IProfileProps {
   profile?: IProfile;
@@ -16,6 +24,10 @@ interface IProfileProps {
 const Profile: React.FC<IProfileProps> = (props) => {
   const i18n = useIntl();
   const { dispatchProfileContext } = useProfileContext();
+  const { photo, getPhoto } = useCamera();
+  // const [b64img, setB64img] = useState<string>();
+
+  // alert(props.profile?.image?.length);
 
   const updateProfile = (inputFieldName: keyof IVCard) => (event: CustomEvent) => {
     if (props.profile && props.profile.id) {
@@ -36,8 +48,64 @@ const Profile: React.FC<IProfileProps> = (props) => {
     }
   };
 
+  const updateProfileImage = (base64Image: string) => (event: CustomEvent) => {
+    if (props.profile && props.profile.id) {
+      dispatchProfileContext(
+        Actions.Profile.setProfileImage(
+          props.profile.id,
+          base64Image
+        )
+      );
+    }
+  };
+
+  const removeProfileImage = () => (event: CustomEvent) => {
+    if (props.profile && props.profile.id) {
+      dispatchProfileContext(
+        Actions.Profile.removeProfileImage(props.profile.id)
+      );
+    }
+  };
+
+  const loadPicture = async (sourceType: number) => {
+    const options = {
+      quality: 100,
+      // sourceType: sourceType,
+      // destinationType: Camera.DestinationType.FILE_URI,
+      resultType: CameraResultType.Uri,
+      // encodingType: Camera.EncodingType.JPEG,
+      // mediaType: Camera.MediaType.PICTURE
+    }
+
+    // let fileUri = await Camera.getPicture(options)  
+    const cameraPhoto = await getPhoto(options);
+    const fileUri = isPlatform('android') ? cameraPhoto.path = 'file://' : cameraPhoto.path;
+  
+    // const cropPath = await Crop.crop(fileUri + "", {
+    //   quality: 75,
+    //   targetHeight: 400,
+    //   targetWidth: 400
+    // });
+
+    const newPath = (fileUri + "").split('?')[0];
+    // const newPath = cropPath.split('?')[0];
+    const copyPath = newPath;
+    const splitPath = copyPath.split('/');
+    const imageName = splitPath[splitPath.length - 1];
+    const filePath = newPath.split(imageName)[0];
+
+    const base64 = await File.readAsDataURL(filePath, imageName);
+    updateProfileImage(base64);
+    await File.removeFile(filePath, imageName);
+  };
+
   return (
     <div>
+      <div>
+        <img className="profile-avatar" src={props.profile?.image} alt="img"/>
+      </div>
+      <IonButton onClick={() => loadPicture(Camera.PictureSourceType.CAMERA)}>Open camera</IonButton>
+      <IonButton onClick={() => loadPicture(Camera.PictureSourceType.PHOTOLIBRARY)}>Open gallery</IonButton>
       <IonItem >
         <IonLabel position='stacked' color='abatgray'>
           {translate(i18n, 'Profile_Description')}
