@@ -6,14 +6,16 @@ import { IVCard } from '../interfaces/IVCard';
 import VCardField from './VCardField';
 import { translate } from '../utils';
 import * as Actions from '../store/actions/actions';
-import { isPlatform } from '@ionic/react';
-import { IonItem, IonLabel, IonInput, IonButton } from '@ionic/react';
+import { isPlatform, IonAvatar, IonFab, IonFabButton, IonFabList } from '@ionic/react';
+import { IonItem, IonLabel, IonInput } from '@ionic/react';
 import './VCardField.css';
 import './Profile.css';
 import { Camera, CameraOptions } from '@ionic-native/camera';
-import { useState } from 'react';
 import { Crop } from '@ionic-native/crop';
 import { File } from '@ionic-native/file';
+import MockImage from './MockImage';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCamera, faImage, faFolderOpen, faTrash, faUser } from '@fortawesome/pro-duotone-svg-icons';
 
 interface IProfileProps {
   profile?: IProfile;
@@ -44,24 +46,23 @@ const Profile: React.FC<IProfileProps> = (props) => {
 
   const updateProfileImage = (base64Image: string) => {
     if (props.profile && props.profile.id) {
-      dispatchProfileContext(
-        Actions.Profile.setProfileImage(
-          props.profile.id,
-          base64Image
-        )
-      );
+      dispatchProfileContext(Actions.Profile.setProfileImage(props.profile.id, base64Image));
     }
   };
 
   const removeProfileImage = () => {
     if (props.profile && props.profile.id) {
-      dispatchProfileContext(
-        Actions.Profile.removeProfileImage(props.profile.id)
-      );
+      dispatchProfileContext(Actions.Profile.removeProfileImage(props.profile.id));
     }
   };
 
   const loadPicture = async (sourceType: number) => {
+    if (!isPlatform('capacitor')) {
+      alert("not supported in browser");
+      // updateProfileImage(base64); // for browser debugging insert dummy data here
+      return;
+    }
+
     const options: CameraOptions = {
       quality: 100,
       sourceType: sourceType,
@@ -89,14 +90,42 @@ const Profile: React.FC<IProfileProps> = (props) => {
     await File.removeFile(filePath, imageName);
   };
 
+  const imageData = isPlatform('capacitor') ? props.profile?.image : MockImage;
+
+  const renderProfileImage = () => {  
+    if (imageData) {
+      return <img src={imageData} alt="profile-img" />;
+    } else {
+      return <FontAwesomeIcon className="fa fa-lg profile-no-user" icon={faUser}/>;
+    }
+  }
+
   return (
     <div>
       <div>
-        <img className="profile-avatar" src={props.profile?.image} alt="img"/>
+        <IonFab horizontal="start" slot="fixed" className="profile-avatar-button">
+          <IonFabButton size="small">
+            <FontAwesomeIcon className="fa fa-lg" icon={faImage}/>
+          </IonFabButton>
+          <IonFabList side="end">
+          <IonFabButton onClick={() => loadPicture(Camera.PictureSourceType.CAMERA)} size={'small'} color="primary">
+            <FontAwesomeIcon className="fa fa-lg" icon={faCamera} />
+          </IonFabButton>
+          <IonFabButton onClick={() => loadPicture(Camera.PictureSourceType.PHOTOLIBRARY)} size={'small'} color="primary">
+            <FontAwesomeIcon className="fa fa-lg" icon={faFolderOpen} />
+          </IonFabButton>
+          <IonFabButton onClick={() => removeProfileImage()} size={'small'} color="danger">
+            <FontAwesomeIcon className="fa fa-lg" icon={faTrash}/>
+          </IonFabButton>
+          </IonFabList>
+        </IonFab>
       </div>
-      <IonButton onClick={() => loadPicture(Camera.PictureSourceType.CAMERA)}>Open camera</IonButton>
-      <IonButton onClick={() => loadPicture(Camera.PictureSourceType.PHOTOLIBRARY)}>Open gallery</IonButton>
-      <IonItem >
+      <IonItem>
+        <IonAvatar className="profile-avatar">
+          { renderProfileImage() }
+        </IonAvatar>
+      </IonItem>
+      <IonItem>
         <IonLabel position='stacked' color='abatgray'>
           {translate(i18n, 'Profile_Description')}
         </IonLabel>

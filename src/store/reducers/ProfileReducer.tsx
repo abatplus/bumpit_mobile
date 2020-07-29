@@ -116,9 +116,9 @@ export const ProfileReducer = (state = initialState, action: IAction) => {
   }
 
   case Actions.Profile.ActionTypes.REMOVE_PROFILE_IMAGE: {
-    const data = action.payload as { id: string; image: string };
+    const id = action.payload as string;
 
-    const updateProfileIndex: number = state.profiles.findIndex((x) => x.id === data.id);
+    const updateProfileIndex: number = state.profiles.findIndex((x) => x.id === id);
     if (updateProfileIndex < 0) {
       return { ...state };
     }
