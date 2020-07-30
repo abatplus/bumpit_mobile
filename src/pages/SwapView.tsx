@@ -19,9 +19,9 @@ import {
 } from '@ionic/react';
 import './SwapView.css';
 import SwapViewListItem from '../components/SwapViewListItem';
-import { faPollPeople, faCheck, } from '@fortawesome/pro-duotone-svg-icons';
+import { faPollPeople, faCheck } from '@fortawesome/pro-duotone-svg-icons';
 import { faCheckDouble, faShareAll } from '@fortawesome/pro-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import SwapState from '../enums/SwapState';
 import * as SwapReducer from '../store/reducers/SwapReducer';
 import { SwapViewCardExchangeClient } from '../server/SwapViewCardExchangeClient';
@@ -44,7 +44,7 @@ const SwapView: React.FC = () => {
   const [segmentFilter, setSegmentFilter] = useState<string>('swap-list');
   const [swapList, setSwapList] = useState<ISwapListEntry[]>([]);
   const [deviceId] = useState<string>(uuid4());
-  let updateHandler = setTimeout(() => { }, 10000000); // dummy
+  let updateHandler = setTimeout(() => {}, 10000000); // dummy
   const [lonLat, setLonLat] = useState<string>();
 
   const debug = false;
@@ -56,22 +56,22 @@ const SwapView: React.FC = () => {
   const getCurrentVCard = () => {
     const profile = getCurrentProfile();
     if (!profile?.vCard) {
-      throw new Error("could not get vcard");
+      throw new Error('could not get vcard');
     }
     return profile.vCard;
-  }
+  };
 
   const getCurrentProfileNameField = () => {
     const vcard = getCurrentVCard();
     if (!vcard?.name) {
-      throw new Error("vcard contains no name");
+      throw new Error('vcard contains no name');
     }
     return vcard.name;
   };
 
   const sendCardData = (peerDeviceId: string) => {
     server.Hub.SendCardData(deviceId, peerDeviceId, getCurrentProfileNameField(), JSON.stringify(getCurrentVCard()));
-  }
+  };
 
   const cardExchangeClient = new SwapViewCardExchangeClient(dispatchSwapContext, sendCardData);
   const server = new CardExchangeServer(cardExchangeClient);
@@ -88,24 +88,23 @@ const SwapView: React.FC = () => {
     try {
       const name: string = getCurrentProfileNameField();
       const geo = await Geolocation.getCurrentPosition();
-      if (debug) setLonLat((geo.coords.latitude + "").substr(0,9) + " - " + (geo.coords.longitude + "").substr(0,9));
+      if (debug) setLonLat((geo.coords.latitude + '').substr(0, 9) + ' - ' + (geo.coords.longitude + '').substr(0, 9));
       // Subscribe to the hub
-      await server.Hub.Subscribe(deviceId, geo.coords.longitude, geo.coords.latitude, name)
-      if (debug) console.log("connected");
+      await server.Hub.Subscribe(deviceId, geo.coords.longitude, geo.coords.latitude, name);
+      if (debug) console.log('connected');
       // Update the current location everty 2 seconds
-      updateHandler = setInterval( async () => {
+      updateHandler = setInterval(async () => {
         const geo = await Geolocation.getCurrentPosition();
-        if (debug) console.log("update");
-        if (debug) setLonLat((geo.coords.latitude + "").substr(0,9) + " - " + (geo.coords.longitude + "").substr(0,9));
+        if (debug) console.log('update');
+        if (debug) setLonLat((geo.coords.latitude + '').substr(0, 9) + ' - ' + (geo.coords.longitude + '').substr(0, 9));
         await server.Hub.Update(deviceId, geo.coords.longitude, geo.coords.latitude, name);
       }, 2000);
-
     } catch (error) {
-        console.error('Error: ', error);
-        alert(translate(i18n, 'Connection_Or_Geolocation_Error'));
-        if (clearInterval) clearInterval(updateHandler);
-        history.goBack();
-    }     
+      console.error('Error: ', error);
+      alert(translate(i18n, 'Connection_Or_Geolocation_Error'));
+      if (clearInterval) clearInterval(updateHandler);
+      history.goBack();
+    }
   });
 
   useIonViewDidLeave(() => {
@@ -124,7 +123,7 @@ const SwapView: React.FC = () => {
   };
 
   const onAcceptAll = () => {
-    const entries = [...swapContext.filter((entry) => entry.state === SwapState.received)]
+    const entries = [...swapContext.filter((entry) => entry.state === SwapState.received)];
     entries.forEach((entry) => onAcceptRequest(entry.deviceId));
     clearInterval(updateHandler); // delete
   };
@@ -150,6 +149,7 @@ const SwapView: React.FC = () => {
     return swapList.map((entry) => (
       <div key={entry.deviceId}>
         <SwapViewListItem
+          imgSource={entry.imgSource}
           key={entry.deviceId}
           name={entry.displayName}
           state={entry.state}
@@ -161,17 +161,11 @@ const SwapView: React.FC = () => {
     ));
   };
 
-  
-
   const renderFooter = () => {
     if (segmentFilter === 'swap-list')
       return (
         <IonFooter>
-          { debug && (
-            <IonItem>
-              {lonLat}
-            </IonItem> )
-          }
+          {debug && <IonItem>{lonLat}</IonItem>}
           <IonItem>
             <IonList className="swap-footer-button-list">
               <IonButton className="swap-footer-button" onClick={onDoRequestAll}>
@@ -212,8 +206,7 @@ const SwapView: React.FC = () => {
             <IonSegmentButton value="ready-list">
               <FontAwesomeIcon className="fa fa-lg" icon={faCheck} />
               <IonLabel>
-                {translate(i18n, 'Received')} (
-                {swapContext.filter((entry) => entry.state === SwapState.exchanged).length})
+                {translate(i18n, 'Received')} ({swapContext.filter((entry) => entry.state === SwapState.exchanged).length})
               </IonLabel>
             </IonSegmentButton>
           </IonSegment>
@@ -221,7 +214,7 @@ const SwapView: React.FC = () => {
       </IonHeader>
 
       <IonContent>
-        {swapContext.length === 0 && <LoadingSpinner message={translate(i18n, 'Wait_for_contacts')}/> }
+        {swapContext.length === 0 && <LoadingSpinner message={translate(i18n, 'Wait_for_contacts')} />}
         <IonList>{renderList()}</IonList>
       </IonContent>
       {renderFooter()}
