@@ -42,7 +42,7 @@ export default class ContactApi {
       new ContactAddress(false, 'work', undefined, vCardFields.street, vCardFields.location, undefined, vCardFields.zipCode, vCardFields.country),
     ];
 
-    // TODO: Add base64 contactphoto or URL
+    // TODO: Add base64 contact photo or URL
     // contact.photos = [new ContactField('base64', base64String, true)];
 
     contact.note = 'Added by vSwap';

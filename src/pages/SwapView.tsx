@@ -87,12 +87,13 @@ const SwapView: React.FC = () => {
   useIonViewDidEnter(async () => {
     try {
       const name: string = getCurrentProfileNameField();
+      const image: string = getCurrentProfile()?.image ?? '';
       const geo = await Geolocation.getCurrentPosition();
       if (debug) setLonLat((geo.coords.latitude + '').substr(0, 9) + ' - ' + (geo.coords.longitude + '').substr(0, 9));
       // Subscribe to the hub
-      await server.Hub.Subscribe(deviceId, geo.coords.longitude, geo.coords.latitude, name);
+      await server.Hub.Subscribe(deviceId, geo.coords.longitude, geo.coords.latitude, name, image);
       if (debug) console.log('connected');
-      // Update the current location everty 2 seconds
+      // Update the current location every 2 seconds
       updateHandler = setInterval(async () => {
         const geo = await Geolocation.getCurrentPosition();
         if (debug) console.log('update');
@@ -137,7 +138,7 @@ const SwapView: React.FC = () => {
   };
 
   const onAcceptRequest = (peerDeviceId: string) => {
-    server.Hub.AcceptCardExchange(deviceId, peerDeviceId, getCurrentProfileNameField(), JSON.stringify(getCurrentProfile()?.vCard));
+    server.Hub.AcceptCardExchange(deviceId, peerDeviceId, getCurrentProfileNameField(), JSON.stringify(getCurrentVCard()), getCurrentProfile()?.image ?? '');
   };
 
   const onAbortRequest = (peerDeviceId: string) => {

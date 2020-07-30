@@ -21,23 +21,22 @@ export class CardExchangeHub implements ICardExchangeHub {
 
   // TODO test if it needs further transaction handling
   transaction = async (func: () => Promise<void>) => {
-    if ( this.connection.state !== signalR.HubConnectionState.Connected 
-      && this.connection.state !== signalR.HubConnectionState.Connecting
-      && this.connection.state !== signalR.HubConnectionState.Reconnecting ) {
+    if (
+      this.connection.state !== signalR.HubConnectionState.Connected &&
+      this.connection.state !== signalR.HubConnectionState.Connecting &&
+      this.connection.state !== signalR.HubConnectionState.Reconnecting
+    ) {
       await this.connection.start();
     }
 
-    while (this.connection.state === signalR.HubConnectionState.Connecting
-        || this.connection.state === signalR.HubConnectionState.Reconnecting ) {
-      await new Promise( resolve => setTimeout(() => resolve, 50));
+    while (this.connection.state === signalR.HubConnectionState.Connecting || this.connection.state === signalR.HubConnectionState.Reconnecting) {
+      await new Promise((resolve) => setTimeout(() => resolve, 50));
     }
 
     await func();
-  }
+  };
 
-  send = async (methodName: CardExchangeHubMethod, ...args: any[]) =>
-    await this.transaction(() => this.connection.send(methodName, ...args));
-
+  send = async (methodName: CardExchangeHubMethod, ...args: any[]) => await this.transaction(() => this.connection.send(methodName, ...args));
 
   public Subscribe = async (deviceId: string, longitude: number, latitude: number, displayName: string) =>
     await this.send(CardExchangeHubMethod.Subscribe, deviceId, longitude, latitude, displayName);
@@ -45,7 +44,7 @@ export class CardExchangeHub implements ICardExchangeHub {
   public Unsubcribe = async (deviceId: string) => {
     await this.send(CardExchangeHubMethod.Unsubcribe, deviceId);
     await this.connection.stop();
-  }
+  };
 
   public Update = async (deviceId: string, longitude: number, latitude: number, displayName: string) =>
     await this.send(CardExchangeHubMethod.Update, deviceId, longitude, latitude, displayName);
@@ -61,5 +60,4 @@ export class CardExchangeHub implements ICardExchangeHub {
 
   public SendCardData = async (deviceId: string, peerDeviceId: string, displayName: string, cardData: string) =>
     await this.send(CardExchangeHubMethod.SendCardData, deviceId, peerDeviceId, displayName, cardData);
-
 }

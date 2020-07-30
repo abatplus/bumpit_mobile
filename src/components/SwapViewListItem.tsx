@@ -70,6 +70,16 @@ const SwapViewListItem = ({ imgSource, name, state, onDoRequest, onAbortRequest,
       );
   };
 
+  const renderAvatarImage = () => {
+    if (imgSource) {
+      return (
+        <IonAvatar slot="start">
+          <img src={imgSource} alt={name} />
+        </IonAvatar>
+      );
+    }
+  };
+
   return (
     <IonItem>
       <IonGrid>
@@ -77,9 +87,7 @@ const SwapViewListItem = ({ imgSource, name, state, onDoRequest, onAbortRequest,
           <IonCol className="swap-view-wait">{state === SwapState.requested ? <IonSpinner name="dots" /> : ''}</IonCol>
           <IonCol>
             <div>
-              <IonAvatar slot="start">
-                <img src={imgSource} alt={name} />
-              </IonAvatar>
+              {renderAvatarImage()}
               <IonLabel>
                 <h2>{name}</h2>
                 <p>{stateText}</p>
