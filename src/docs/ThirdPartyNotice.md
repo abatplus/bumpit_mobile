@@ -413,9 +413,11 @@ Copyright Notice: Copyright (c) Fonticons, Inc.
 
 License: Font Awesome Pro commercial license
 
-Licenses:
+## Licenses:
 
-**Apache 2.0** (@microsoft/signalr, cordova-plugin-camera, cordova-plugin-contacts, cordova-plugin-file, cordova-plugin-globalization, typescript)
+### Apache 2.0
+
+(@microsoft/signalr, cordova-plugin-camera, cordova-plugin-contacts, cordova-plugin-file, cordova-plugin-globalization, typescript)
 
 TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
 
@@ -466,7 +468,8 @@ TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
 
 END OF TERMS AND CONDITIONS
 
-**MIT - License**
+## MIT - License
+
 (@capacitor/android, @capacitor/core, @ionic-native/camera, @ionic-native/core, @ionic-native/contacts, cordova-plugin-crop, @ionic-native/crop, @ionic-native/file, @ionic-native/globalization, @ionic-native/qr-scanner, @ionic/pwa-elements, @ionic/react, @ionic/react-router, @types/node, @types/qrcode.react, @types/react, @types/react-dom, @types/react-qr-reader, @types/react-router, @types/react-router-dom, @types/uuid, ionicons, phonegap-plugin-barcodescanner, react, react-dom, react-qr-reader, react-router, react-router-dom, react-scripts, uuid, vcf)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
@@ -475,8 +478,9 @@ The above copyright notice and this permission notice shall be included in all c
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE
 
-**BSD-3-Clause** (react-intl)
-Copyright 2019 Oath Inc. All rights reserved.
+## BSD-3-Clause
+
+(react-intl) Copyright 2019 Oath Inc. All rights reserved.
 
 Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
 
@@ -492,7 +496,9 @@ Redistribution and use in source and binary forms, with or without modification,
   derived from this software without specific prior written permission.
   THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL Oath INC. BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-ISC (qrcode.react)
+## ISC
+
+(qrcode.react)
 Permission to use, copy, modify, and/or distribute this software for any
 purpose with or without fee is hereby granted, provided that the above
 copyright notice and this permission notice appear in all copies.
