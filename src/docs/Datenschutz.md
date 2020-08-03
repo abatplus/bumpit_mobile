@@ -47,7 +47,7 @@ Wenn Sie die Funktion „Austausch“ betätigen, wird ein Datensatz bestehend a
 -	Name, im ausgewählten Profil eingetragener Name
 -	Geo-Position, die aktuelle Geo-Position ihres Mobilgeräts
 
-an unser Backend im vSwap-Portal gesendet und ist dort solange gespeichert, wie Sie die App, im speziellen den “Austausch-Bereich” geöffnet haben. Haben andere Personen in einem Radius von 10m die App ebenfalls geöffnet, so sehen diese Personen Ihren Eintrag und umgekehrt. 
+an unser Backend im vSwap-Portal gesendet und ist dort solange gespeichert, wie Sie die App, im speziellen den “Austausch-Bereich” geöffnet haben. Haben andere Personen in einem Radius von 25 Metern die App ebenfalls geöffnet, so sehen diese Personen Ihren Eintrag und umgekehrt. 
 
 Personen können über die App eine Anfrage an andere App-Nutzer senden, die sich im “Austausch-Bereich” befinden. Anschließend können die anderen App-Nutzer die Anfrage akzeptieren und es werden die jeweiligen, auf dem Gerät befindlichen, vCard-Daten über den Server auf das Gerät des jeweils anderen Partners übertragen. 
 
