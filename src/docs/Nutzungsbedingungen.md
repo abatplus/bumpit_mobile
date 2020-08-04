@@ -3,15 +3,18 @@
 ## 1. Geltungsbereich und Zweck
 a. Die „vSwap-App“ (gemeinsam als „App“ bezeichnet) ist eine mobile Anwendung, die von der abat+ GmbH, Innovationspark am Beckerturm, Kaiserstraße 170 – 174, 66386 St. Ingbert („abat+“) über einen App Store („Plattform“) des jeweiligen Betreibers („Plattformbetreiber“) kostenlos zum Herunterladen angeboten wird. Vertragspartner für die Nutzung der App sowie die Nutzung von deren Inhalten wird abat+, nicht der Plattformbetreiber. Mit der Installation und Nutzung der App erklären Sie sich mit diesen Nutzungsbedingungen einverstanden.
 b. Die App ist nur für die Nutzung in Deutschland bestimmt und richtet sich an Personen, die mindestens 16 Jahre alt sind. Personen unter 16 Jahren dürfen die App nur mit Zustimmung ihres/ihrer Sorgeberechtigten verwenden.
-c. Zweck der App ist es, virtuelle Visitenkarten auf einfache Art und Weise von einem Mobiltelefon auf das eines gewünschten Partners zu übertragen, der sich in regionaler Nähe (10 Meter Radius) befindet. Die Nutzer können hierfür Ihre Kontaktdaten in der App speichern und diese z.B. bei Meetings über einen Server austauschen oder per QR-Code anzeigen, sodass diese Daten durch einen QR-Code-Scanner gelesen werden können.
+c. Zweck der App ist es, virtuelle Visitenkarten auf einfache Art und Weise von einem Mobiltelefon auf das eines gewünschten Partners zu übertragen, der sich in regionaler Nähe (25 Meter Radius) befindet. Die Nutzer können hierfür Ihre Kontaktdaten in der App speichern und diese z.B. bei Meetings über einen Server austauschen oder per QR-Code anzeigen, sodass diese Daten durch einen QR-Code-Scanner gelesen werden können.
 
 ## 2. Funktionsweise und Nutzung der App
 a. Sobald Sie die App installiert haben, können Sie Ihre eigenen Kontaktdaten (Name, Vorname, Firma, Telefonnummer, E-Mail-Adresse, Webseite, Faxnummer, Land, Jobbezeichnung, Homepage) hinterlegen, um diese für den Austausch als vCard mit anderen Nutzern der App zu nutzen. Diese hinterlegten Daten werden zunächst ausschließlich auf dem Mobiltelefon gespeichert, auf dem die App installiert ist.
+
 b. Austausch über “Austausch-Bereich”
-Wenn Sie die Funktion „Austausch“ betätigen, wird ein Datensatz bestehend aus Geräte-ID, Name und Geo-Position an unser Backend im vSwap-Portal gesendet und ist dort solange gespeichert, wie Sie die App, im speziellen den “Austausch-Bereich” geöffnet haben. Haben andere Personen in einem Radius von 10m die App ebenfalls geöffnet, so sehen diese Personen Ihren Eintrag und umgekehrt. 
+Wenn Sie die Funktion „Austausch“ betätigen, wird ein Datensatz bestehend aus Geräte-ID, Name und Geo-Position an unser Backend im vSwap-Portal gesendet und ist dort solange gespeichert, wie Sie die App, im speziellen den “Austausch-Bereich” geöffnet haben. Haben andere Personen in einem Radius von 25 Metern die App ebenfalls geöffnet, so sehen diese Personen Ihren Eintrag und umgekehrt. 
 Personen können über die App eine Anfrage an andere App-Nutzer senden, die sich im “Austausch-Bereich” befinden. Anschließend können die anderen App-Nutzer die Anfrage akzeptieren und es werden damit die jeweiligen auf dem Gerät befindlichen vCard-Daten über den Server auf das Gerät des jeweils anderen Partners übertragen. 
+
 c. Austausch über QR-Code
 Es ist auch möglich für ein Profil einen QR-Code zu generieren. Dieser beinhaltet die Daten aus dem Profil als vCard und kann direkt mit einem QR-Scanner eingelesen werden. Dadurch können die Daten aus der vCard direkt mit einem Partner ohne Servernutzung getauscht werden. Hierbei werden keinerlei Daten an unsere Server übermittelt.
+
 d. Die im vSwap-Portal auf dem Server temporär gespeicherten Daten, bestehend aus: Name, Geräte-ID und Geo-Position, werden dort nur solange gespeichert, wie der Nutzer auf der Ansicht ‘Austausch’ bleibt, oder bis die App wieder geschlossen wird und dann werden die Daten automatisch gelöscht. 
 
 ## 3. Einstellungen im Endgerät
