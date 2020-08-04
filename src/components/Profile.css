@@ -1,13 +1,14 @@
 .profile-avatar {
-    width:  150px;
+    width: 150px;
     height: 150px;
-    max-width:  150px;
+    max-width: 150px;
     max-height: 150px;
     margin-top: 20px;
     margin-bottom: 20px;
     border-radius: 100px;
-    background-color: gray;
-}   
+    background-color: lightgray;
+    color: darkgrey;
+}
 
 .profile-avatar-container {
     max-width: 185px;
@@ -29,4 +30,10 @@
     position: absolute;
     top: 40px;
     left: 24px;
+}
+
+@media (prefers-color-scheme: dark) {
+    .profile-avatar {
+        background-color: gray;
+    }
 }

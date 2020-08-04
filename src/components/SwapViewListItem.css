@@ -8,8 +8,62 @@
 .swap-view-button {
     width: 50px;
     max-width: 50px;
-    margin: auto;
 }
+
+.swap-view-list-item {
+    height: 60px;
+    min-height: 60px;
+    width: 100%;
+}
+
 .swap-view-item-name {
     text-overflow: ellipsis;
+    vertical-align: middle;
+    transform: translateY(-5px);
+}
+
+.swap-view-avatar-col {
+    width: 50px;
+    max-width: 50px;
+}
+
+.swap-list-avatar {
+    width: 40px;
+    height: 40px;
+    max-width: 40px;
+    max-height: 40px;
+    border-radius: 100px;
+    background-color: lightgray;
+    transform: translateY(-4px);
+    color: darkgray;
+}
+
+.swap-list-no-user {
+    height: 20px;
+    width: 20px;
+    min-height: 20px;
+    min-width: 20px;
+    position: absolute;
+    top: 9px;
+    left: 10px;
+}
+
+.swap-list-image {
+    position: absolute;
+}
+
+.swap-list-image-shadowed {
+    position: absolute;
+    opacity: 0.5;
+}
+
+.swap-list-avatar-spinner {
+    top: 6px;
+    left: 6px;
+}
+
+@media (prefers-color-scheme: dark) {
+    .swap-list-avatar {
+        background-color: gray;
+    }
 }
