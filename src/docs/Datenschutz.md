@@ -1,4 +1,3 @@
-Hinweise zum Datenschutz
 Stand: Juli 2020
 
 Wir (abat+ GmbH) möchten Sie hiermit über die Verarbeitung Ihrer personenbezogenen Daten bei der Nutzung der vSwap-App informieren.
@@ -7,13 +6,21 @@ Wir (abat+ GmbH) möchten Sie hiermit über die Verarbeitung Ihrer personenbezog
 ## A.	Wer ist für die Datenverarbeitung verantwortlich? 
 
 Verantwortlicher (Art. 4 Abs. 7 EU-Datenschutz-Grundverordnung, DSGVO) für die Datenverarbeitung im Zusammenhang mit Ihrer Nutzung der vSwap-App ist:
+
 abat+ GmbH
+
 Innovationspark am Beckerturm
+
 Kaiserstraße 170 – 174
+
 66386 St. Ingbert
+
 Tel.: +49 6894-38808-05
+
 Fax: +49 6894-38808-99
+
 Unseren betrieblichen Datenschutzbeauftragten erreichen Sie unter:
+
 datenschutz@abatplus.de
 
 ## B.	Welche personenbezogenen Daten verarbeiten wir bei Nutzung der App?
@@ -35,6 +42,7 @@ Sie können in der App Ihre eigenen personenbezogenen Daten in frei erstellbaren
 -	Postleitzahl
 -	Ort
 -	Land
+-   Profilbild
 
 Die von Ihnen eingegebenen Daten werden zunächst lediglich lokal auf Ihrem Endgerät gespeichert und nicht an uns oder Dritte übermittelt.
 
@@ -46,8 +54,9 @@ Wenn Sie die Funktion „Austausch“ betätigen, wird ein Datensatz bestehend a
 -	Geräte-ID, zufällig generierte GUID
 -	Name, im ausgewählten Profil eingetragener Name
 -	Geo-Position, die aktuelle Geo-Position ihres Mobilgeräts
+-   Profilbild
 
-an unser Backend im vSwap-Portal gesendet und ist dort solange gespeichert, wie Sie die App, im speziellen den “Austausch-Bereich” geöffnet haben. Haben andere Personen in einem Radius von 10m die App ebenfalls geöffnet, so sehen diese Personen Ihren Eintrag und umgekehrt. 
+an unser Backend im vSwap-Portal gesendet und ist dort solange gespeichert, wie Sie die App, im speziellen den “Austausch-Bereich” geöffnet haben. Der Server generiert zusätzlich ein Thumbnail des Profilbildes und eine zufällige Adresse dazu und hält diese Daten für den möglichen nachfolgenden Austausch vor. Haben andere Personen in einem Radius von 25m die App ebenfalls geöffnet, so sehen diese Personen Ihren Eintrag und umgekehrt. 
 
 Personen können über die App eine Anfrage an andere App-Nutzer senden, die sich im “Austausch-Bereich” befinden. Anschließend können die anderen App-Nutzer die Anfrage akzeptieren und es werden die jeweiligen, auf dem Gerät befindlichen, vCard-Daten über den Server auf das Gerät des jeweils anderen Partners übertragen. 
 
@@ -74,7 +83,6 @@ Aus technischen Gründen werden weitere personenbezogene Daten an uns übermitte
 - Browser
 - Betriebssystem und dessen Oberfläche
 - Sprache und Version der Browsersoftware
- sowie
 - Gerätekennzeichnung (IMEI)
 
 Wir verarbeiten diese Daten, um Ihnen eine möglichst reibungslose Nutzung der App zu ermöglichen und die Stabilität und Sicherheit der App zu gewährleisten. Rechtsgrundlage ist der Vertrag (Nutzungsbedingungen), welchen Sie vor der Nutzung der App mit uns geschlossen haben (Art. 6 Abs. 1 S. 1 lit. b DSGVO). 
@@ -108,19 +116,19 @@ Nein, Sie werden keiner Entscheidung unterworfen, die Ihnen gegenüber rechtlich
 
 Ihre nachfolgenden Rechte können Sie uns gegenüber jederzeit unentgeltlich über datenschutz@abatplus.de oder über die oben genannten Kontaktmöglichkeiten geltend machen:
 
-•	gemäß Art. 15 DS-GVO Auskunft über Ihre von uns verarbeiteten personenbezogenen Daten zu verlangen. Insbesondere können Sie Auskunft über die Verarbeitungszwecke, die Kategorien der personenbezogenen Daten, die Kategorien von Empfängern, gegenüber denen Ihre Daten offengelegt wurden oder werden, die geplante Speicherdauer, das Bestehen eines Rechts auf Berichtigung, Löschung, Einschränkung der Verarbeitung oder Widerspruch, das Bestehen eines Beschwerderechts, die Herkunft Ihrer Daten, sofern diese nicht bei uns erhoben wurden, sowie über das Bestehen einer automatisierten Entscheidungsfindung einschließlich Profiling und gegebenenfalls aussagekräftigen Informationen zu deren Einzelheiten verlangen;
+•	gemäß Art. 15 DS-GVO **Auskunft** über Ihre von uns verarbeiteten personenbezogenen Daten zu verlangen. Insbesondere können Sie Auskunft über die Verarbeitungszwecke, die Kategorien der personenbezogenen Daten, die Kategorien von Empfängern, gegenüber denen Ihre Daten offengelegt wurden oder werden, die geplante Speicherdauer, das Bestehen eines Rechts auf Berichtigung, Löschung, Einschränkung der Verarbeitung oder Widerspruch, das Bestehen eines Beschwerderechts, die Herkunft Ihrer Daten, sofern diese nicht bei uns erhoben wurden, sowie über das Bestehen einer automatisierten Entscheidungsfindung einschließlich Profiling und gegebenenfalls aussagekräftigen Informationen zu deren Einzelheiten verlangen;
 
-•	gemäß Art. 16 DS-GVO unverzüglich die Berichtigung unrichtiger oder Vervollständigung Ihrer bei uns gespeicherten personenbezogenen Daten zu verlangen;
+•	gemäß Art. 16 DS-GVO unverzüglich die **Berichtigung** unrichtiger oder Vervollständigung Ihrer bei uns gespeicherten personenbezogenen Daten zu verlangen;
 
-•	gemäß Art. 17 DS-GVO die Löschung Ihrer bei uns gespeicherten personenbezogenen Daten zu verlangen, soweit nicht die Verarbeitung zur Ausübung des Rechts auf freie Meinungsäußerung und Information, zur Erfüllung einer rechtlichen Verpflichtung, aus Gründen des öffentlichen Interesses oder zur Geltendmachung, Ausübung oder Verteidigung von Rechtsansprüchen erforderlich ist;
+•	gemäß Art. 17 DS-GVO die **Löschung** Ihrer bei uns gespeicherten personenbezogenen Daten zu verlangen, soweit nicht die Verarbeitung zur Ausübung des Rechts auf freie Meinungsäußerung und Information, zur Erfüllung einer rechtlichen Verpflichtung, aus Gründen des öffentlichen Interesses oder zur Geltendmachung, Ausübung oder Verteidigung von Rechtsansprüchen erforderlich ist;
 
-•	gemäß Art. 18 DS-GVO die Einschränkung der Verarbeitung Ihrer personenbezogenen Daten zu verlangen, soweit die Richtigkeit der Daten von Ihnen bestritten wird, die Verarbeitung unrechtmäßig ist, Sie aber deren Löschung ablehnen und wir die Daten nicht mehr benötigen, Sie jedoch diese zur Geltendmachung, Ausübung oder Verteidigung von Rechtsansprüchen benötigen oder Sie gemäß Art. 21 DS-GVO Widerspruch gegen die Verarbeitung eingelegt haben;
+•	gemäß Art. 18 DS-GVO die **Einschränkung der Verarbeitung** Ihrer personenbezogenen Daten zu verlangen, soweit die Richtigkeit der Daten von Ihnen bestritten wird, die Verarbeitung unrechtmäßig ist, Sie aber deren Löschung ablehnen und wir die Daten nicht mehr benötigen, Sie jedoch diese zur Geltendmachung, Ausübung oder Verteidigung von Rechtsansprüchen benötigen oder Sie gemäß Art. 21 DS-GVO Widerspruch gegen die Verarbeitung eingelegt haben;
 
-•	gemäß Art. 20 DS-GVO Ihre personenbezogenen Daten, die Sie uns bereitgestellt haben, in einem strukturierten, gängigen und maschinenlesbaren Format zu erhalten oder die Übermittlung an einen anderen Verantwortlichen zu verlangen (Recht auf Datenportabilität);
+•	gemäß Art. 20 DS-GVO Ihre personenbezogenen Daten, die Sie uns bereitgestellt haben, in einem strukturierten, gängigen und maschinenlesbaren Format zu erhalten oder die Übermittlung an einen anderen Verantwortlichen zu verlangen (**Recht auf Datenportabilität**);
 
-•	gemäß Art. 7 Abs. 3 DS-GVO Ihre einmal erteilte Einwilligung jederzeit gegenüber uns zu widerrufen. Dies hat zur Folge, dass wir die Datenverarbeitung, die auf dieser Einwilligung beruhte, für die Zukunft nicht mehr fortführen dürfen;
+•	gemäß Art. 7 Abs. 3 DS-GVO Ihre einmal erteilte Einwilligung jederzeit gegenüber uns zu **widerrufen**. Dies hat zur Folge, dass wir die Datenverarbeitung, die auf dieser Einwilligung beruhte, für die Zukunft nicht mehr fortführen dürfen;
 
-•	gemäß Art. 77 DS-GVO sich bei einer Aufsichtsbehörde zu beschweren. In der Regel können Sie sich hierfür an die Aufsichtsbehörde Ihres üblichen Aufenthaltsortes oder Arbeitsplatzes oder unseres Geschäftssitzes wenden.
+•	gemäß Art. 77 DS-GVO sich bei einer **Aufsichtsbehörde zu beschweren**. In der Regel können Sie sich hierfür an die Aufsichtsbehörde Ihres üblichen Aufenthaltsortes oder Arbeitsplatzes oder unseres Geschäftssitzes wenden.
 
 ## Widerspruchsrecht
 
