@@ -28,6 +28,7 @@ export const ProfileReducer = (state = initialState, action: IAction) => {
         profiles: action.payload as IProfile[],
       };
     }
+
     case Actions.Profile.ActionTypes.ADD_PROFILE:
       const afterAdd = [...state.profiles, action.payload] as IProfile[];
       (async () => await storeProfileData(afterAdd))();
@@ -35,6 +36,7 @@ export const ProfileReducer = (state = initialState, action: IAction) => {
         ...state,
         profiles: afterAdd,
       };
+
     case Actions.Profile.ActionTypes.UPDATE_PROFILE:
       const payload = action.payload as { id: string; profileName: string; fieldName: keyof IVCard; fieldValue: string };
 
@@ -54,6 +56,7 @@ export const ProfileReducer = (state = initialState, action: IAction) => {
         ...state,
         profiles: profiles,
       };
+
     case Actions.Profile.ActionTypes.REMOVE_PROFILE:
       const currentProfiles = state.profiles;
       const indexOfProfileToRemove = state.profiles.findIndex((x) => x.id === action.payload);
@@ -63,11 +66,13 @@ export const ProfileReducer = (state = initialState, action: IAction) => {
         ...state,
         profiles: currentProfiles,
       };
+
     case Actions.Profile.ActionTypes.SET_LOADING:
       return {
         ...state,
         isLoading: action.payload,
       };
+
     case Actions.Profile.ActionTypes.SET_PROFILE_NAME: {
       const data = action.payload as { id: string; profileName: string };
 
@@ -88,7 +93,50 @@ export const ProfileReducer = (state = initialState, action: IAction) => {
         profiles: profiles,
       };
     }
-    default:
-      return state;
+
+  case Actions.Profile.ActionTypes.SET_PROFILE_IMAGE: {
+    const data = action.payload as { id: string; image: string };
+
+    const updateProfileIndex: number = state.profiles.findIndex((x) => x.id === data.id);
+    if (updateProfileIndex < 0) {
+      return { ...state };
+    }
+    const updateProfile: IProfile = state.profiles[updateProfileIndex];
+
+    updateProfile.image = data.image;
+    state.profiles[updateProfileIndex] = updateProfile;
+
+    const profiles = [...state.profiles];
+    (async () => await storeProfileData(profiles))();
+
+    return {
+      ...state,
+      profiles: profiles,
+    };
+  }
+
+  case Actions.Profile.ActionTypes.REMOVE_PROFILE_IMAGE: {
+    const id = action.payload as string;
+
+    const updateProfileIndex: number = state.profiles.findIndex((x) => x.id === id);
+    if (updateProfileIndex < 0) {
+      return { ...state };
+    }
+    const updateProfile: IProfile = state.profiles[updateProfileIndex];
+
+    delete updateProfile.image;
+    state.profiles[updateProfileIndex] = updateProfile;
+
+    const profiles = [...state.profiles];
+    (async () => await storeProfileData(profiles))();
+
+    return {
+      ...state,
+      profiles: profiles,
+    };
+  }
+
+  default:
+    return state;
   }
 };

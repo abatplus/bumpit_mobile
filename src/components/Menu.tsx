@@ -1,19 +1,8 @@
 import React from 'react';
 import { withRouter, useLocation } from 'react-router';
-import {
-  IonContent,
-  IonItem,
-  IonLabel,
-  IonList,
-  IonMenu,
-  IonMenuToggle,
-  IonFooter,
-  IonToolbar,
-  IonTitle,
-  IonImg,
-} from '@ionic/react';
+import { IonContent, IonItem, IonLabel, IonList, IonMenu, IonMenuToggle, IonFooter, IonImg } from '@ionic/react';
 import { faBarcodeRead, faIdCard, IconDefinition } from '@fortawesome/pro-duotone-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useAppContext } from '../store/contexts/AppContext';
 import './Menu.css';
 import { useIntl } from 'react-intl';
@@ -57,45 +46,43 @@ const Menu: React.FC = () => {
     return list
       .filter((route) => !!route.path)
       .map((p) => (
-        <IonMenuToggle key={p.title} auto-hide='false'>
+        <IonMenuToggle key={p.title} auto-hide="false">
           <IonItem
             detail={false}
             routerLink={p.path}
-            routerDirection='none'
+            routerDirection="none"
             className={location.pathname.startsWith(p.path) ? 'selected' : undefined}
-            disabled={appContext.isLoading}>
-
+            disabled={appContext.isLoading}
+          >
             {p.icon && <FontAwesomeIcon className="fa fa-2x menuline-icon" icon={p.icon} />}
-            <IonLabel >{p.title}</IonLabel>
+            <IonLabel>{p.title}</IonLabel>
           </IonItem>
         </IonMenuToggle>
       ));
   };
 
   // detect darkmode and switch imgsrc
-  const logo = window.matchMedia('(prefers-color-scheme: dark)').matches ? 
-    '../../assets/icon/Logo_vSwap_Menue-Drawer Darkmode.png' 
-    : 
-    '../../assets/icon/Logo_vSwap_Menue-Drawer.png';
+  const logo = window.matchMedia('(prefers-color-scheme: dark)').matches
+    ? '../../assets/icon/Logo_vSwap_Menue-Drawer Darkmode.png'
+    : '../../assets/icon/Logo_vSwap_Menue-Drawer.png';
 
-  const menuItemColor = window.matchMedia('(prefers-color-scheme: dark)').matches ? 
-    'secondary' : '';
+  const menuItemColor = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'secondary' : '';
 
   return (
-    <IonMenu type='overlay' disabled={!appContext.menuEnabled} contentId='main'>
+    <IonMenu type="overlay" disabled={!appContext.menuEnabled} contentId="main">
       <IonContent forceOverscroll={false}>
-        <IonItem lines='inset' color='secondary'>
-          <IonImg className='app-icon' src={logo}></IonImg>
+        <IonItem lines="inset" color="secondary">
+          <IonImg className="app-icon" src={logo}></IonImg>
         </IonItem>
-        <IonItem lines='inset' color={menuItemColor}>
-          <IonList lines='none'>{renderListItems(routes.tabsPages)}</IonList>
+        <IonItem lines="inset" color={menuItemColor}>
+          <IonList lines="none">{renderListItems(routes.tabsPages)}</IonList>
         </IonItem>
         <IonItem>
-          <IonList lines='none'>{renderListItems(routes.appPages)}</IonList>
+          <IonList lines="none">{renderListItems(routes.appPages)}</IonList>
         </IonItem>
       </IonContent>
-      <IonFooter className='menu-footer'>
-          <IonText className='poweredBy'>POWERED BY abat+</IonText>
+      <IonFooter className="menu-footer">
+        <IonText className="poweredBy">POWERED BY abat+</IonText>
       </IonFooter>
     </IonMenu>
   );

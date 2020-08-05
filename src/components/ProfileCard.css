@@ -1,0 +1,26 @@
+.profile-list-avatar {
+    width: 80px;
+    height: 80px;
+    max-width: 80px;
+    max-height: 80px;
+    border-radius: 100px;
+    background-color: lightgray;
+    transform: translateY(-4px);
+    color: darkgray;
+}
+
+.profile-list-no-user {
+    height: 40px;
+    width: 40px;
+    min-height: 40px;
+    min-width: 40px;
+    position: absolute;
+    top: 18px;
+    left: 20px;
+}
+
+@media (prefers-color-scheme: dark) {
+    .profile-list-avatar {
+        background-color: gray;
+    }
+}

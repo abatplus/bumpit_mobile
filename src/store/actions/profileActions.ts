@@ -8,6 +8,8 @@ export enum ActionTypes {
   REMOVE_PROFILE = 'REMOVE_PROFILE',
   UPDATE_PROFILE = 'UPDATE_PROFILE',
   SET_PROFILE_NAME = 'SET_PROFILE_NAME',
+  SET_PROFILE_IMAGE = 'SET_PROFILE_IMAGE',
+  REMOVE_PROFILE_IMAGE = 'REMOVE_PROFILE_IMAGE'
 }
 
 export const setProfileName = (profileId: string, profileName: string) => {
@@ -56,6 +58,23 @@ export const addNewProfile = (newProfile: IProfile) => {
 export const removeProfile = (profileId: string) => {
   return {
     type: ActionTypes.REMOVE_PROFILE,
+    payload: profileId,
+  };
+};
+
+export const setProfileImage = (profileId: string, base64Image: string) => {
+  return {
+    type: ActionTypes.SET_PROFILE_IMAGE,
+    payload: {
+      id: profileId,
+      image: base64Image
+    }
+  };
+};
+
+export const removeProfileImage = (profileId: string) => {
+  return {
+    type: ActionTypes.REMOVE_PROFILE_IMAGE,
     payload: profileId,
   };
 };

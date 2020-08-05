@@ -9,16 +9,20 @@ import {
     IonCol,
     IonCardHeader,
     IonToast,
+    IonAvatar,
+    isPlatform,
 } from '@ionic/react';
 import { useIntl } from 'react-intl';
 import { translate } from '../utils';
-import { faQrcode, faEdit, faExchange } from '@fortawesome/pro-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faQrcode, faEdit, faExchange, faUser } from '@fortawesome/pro-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useHistory } from 'react-router';
 import IProfile from '../interfaces/IProfile';
+import './ProfileCard.css';
+import MockImage from './MockImage';
 
 interface IProfileCardProps {
-  profile: IProfile;
+    profile: IProfile;
 }
 
 const ProfileCard: React.FC<IProfileCardProps> = (props) => {
@@ -34,38 +38,54 @@ const ProfileCard: React.FC<IProfileCardProps> = (props) => {
         }
     };
 
+    const renderProfileImage = () => {
+        const imageData = props.profile?.image; //isPlatform('capacitor') ? props.profile?.image : MockImage;
+        if (imageData) {
+            return <img src={imageData} alt='profile-img' />;
+        } else {
+            return <FontAwesomeIcon className='fa fa-lg profile-list-no-user' icon={faUser} />;
+        }
+    };
+
     return (
-        <IonCard style={{ margin: '2em' }}>
+        <IonCard>
             <IonCardHeader onClick={() => history.push('/profile/edit/' + props.profile.id)}>
-                <IonTitle  className='ion-text-center ion-title'>{props.profile.name}</IonTitle>
+                <IonTitle className='ion-text-center ion-title'>{props.profile.name}</IonTitle>
             </IonCardHeader>
             <IonCardContent>
                 <IonGrid>
                     <IonRow>
-                        <IonCol className='ion-text-center'>
-                            <IonButton
-                                onClick={() => {
-                                    history.push('/qrcode/' + props.profile.id);
-                                }}
-                                title={translate(i18n, 'ShowQRCode')}>
-                                <FontAwesomeIcon className="fa fa-lg" icon={faQrcode} />
-                            </IonButton>
+                        <IonCol size='4'>
+                            <IonAvatar className='profile-list-avatar'>{renderProfileImage()}</IonAvatar>
                         </IonCol>
-                        <IonCol className='ion-text-center'>
-                            <IonButton
-                                onClick={onClickSwap}
-                                title={translate(i18n, 'Exchange')}>
-                                <FontAwesomeIcon className="fa fa-lg" icon={faExchange} />
-                            </IonButton>
-                        </IonCol>
-                        <IonCol className='ion-text-center'>
-                            <IonButton
-                                onClick={() => {
-                                    history.push('/profile/edit/' + props.profile.id);
-                                }}
-                                title={translate(i18n, 'Edit')}>
-                                <FontAwesomeIcon className="fa fa-lg" icon={faEdit} />
-                            </IonButton>
+                        <IonCol size='8'>
+                            <IonGrid>
+                                <IonRow>
+                                    <IonCol size='4'>
+                                        <IonButton
+                                            onClick={() => {
+                                                history.push('/qrcode/' + props.profile.id);
+                                            }}
+                                            title={translate(i18n, 'ShowQRCode')}>
+                                            <FontAwesomeIcon className='fa fa-lg' icon={faQrcode} />
+                                        </IonButton>
+                                    </IonCol>
+                                    <IonCol size='4'>
+                                        <IonButton onClick={onClickSwap} title={translate(i18n, 'Exchange')}>
+                                            <FontAwesomeIcon className='fa fa-lg' icon={faExchange} />
+                                        </IonButton>
+                                    </IonCol>
+                                    <IonCol size='4'>
+                                        <IonButton
+                                            onClick={() => {
+                                                history.push('/profile/edit/' + props.profile.id);
+                                            }}
+                                            title={translate(i18n, 'Edit')}>
+                                            <FontAwesomeIcon className='fa fa-lg' icon={faEdit} />
+                                        </IonButton>
+                                    </IonCol>
+                                </IonRow>
+                            </IonGrid>
                         </IonCol>
                     </IonRow>
                 </IonGrid>

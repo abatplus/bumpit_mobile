@@ -24,7 +24,7 @@ const emptyVCard: IVCard = {
 const emptyProfile: IProfile = {
     id: 'default',
     name: 'default',
-    vCard: emptyVCard,
+    vCard: emptyVCard
 };
 
 export function getEmptyProfile(id: string): IProfile {
@@ -32,6 +32,7 @@ export function getEmptyProfile(id: string): IProfile {
         id: id,
         name: '',
         vCard: getEmptyVCard (),
+        image: ''
     };
 }
 
@@ -61,7 +62,7 @@ export const getProfileData = async () => {
     //read data from url
     else {
         const response = await fetch(profileDataUrl);
-        const responseData: { profiles: [{ id: string; name: string; vCard: IVCard }] } = await response.json();
+        const responseData: { profiles: [{ id: string; name: string; vCard: IVCard, image: string }] } = await response.json();
         profiles = responseData.profiles;
     }
     return profiles;
