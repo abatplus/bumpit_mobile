@@ -67,8 +67,8 @@ export const storeProfileData = async (data: IProfile[]) => {
 export const loadProfileDataFromFile = async () => {
     const fileName = 'vSwapCardData.json';
     try {
-        await File.checkFile(File.syncedDataDirectory, fileName);
-        return JSON.parse(await File.readAsText(File.syncedDataDirectory, fileName));
+        await File.checkFile(File.dataDirectory, fileName);
+        return JSON.parse(await File.readAsText(File.dataDirectory, fileName));
     } catch (error) {
         // no file found => possible but ok if we open the app for the first time
         return [];
@@ -83,26 +83,27 @@ export const storeProfileDataToFile = async (data: IProfile[]) => {
     // safely remove old temp file if somehow it is present, what shouldn't be
     try {
         try {
-            await File.checkFile(File.syncedDataDirectory, fileNameNew);
-            await File.removeFile(File.syncedDataDirectory, fileNameNew);
+            await File.checkFile(File.dataDirectory, fileNameNew);
+            await File.removeFile(File.dataDirectory, fileNameNew);
         } catch (error) {
             // no file found => good, because we have no old unwanted data
         }
 
         // write temporarily new file
-        await File.writeFile(File.syncedDataDirectory, fileNameNew, JSON.stringify(data));
+        await File.writeFile(File.dataDirectory, fileNameNew, JSON.stringify(data));
 
         // remove old file
         try {
-            await File.checkFile(File.syncedDataDirectory, fileName);
-            await File.removeFile(File.syncedDataDirectory, fileName);
+            await File.checkFile(File.dataDirectory, fileName);
+            await File.removeFile(File.dataDirectory, fileName);
         } catch (error) {
             // no file found => possible but ok if we open the app for the first time
         }
 
         // move the temp file as actual data file
-        await File.moveFile(File.syncedDataDirectory, fileNameNew, File.syncedDataDirectory, fileName);
+        await File.moveFile(File.dataDirectory, fileNameNew, File.dataDirectory, fileName);
     } catch (error) {
         // no file found
+        alert('Error storing profile data to file');
     }
 };
