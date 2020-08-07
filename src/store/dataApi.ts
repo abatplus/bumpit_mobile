@@ -9,6 +9,14 @@ const profileDataUrl = '/assets/mock/profilesMock.json';
 
 const PROFILE_DATA = 'profile_data';
 
+const getDataDirectory = () => (isPlatform('ios') ? File.syncedDataDirectory : File.dataDirectory);
+
+const debugAlert = (message: string) => {
+    if (false) {
+        alert(message);
+    }
+};
+
 export function getEmptyProfile(id: string): IProfile {
     return {
         id: id,
@@ -36,7 +44,8 @@ export function getEmptyVCard(): IVCard {
 
 export const getProfileData = async () => {
     let profiles = [];
-    if (isPlatform('cordova')) {
+    // if (isPlatform('cordova')) { // TODO: fix bug in iOS file system
+    if (false) {
         profiles = await loadProfileDataFromFile();
     } else {
         //get from storage
@@ -60,17 +69,26 @@ export const getProfileData = async () => {
 
 //save in Storage
 export const storeProfileData = async (data: IProfile[]) => {
-    if (isPlatform('cordova')) await storeProfileDataToFile(data);
-    else await Storage.set({ key: PROFILE_DATA, value: JSON.stringify(data) });
+    // if (isPlatform('cordova')) { // TODO: fix bug in iOS file system
+    if (false) {
+        await storeProfileDataToFile(data);
+    } else {
+        await Storage.set({ key: PROFILE_DATA, value: JSON.stringify(data) });
+    }
 };
 
 export const loadProfileDataFromFile = async () => {
+    debugAlert('DataDir:' + getDataDirectory());
     const fileName = 'vSwapCardData.json';
     try {
-        await File.checkFile(File.dataDirectory, fileName);
-        return JSON.parse(await File.readAsText(File.dataDirectory, fileName));
+        await File.checkFile(getDataDirectory(), fileName);
+        const fileData = await File.readAsText(getDataDirectory(), fileName);
+        debugAlert('file data: ' + fileData);
+        return JSON.parse(fileData);
     } catch (error) {
         // no file found => possible but ok if we open the app for the first time
+        debugAlert('error: load data file');
+        debugAlert(JSON.stringify(error));
         return [];
     }
 };
@@ -83,27 +101,31 @@ export const storeProfileDataToFile = async (data: IProfile[]) => {
     // safely remove old temp file if somehow it is present, what shouldn't be
     try {
         try {
-            await File.checkFile(File.dataDirectory, fileNameNew);
-            await File.removeFile(File.dataDirectory, fileNameNew);
+            await File.checkFile(getDataDirectory(), fileNameNew);
+            await File.removeFile(getDataDirectory(), fileNameNew);
         } catch (error) {
             // no file found => good, because we have no old unwanted data
+            // debugAlert('error: remove old temp file');
+            // debugAlert(JSON.stringify(error));
         }
 
         // write temporarily new file
-        await File.writeFile(File.dataDirectory, fileNameNew, JSON.stringify(data));
+        await File.writeFile(getDataDirectory(), fileNameNew, JSON.stringify(data));
 
-        // remove old file
+        // remove old data file
         try {
-            await File.checkFile(File.dataDirectory, fileName);
-            await File.removeFile(File.dataDirectory, fileName);
+            await File.checkFile(getDataDirectory(), fileName);
+            await File.removeFile(getDataDirectory(), fileName);
         } catch (error) {
             // no file found => possible but ok if we open the app for the first time
+            debugAlert('error: remove old data file');
+            debugAlert(JSON.stringify(error));
         }
 
         // move the temp file as actual data file
-        await File.moveFile(File.dataDirectory, fileNameNew, File.dataDirectory, fileName);
+        await File.moveFile(getDataDirectory(), fileNameNew, getDataDirectory(), fileName);
     } catch (error) {
         // no file found
-        alert('Error storing profile data to file');
+        debugAlert('Error storing profile data to file');
     }
 };
