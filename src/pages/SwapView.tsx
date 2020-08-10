@@ -49,6 +49,18 @@ const SwapView: React.FC = () => {
 
     const debug = false;
 
+    const getOnlineOrExchangedEntries = () => {
+        return swapContext.filter((entry) => entry.online === true || entry.state === SwapState.exchanged);
+    };
+
+    const getCandidatesEntries = () => {
+        return swapContext.filter((entry) => entry.online === true && entry.state !== SwapState.exchanged);
+    };
+
+    const getExchangedEntries = () => {
+        return swapContext.filter((entry) => entry.state === SwapState.exchanged);
+    };
+
     const getCurrentProfile = () => {
         return profileContext.profiles.find((entry) => entry.id === id);
     };
@@ -218,19 +230,13 @@ const SwapView: React.FC = () => {
                         <IonSegmentButton value='swap-list' className='swap-segment-button'>
                             <FontAwesomeIcon className='fa fa-lg' icon={faPollPeople} />
                             <IonLabel>
-                                {translate(i18n, 'Swap_candidates')} (
-                                {
-                                    swapContext.filter((entry) => entry.state !== SwapState.exchanged && entry.online)
-                                        .length
-                                }
-                                )
+                                {translate(i18n, 'Swap_candidates')} ({getCandidatesEntries().length})
                             </IonLabel>
                         </IonSegmentButton>
                         <IonSegmentButton value='ready-list'>
                             <FontAwesomeIcon className='fa fa-lg' icon={faCheck} />
                             <IonLabel>
-                                {translate(i18n, 'Received')} (
-                                {swapContext.filter((entry) => entry.state === SwapState.exchanged).length})
+                                {translate(i18n, 'Received')} ({getExchangedEntries().length})
                             </IonLabel>
                         </IonSegmentButton>
                     </IonSegment>
@@ -238,7 +244,9 @@ const SwapView: React.FC = () => {
             </IonHeader>
 
             <IonContent>
-                {swapContext.length === 0 && <LoadingSpinner message={translate(i18n, 'Wait_for_contacts')} />}
+                {getOnlineOrExchangedEntries().length > 0 && (
+                    <LoadingSpinner message={translate(i18n, 'Wait_for_contacts')} />
+                )}
                 <IonList>{renderList()}</IonList>
             </IonContent>
             {renderFooter()}
