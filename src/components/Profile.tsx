@@ -142,6 +142,13 @@ const Profile: React.FC<IProfileProps> = (props) => {
                 />
             </IonItem>
             <VCardField
+                key={'name'}
+                name={'name'}
+                label={translate(i18n, 'Name')}
+                value={props.profile?.vCard?.name}
+                onChange={updateProfile('name')}
+            />
+            <VCardField
                 key={'company'}
                 name={'company'}
                 label={translate(i18n, 'Company')}
@@ -182,13 +189,6 @@ const Profile: React.FC<IProfileProps> = (props) => {
                 label={translate(i18n, 'Country')}
                 value={props.profile?.vCard?.country}
                 onChange={updateProfile('country')}
-            />
-            <VCardField
-                key={'name'}
-                name={'name'}
-                label={translate(i18n, 'Name')}
-                value={props.profile?.vCard?.name}
-                onChange={updateProfile('name')}
             />
             <VCardField
                 key={'position'}
