@@ -23,6 +23,22 @@ interface IProfileProps {
     profile?: IProfile;
 }
 
+function imageToDataUri(img: CanvasImageSource, width: number, height: number) {
+    // create an off-screen canvas
+    let canvas = document.createElement('canvas');
+    let ctx = canvas.getContext('2d');
+
+    // set its dimension to target size
+    canvas.width = width;
+    canvas.height = height;
+
+    // draw source image into the off-screen canvas:
+    ctx?.drawImage(img, 0, 0, width, height);
+
+    // encode image to data-uri with base64 version of compressed image
+    return canvas.toDataURL();
+}
+
 const Profile: React.FC<IProfileProps> = (props) => {
     const i18n = useIntl();
     const { dispatchProfileContext } = useProfileContext();
@@ -80,10 +96,9 @@ const Profile: React.FC<IProfileProps> = (props) => {
         const fileUri = cameraPhoto.path + '';
 
         const cropPath = await Crop.crop(fileUri, {
-            quality: 75,
-            targetHeight: 300,
-            targetWidth: 300,
+            quality: 100,
         });
+
         const newPath = cropPath.split('?')[0];
         const copyPath = newPath;
         const splitPath = copyPath.split('/');
@@ -91,8 +106,14 @@ const Profile: React.FC<IProfileProps> = (props) => {
         const filePath = newPath.split(imageName)[0];
 
         const base64 = await File.readAsDataURL(filePath, imageName);
-        updateProfileImage(base64);
-        await File.removeFile(filePath, imageName);
+
+        var img = new Image();
+        img.src = base64;
+        img.onload = async () => {
+            const newDataUri = imageToDataUri(img, 300, 300);
+            updateProfileImage(newDataUri);
+            await File.removeFile(filePath, imageName);
+        };
     };
 
     const imageData = props.profile?.image; // isPlatform('capacitor') ? props.profile?.image : MockImage;
