@@ -23,6 +23,7 @@ interface IProfileProps {
     profile?: IProfile;
 }
 
+// function to resize the image properly
 function imageToDataUri(img: CanvasImageSource, width: number, height: number) {
     // create an off-screen canvas
     let canvas = document.createElement('canvas');
@@ -45,13 +46,15 @@ const Profile: React.FC<IProfileProps> = (props) => {
     const { getPhoto } = useCamera();
 
     const updateProfile = (inputFieldName: keyof IVCard) => (event: CustomEvent) => {
+        const input = document.getElementsByName(inputFieldName);
+        const inputElem = input[0] as HTMLInputElement;
         if (props.profile && props.profile.id) {
             dispatchProfileContext(
                 Actions.Profile.setProfileVCardDataField(
                     props.profile.id,
                     props.profile.name,
                     inputFieldName,
-                    event.detail.value
+                    inputElem.value
                 )
             );
         }

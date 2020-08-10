@@ -23,7 +23,8 @@ const VCardField: React.FC<VCardProps> = (props) => {
                 value={props.value}
                 spellCheck={false}
                 autocapitalize='off'
-                onIonChange={props.onChange}
+                // onIonChange={props.onChange}
+                onIonBlur={props.onChange}
                 readonly={props.isReadonly}
             />
         </IonItem>
