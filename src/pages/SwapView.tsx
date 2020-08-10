@@ -122,19 +122,19 @@ const SwapView: React.FC = () => {
         server.Hub.Unsubcribe(deviceId);
     });
 
-    const onDoRequestAll = () => {
+    const onDoRequestAll = async () => {
         // request all non requested or from whose no request is received
         const entries = [...swapContext.filter((entry) => entry.state === SwapState.initial && entry.online)];
-        entries.forEach((entry) => onDoRequest(entry.deviceId));
+        for (const entry of entries) await onDoRequest(entry.deviceId);
     };
 
     const getNumberOfRequestAll = () => {
         return swapContext.filter((entry) => entry.state === SwapState.initial && entry.online).length;
     };
 
-    const onAcceptAll = () => {
+    const onAcceptAll = async () => {
         const entries = [...swapContext.filter((entry) => entry.state === SwapState.received && entry.online)];
-        entries.forEach((entry) => onAcceptRequest(entry.deviceId));
+        for (const entry of entries) await onAcceptRequest(entry.deviceId);
         clearInterval(updateHandler); // delete
     };
 
@@ -142,12 +142,13 @@ const SwapView: React.FC = () => {
         return swapContext.filter((entry) => entry.state === SwapState.received && entry.online).length;
     };
 
-    const onDoRequest = (peerDeviceId: string) => {
-        server.Hub.RequestCardExchange(deviceId, peerDeviceId, getCurrentProfileNameField());
+    const onDoRequest = async (peerDeviceId: string) => {
+        if (debug) console.log(new Date(Date.now()).toISOString() + ' + request to: ' + peerDeviceId);
+        await server.Hub.RequestCardExchange(deviceId, peerDeviceId, getCurrentProfileNameField());
     };
 
-    const onAcceptRequest = (peerDeviceId: string) => {
-        server.Hub.AcceptCardExchange(
+    const onAcceptRequest = async (peerDeviceId: string) => {
+        await server.Hub.AcceptCardExchange(
             deviceId,
             peerDeviceId,
             getCurrentProfileNameField(),
@@ -156,8 +157,9 @@ const SwapView: React.FC = () => {
         );
     };
 
-    const onAbortRequest = (peerDeviceId: string) => {
-        server.Hub.RevokeCardExchangeRequest(deviceId, peerDeviceId);
+    const onAbortRequest = async (peerDeviceId: string) => {
+        if (debug) console.log('abort to: ' + peerDeviceId);
+        await server.Hub.RevokeCardExchangeRequest(deviceId, peerDeviceId);
     };
 
     const renderList = () => {
