@@ -1,5 +1,5 @@
 import { IVCard } from './IVCard';
 
 export default interface IContactApi {
-  createContact: (vCardFields: IVCard) => Promise<any>;
+    createContact: (vCardFields: IVCard, base64Image: string | undefined | null) => Promise<any>;
 }

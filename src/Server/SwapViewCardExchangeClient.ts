@@ -5,69 +5,87 @@ import ISwapListEntry from '../interfaces/ISwapListEntry';
 import IContactApi from '../interfaces/IContactApi';
 import ContactApi from '../contacts/ContactApi';
 import { ICardExchangeClient } from './ICardExchangeClient';
+import axios from 'axios';
 
 export class SwapViewCardExchangeClient implements ICardExchangeClient {
+    constructor(
+        private dispatch: Dispatch<IAction>,
+        private sendCardData: (peerDeviceId: string) => void,
+        private contactApi: IContactApi = new ContactApi()
+    ) {}
 
-  constructor(private dispatch: Dispatch<IAction>, private sendCardData: (peerDeviceId: string) => void, private contactApi: IContactApi = new ContactApi()) {
+    subscribed = (peers: string[]) => {
+        this.dispatch(Actions.Swap.updateList(peers.map((entry) => JSON.parse(entry))));
+    };
 
-  }
+    unsubscribed = (statusMessage: string) => {
+        this.dispatch(Actions.Swap.updateList([] as ISwapListEntry[]));
+    };
 
-  subscribed = (peers: string[]) => {
-    this.dispatch(Actions.Swap.updateList(peers.map((entry) => JSON.parse(entry))));
-  };
+    updated = (peers: string[]) => {
+        this.dispatch(Actions.Swap.updateList(peers.map((entry) => JSON.parse(entry))));
+    };
 
-  unsubscribed = (statusMessage: string) => {
-    this.dispatch(Actions.Swap.updateList([] as ISwapListEntry[]));
-  };
+    cardExchangeRequested = (deviceId: string, displayName: string) => {
+        console.log('cardExchangeRequested', deviceId, displayName);
+        this.dispatch(Actions.Swap.receiveRequest(deviceId));
+    };
 
-  updated = (peers: string[]) => {
-    this.dispatch(Actions.Swap.updateList(peers.map((entry) => JSON.parse(entry))));
-  };
+    waitingForAcceptance = (peerDeviceId: string) => {
+        console.log('waitingForAcceptance', peerDeviceId);
+        // Action to show clock already fired when the exchange request has been sent
+        this.dispatch(Actions.Swap.sendRequest(peerDeviceId));
+    };
 
-  cardExchangeRequested = (deviceId: string, displayName: string) => {
-    console.log('cardExchangeRequested', deviceId, displayName);
-    this.dispatch(Actions.Swap.receiveRequest(deviceId));
-  };
+    // get a revoke request
+    cardExchangeRequestRevoked = (deviceId: string) => {
+        console.log('cardExchangeRequestRevoked', deviceId);
+        this.dispatch(Actions.Swap.receiveAbortRequest(deviceId));
+    };
 
-  waitingForAcceptance = (peerDeviceId: string) => {
-    console.log('waitingForAcceptance', peerDeviceId);
-    // Action to show clock already fired when the exchange request has been sent
-    this.dispatch(Actions.Swap.sendRequest(peerDeviceId));
-  };
+    // remove request successfully sent
+    revokeSent = (peerDeviceId: string) => {
+        console.log('revokeSent', peerDeviceId);
+        this.dispatch(Actions.Swap.sendAbortRequest(peerDeviceId));
+    };
 
-  // get a revoke request
-  cardExchangeRequestRevoked = (deviceId: string) => {
-    console.log('cardExchangeRequestRevoked', deviceId);
-    this.dispatch(Actions.Swap.receiveAbortRequest(deviceId));
-  };
+    cardExchangeAccepted = async (peerDeviceId: string, peerDisplayName: string, peerCardData: string) => {
+        // received
+        console.log('cardExchangeAccepted', peerDeviceId, peerDisplayName, peerCardData);
+        let data = JSON.parse(peerCardData);
+        let base64Image;
+        if (Object.keys(data).includes('imageUrl')) {
+            const url = data.imageUrl;
+            delete data.imageUrl;
+            const response = await axios.get(url, { responseType: 'arraybuffer' });
+            base64Image = 'data:image/jpeg;base64,' + Buffer.from(response.data, 'binary').toString('base64');
+        }
+        await this.contactApi.createContact(data, base64Image);
+        this.sendCardData(peerDeviceId);
+        this.dispatch(Actions.Swap.receiveAcceptRequest(peerDeviceId));
+    };
 
-  // remove request successfully sent
-  revokeSent = (peerDeviceId: string) => {
-    console.log('revokeSent', peerDeviceId);
-    this.dispatch(Actions.Swap.sendAbortRequest(peerDeviceId));
-  };
+    acceptanceSent = (deviceId: string) => {
+        console.log('acceptanceSent', deviceId);
+    };
 
-  cardExchangeAccepted = (peerDeviceId: string, peerDisplayName: string, peerCardData: string) => {
-    // received
-    console.log('cardExchangeAccepted', peerDeviceId, peerDisplayName, peerCardData);
-    this.contactApi.createContact(JSON.parse(peerCardData));
-    this.sendCardData(peerDeviceId);
-    this.dispatch(Actions.Swap.receiveAcceptRequest(peerDeviceId));
-  };
+    cardDataReceived = async (deviceId: string, displayName: string, cardData: string) => {
+        console.log('cardDataReceived', deviceId, displayName, cardData);
+        let data = JSON.parse(cardData);
+        let base64Image;
+        if (Object.keys(data).includes('imageUrl')) {
+            const url = data.imageUrl;
+            delete data.imageUrl;
+            const response = await axios.get(url, { responseType: 'arraybuffer' });
+            base64Image = 'data:image/jpeg;base64,' + Buffer.from(response.data, 'binary').toString('base64');
+        }
+        await this.contactApi.createContact(data, base64Image);
+        this.dispatch(Actions.Swap.receiveAcceptRequest(deviceId));
+    };
 
-  acceptanceSent = (deviceId: string) => {
-    console.log('acceptanceSent', deviceId);
-  };
-
-  cardDataReceived = (deviceId: string, displayName: string, cardData: string) => {
-    console.log('cardDataReceived', deviceId, displayName, cardData);
-    this.contactApi.createContact(JSON.parse(cardData));
-    this.dispatch(Actions.Swap.receiveAcceptRequest(deviceId));
-  }
-
-  cardDataSent = (peerDeviceId: string) => {
-    console.log('cardDataSent', peerDeviceId);
-  };
+    cardDataSent = (peerDeviceId: string) => {
+        console.log('cardDataSent', peerDeviceId);
+    };
 }
 
 // Workflow:

@@ -106,6 +106,16 @@ Copyright Notice: Copyright (c) Microsoft Corporation. All rights reserved.
 
 License: Apache-2.0
 
+**Name: @types/axios**
+
+Version: 0.14.0
+
+Licensor: DefinitelyTyped (https://github.com/DefinitelyTyped/DefinitelyTyped)
+
+Copyright Notice: Copyright (c) Microsoft Corporation. All rights reserved.
+
+License: MIT
+
 **Name: @types/node**
 
 Version: 14.0.23
@@ -183,6 +193,16 @@ Version: 8.0.0
 Licensor: DefinitelyTyped (https://github.com/DefinitelyTyped/DefinitelyTyped)
 
 Copyright Notice: Copyright 2014 - 2016 © Microsoft Corporation
+
+License: MIT
+
+**Name: axios**
+
+Version: 0.19.2
+
+Licensor: Matt Zabriskie (https://github.com/axios/axios)
+
+Copyright Notice: Copyright 2014 - present © Matt Zabriskie
 
 License: MIT
 
