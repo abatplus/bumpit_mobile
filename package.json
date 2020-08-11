@@ -58,6 +58,10 @@
     "scripts": {
         "start": "react-scripts start",
         "build": "react-scripts build",
+        "build-android": "ionic cap build android && node scripts/android-contacts-fix/index.js",
+        "build-android-live": "ionic cap build android -l --external --https && node scripts/android-contacts-fix/index.js",
+        "build-ios": "ionic cap build ios && node scripts/ios-set-policies/index.js && node scripts/ios-set-provisioning-profile/index.js",
+        "build-ios-live": "ionic cap build ios -l --external --https && node scripts/ios-set-policies/index.js && node scripts/ios-set-provisioning-profile/index.js",
         "resources": "cordova-res ios && cordova-res android && node scripts/resources.js"
     },
     "eslintConfig": {

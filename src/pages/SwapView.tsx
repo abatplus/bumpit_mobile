@@ -244,7 +244,7 @@ const SwapView: React.FC = () => {
             </IonHeader>
 
             <IonContent>
-                {getOnlineOrExchangedEntries().length > 0 && (
+                {getOnlineOrExchangedEntries().length === 0 && (
                     <LoadingSpinner message={translate(i18n, 'Wait_for_contacts')} />
                 )}
                 <IonList>{renderList()}</IonList>
