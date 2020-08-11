@@ -9,6 +9,7 @@ const profileDataUrl = '/assets/mock/profilesMock.json';
 
 const PROFILE_DATA = 'profile_data';
 
+// Add a timeout to the index.tsx in order to get a directory and not null for this function
 const getDataDirectory = () => (isPlatform('ios') ? File.syncedDataDirectory : File.dataDirectory);
 
 const debugAlert = (message: string) => {
