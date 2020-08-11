@@ -49,6 +49,18 @@ const SwapView: React.FC = () => {
 
     const debug = false;
 
+    const getOnlineOrExchangedEntries = () => {
+        return swapContext.filter((entry) => entry.online === true || entry.state === SwapState.exchanged);
+    };
+
+    const getCandidatesEntries = () => {
+        return swapContext.filter((entry) => entry.online === true && entry.state !== SwapState.exchanged);
+    };
+
+    const getExchangedEntries = () => {
+        return swapContext.filter((entry) => entry.state === SwapState.exchanged);
+    };
+
     const getCurrentProfile = () => {
         return profileContext.profiles.find((entry) => entry.id === id);
     };
@@ -122,19 +134,19 @@ const SwapView: React.FC = () => {
         server.Hub.Unsubcribe(deviceId);
     });
 
-    const onDoRequestAll = () => {
+    const onDoRequestAll = async () => {
         // request all non requested or from whose no request is received
         const entries = [...swapContext.filter((entry) => entry.state === SwapState.initial && entry.online)];
-        entries.forEach((entry) => onDoRequest(entry.deviceId));
+        for (const entry of entries) await onDoRequest(entry.deviceId);
     };
 
     const getNumberOfRequestAll = () => {
         return swapContext.filter((entry) => entry.state === SwapState.initial && entry.online).length;
     };
 
-    const onAcceptAll = () => {
+    const onAcceptAll = async () => {
         const entries = [...swapContext.filter((entry) => entry.state === SwapState.received && entry.online)];
-        entries.forEach((entry) => onAcceptRequest(entry.deviceId));
+        for (const entry of entries) await onAcceptRequest(entry.deviceId);
         clearInterval(updateHandler); // delete
     };
 
@@ -142,12 +154,13 @@ const SwapView: React.FC = () => {
         return swapContext.filter((entry) => entry.state === SwapState.received && entry.online).length;
     };
 
-    const onDoRequest = (peerDeviceId: string) => {
-        server.Hub.RequestCardExchange(deviceId, peerDeviceId, getCurrentProfileNameField());
+    const onDoRequest = async (peerDeviceId: string) => {
+        if (debug) console.log(new Date(Date.now()).toISOString() + ' + request to: ' + peerDeviceId);
+        await server.Hub.RequestCardExchange(deviceId, peerDeviceId, getCurrentProfileNameField());
     };
 
-    const onAcceptRequest = (peerDeviceId: string) => {
-        server.Hub.AcceptCardExchange(
+    const onAcceptRequest = async (peerDeviceId: string) => {
+        await server.Hub.AcceptCardExchange(
             deviceId,
             peerDeviceId,
             getCurrentProfileNameField(),
@@ -156,8 +169,9 @@ const SwapView: React.FC = () => {
         );
     };
 
-    const onAbortRequest = (peerDeviceId: string) => {
-        server.Hub.RevokeCardExchangeRequest(deviceId, peerDeviceId);
+    const onAbortRequest = async (peerDeviceId: string) => {
+        if (debug) console.log('abort to: ' + peerDeviceId);
+        await server.Hub.RevokeCardExchangeRequest(deviceId, peerDeviceId);
     };
 
     const renderList = () => {
@@ -216,19 +230,13 @@ const SwapView: React.FC = () => {
                         <IonSegmentButton value='swap-list' className='swap-segment-button'>
                             <FontAwesomeIcon className='fa fa-lg' icon={faPollPeople} />
                             <IonLabel>
-                                {translate(i18n, 'Swap_candidates')} (
-                                {
-                                    swapContext.filter((entry) => entry.state !== SwapState.exchanged && entry.online)
-                                        .length
-                                }
-                                )
+                                {translate(i18n, 'Swap_candidates')} ({getCandidatesEntries().length})
                             </IonLabel>
                         </IonSegmentButton>
                         <IonSegmentButton value='ready-list'>
                             <FontAwesomeIcon className='fa fa-lg' icon={faCheck} />
                             <IonLabel>
-                                {translate(i18n, 'Received')} (
-                                {swapContext.filter((entry) => entry.state === SwapState.exchanged).length})
+                                {translate(i18n, 'Received')} ({getExchangedEntries().length})
                             </IonLabel>
                         </IonSegmentButton>
                     </IonSegment>
@@ -236,7 +244,9 @@ const SwapView: React.FC = () => {
             </IonHeader>
 
             <IonContent>
-                {swapContext.length === 0 && <LoadingSpinner message={translate(i18n, 'Wait_for_contacts')} />}
+                {getOnlineOrExchangedEntries().length === 0 && (
+                    <LoadingSpinner message={translate(i18n, 'Wait_for_contacts')} />
+                )}
                 <IonList>{renderList()}</IonList>
             </IonContent>
             {renderFooter()}

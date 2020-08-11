@@ -29,7 +29,6 @@ export const SwapReducer = (state: ISwapListEntry[] = [], action: IAction) => {
         case Actions.Swap.ActionTypes.UPDATE_LIST: {
             // copy old list and set everyone to offline initially to remember him
             const oldList = [...state];
-
             // copy the old list items SwapState if the entry is still available in the updated list
             const newList = action.payload as ISwapListEntry[];
             newList.forEach((newItem) => {

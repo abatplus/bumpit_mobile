@@ -10,10 +10,9 @@ import { isPlatform, IonAvatar, IonFab, IonFabButton, IonFabList } from '@ionic/
 import { IonItem, IonLabel, IonInput } from '@ionic/react';
 import './VCardField.css';
 import './Profile.css';
-import { Camera, CameraOptions } from '@ionic-native/camera';
 import { Crop } from '@ionic-native/crop';
 import { File } from '@ionic-native/file';
-import MockImage from './MockImage';
+// import MockImage from './MockImage';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCamera, faImage, faFolderOpen, faTrash } from '@fortawesome/pro-duotone-svg-icons';
 import { faUser } from '@fortawesome/pro-solid-svg-icons';
@@ -24,19 +23,38 @@ interface IProfileProps {
     profile?: IProfile;
 }
 
+// function to resize the image properly
+function imageToDataUri(img: CanvasImageSource, width: number, height: number) {
+    // create an off-screen canvas
+    let canvas = document.createElement('canvas');
+    let ctx = canvas.getContext('2d');
+
+    // set its dimension to target size
+    canvas.width = width;
+    canvas.height = height;
+
+    // draw source image into the off-screen canvas:
+    ctx?.drawImage(img, 0, 0, width, height);
+
+    // encode image to data-uri with base64 version of compressed image
+    return canvas.toDataURL();
+}
+
 const Profile: React.FC<IProfileProps> = (props) => {
     const i18n = useIntl();
     const { dispatchProfileContext } = useProfileContext();
     const { getPhoto } = useCamera();
 
     const updateProfile = (inputFieldName: keyof IVCard) => (event: CustomEvent) => {
+        const input = document.getElementsByName(inputFieldName);
+        const inputElem = input[0] as HTMLInputElement;
         if (props.profile && props.profile.id) {
             dispatchProfileContext(
                 Actions.Profile.setProfileVCardDataField(
                     props.profile.id,
                     props.profile.name,
                     inputFieldName,
-                    event.detail.value
+                    inputElem.value
                 )
             );
         }
@@ -60,11 +78,11 @@ const Profile: React.FC<IProfileProps> = (props) => {
         }
     };
 
-    const loadPicture = async (sourceType: number) => {
+    const loadPicture = async (sourceType: CameraSource) => {
         if (!isPlatform('capacitor')) {
             const cameraPhoto = await getPhoto({
                 resultType: CameraResultType.DataUrl,
-                source: CameraSource.Camera,
+                source: sourceType,
                 quality: 100,
             });
             console.log(cameraPhoto.dataUrl);
@@ -72,22 +90,18 @@ const Profile: React.FC<IProfileProps> = (props) => {
             return;
         }
 
-        const options: CameraOptions = {
+        const cameraPhoto = await getPhoto({
+            resultType: CameraResultType.Uri,
+            source: sourceType,
             quality: 100,
-            sourceType: sourceType,
-            destinationType: Camera.DestinationType.FILE_URI,
-            encodingType: Camera.EncodingType.JPEG,
-            mediaType: Camera.MediaType.PICTURE,
-        };
+        });
 
-        let fileUri = await Camera.getPicture(options);
-        if (isPlatform('android')) fileUri = 'file://' + fileUri;
+        const fileUri = cameraPhoto.path + '';
 
         const cropPath = await Crop.crop(fileUri, {
-            quality: 75,
-            targetHeight: 400,
-            targetWidth: 400,
+            quality: 100,
         });
+
         const newPath = cropPath.split('?')[0];
         const copyPath = newPath;
         const splitPath = copyPath.split('/');
@@ -95,8 +109,14 @@ const Profile: React.FC<IProfileProps> = (props) => {
         const filePath = newPath.split(imageName)[0];
 
         const base64 = await File.readAsDataURL(filePath, imageName);
-        updateProfileImage(base64);
-        await File.removeFile(filePath, imageName);
+
+        var img = new Image();
+        img.src = base64;
+        img.onload = async () => {
+            const newDataUri = imageToDataUri(img, 300, 300);
+            updateProfileImage(newDataUri);
+            await File.removeFile(filePath, imageName);
+        };
     };
 
     const imageData = props.profile?.image; // isPlatform('capacitor') ? props.profile?.image : MockImage;
@@ -117,16 +137,10 @@ const Profile: React.FC<IProfileProps> = (props) => {
                         <FontAwesomeIcon className='fa fa-lg' icon={faImage} />
                     </IonFabButton>
                     <IonFabList side='end'>
-                        <IonFabButton
-                            onClick={() => loadPicture(Camera.PictureSourceType.CAMERA)}
-                            size={'small'}
-                            color='primary'>
+                        <IonFabButton onClick={() => loadPicture(CameraSource.Camera)} size={'small'} color='primary'>
                             <FontAwesomeIcon className='fa fa-lg' icon={faCamera} />
                         </IonFabButton>
-                        <IonFabButton
-                            onClick={() => loadPicture(Camera.PictureSourceType.PHOTOLIBRARY)}
-                            size={'small'}
-                            color='primary'>
+                        <IonFabButton onClick={() => loadPicture(CameraSource.Photos)} size={'small'} color='primary'>
                             <FontAwesomeIcon className='fa fa-lg' icon={faFolderOpen} />
                         </IonFabButton>
                         <IonFabButton onClick={() => removeProfileImage()} size={'small'} color='danger'>
@@ -151,6 +165,13 @@ const Profile: React.FC<IProfileProps> = (props) => {
                     onIonChange={updateProfileName}
                 />
             </IonItem>
+            <VCardField
+                key={'name'}
+                name={'name'}
+                label={translate(i18n, 'Name')}
+                value={props.profile?.vCard?.name}
+                onChange={updateProfile('name')}
+            />
             <VCardField
                 key={'company'}
                 name={'company'}
@@ -192,13 +213,6 @@ const Profile: React.FC<IProfileProps> = (props) => {
                 label={translate(i18n, 'Country')}
                 value={props.profile?.vCard?.country}
                 onChange={updateProfile('country')}
-            />
-            <VCardField
-                key={'name'}
-                name={'name'}
-                label={translate(i18n, 'Name')}
-                value={props.profile?.vCard?.name}
-                onChange={updateProfile('name')}
             />
             <VCardField
                 key={'position'}
