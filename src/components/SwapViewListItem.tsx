@@ -79,11 +79,9 @@ const SwapViewListItem = ({
 
     const renderAvatarImage = () => {
         if (thumbnailUrl) {
-            alert(thumbnailUrl);
             const imageClass = state === SwapState.requested ? 'swap-list-image-shadowed' : 'swap-list-image';
             return <img src={thumbnailUrl} alt={name} className={imageClass} />;
         } else {
-            alert('no-thumb');
             return <FontAwesomeIcon className='fa fa-lg swap-list-no-user' icon={faUser} />;
         }
     };
