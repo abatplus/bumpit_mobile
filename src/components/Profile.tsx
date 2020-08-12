@@ -12,7 +12,6 @@ import './VCardField.css';
 import './Profile.css';
 import { Crop } from '@ionic-native/crop';
 import { File } from '@ionic-native/file';
-// import MockImage from './MockImage';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCamera, faImage, faFolderOpen, faTrash } from '@fortawesome/pro-duotone-svg-icons';
 import { faUser } from '@fortawesome/pro-solid-svg-icons';
