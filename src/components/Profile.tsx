@@ -12,7 +12,6 @@ import './VCardField.css';
 import './Profile.css';
 import { Crop } from '@ionic-native/crop';
 import { File } from '@ionic-native/file';
-// import MockImage from './MockImage';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCamera, faImage, faFolderOpen, faTrash } from '@fortawesome/pro-duotone-svg-icons';
 import { faUser } from '@fortawesome/pro-solid-svg-icons';
@@ -37,7 +36,7 @@ function imageToDataUri(img: CanvasImageSource, width: number, height: number) {
     ctx?.drawImage(img, 0, 0, width, height);
 
     // encode image to data-uri with base64 version of compressed image
-    return canvas.toDataURL();
+    return canvas.toDataURL('image/jpeg', 1.0);
 }
 
 const Profile: React.FC<IProfileProps> = (props) => {
@@ -119,7 +118,7 @@ const Profile: React.FC<IProfileProps> = (props) => {
         };
     };
 
-    const imageData = props.profile?.image; // isPlatform('capacitor') ? props.profile?.image : MockImage;
+    const imageData = props.profile?.image;
 
     const renderProfileImage = () => {
         if (imageData) {
