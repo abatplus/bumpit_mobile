@@ -19,7 +19,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useHistory } from 'react-router';
 import IProfile from '../interfaces/IProfile';
 import './ProfileCard.css';
-import MockImage from './MockImage';
 
 interface IProfileCardProps {
     profile: IProfile;
@@ -39,7 +38,7 @@ const ProfileCard: React.FC<IProfileCardProps> = (props) => {
     };
 
     const renderProfileImage = () => {
-        const imageData = props.profile?.image; //isPlatform('capacitor') ? props.profile?.image : MockImage;
+        const imageData = props.profile?.image;
         if (imageData) {
             return <img src={imageData} alt='profile-img' />;
         } else {

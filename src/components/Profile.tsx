@@ -118,7 +118,7 @@ const Profile: React.FC<IProfileProps> = (props) => {
         };
     };
 
-    const imageData = props.profile?.image; // isPlatform('capacitor') ? props.profile?.image : MockImage;
+    const imageData = props.profile?.image;
 
     const renderProfileImage = () => {
         if (imageData) {
