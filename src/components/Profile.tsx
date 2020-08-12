@@ -37,7 +37,7 @@ function imageToDataUri(img: CanvasImageSource, width: number, height: number) {
     ctx?.drawImage(img, 0, 0, width, height);
 
     // encode image to data-uri with base64 version of compressed image
-    return canvas.toDataURL();
+    return canvas.toDataURL('image/jpeg', 1.0);
 }
 
 const Profile: React.FC<IProfileProps> = (props) => {
