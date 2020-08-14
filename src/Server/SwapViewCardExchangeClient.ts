@@ -55,7 +55,7 @@ export class SwapViewCardExchangeClient implements ICardExchangeClient {
         let data = JSON.parse(peerCardData);
         let base64Image;
         if (Object.keys(data).includes('imageUrl')) {
-            const url = data.imageUrl;
+            const url = 'https://vswap-dev.smef.io' + data.imageUrl;
             delete data.imageUrl;
             const response = await axios.get(url, { responseType: 'arraybuffer' });
             base64Image = 'data:image/jpeg;base64,' + Buffer.from(response.data, 'binary').toString('base64');
@@ -74,7 +74,7 @@ export class SwapViewCardExchangeClient implements ICardExchangeClient {
         let data = JSON.parse(cardData);
         let base64Image;
         if (Object.keys(data).includes('imageUrl')) {
-            const url = data.imageUrl;
+            const url = 'https://vswap-dev.smef.io' + data.imageUrl;
             delete data.imageUrl;
             const response = await axios.get(url, { responseType: 'arraybuffer' });
             base64Image = 'data:image/jpeg;base64,' + Buffer.from(response.data, 'binary').toString('base64');
