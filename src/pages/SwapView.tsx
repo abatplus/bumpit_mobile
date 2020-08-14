@@ -34,6 +34,7 @@ import { useIntl } from 'react-intl';
 import { translate } from '../utils';
 import CardExchangeServer from '../server/CardExchangeServer';
 import LoadingSpinner from '../components/LoadingSpinner';
+import * as Actions from '../store/actions/actions';
 
 const SwapView: React.FC = () => {
     const { profileContext } = useProfileContext();
@@ -132,6 +133,7 @@ const SwapView: React.FC = () => {
     useIonViewDidLeave(() => {
         clearInterval(updateHandler); // stop updates
         server.Hub.Unsubcribe(deviceId);
+        dispatchSwapContext(Actions.Swap.clearList()); // clear list
     });
 
     const onDoRequestAll = async () => {

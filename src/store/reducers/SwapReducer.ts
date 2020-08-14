@@ -54,6 +54,10 @@ export const SwapReducer = (state: ISwapListEntry[] = [], action: IAction) => {
 
             return newList.sort(swapListEntrySort);
         }
+
+        case Actions.Swap.ActionTypes.CLEAR_LIST:
+            return [];
+
         case Actions.Swap.ActionTypes.SEND_REQUEST: {
             const indexOfEntry = state.findIndex((item) => item.deviceId === action.payload);
             if (indexOfEntry === -1) return state;
