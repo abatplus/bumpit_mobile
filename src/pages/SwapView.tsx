@@ -49,6 +49,7 @@ const SwapView: React.FC = () => {
     const [lonLat, setLonLat] = useState<string>();
 
     const debug = false;
+    const mockGeo = false;
 
     const getOnlineOrExchangedEntries = () => {
         return swapContext.filter((entry) => entry.online === true || entry.state === SwapState.exchanged);
@@ -106,7 +107,14 @@ const SwapView: React.FC = () => {
         try {
             const name: string = getCurrentProfileNameField();
             const image: string = getCurrentProfile()?.image ?? '';
-            const geo = await Geolocation.getCurrentPosition();
+            const geo = mockGeo
+                ? {
+                      coords: {
+                          longitude: 1,
+                          latitude: 1,
+                      },
+                  }
+                : await Geolocation.getCurrentPosition();
             if (debug)
                 setLonLat((geo.coords.latitude + '').substr(0, 9) + ' - ' + (geo.coords.longitude + '').substr(0, 9));
             // Subscribe to the hub
@@ -114,7 +122,7 @@ const SwapView: React.FC = () => {
             if (debug) console.log('connected');
             // Update the current location every 2 seconds
             updateHandler = setInterval(async () => {
-                const geo = await Geolocation.getCurrentPosition();
+                // const geo = await Geolocation.getCurrentPosition();
                 if (debug) console.log('update');
                 if (debug)
                     setLonLat(
