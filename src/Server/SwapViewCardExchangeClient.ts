@@ -73,12 +73,12 @@ export class SwapViewCardExchangeClient implements ICardExchangeClient {
         console.log('acceptanceSent', deviceId);
     };
 
-    cardDataReceived = async (deviceId: string, displayName: string, cardData: string, peerImageUrl: string) => {
+    cardDataReceived = async (deviceId: string, displayName: string, cardData: string, imageUrl: string) => {
         console.log('cardDataReceived', deviceId, displayName, cardData);
         let data = JSON.parse(cardData);
         let base64Image;
-        if (peerImageUrl && peerImageUrl !== '') {
-            const url = 'https://vswap-dev.smef.io' + peerImageUrl;
+        if (imageUrl && imageUrl !== '') {
+            const url = 'https://vswap-dev.smef.io' + imageUrl;
             const response = await axios.get(url, { responseType: 'arraybuffer' });
             base64Image = 'data:image/jpeg;base64,' + Buffer.from(response.data, 'binary').toString('base64');
         }

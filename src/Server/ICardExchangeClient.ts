@@ -18,6 +18,6 @@ export interface ICardExchangeClient {
     ) => void;
     acceptanceSent: (deviceId: string) => void;
 
-    cardDataReceived: (deviceId: string, displayName: string, cardData: string, image: string) => void;
+    cardDataReceived: (deviceId: string, displayName: string, cardData: string, imageUrl: string) => void;
     cardDataSent: (peerDeviceId: string) => void;
 }
