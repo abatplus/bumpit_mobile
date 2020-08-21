@@ -42,11 +42,11 @@ export const SwapReducer = (state: ISwapListEntry[] = [], action: IAction) => {
                 }
             });
 
-            // copy old items which are offline or already exchanged to remember them
+            // copy old items which are offline and already exchanged to remember them
             oldList.forEach((oldItem) => {
                 oldItem.online = false;
                 const index = newList.findIndex((newItem) => oldItem.deviceId === newItem.deviceId);
-                if (index === -1) {
+                if (index === -1 && oldItem.state === SwapState.exchanged) {
                     // add the old item to the list now
                     newList.push(oldItem);
                 }
