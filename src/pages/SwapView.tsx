@@ -14,8 +14,7 @@ import {
     IonItem,
     IonSegment,
     IonSegmentButton,
-    useIonViewDidEnter,
-    useIonViewDidLeave,
+    useIonViewWillLeave,
 } from '@ionic/react';
 import './SwapView.css';
 import SwapViewListItem from '../components/SwapViewListItem';
@@ -27,7 +26,6 @@ import * as SwapReducer from '../store/reducers/SwapReducer';
 import { SwapViewCardExchangeClient } from '../server/SwapViewCardExchangeClient';
 import { v4 as uuid4 } from 'uuid';
 import { useProfileContext } from '../store/contexts/ProfileContext';
-import { useParams, useHistory } from 'react-router';
 import { Geolocation } from '@ionic-native/geolocation';
 import ISwapListEntry from '../interfaces/ISwapListEntry';
 import { useIntl } from 'react-intl';
@@ -35,20 +33,40 @@ import { translate } from '../utils';
 import CardExchangeServer from '../server/CardExchangeServer';
 import LoadingSpinner from '../components/LoadingSpinner';
 import * as Actions from '../store/actions/actions';
+import { useHistory } from 'react-router';
+
+const distance = (lat1: number, lon1: number, lat2: number, lon2: number) => {
+    if (lat1 === lat2 && lon1 === lon2) {
+        return 0;
+    } else {
+        const radlat1 = (Math.PI * lat1) / 180;
+        const radlat2 = (Math.PI * lat2) / 180;
+        const theta = lon1 - lon2;
+        const radtheta = (Math.PI * theta) / 180;
+        let dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+        if (dist > 1) {
+            dist = 1;
+        }
+        dist = Math.acos(dist);
+        dist = (dist * 180) / Math.PI;
+        dist = dist * 60 * 1.609344 * 1000;
+        return dist;
+    }
+};
 
 const SwapView: React.FC = () => {
-    const { profileContext } = useProfileContext();
-    const { id } = useParams();
     const i18n = useIntl();
     const history = useHistory();
+    const { profileContext, dispatchProfileContext } = useProfileContext();
     const [swapContext, dispatchSwapContext] = useReducer(SwapReducer.SwapReducer, []);
     const [segmentFilter, setSegmentFilter] = useState<string>('swap-list');
     const [swapList, setSwapList] = useState<ISwapListEntry[]>([]);
     const deviceId = useRef<string>('');
     const lastUpdateTimestamp = useRef<number>(0);
     const [timeElapsed, setTimeElapsed] = useState<number>(0);
-    let updateHandler = setTimeout(() => {}, 10000000); // dummy
-    const [lonLat, setLonLat] = useState<string>();
+    const doUpdate = useRef(true);
+    const [lon, setLon] = useState<number>();
+    const [lat, setLat] = useState<number>();
 
     const debug = false;
     const mockGeo = false;
@@ -65,12 +83,12 @@ const SwapView: React.FC = () => {
         return swapContext.filter((entry) => entry.state === SwapState.exchanged);
     };
 
-    const getCurrentProfile = () => {
-        return profileContext.profiles.find((entry) => entry.id === id);
+    const getProfile = (profileId: string) => {
+        return profileContext.profiles.find((entry) => entry.id === profileId);
     };
 
     const getCurrentVCard = () => {
-        const profile = getCurrentProfile();
+        const profile = getProfile(profileContext.currentProfileId!);
         if (!profile?.vCard) {
             throw new Error('could not get vcard');
         }
@@ -105,11 +123,25 @@ const SwapView: React.FC = () => {
         );
     }, [segmentFilter, swapContext]);
 
-    useIonViewDidEnter(async () => {
+    useEffect(() => {
+        if (profileContext.currentProfileId) {
+            connectToHub(profileContext.currentProfileId);
+        }
+    }, [profileContext.currentProfileId]);
+
+    useIonViewWillLeave(() => {
+        // clearInterval(updateHandler.current); // stop updates
+        doUpdate.current = false;
+        server.Hub.Unsubcribe(deviceId.current);
+        dispatchProfileContext(Actions.Profile.unsetCurrentProfileId());
+        dispatchSwapContext(Actions.Swap.clearList()); // clear list
+    });
+
+    const connectToHub = async (profileId: string) => {
         try {
             deviceId.current = uuid4();
-            const name: string = getCurrentProfileNameField();
-            const image: string = getCurrentProfile()?.image ?? '';
+            const name: string = getProfile(profileId)?.vCard.name ?? '';
+            const image: string = getProfile(profileId)?.image ?? '';
             let geo = mockGeo
                 ? {
                       coords: {
@@ -118,54 +150,58 @@ const SwapView: React.FC = () => {
                       },
                   }
                 : await Geolocation.getCurrentPosition();
-            if (debug)
-                setLonLat((geo.coords.latitude + '').substr(0, 9) + ' - ' + (geo.coords.longitude + '').substr(0, 9));
+
+            if (debug) {
+                setLon(geo.coords.longitude);
+                setLat(geo.coords.latitude);
+            }
             // Subscribe to the hub
             await server.Hub.Subscribe(deviceId.current, geo.coords.longitude, geo.coords.latitude, name, image);
             lastUpdateTimestamp.current = Date.now();
             // Update the current location every 2 seconds
-            updateHandler = setInterval(async () => {
-                if (!mockGeo) geo = await Geolocation.getCurrentPosition();
-                if (debug) {
-                    // console.log('update');
-                    setLonLat(
-                        (geo.coords.latitude + '').substr(0, 9) + ' - ' + (geo.coords.longitude + '').substr(0, 9)
-                    );
-                }
-                // check if the last update is longer ago than 4 seconds (in that case we reconnect to ensure we have an image on the backend)
-                const elapsed = Date.now() - lastUpdateTimestamp.current;
-                setTimeElapsed(elapsed);
-                if (elapsed > 3000) {
-                    if (debug) console.log('resubscribe');
-                    try {
-                        await server.Hub.Subscribe(
-                            deviceId.current,
-                            geo.coords.longitude,
-                            geo.coords.latitude,
-                            name,
-                            image
-                        );
-                    } catch (err) {
-                        console.log(err);
+            doUpdate.current = true;
+            const updateHandler = async () => {
+                if (doUpdate.current) {
+                    if (!mockGeo) geo = await Geolocation.getCurrentPosition();
+                    if (debug) {
+                        setLon(geo.coords.longitude);
+                        setLat(geo.coords.latitude);
                     }
-                } else {
-                    await server.Hub.Update(deviceId.current, geo.coords.longitude, geo.coords.latitude, name);
+                    // check if the last update is longer ago than 4 seconds (in that case we reconnect to ensure we have an image on the backend)
+                    const elapsed = Date.now() - lastUpdateTimestamp.current;
+                    // if (debug) console.log('last update ts:' + lastUpdateTimestamp.current);
+                    // if (debug) console.log('elapsed:' + elapsed);
+                    setTimeElapsed(elapsed);
+                    if (elapsed > 3000) {
+                        if (debug) console.log(new Date(Date.now()).toISOString + ' resubscribe');
+                        try {
+                            await server.Hub.Subscribe(
+                                deviceId.current,
+                                geo.coords.longitude,
+                                geo.coords.latitude,
+                                name,
+                                image
+                            );
+                        } catch (err) {
+                            console.log(err);
+                        }
+                    } else {
+                        if (debug) console.log(new Date(Date.now()).toISOString() + ' update');
+                        await server.Hub.Update(deviceId.current, geo.coords.longitude, geo.coords.latitude, name);
+                    }
+                    lastUpdateTimestamp.current = Date.now();
+                    // if (debug) console.log('set update ts:' + lastUpdateTimestamp.current);
+                    if (doUpdate.current) setTimeout(updateHandler, 2000);
                 }
-                lastUpdateTimestamp.current = Date.now();
-            }, 2000);
+            };
+            setTimeout(updateHandler, 2000);
         } catch (error) {
             console.error('Error: ', error);
             alert(translate(i18n, 'Connection_Or_Geolocation_Error'));
-            clearInterval(updateHandler);
+            doUpdate.current = false;
             history.goBack();
         }
-    });
-
-    useIonViewDidLeave(() => {
-        clearInterval(updateHandler); // stop updates
-        server.Hub.Unsubcribe(deviceId.current);
-        dispatchSwapContext(Actions.Swap.clearList()); // clear list
-    });
+    };
 
     const onDoRequestAll = async () => {
         // request all non requested or from whose no request is received
@@ -197,7 +233,7 @@ const SwapView: React.FC = () => {
             peerDeviceId,
             getCurrentProfileNameField(),
             JSON.stringify(getCurrentVCard()),
-            getCurrentProfile()?.image ?? ''
+            getProfile(profileContext.currentProfileId!)?.image ?? ''
         );
     };
 
@@ -218,6 +254,11 @@ const SwapView: React.FC = () => {
                     onDoRequest={() => onDoRequest(entry.deviceId)}
                     onAcceptRequest={() => onAcceptRequest(entry.deviceId)}
                     onAbortRequest={() => onAbortRequest(entry.deviceId)}
+                    dist={
+                        debug && lon && lat && entry.longitude && entry.latitude
+                            ? distance(lat, lon, entry.latitude, entry.longitude)
+                            : undefined
+                    }
                 />
             </div>
         ));
@@ -228,7 +269,11 @@ const SwapView: React.FC = () => {
             return (
                 <IonFooter>
                     {debug && <IonItem>DeviceId:{deviceId.current}</IonItem>}
-                    {debug && <IonItem>LonLat:{lonLat}</IonItem>}
+                    {debug && lon && lat && (
+                        <IonItem>
+                            LonLat:{lon.toString().substr(0, 9)} - {lat.toString().substr(0, 9)}
+                        </IonItem>
+                    )}
                     {debug && <IonItem>Last update span:{timeElapsed}</IonItem>}
                     <IonItem>
                         <IonList className='swap-footer-button-list'>

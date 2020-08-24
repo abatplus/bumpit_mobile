@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import {
     IonTitle,
     IonCard,
@@ -19,6 +19,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useHistory } from 'react-router';
 import IProfile from '../interfaces/IProfile';
 import './ProfileCard.css';
+import { useProfileContext } from '../store/contexts/ProfileContext';
+import * as Actions from '../store/actions/actions';
 
 interface IProfileCardProps {
     profile: IProfile;
@@ -27,12 +29,14 @@ interface IProfileCardProps {
 const ProfileCard: React.FC<IProfileCardProps> = (props) => {
     const i18n = useIntl();
     const history = useHistory();
+    const { profileContext, dispatchProfileContext } = useProfileContext();
     const [showToast, setShowToast] = useState(false);
 
-    const onClickSwap = () => {
+    const onClickSwap = async () => {
         if (!props.profile.vCard.name) {
             setShowToast(true);
         } else {
+            dispatchProfileContext(Actions.Profile.setCurrentProfileId(props.profile.id));
             history.push('/swap/' + props.profile.id);
         }
     };
