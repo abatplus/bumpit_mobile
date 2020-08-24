@@ -58,6 +58,7 @@ const VCardView: React.FC = () => {
         if (!currentProfile?.vCard.name) {
             setShowToast(true);
         } else {
+            dispatchProfileContext(Actions.Profile.setCurrentProfileId(currentProfile?.id));
             history.push('/swap/' + currentProfile?.id);
         }
     };
