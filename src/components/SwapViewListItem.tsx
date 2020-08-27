@@ -14,6 +14,7 @@ type SwapViewListItemType = {
     onDoRequest: () => void;
     onAcceptRequest: () => void;
     onAbortRequest: () => void;
+    dist?: number;
 };
 
 const SwapViewListItem = ({
@@ -23,6 +24,7 @@ const SwapViewListItem = ({
     onDoRequest,
     onAbortRequest,
     onAcceptRequest,
+    dist,
 }: SwapViewListItemType) => {
     let stateText = ' ';
 
@@ -108,6 +110,7 @@ const SwapViewListItem = ({
                             <IonLabel className='swap-view-item-name'>
                                 <h2>{name}</h2>
                                 <p>{stateText}</p>
+                                {dist && <p>{(dist + '').substr(0, 4)} m</p>}
                             </IonLabel>
                         </IonCol>
                         <IonCol className='swap-view-button'>{renderActionButton()}</IonCol>

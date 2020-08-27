@@ -17,7 +17,7 @@ import { translate } from '../utils';
 import IProfile from '../interfaces/IProfile';
 import { useProfileContext } from '../store/contexts/ProfileContext';
 import { faPlus } from '@fortawesome/pro-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ProfileCard from '../components/ProfileCard';
 import * as Actions from '../store/actions/actions';
 import { useAppContext } from '../store/contexts/AppContext';
@@ -25,36 +25,36 @@ import { getProfileData, getEmptyProfile } from '../store/dataApi';
 import { v4 as uuidv4 } from 'uuid';
 
 const renderProfiles = (profiles: IProfile[]) => {
-  return profiles.map((profile: IProfile) => <ProfileCard profile={profile} key={profile.id} />);
+    return profiles.map((profile: IProfile) => <ProfileCard profile={profile} key={profile.id} />);
 };
 
 export const VCardProfiles: React.FC = () => {
-  const history = useHistory();
-  const i18n = useIntl();
-  const { profileContext, dispatchProfileContext } = useProfileContext();
-  const { dispatchAppContext } = useAppContext();
+    const history = useHistory();
+    const i18n = useIntl();
+    const { profileContext, dispatchProfileContext } = useProfileContext();
+    const { dispatchAppContext } = useAppContext();
 
-  useEffect(() => {
-    dispatchAppContext(Actions.App.setLoading(true));
+    useEffect(() => {
+        dispatchAppContext(Actions.App.setLoading(true));
 
-    const getProfiles = (async () => await getProfileData())();
-    getProfiles.then((res) => dispatchProfileContext(Actions.Profile.setProfiles(res)));
-    setTimeout(() => {
-      dispatchAppContext(Actions.App.setLoading(false));
-    }, 2000);
-  }, [dispatchAppContext, dispatchProfileContext]);
+        const getProfiles = (async () => await getProfileData())();
+        getProfiles.then((res) => dispatchProfileContext(Actions.Profile.setProfiles(res)));
+        setTimeout(() => {
+            dispatchAppContext(Actions.App.setLoading(false));
+        }, 2000);
+    }, [dispatchAppContext, dispatchProfileContext]);
 
-  function addNewProfile() {
-    let newProfile: IProfile = getEmptyProfile(uuidv4());
-    newProfile.name = translate(i18n, 'Set_Profile_Name');
-    dispatchProfileContext(Actions.Profile.addNewProfile(newProfile));
-    history.push('/profile/edit/' + newProfile.id);
-  }
+    function addNewProfile() {
+        let newProfile: IProfile = getEmptyProfile(uuidv4());
+        newProfile.name = translate(i18n, 'Set_Profile_Name');
+        dispatchProfileContext(Actions.Profile.addNewProfile(newProfile));
+        history.push('/profile/edit/' + newProfile.id);
+    }
 
     return (
         <IonPage>
             <IonHeader translucent={true}>
-                <IonToolbar color="primary">
+                <IonToolbar color='primary'>
                     <IonButtons slot='start'>
                         <IonMenuButton />
                         <IonBackButton />
@@ -73,7 +73,7 @@ export const VCardProfiles: React.FC = () => {
                         onClick={() => {
                             addNewProfile();
                         }}>
-                        <FontAwesomeIcon  className="fa fa-2x" icon={faPlus} />
+                        <FontAwesomeIcon className='fa fa-2x' icon={faPlus} />
                     </IonFabButton>
                 </IonFab>
             </IonContent>

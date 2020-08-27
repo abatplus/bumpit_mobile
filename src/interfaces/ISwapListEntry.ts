@@ -6,4 +6,6 @@ export default interface ISwapListEntry {
     displayName: string;
     state: SwapState;
     online: boolean;
+    longitude: number;
+    latitude: number;
 }
