@@ -33,7 +33,7 @@
         "@types/react-router": "5.1.8",
         "@types/react-router-dom": "5.1.5",
         "@types/uuid": "8.0.0",
-        "axios": "0.19.2",
+        "axios": "0.21.1",
         "cordova-plugin-camera": "4.1.0",
         "cordova-plugin-contacts": "3.0.1",
         "cordova-plugin-crop": "0.4.0",
